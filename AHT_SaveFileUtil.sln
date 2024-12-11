@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AHT_SaveFileUtil", "AHT_SaveFileUtil\AHT_SaveFileUtil.csproj", "{6446E16D-D96A-4F40-B76F-362EBE8DC719}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6446E16D-D96A-4F40-B76F-362EBE8DC719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6446E16D-D96A-4F40-B76F-362EBE8DC719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6446E16D-D96A-4F40-B76F-362EBE8DC719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6446E16D-D96A-4F40-B76F-362EBE8DC719}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D07731D1-3DFE-473B-9B1B-AF39667DD4B6}
+	EndGlobalSection
+EndGlobal
