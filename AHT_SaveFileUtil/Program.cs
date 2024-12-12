@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AHT_SaveFileUtil.Save;
+using Common;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +13,10 @@ namespace AHT_SaveFileUtil
     {
         public static void Main(string[] args)
         {
-            
+            using (var stream = File.OpenRead("C:\\Users\\Ebbers\\Documents\\Spyro Save Editing\\7D-G5SE-G5SE.gci"))
+            {
+                var file = SaveFile.FromFileStream(stream, GamePlatform.GameCube);
+            }
         }
     }
 }

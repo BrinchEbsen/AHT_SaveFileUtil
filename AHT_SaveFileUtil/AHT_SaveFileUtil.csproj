@@ -37,10 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\GamePlatform.cs" />
+    <Compile Include="Common\Players.cs" />
     <Compile Include="Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\BinaryWriterExtensions.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Save\GlobalGameState.cs" />
     <Compile Include="Save\SaveFile.cs" />
+    <Compile Include="Save\SaveInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

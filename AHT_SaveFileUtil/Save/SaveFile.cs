@@ -1,4 +1,5 @@
 ﻿using Common;
+using Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +11,9 @@ namespace AHT_SaveFileUtil.Save
 {
     public class SaveFile
     {
-        public GamePlatform Platform;
+        public uint CheckSum { get; private set; }
 
-        public uint CheckSum { get; }
+        public SaveInfo SaveInfo { get; private set; }
 
         private SaveFile() { }
 
@@ -25,7 +26,16 @@ namespace AHT_SaveFileUtil.Save
 
             var file = new SaveFile();
 
-            // ...
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                stream.Seek(0x40, SeekOrigin.Begin);
+                file.CheckSum = reader.ReadUInt32(bigEndian);
+
+                stream.Seek(0x4040, SeekOrigin.Begin);
+                file.SaveInfo = SaveInfo.FromReader(reader, platform);
+            }
 
             return file;
         }
