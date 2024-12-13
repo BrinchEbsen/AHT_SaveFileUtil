@@ -1,4 +1,5 @@
-﻿using AHT_SaveFileUtil.Save;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Save;
 using Common;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace AHT_SaveFileUtil
     {
         public static void Main(string[] args)
         {
-            using (var stream = File.OpenRead("C:\\Users\\Ebbers\\Documents\\Spyro Save Editing\\7D-G5SE-G5SE.gci"))
+            using (var stream = File.OpenRead("C:\\Users\\Ebbers\\Downloads\\7D-G5SE-G5SE.gci"))
             {
                 var file = SaveFile.FromFileStream(stream, GamePlatform.GameCube);
             }

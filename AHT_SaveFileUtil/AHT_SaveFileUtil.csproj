@@ -36,14 +36,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\EXHashCode.cs" />
+    <Compile Include="Common\EXVector.cs" />
+    <Compile Include="Common\EXVector3.cs" />
     <Compile Include="Common\GamePlatform.cs" />
+    <Compile Include="Common\MapList.cs" />
     <Compile Include="Common\Players.cs" />
+    <Compile Include="Common\XAppTime.cs" />
     <Compile Include="Extensions\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\BinaryWriterExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Save\GlobalGameState.cs" />
     <Compile Include="Save\SaveFile.cs" />
     <Compile Include="Save\SaveInfo.cs" />
+    <Compile Include="Save\Slot\GameState.cs" />
+    <Compile Include="Save\Slot\GameStateTrigInfo.cs" />
+    <Compile Include="Save\Slot\PlayerState.cs" />
+    <Compile Include="Save\Slot\SaveSlot.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using AHT_SaveFileUtil.Save.Slot;
+using Common;
 using Extensions;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace AHT_SaveFileUtil.Save
         public uint CheckSum { get; private set; }
 
         public SaveInfo SaveInfo { get; private set; }
+
+        public SaveSlot[] Slots { get; private set; } = new SaveSlot[3];
 
         private SaveFile() { }
 
@@ -35,6 +38,19 @@ namespace AHT_SaveFileUtil.Save
 
                 stream.Seek(0x4040, SeekOrigin.Begin);
                 file.SaveInfo = SaveInfo.FromReader(reader, platform);
+
+                long addr = stream.Position;
+                for (int i = 0; i < 3; i++)
+                {
+                    file.Slots[i] = SaveSlot.FromReader(reader, platform);
+
+                    if (i != 2)
+                    {
+                        //Seek forward the GameStateSize + the slot header data
+                        stream.Seek(addr + file.SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
+                        addr = stream.Position;
+                    }
+                }
             }
 
             return file;
