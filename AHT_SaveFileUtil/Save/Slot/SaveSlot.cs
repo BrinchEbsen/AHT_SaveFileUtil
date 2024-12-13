@@ -43,5 +43,12 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return slot;
         }
+
+        public override string ToString()
+        {
+            if (!IsUsed) return "Not used";
+
+            return GameState.ToString();
+        }
     }
 }

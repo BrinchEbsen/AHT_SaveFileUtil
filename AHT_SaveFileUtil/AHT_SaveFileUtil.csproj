@@ -49,8 +49,10 @@
     <Compile Include="Save\GlobalGameState.cs" />
     <Compile Include="Save\SaveFile.cs" />
     <Compile Include="Save\SaveInfo.cs" />
+    <Compile Include="Save\Slot\BitHeap.cs" />
     <Compile Include="Save\Slot\GameState.cs" />
     <Compile Include="Save\Slot\GameStateTrigInfo.cs" />
+    <Compile Include="Save\Slot\MapGameState.cs" />
     <Compile Include="Save\Slot\PlayerState.cs" />
     <Compile Include="Save\Slot\SaveSlot.cs" />
   </ItemGroup>

@@ -49,6 +49,12 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public uint[] Tasks { get; private set; } = new uint[5];
 
+        public uint ShopAvailableFlags { get; private set; }
+
+        public BitHeap BitHeap { get; private set; }
+
+        public MapGameState[] MapStates { get; private set; } = new MapGameState[200];
+
 
 
         private GameState() { }
@@ -108,6 +114,17 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             for (int i = 0; i < state.Tasks.Length; i++)
                 state.Tasks[i] = reader.ReadUInt32(bigEndian);
+
+            reader.BaseStream.Seek(4, SeekOrigin.Current);
+
+            state.ShopAvailableFlags = reader.ReadUInt32(bigEndian);
+
+            state.BitHeap = BitHeap.FromReader(reader, platform);
+
+            for (int i = 0; i < state.MapStates.Length; i++)
+                state.MapStates[i] = MapGameState.FromReader(reader, platform);
+
+            reader.BaseStream.Seek(4, SeekOrigin.Current);
 
             return state;
         }
@@ -200,6 +217,49 @@ namespace AHT_SaveFileUtil.Save.Slot
             bit = (int)task & 0x1F;
 
             return true;
+        }
+
+        public float GetCompletionPercentage()
+        {
+            if (PlayerState == null) return 0f;
+
+            int tally =
+                PlayerState.TotalDragonEggs +
+                PlayerState.TotalDarkGems +
+                PlayerState.TotalLightGems;
+
+            if (GetObjective(EXHashCode.HT_Objective_Boss4_Beaten))
+                tally += 1;
+
+            // tally = 221 if the game is 100% complete
+
+            return (tally / 221f) * 100f;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(string.Format("Started: {0}-{1}-{2} {3}:{4:00}:{5:00}",
+                StartTime.Year, StartTime.Month, StartTime.Day,
+                StartTime.Hours, StartTime.Minutes, StartTime.Seconds));
+
+            sb.AppendLine(string.Format("Played: {0}:{1:00}:{2:00}",
+                (int)PlayTimer / (60*60),
+                ((int)PlayTimer / 60) % 60,
+                (int)PlayTimer % 60
+                ));
+
+            sb.AppendLine($"Dark Gems: {PlayerState.TotalDarkGems}");
+            sb.AppendLine($"Light Gems: {PlayerState.TotalLightGems}");
+            sb.AppendLine($"Dragon Eggs: {PlayerState.TotalDragonEggs}");
+
+            sb.AppendLine($"Completed: {GetCompletionPercentage():0.00}%");
+
+            sb.AppendLine($"Character: {PlayerState.Setup.Player}");
+            sb.AppendLine($"Level: {StartingMap}");
+
+            return sb.ToString();
         }
     }
 }
