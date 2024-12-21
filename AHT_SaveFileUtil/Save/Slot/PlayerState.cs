@@ -1,6 +1,5 @@
 ﻿using AHT_SaveFileUtil.Common;
-using Common;
-using Extensions;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,14 +55,14 @@ namespace AHT_SaveFileUtil.Save.Slot
         ClonePos = 2
     }
 
-    public struct PowerupTally
+    public struct PowerupTally : ISaveFileIO<PowerupTally>
     {
         public byte Amount;
         public byte Max;
         public byte Total;
         public byte Magazines;
 
-        public static PowerupTally FromReader(BinaryReader reader)
+        public static PowerupTally FromReader(BinaryReader reader, GamePlatform platform)
         {
             return new PowerupTally
             {
@@ -73,9 +72,14 @@ namespace AHT_SaveFileUtil.Save.Slot
                 Magazines = reader.ReadByte()
             };
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public struct PlayerSetupInfo
+    public struct PlayerSetupInfo : ISaveFileIO<PlayerSetupInfo>
     {
         public EXVector Position;
         
@@ -175,9 +179,14 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return info;
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class PlayerState
+    public class PlayerState : ISaveFileIO<PlayerState>
     {
         public BreathType CurrentBreath { get; private set; }
 
@@ -354,15 +363,15 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             state.TotalGems = reader.ReadInt32(bigEndian);
 
-            state.LockPickers = PowerupTally.FromReader(reader);
+            state.LockPickers = PowerupTally.FromReader(reader, platform);
 
-            state.FlameBombs = PowerupTally.FromReader(reader);
+            state.FlameBombs = PowerupTally.FromReader(reader, platform);
 
-            state.IceBombs = PowerupTally.FromReader(reader);
+            state.IceBombs = PowerupTally.FromReader(reader, platform);
 
-            state.WaterBombs = PowerupTally.FromReader(reader);
+            state.WaterBombs = PowerupTally.FromReader(reader, platform);
 
-            state.ElectricBombs = PowerupTally.FromReader(reader);
+            state.ElectricBombs = PowerupTally.FromReader(reader, platform);
 
             state.FireArrows = reader.ReadInt16(bigEndian);
 
@@ -417,6 +426,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             reader.BaseStream.Seek(4, SeekOrigin.Current);
 
             return state;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
         }
     }
 }

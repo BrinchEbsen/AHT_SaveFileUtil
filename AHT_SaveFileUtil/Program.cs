@@ -1,5 +1,5 @@
-﻿using AHT_SaveFileUtil.Save;
-using Common;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Save;
 using System;
 using System.IO;
 
@@ -12,8 +12,9 @@ namespace AHT_SaveFileUtil
             using (var stream = File.OpenRead("C:\\Users\\Ebbers\\Downloads\\7D-G5SE-G5SE.gci"))
             {
                 var file = SaveFile.FromFileStream(stream, GamePlatform.GameCube);
+                Console.WriteLine(SaveFile.GetCheckSum(stream, GamePlatform.GameCube).ToString("X"));
 
-                foreach(var slot in file.Slots)
+                foreach (var slot in file.Slots)
                 {
                     Console.WriteLine(slot);
                 }

@@ -1,5 +1,5 @@
-﻿using Common;
-using Extensions;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,13 +17,15 @@ namespace AHT_SaveFileUtil.Save.Slot
         GetSize = 3
     }
 
-    public struct StackEntry
+    public class StackEntry : ISaveFileIO<StackEntry>
     {
         public int Start;
         public int Address;
         public int End;
         public PreserveMode Mode;
         public int BeenWrittenFlag;
+
+        private StackEntry() { }
 
         public static StackEntry FromReader(BinaryReader reader, GamePlatform platform)
         {
@@ -44,9 +46,20 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return entry;
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(Start, bigEndian);
+            writer.Write(Address, bigEndian);
+            writer.Write(End, bigEndian);
+            writer.Write((int)Mode, bigEndian);
+            writer.Write(BeenWrittenFlag, bigEndian);
+        }
     }
 
-    public class BitHeap
+    public class BitHeap : ISaveFileIO<BitHeap>
     {
         public byte[] ByteHeap { get; private set; } = new byte[0x4000];
 
@@ -62,23 +75,34 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            BitHeap heap = new BitHeap();
+            var heap = new BitHeap();
 
+            //0x4000 bytes
             for (int i = 0; i < heap.ByteHeap.Length; i++)
-            {
                 heap.ByteHeap[i] = reader.ReadByte();
-            }
 
             heap.NumBitsUsed = reader.ReadInt32(bigEndian);
 
             heap.StackPtr = reader.ReadInt32(bigEndian);
 
             for (int i = 0; i < heap.Stack.Length; i++)
-            {
                 heap.Stack[i] = StackEntry.FromReader(reader, platform);
-            }
 
             return heap;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            foreach (byte b in ByteHeap)
+                writer.Write(b);
+
+            writer.Write(NumBitsUsed, bigEndian);
+            writer.Write(StackPtr, bigEndian);
+
+            foreach(var entry in Stack)
+                entry.ToWriter(writer, platform);
         }
     }
 }

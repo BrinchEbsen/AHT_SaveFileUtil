@@ -1,6 +1,5 @@
 ﻿using AHT_SaveFileUtil.Common;
-using Common;
-using Extensions;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +18,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         FoundAndCleared = 0x3
     }
 
-    public class GameState
+    public class GameState : ISaveFileIO<GameState>
     {
         public uint Version { get; private set; }
 
@@ -78,22 +77,16 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             state.NumTrigInfo = reader.ReadInt32(bigEndian);
             if (state.NumTrigInfo < 0 || state.NumTrigInfo > 256)
-            {
                 throw new IOException($"Invalid number of TrigInfo: {state.NumTrigInfo}");
-            }
 
             state.TrigInfo = new GameStateTrigInfo[state.NumTrigInfo];
             for (int i = 0; i < state.TrigInfo.Length; i++)
-            {
                 state.TrigInfo[i] = GameStateTrigInfo.FromReader(reader, platform);
-            }
 
             if (state.NumTrigInfo < 256)
-            {
                 reader.BaseStream.Seek(
                     (256 - state.NumTrigInfo) * 0x20,
                     SeekOrigin.Current);
-            }
 
             int cheatsPlayerType = reader.ReadInt32(bigEndian);
             if (!Enum.IsDefined(typeof(Players), cheatsPlayerType))
@@ -129,11 +122,47 @@ namespace AHT_SaveFileUtil.Save.Slot
             return state;
         }
 
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(Version, bigEndian);
+            writer.Write(VersionValidFlag, bigEndian);
+            writer.Write((int)StartingMap, bigEndian);
+            writer.Write(Flags, bigEndian);
+            writer.Write(NumTrigInfo, bigEndian);
+
+            foreach(var trigInfo in TrigInfo)
+                trigInfo.ToWriter(writer, platform);
+
+            writer.Write((int)CheatsPlayerType, bigEndian);
+            StartTime.ToWriter(writer, platform);
+            writer.Write(PlayTimer, bigEndian);
+            writer.Write(TimeoutTimer, bigEndian);
+            PlayerState.ToWriter(writer, platform);
+
+            foreach (var obj in Objectives)
+                writer.Write(obj, bigEndian);
+
+            foreach (var tsk in Tasks)
+                writer.Write(tsk, bigEndian);
+
+            writer.BaseStream.Seek(4, SeekOrigin.Current);
+
+            writer.Write(ShopAvailableFlags, bigEndian);
+            BitHeap.ToWriter(writer, platform);
+
+            foreach(var state in MapStates)
+                state.ToWriter(writer, platform);
+
+            writer.BaseStream.Seek(4, SeekOrigin.Current);
+        }
+
         //OBJECTIVES
 
         public bool GetObjective(EXHashCode objectiveHash)
         {
-            if (!ObjectiveIntoIndexAndBit(objectiveHash, out int index, out int bit))
+            if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
                 return false;
 
             return (Objectives[index] & (1 << bit)) != 0;
@@ -141,14 +170,14 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public bool SetObjective(EXHashCode objectiveHash, bool value)
         {
-            if (!ObjectiveIntoIndexAndBit(objectiveHash, out int index, out int bit))
+            if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
                 return false;
 
             Objectives[index] &= ~((uint)(value ? 0 : 1) << bit);
             return true;
         }
 
-        private static bool ObjectiveIntoIndexAndBit(EXHashCode objectiveHash, out int index, out int bit)
+        private static bool ObjectiveToIndexAndBit(EXHashCode objectiveHash, out int index, out int bit)
         {
             index = 0;
             bit = 0;
@@ -175,7 +204,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public TaskStates GetTaskState(EXHashCode taskHash)
         {
-            if (!TaskIntoIndexAndBit(taskHash, out int index, out int bit))
+            if (!TaskToIndexAndBit(taskHash, out int index, out int bit))
                 return TaskStates.Undiscovered;
 
             uint valueMask = ((uint)1 << bit) | ((uint)1 << (bit + 1));
@@ -185,7 +214,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public bool SetTaskState(EXHashCode taskHash, TaskStates value)
         {
-            if (!TaskIntoIndexAndBit(taskHash, out int index, out int bit))
+            if (!TaskToIndexAndBit(taskHash, out int index, out int bit))
                 return false;
 
             uint mask = (uint)3 << bit;
@@ -196,7 +225,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             return true;
         }
 
-        private static bool TaskIntoIndexAndBit(EXHashCode taskHash, out int index, out int bit)
+        private static bool TaskToIndexAndBit(EXHashCode taskHash, out int index, out int bit)
         {
             index = 0;
             bit = 0;
@@ -218,6 +247,8 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+
+
 
         public float GetCompletionPercentage()
         {

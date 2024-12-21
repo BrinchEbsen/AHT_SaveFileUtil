@@ -8,6 +8,7 @@ namespace AHT_SaveFileUtil.Common
 {
     public enum Map
     {
+        None = -1,
         MapLoading = 0,
         LoadingLoop2D = 1,
         Completely_Swamped = 2,

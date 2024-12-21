@@ -1,10 +1,10 @@
-﻿using Common;
-using Extensions;
+﻿using AHT_SaveFileUtil.Extensions;
+using AHT_SaveFileUtil.Save;
 using System.IO;
 
 namespace AHT_SaveFileUtil.Common
 {
-    public class XAppTime
+    public class XAppTime : ISaveFileIO<XAppTime>
     {
         public short Year { get; set; }
         public byte Month { get; set; }
@@ -15,24 +15,31 @@ namespace AHT_SaveFileUtil.Common
 
         public override string ToString()
         {
-            return $"{Day}-{Month}-{Year} | {Hours}:{Minutes.ToString().PadLeft(2, '0')}:{Seconds.ToString().PadLeft(2, '0')}";
+            return $"{Day}-{Month}-{Year} | {Hours}:{Minutes:00}:{Seconds:00}";
         }
 
         public static XAppTime FromReader(BinaryReader reader, GamePlatform platform)
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            var time = new XAppTime();
+            var time = new XAppTime
+            {
+                Year = reader.ReadInt16(bigEndian),
+                Month = reader.ReadByte(),
+                Day = reader.ReadByte(),
+                Hours = reader.ReadByte(),
+                Minutes = reader.ReadByte(),
+                Seconds = reader.ReadByte()
+            };
 
-            time.Year = reader.ReadInt16(bigEndian);
-            time.Month = reader.ReadByte();
-            time.Day = reader.ReadByte();
-            time.Hours = reader.ReadByte();
-            time.Minutes = reader.ReadByte();
-            time.Seconds = reader.ReadByte();
             reader.BaseStream.Seek(1, SeekOrigin.Current);
 
             return time;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

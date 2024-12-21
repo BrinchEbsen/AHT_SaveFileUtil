@@ -1,6 +1,5 @@
 ﻿using AHT_SaveFileUtil.Common;
-using Common;
-using Extensions;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save
 {
-    public class SaveInfo
+    public class SaveInfo : ISaveFileIO<SaveInfo>
     {
         public GamePlatform Platform { get; private set; }
 
@@ -136,6 +135,11 @@ namespace AHT_SaveFileUtil.Save
             reader.BaseStream.Seek(4, SeekOrigin.Current);
 
             return info;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
         }
     }
 }

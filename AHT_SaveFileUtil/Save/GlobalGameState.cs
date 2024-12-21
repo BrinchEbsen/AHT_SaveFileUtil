@@ -1,5 +1,5 @@
-﻿using Common;
-using Extensions;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,7 +32,7 @@ namespace AHT_SaveFileUtil.Save
         }
     }
 
-    public class GlobalGameState
+    public class GlobalGameState : ISaveFileIO<GlobalGameState>
     {
         //For each bit in EggSets
         public const ushort EGG_SETS_CONCEPT_ART        =  0x1;
@@ -94,6 +94,11 @@ namespace AHT_SaveFileUtil.Save
             reader.BaseStream.Seek(2, SeekOrigin.Current);
 
             return state;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
         }
     }
 }

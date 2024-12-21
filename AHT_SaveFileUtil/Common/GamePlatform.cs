@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace AHT_SaveFileUtil.Common
 {
     public enum GamePlatform
     {

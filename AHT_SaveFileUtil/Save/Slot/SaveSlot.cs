@@ -1,5 +1,5 @@
-﻿using Common;
-using Extensions;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
-    public class SaveSlot
+    public class SaveSlot : ISaveFileIO<SaveSlot>
     {
         public uint CheckSum { get; private set; }
 
@@ -42,6 +42,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             slot.GameState = GameState.FromReader(reader, platform);
 
             return slot;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
         }
 
         public override string ToString()

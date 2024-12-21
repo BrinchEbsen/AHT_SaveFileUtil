@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-namespace Extensions
+namespace AHT_SaveFileUtil.Extensions
 {
     public static class BinaryReaderExtensions
     {
@@ -18,7 +18,7 @@ namespace Extensions
             {
                 ushort x = reader.ReadUInt16();
 
-                return (ushort)((ushort)((x & 0xff) << 8) | ((x >> 8) & 0xff));
+                return (ushort)((ushort)((x & 0xff) << 8) | x >> 8 & 0xff);
             }
         }
 
@@ -30,7 +30,7 @@ namespace Extensions
             }
             else
             {
-                return (short)ReadUInt16(reader, BigEndian);
+                return (short)reader.ReadUInt16(BigEndian);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Extensions
             }
             else
             {
-                return (int)ReadUInt32(reader, BigEndian);
+                return (int)reader.ReadUInt32(BigEndian);
             }
         }
 
@@ -80,14 +80,14 @@ namespace Extensions
 
         public static string ReadASCIIString(this BinaryReader reader)
         {
-            return ReadASCIIString(reader, -1);
+            return reader.ReadASCIIString(-1);
         }
 
         public static string ReadASCIIString(this BinaryReader reader, int length)
         {
             if (length == 0) return string.Empty;
 
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             int index = 0;
             for (char c = (char)reader.ReadByte(); true; c = (char)reader.ReadByte())

@@ -1,6 +1,5 @@
 ﻿using AHT_SaveFileUtil.Common;
-using Common;
-using Extensions;
+using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
-    public class MapGameState
+    public class MapGameState : ISaveFileIO<MapGameState>
     {
+        public int MapIndexValue { get; private set; }
+
         public uint LastStartPoint { get; private set; }
 
         public Players LastStartPointPlayer { get; private set; }
@@ -99,6 +100,36 @@ namespace AHT_SaveFileUtil.Save.Slot
             state.TriggerListBitHeapSize = reader.ReadInt32(bigEndian);
 
             return state;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Startpoint: {LastStartPoint.ToString("X")} | Character: {LastStartPointPlayer}");
+            sb.AppendLine($"Dark Gems: {NumDarkGems}/{(MaxDarkGems < 0 ? 0 : MaxDarkGems)}");
+            sb.AppendLine($"Dragon Eggs: {SumOfEggs()}/{(MaxDragonEggs < 0 ? 0 : MaxDragonEggs)}");
+            sb.AppendLine($"Light Gems: {NumLightGems}/{(MaxLightGems < 0 ? 0 : MaxLightGems)}");
+
+            return sb.ToString();
+        }
+
+        public int SumOfEggs()
+        {
+            return
+                NumEggs_ConceptArt +
+                NumEggs_ModelViewer +
+                NumEggs_Ember +
+                NumEggs_Flame +
+                NumEggs_SgtByrd +
+                NumEggs_Turret +
+                NumEggs_Sparx +
+                NumEggs_Blink;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            throw new NotImplementedException();
         }
     }
 }

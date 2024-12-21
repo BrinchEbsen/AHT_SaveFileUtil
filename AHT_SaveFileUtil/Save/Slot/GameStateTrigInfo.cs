@@ -1,14 +1,7 @@
 ﻿using AHT_SaveFileUtil.Common;
-using Common;
-using Extensions;
+using AHT_SaveFileUtil.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -20,9 +13,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         MapReveal = 3
     }
 
+    /// <summary>
+    /// A saved record of information about a specific type of trigger.
+    /// </summary>
     public interface ITrigInfoData { }
 
-    public class TrigInfo_RestartPoint : ITrigInfoData
+    public class TrigInfo_RestartPoint : ISaveFileIO<TrigInfo_RestartPoint>, ITrigInfoData
     {
         public bool HasVisited { get; set; }
 
@@ -39,7 +35,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             var data = new TrigInfo_RestartPoint();
 
             byte b = reader.ReadByte();
-            data.HasVisited = (b >> 7) != 0;
+            data.HasVisited = (b % 0x80) != 0;
 
             reader.BaseStream.Seek(3, SeekOrigin.Current);
 
@@ -49,9 +45,19 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return data;
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(HasVisited ? (byte)0x80 : (byte)0);
+            writer.BaseStream.Seek(3, SeekOrigin.Current);
+            writer.Write(HashCode, bigEndian);
+            writer.Write(NameTextHashCode, bigEndian);
+        }
     }
 
-    public class TrigInfo_LightGem : ITrigInfoData
+    public class TrigInfo_LightGem : ISaveFileIO<TrigInfo_LightGem>, ITrigInfoData
     {
         public bool IsLight { get; set; }
 
@@ -62,15 +68,21 @@ namespace AHT_SaveFileUtil.Save.Slot
             var data = new TrigInfo_LightGem();
 
             byte b = reader.ReadByte();
-            data.IsLight = (b >> 7) != 0;
+            data.IsLight = (b & 0x80) != 0;
 
             reader.BaseStream.Seek(11, SeekOrigin.Current);
 
             return data;
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            writer.Write(IsLight ? (byte)0x80 : (byte)0);
+            writer.BaseStream.Seek(11, SeekOrigin.Current);
+        }
     }
 
-    public class TrigInfo_MapReveal : ITrigInfoData
+    public class TrigInfo_MapReveal : ISaveFileIO<TrigInfo_MapReveal>, ITrigInfoData
     {
         public uint IdentifierHashCode { get; set; }
 
@@ -87,15 +99,24 @@ namespace AHT_SaveFileUtil.Save.Slot
             data.IdentifierHashCode = reader.ReadUInt32(bigEndian);
 
             byte b = reader.ReadByte();
-            data.IsRevealed = (b >> 7) != 0;
+            data.IsRevealed = (b & 0x80) != 0;
 
             reader.BaseStream.Seek(7, SeekOrigin.Current);
 
             return data;
         }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(IdentifierHashCode, bigEndian);
+            writer.Write(IsRevealed ? (byte)0x80 : (byte)0);
+            writer.BaseStream.Seek(7, SeekOrigin.Current);
+        }
     }
 
-    public class GameStateTrigInfo
+    public class GameStateTrigInfo : ISaveFileIO<GameStateTrigInfo>
     {
         public short MapIndex { get; private set; }
 
@@ -105,21 +126,17 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public TrigInfoType Type { get; private set; }
 
-        public Type GetTrigInfoDataType
+        public Type TrigInfoDataType
         {
             get
             {
-                switch (Type)
+                return Type switch
                 {
-                    case TrigInfoType.RestartPoint:
-                        return typeof(TrigInfo_RestartPoint);
-                    case TrigInfoType.LightGem:
-                        return typeof(TrigInfo_LightGem);
-                    case TrigInfoType.MapReveal:
-                        return typeof(TrigInfo_MapReveal);
-                    default:
-                        return null;
-                }
+                    TrigInfoType.RestartPoint => typeof(TrigInfo_RestartPoint),
+                    TrigInfoType.LightGem => typeof(TrigInfo_LightGem),
+                    TrigInfoType.MapReveal => typeof(TrigInfo_MapReveal),
+                    _ => null,
+                };
             }
         }
 
@@ -163,9 +180,20 @@ namespace AHT_SaveFileUtil.Save.Slot
                     reader.BaseStream.Seek(12, SeekOrigin.Current); break;
             }
 
-
-
             return trig;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(MapIndex, bigEndian);
+            writer.Write(TrigIndex, bigEndian);
+            writer.Write(XYZ.X, bigEndian);
+            writer.Write(XYZ.Y, bigEndian);
+            writer.Write(XYZ.Z, bigEndian);
+            writer.Write((int)Type, bigEndian);
+            
         }
     }
 }
