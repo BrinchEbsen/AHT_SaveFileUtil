@@ -35,7 +35,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             var data = new TrigInfo_RestartPoint();
 
             byte b = reader.ReadByte();
-            data.HasVisited = (b % 0x80) != 0;
+            data.HasVisited = (b & 0x80) != 0;
 
             reader.BaseStream.Seek(3, SeekOrigin.Current);
 
@@ -50,8 +50,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            writer.Write(HasVisited ? (byte)0x80 : (byte)0);
-            writer.BaseStream.Seek(3, SeekOrigin.Current);
+            writer.Write(HasVisited ? 0x80000000 : 0, bigEndian);
             writer.Write(HashCode, bigEndian);
             writer.Write(NameTextHashCode, bigEndian);
         }
@@ -77,8 +76,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            writer.Write(IsLight ? (byte)0x80 : (byte)0);
-            writer.BaseStream.Seek(11, SeekOrigin.Current);
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(IsLight ? 0x80000000 : 0, bigEndian);
+            writer.Write(0);
+            writer.Write(0);
         }
     }
 
@@ -111,8 +113,8 @@ namespace AHT_SaveFileUtil.Save.Slot
             bool bigEndian = platform == GamePlatform.GameCube;
 
             writer.Write(IdentifierHashCode, bigEndian);
-            writer.Write(IsRevealed ? (byte)0x80 : (byte)0);
-            writer.BaseStream.Seek(7, SeekOrigin.Current);
+            writer.Write(IsRevealed ? 0x80000000 : 0, bigEndian);
+            writer.Write(0);
         }
     }
 
