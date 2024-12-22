@@ -11,7 +11,7 @@ namespace AHT_SaveFileUtil.Common
         public byte Day { get; set; }
         public byte Hours { get; set; }
         public byte Minutes { get; set; }
-        public short Seconds { get; set; }
+        public byte Seconds { get; set; }
 
         public override string ToString()
         {
@@ -39,7 +39,16 @@ namespace AHT_SaveFileUtil.Common
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new System.NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(Year, bigEndian);
+            writer.Write(Month);
+            writer.Write(Day);
+            writer.Write(Hours);
+            writer.Write(Minutes);
+            writer.Write(Seconds);
+
+            writer.BaseStream.Seek(1, SeekOrigin.Current);
         }
     }
 }

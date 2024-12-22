@@ -98,7 +98,18 @@ namespace AHT_SaveFileUtil.Save
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            foreach(var time in MiniGameBestTimes)
+            {
+                writer.Write(time.FileHash, bigEndian);
+                writer.Write(time.EasyTime, bigEndian);
+                writer.Write(time.HardTime, bigEndian);
+            }
+
+            writer.Write(EggSets, bigEndian);
+
+            writer.BaseStream.Seek(2, SeekOrigin.Current);
         }
     }
 }

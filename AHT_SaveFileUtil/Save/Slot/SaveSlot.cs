@@ -46,7 +46,14 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(CheckSum, bigEndian);
+            writer.Write(UsedFlag);
+            writer.Write(DisplayedSaveMessageFlag);
+            writer.Write(SpareFlag2);
+            writer.Write(SpareFlag3);
+            GameState.ToWriter(writer, platform);
         }
 
         public override string ToString()

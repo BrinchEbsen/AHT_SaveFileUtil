@@ -14,6 +14,8 @@ namespace AHT_SaveFileUtil.Save
 {
     public class SaveFile
     {
+        public GamePlatform Platform { get; private set; }
+
         public uint CheckSum { get; private set; }
 
         public bool CheckSumValid { get; private set; }
@@ -26,10 +28,15 @@ namespace AHT_SaveFileUtil.Save
 
         public static SaveFile FromFileStream(FileStream stream, GamePlatform platform)
         {
+            if (!stream.CanRead)
+                throw new ArgumentException("Provided stream needs to be readable.");
+
             if (platform != GamePlatform.GameCube)
                 throw new NotImplementedException("Only GameCube supported.");
 
             var file = new SaveFile();
+
+            file.Platform = platform;
 
             bool bigEndian = platform == GamePlatform.GameCube;
 
@@ -62,9 +69,37 @@ namespace AHT_SaveFileUtil.Save
             return file;
         }
 
-        public void ToFileStream(FileStream stream, GamePlatform platform)
+        public void ToFileStream(FileStream stream)
         {
-            throw new NotImplementedException();
+            if (!stream.CanWrite || !stream.CanRead)
+                throw new ArgumentException("Provided stream needs to be both readable and writeable.");
+
+            bool bigEndian = Platform == GamePlatform.GameCube;
+
+            using (BinaryWriter writer = new(stream, Encoding.UTF8, true))
+            {
+                //Write new checksum later
+                stream.Seek(0x4040, SeekOrigin.Begin);
+                SaveInfo.ToWriter(writer, Platform);
+
+                long addr = stream.Position;
+                for (int i = 0; i < Slots.Length; i++)
+                {
+                    Slots[i].ToWriter(writer, Platform);
+
+                    if (i != 2)
+                    {
+                        //Seek forward the GameStateSize + the slot header data
+                        stream.Seek(addr + SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
+                        addr = stream.Position;
+                    }
+                }
+
+                //Now that we're done, write a new checksum
+                uint newChecksum = GetCheckSum(stream, Platform);
+                stream.Seek(0x40, SeekOrigin.Begin);
+                writer.Write(newChecksum, bigEndian);
+            }
         }
 
         public static uint GetCheckSum(FileStream stream, GamePlatform platform)

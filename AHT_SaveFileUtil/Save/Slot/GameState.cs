@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
@@ -134,6 +135,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             foreach(var trigInfo in TrigInfo)
                 trigInfo.ToWriter(writer, platform);
+
+            if (NumTrigInfo < 256)
+                writer.BaseStream.Seek(
+                    (256 - NumTrigInfo) * 0x20,
+                    SeekOrigin.Current);
 
             writer.Write((int)CheatsPlayerType, bigEndian);
             StartTime.ToWriter(writer, platform);

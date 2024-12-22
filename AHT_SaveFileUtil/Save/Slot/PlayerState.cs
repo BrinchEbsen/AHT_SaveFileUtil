@@ -75,7 +75,10 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            writer.Write(Amount);
+            writer.Write(Max);
+            writer.Write(Total);
+            writer.Write(Magazines);
         }
     }
 
@@ -182,7 +185,38 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(Position.X, bigEndian);
+            writer.Write(Position.Y, bigEndian);
+            writer.Write(Position.Z, bigEndian);
+            writer.Write(Position.W, bigEndian);
+
+            writer.Write(Rotation.X, bigEndian);
+            writer.Write(Rotation.Y, bigEndian);
+            writer.Write(Rotation.Z, bigEndian);
+            writer.Write(Rotation.W, bigEndian);
+
+            writer.Write((int)Player, bigEndian);
+            writer.Write((int)MiniGameID, bigEndian);
+            writer.Write((int)MapListIndex, bigEndian);
+            writer.Write((int)CamType, bigEndian);
+            writer.Write((int)CamCreateMode, bigEndian);
+            writer.Write(Flags, bigEndian);
+
+            foreach (var hash in DataHashcodes)
+                writer.Write(hash, bigEndian);
+
+            foreach (var val in DataR32)
+                writer.Write(val, bigEndian);
+
+            foreach (var val in DataS32)
+                writer.Write(val, bigEndian);
+
+            foreach (var val in DataU32)
+                writer.Write(val, bigEndian);
+
+            writer.BaseStream.Seek(8, SeekOrigin.Current);
         }
     }
 
@@ -430,7 +464,41 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write((int)CurrentBreath, bigEndian);
+            writer.Write(Health, bigEndian);
+            writer.Write(Gems, bigEndian);
+            writer.Write(TotalGems, bigEndian);
+            LockPickers.ToWriter(writer, platform);
+            FlameBombs.ToWriter(writer, platform);
+            IceBombs.ToWriter(writer, platform);
+            WaterBombs.ToWriter(writer, platform);
+            ElectricBombs.ToWriter(writer, platform);
+            writer.Write(FireArrows, bigEndian);
+            writer.Write(FireArrowsMax, bigEndian);
+            writer.Write(AbilityFlags, bigEndian);
+            writer.Write(WaterDiveTimer, bigEndian);
+            writer.Write(SuperchargeTimer, bigEndian);
+            writer.Write(SuperchargeTimerMax, bigEndian);
+            writer.Write(InvincibleTimer, bigEndian);
+            writer.Write(InvincibleTimerMax, bigEndian);
+            writer.Write(DoubleGemTimer, bigEndian);
+            writer.Write(DoubleGemTimerMax, bigEndian);
+            writer.Write(SgtByrdFuel, bigEndian);
+            writer.Write(SgtByrdBombs, bigEndian);
+            writer.Write(SgtByrdMissiles, bigEndian);
+            writer.Write(SparxSmartBombs, bigEndian);
+            writer.Write(SparxSeekers, bigEndian);
+            writer.Write(BlinkBombs, bigEndian);
+            writer.Write(TotalLightGems);
+            writer.Write(TotalDarkGems);
+            writer.Write(TotalDragonEggs);
+            writer.Write(UNK_0);
+            writer.BaseStream.Seek(6, SeekOrigin.Current);
+            Setup.ToWriter(writer, platform);
+            writer.Write((int)LastPlayerSetup, bigEndian);
+            writer.BaseStream.Seek(4, SeekOrigin.Current);
         }
     }
 }

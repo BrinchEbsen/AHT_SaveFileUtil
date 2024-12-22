@@ -193,7 +193,21 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.Write(XYZ.Y, bigEndian);
             writer.Write(XYZ.Z, bigEndian);
             writer.Write((int)Type, bigEndian);
-            
+
+            switch (Type)
+            {
+                case TrigInfoType.RestartPoint:
+                    ((TrigInfo_RestartPoint)Data).ToWriter(writer, platform);
+                    break;
+                case TrigInfoType.LightGem:
+                    ((TrigInfo_LightGem)Data).ToWriter(writer, platform);
+                    break;
+                case TrigInfoType.MapReveal:
+                    ((TrigInfo_MapReveal)Data).ToWriter(writer, platform);
+                    break;
+                default:
+                    throw new IOException("Invalid TrigInfo type: " + Type);
+            }
         }
     }
 }

@@ -102,6 +102,31 @@ namespace AHT_SaveFileUtil.Save.Slot
             return state;
         }
 
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            writer.Write(LastStartPoint, bigEndian);
+            writer.Write((int)LastStartPointPlayer, bigEndian);
+            writer.Write(MaxDarkGems, bigEndian);
+            writer.Write(MaxDragonEggs, bigEndian);
+            writer.Write(MaxLightGems, bigEndian);
+            writer.BaseStream.Seek(7*4, SeekOrigin.Current); // 7 unused fields
+            writer.Write(NumDarkGems, bigEndian);
+            writer.Write(NumLightGems, bigEndian);
+            writer.Write(NumEggs_ConceptArt, bigEndian);
+            writer.Write(NumEggs_ModelViewer, bigEndian);
+            writer.Write(NumEggs_Ember, bigEndian);
+            writer.Write(NumEggs_Flame, bigEndian);
+            writer.Write(NumEggs_SgtByrd, bigEndian);
+            writer.Write(NumEggs_Turret, bigEndian);
+            writer.Write(NumEggs_Sparx, bigEndian);
+            writer.Write(NumEggs_Blink, bigEndian);
+            writer.Write(Flags, bigEndian);
+            writer.Write(TriggerListBitHeapAddress, bigEndian);
+            writer.Write(TriggerListBitHeapSize, bigEndian);
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -125,11 +150,6 @@ namespace AHT_SaveFileUtil.Save.Slot
                 NumEggs_Turret +
                 NumEggs_Sparx +
                 NumEggs_Blink;
-        }
-
-        public void ToWriter(BinaryWriter writer, GamePlatform platform)
-        {
-            throw new NotImplementedException();
         }
     }
 }

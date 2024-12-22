@@ -11,8 +11,6 @@ namespace AHT_SaveFileUtil.Save
 {
     public class SaveInfo : ISaveFileIO<SaveInfo>
     {
-        public GamePlatform Platform { get; private set; }
-
         private byte[] BuildTime = new byte[32];
 
         private byte[] BuildDate = new byte[32];
@@ -83,10 +81,7 @@ namespace AHT_SaveFileUtil.Save
 
         public static SaveInfo FromReader(BinaryReader reader, GamePlatform platform)
         {
-            var info = new SaveInfo
-            {
-                Platform = platform
-            };
+            var info = new SaveInfo();
 
             bool bigEndian = platform == GamePlatform.GameCube;
 
@@ -139,7 +134,30 @@ namespace AHT_SaveFileUtil.Save
 
         public void ToWriter(BinaryWriter writer, GamePlatform platform)
         {
-            throw new NotImplementedException();
+            bool bigEndian = platform == GamePlatform.GameCube;
+
+            foreach (var chr in BuildTime)
+                writer.Write(chr);
+
+            foreach (var chr in BuildDate)
+                writer.Write(chr);
+
+            writer.Write(SaveVersion, bigEndian);
+            writer.Write(SaveChecksums[0], bigEndian);
+            writer.Write(SaveChecksums[1], bigEndian);
+            writer.Write(SaveChecksums[2], bigEndian);
+            writer.Write(GameStateSize, bigEndian);
+            GlobalGameState.ToWriter(writer, platform);
+            writer.BaseStream.Seek(4, SeekOrigin.Current);
+            writer.Write(SfxVolume, bigEndian);
+            writer.Write(MusicVolume, bigEndian);
+            writer.Write(FirstPersonYAxisInverted ? 1 : 0, bigEndian);
+            writer.Write(SgtByrdYAxisInverted ? 1 : 0, bigEndian);
+            writer.Write(SparxFlyingYAxisInverted ? 1 : 0, bigEndian);
+            writer.Write(CameraModeActive ? 1 : 0, bigEndian);
+            writer.Write(RumbleEnabled ? 1 : 0, bigEndian);
+            writer.Write((int)SelectedSpyroSkin, bigEndian);
+            writer.BaseStream.Seek(4, SeekOrigin.Current);
         }
     }
 }
