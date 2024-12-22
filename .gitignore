@@ -367,4 +367,4 @@ FodyWeavers.xsd
 # CUSTOM STUFF:
 
 # Save files
-.gci
+*.gci
