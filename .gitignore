@@ -369,3 +369,9 @@ FodyWeavers.xsd
 # Save files
 *.gci
 *.psu
+
+# Game Executable
+main.dol
+
+# YAML Files
+*.yaml

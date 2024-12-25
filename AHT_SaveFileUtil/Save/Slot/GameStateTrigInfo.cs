@@ -36,12 +36,9 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             byte b = reader.ReadByte();
             if (bigEndian)
-            {
                 data.HasVisited = (b & 0x80) != 0;
-            } else
-            {
+            else
                 data.HasVisited = (b & 0x1) != 0;
-            }
 
             reader.BaseStream.Seek(3, SeekOrigin.Current);
 
@@ -57,13 +54,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             bool bigEndian = platform == GamePlatform.GameCube;
 
             if (bigEndian)
-            {
                 writer.Write(HasVisited ? (byte)0x80 : (byte)0);
-            }
             else
-            {
                 writer.Write(HasVisited ? (byte)0x1 : (byte)0);
-            }
+
             writer.BaseStream.Seek(3, SeekOrigin.Current);
 
             writer.Write(HashCode, bigEndian);
@@ -85,13 +79,9 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             byte b = reader.ReadByte();
             if (bigEndian)
-            {
                 data.IsLight = (b & 0x80) != 0;
-            }
             else
-            {
                 data.IsLight = (b & 0x1) != 0;
-            }
 
             reader.BaseStream.Seek(11, SeekOrigin.Current);
 
@@ -103,13 +93,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             bool bigEndian = platform == GamePlatform.GameCube;
 
             if (bigEndian)
-            {
                 writer.Write(IsLight ? (byte)0x80 : (byte)0);
-            }
             else
-            {
                 writer.Write(IsLight ? (byte)0x1 : (byte)0);
-            }
+
             writer.BaseStream.Seek(3, SeekOrigin.Current);
 
             writer.Write(0);
@@ -135,13 +122,9 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             byte b = reader.ReadByte();
             if (bigEndian)
-            {
                 data.IsRevealed = (b & 0x80) != 0;
-            }
             else
-            {
                 data.IsRevealed = (b & 0x1) != 0;
-            }
 
             reader.BaseStream.Seek(7, SeekOrigin.Current);
 
@@ -155,12 +138,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.Write(IdentifierHashCode, bigEndian);
 
             if (bigEndian)
-            {
                 writer.Write(IsRevealed ? (byte)0x80 : (byte)0);
-            } else
-            {
+            else
                 writer.Write(IsRevealed ? (byte)0x1 : (byte)0);
-            }
+
             writer.BaseStream.Seek(3, SeekOrigin.Current);
 
             writer.Write(0);
