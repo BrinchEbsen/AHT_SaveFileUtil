@@ -101,7 +101,13 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             state.TimeoutTimer = reader.ReadSingle(bigEndian);
 
+            if (platform == GamePlatform.PlayStation2)
+                reader.BaseStream.Seek(8, SeekOrigin.Current);
+
             state.PlayerState = PlayerState.FromReader(reader, platform);
+
+            if (platform == GamePlatform.PlayStation2)
+                reader.BaseStream.Seek(8, SeekOrigin.Current);
 
             for(int i = 0; i < state.Objectives.Length; i++)
                 state.Objectives[i] = reader.ReadUInt32(bigEndian);
@@ -145,7 +151,14 @@ namespace AHT_SaveFileUtil.Save.Slot
             StartTime.ToWriter(writer, platform);
             writer.Write(PlayTimer, bigEndian);
             writer.Write(TimeoutTimer, bigEndian);
+
+            if (platform == GamePlatform.PlayStation2)
+                writer.BaseStream.Seek(8, SeekOrigin.Current);
+
             PlayerState.ToWriter(writer, platform);
+
+            if (platform == GamePlatform.PlayStation2)
+                writer.BaseStream.Seek(8, SeekOrigin.Current);
 
             foreach (var obj in Objectives)
                 writer.Write(obj, bigEndian);

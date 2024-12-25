@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +40,9 @@ namespace AHT_SaveFileUtil.Save.Slot
             slot.SpareFlag2 = reader.ReadByte();
             slot.SpareFlag3 = reader.ReadByte();
 
+            if (platform == GamePlatform.PlayStation2)
+                reader.BaseStream.Seek(8, SeekOrigin.Current);
+
             slot.GameState = GameState.FromReader(reader, platform);
 
             return slot;
@@ -53,6 +57,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.Write(DisplayedSaveMessageFlag);
             writer.Write(SpareFlag2);
             writer.Write(SpareFlag3);
+
+            if (platform == GamePlatform.PlayStation2)
+                writer.BaseStream.Seek(8, SeekOrigin.Current);
+
             GameState.ToWriter(writer, platform);
         }
 

@@ -35,7 +35,13 @@ namespace AHT_SaveFileUtil.Save.Slot
             var data = new TrigInfo_RestartPoint();
 
             byte b = reader.ReadByte();
-            data.HasVisited = (b & 0x80) != 0;
+            if (bigEndian)
+            {
+                data.HasVisited = (b & 0x80) != 0;
+            } else
+            {
+                data.HasVisited = (b & 0x1) != 0;
+            }
 
             reader.BaseStream.Seek(3, SeekOrigin.Current);
 
@@ -50,7 +56,16 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            writer.Write(HasVisited ? 0x80000000 : 0, bigEndian);
+            if (bigEndian)
+            {
+                writer.Write(HasVisited ? (byte)0x80 : (byte)0);
+            }
+            else
+            {
+                writer.Write(HasVisited ? (byte)0x1 : (byte)0);
+            }
+            writer.BaseStream.Seek(3, SeekOrigin.Current);
+
             writer.Write(HashCode, bigEndian);
             writer.Write(NameTextHashCode, bigEndian);
         }
@@ -64,10 +79,19 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public static TrigInfo_LightGem FromReader(BinaryReader reader, GamePlatform platform)
         {
+            bool bigEndian = platform == GamePlatform.GameCube;
+
             var data = new TrigInfo_LightGem();
 
             byte b = reader.ReadByte();
-            data.IsLight = (b & 0x80) != 0;
+            if (bigEndian)
+            {
+                data.IsLight = (b & 0x80) != 0;
+            }
+            else
+            {
+                data.IsLight = (b & 0x1) != 0;
+            }
 
             reader.BaseStream.Seek(11, SeekOrigin.Current);
 
@@ -78,7 +102,16 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            writer.Write(IsLight ? 0x80000000 : 0, bigEndian);
+            if (bigEndian)
+            {
+                writer.Write(IsLight ? (byte)0x80 : (byte)0);
+            }
+            else
+            {
+                writer.Write(IsLight ? (byte)0x1 : (byte)0);
+            }
+            writer.BaseStream.Seek(3, SeekOrigin.Current);
+
             writer.Write(0);
             writer.Write(0);
         }
@@ -101,7 +134,14 @@ namespace AHT_SaveFileUtil.Save.Slot
             data.IdentifierHashCode = reader.ReadUInt32(bigEndian);
 
             byte b = reader.ReadByte();
-            data.IsRevealed = (b & 0x80) != 0;
+            if (bigEndian)
+            {
+                data.IsRevealed = (b & 0x80) != 0;
+            }
+            else
+            {
+                data.IsRevealed = (b & 0x1) != 0;
+            }
 
             reader.BaseStream.Seek(7, SeekOrigin.Current);
 
@@ -113,7 +153,16 @@ namespace AHT_SaveFileUtil.Save.Slot
             bool bigEndian = platform == GamePlatform.GameCube;
 
             writer.Write(IdentifierHashCode, bigEndian);
-            writer.Write(IsRevealed ? 0x80000000 : 0, bigEndian);
+
+            if (bigEndian)
+            {
+                writer.Write(IsRevealed ? (byte)0x80 : (byte)0);
+            } else
+            {
+                writer.Write(IsRevealed ? (byte)0x1 : (byte)0);
+            }
+            writer.BaseStream.Seek(3, SeekOrigin.Current);
+
             writer.Write(0);
         }
     }
