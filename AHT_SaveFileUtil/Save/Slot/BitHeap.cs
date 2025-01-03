@@ -79,6 +79,26 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public StackEntry[] Stack { get; private set; } = new StackEntry[32];
 
+        /// <summary>
+        /// Whether the object's data is valid.
+        /// </summary>
+        public bool IsValid
+        {
+            get
+            {
+                if (ByteHeap == null)
+                    return false;
+
+                if (ByteHeap.Length != BYTEHEAP_LENGTH)
+                    return false;
+
+                if (NumBitsUsed < 0)
+                    return false;
+
+                return true;
+            }
+        }
+
         private BitHeap() { }
 
         public static BitHeap FromReader(BinaryReader reader, GamePlatform platform)
@@ -113,24 +133,6 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             foreach(var entry in Stack)
                 entry.ToWriter(writer, platform);
-        }
-
-        /// <summary>
-        /// Check if the object's data is valid.
-        /// </summary>
-        /// <returns>If the object's data is valid.</returns>
-        public bool IsValid()
-        {
-            if (ByteHeap == null)
-                return false;
-
-            if (ByteHeap.Length != BYTEHEAP_LENGTH)
-                return false;
-
-            if (NumBitsUsed < 0)
-                return false;
-
-            return true;
         }
 
 

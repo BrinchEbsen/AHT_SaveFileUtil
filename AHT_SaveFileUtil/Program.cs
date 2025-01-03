@@ -2,6 +2,7 @@
 using AHT_SaveFileUtil.Extensions;
 using AHT_SaveFileUtil.Save;
 using AHT_SaveFileUtil.Save.MiniMap;
+using AHT_SaveFileUtil.Save.Slot;
 using System;
 using System.IO;
 using System.IO.Hashing;
@@ -31,14 +32,6 @@ namespace AHT_SaveFileUtil
             string yaml = File.ReadAllText("../../../../minimaps.yaml");
             var miniMaps = MiniMaps.FromYAML(yaml);
 
-            var mapInfo = miniMaps.MiniMapInfo[1];
-
-            mapInfo.GetTextureWorldEdges(256, 256, out float xLeft, out float xRight, out float zUp, out float zBottom);
-
-            Console.WriteLine($"{xLeft}, {xRight}, {zUp}, {zBottom}");
-
-            return;
-
             File.Copy(gc_input, gc_output, true);
 
             using (var stream = File.OpenRead(gc_input))
@@ -56,10 +49,31 @@ namespace AHT_SaveFileUtil
                     Console.WriteLine(slot);
                 }
 
+                PrintSaveFileMiniMaps(file.Slots[0].GameState.BitHeap, miniMaps);
+
                 //using (var stream2 = File.Open(gc_output, FileMode.Open, FileAccess.ReadWrite))
                 //{
                 //    file.ToFileStream(stream2);
                 //}
+            }
+        }
+
+        public static void PrintSaveFileMiniMaps(BitHeap bitHeap, MiniMaps miniMaps)
+        {
+            var list = miniMaps.GetAllMiniMapArrayFromBitHeap(bitHeap);
+
+            foreach (var map in list)
+            {
+                for(int i = map.Length-1; i >= 0 ; i--)
+                {
+                    for (int j = 0; j < map[i].Length; j++)
+                    {
+                        Console.Write(map[i][j] ? "XX" : "  ");
+                    }
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine(new string('-', map[0].Length*2));
             }
         }
 

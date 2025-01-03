@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AHT_SaveFileUtil.Save.Slot;
+using System;
 
 namespace AHT_SaveFileUtil.Save.MiniMap
 {
@@ -71,6 +72,9 @@ namespace AHT_SaveFileUtil.Save.MiniMap
         /// </summary>
         public float[] PixelEdge { get; set; } = new float[4];
 
+        /// <summary>
+        /// The dimensions of the mapped area of the minimap, along the X [0] axis and the Z [1] axis.
+        /// </summary>
         public int[] MappedGridSize
         {
             get
@@ -96,20 +100,6 @@ namespace AHT_SaveFileUtil.Save.MiniMap
                 int[] size = MappedGridSize;
 
                 return size[0] * size[1];
-            }
-        }
-
-        public float DefaultScale
-        {
-            get
-            {
-                float pixelSpan = PixelEdge[2] - PixelEdge[0];
-                float worldSpan = WorldEdge[2] - WorldEdge[0];
-
-                //Div by 0 guard
-                if (worldSpan == 0) return 0;
-
-                return Math.Abs(pixelSpan) / Math.Abs(worldSpan);
             }
         }
 
@@ -141,7 +131,7 @@ namespace AHT_SaveFileUtil.Save.MiniMap
         /// <summary>
         /// Get the world positions for the edges of a texture with a given width/height.
         /// </summary>
-        public void GetTextureWorldEdges(int texWidth, int texHeight, out float xLeft, out float xRight, out float zUp, out float zBottom)
+        public bool GetTextureWorldEdges(int texWidth, int texHeight, out float xLeft, out float xRight, out float zUp, out float zBottom)
         {
             float worldXSpan = WorldEdge[2] - WorldEdge[0];
             float worldZSpan = WorldEdge[1] - WorldEdge[3];
@@ -155,7 +145,7 @@ namespace AHT_SaveFileUtil.Save.MiniMap
                 xRight = 0;
                 zUp = 0;
                 zBottom = 0;
-                return;
+                return false;
             }
 
             float xRatio = worldXSpan / pixelXSpan;
@@ -165,6 +155,50 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             xRight  = WorldEdge[2] + (( (float)texWidth  * 2) - PixelEdge[2]) * xRatio;
             zBottom = WorldEdge[3] - (( (float)texHeight * 2) - PixelEdge[3]) * zRatio;
             xLeft   = WorldEdge[0] - PixelEdge[0] * xRatio;
+
+            return true;
+        }
+
+        public bool[][] GetArrayFromBitHeap(BitHeap bitHeap, int bitHeapOffset)
+        {
+            ArgumentNullException.ThrowIfNull(bitHeap);
+
+            if (!bitHeap.IsValid)
+                throw new ArgumentException("BitHeap's data is invalid.");
+
+            int size = BitHeapSize;
+            if (size == 0)
+                return [];
+
+            int[] dim = MappedGridSize;
+
+            //generate array
+            bool[][] map = new bool[dim[1]][];
+            for(int i = 0; i < dim[1]; i++)
+                map[i] = new bool[dim[0]];
+
+            byte[] bits = bitHeap.ReadBits(size, bitHeapOffset);
+
+            int readByte = 0;
+            int readBit = 0;
+
+            for(int i = 0; i < map.Length; i++)
+                for (int j = 0; j < map[i].Length; j++)
+                {
+                    bool bit = ((bits[readByte] >> readBit) & 1) != 0;
+
+                    readBit++;
+                    //Check for rollover
+                    if (readBit > 7)
+                    {
+                        readByte++;
+                        readBit = 0;
+                    }
+
+                    map[i][j] = bit;
+                }
+
+            return map;
         }
     }
 }
