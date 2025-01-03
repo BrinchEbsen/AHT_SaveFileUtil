@@ -26,17 +26,28 @@ namespace AHT_SaveFileUtil
         public static void Main(string[] args)
         {
             //GenerateYamlFromGCExe();
-            //return;
+            //return; 
 
-            File.Copy(ps2_input, ps2_output, true);
+            string yaml = File.ReadAllText("../../../../minimaps.yaml");
+            var miniMaps = MiniMaps.FromYAML(yaml);
 
-            using (var stream = File.OpenRead(ps2_input))
+            var mapInfo = miniMaps.MiniMapInfo[1];
+
+            mapInfo.GetTextureWorldEdges(256, 256, out float xLeft, out float xRight, out float zUp, out float zBottom);
+
+            Console.WriteLine($"{xLeft}, {xRight}, {zUp}, {zBottom}");
+
+            return;
+
+            File.Copy(gc_input, gc_output, true);
+
+            using (var stream = File.OpenRead(gc_input))
             {
-                var file = SaveFile.FromFileStream(stream, GamePlatform.PlayStation2);
+                var file = SaveFile.FromFileStream(stream, GamePlatform.GameCube);
 
                 try
                 {
-                    Console.WriteLine(SaveFile.GetGCCheckSum(stream, GamePlatform.PlayStation2).ToString("X"));
+                    Console.WriteLine(SaveFile.GetGCCheckSum(stream, GamePlatform.GameCube).ToString("X"));
                 }
                 catch (Exception e) { }
 
@@ -45,10 +56,10 @@ namespace AHT_SaveFileUtil
                     Console.WriteLine(slot);
                 }
 
-                using (var stream2 = File.Open(ps2_output, FileMode.Open, FileAccess.ReadWrite))
-                {
-                    file.ToFileStream(stream2);
-                }
+                //using (var stream2 = File.Open(gc_output, FileMode.Open, FileAccess.ReadWrite))
+                //{
+                //    file.ToFileStream(stream2);
+                //}
             }
         }
 

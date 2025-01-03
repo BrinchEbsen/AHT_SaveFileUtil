@@ -61,7 +61,17 @@ namespace AHT_SaveFileUtil.Save.Slot
 
     public class BitHeap : ISaveFileIO<BitHeap>
     {
-        public byte[] ByteHeap { get; private set; } = new byte[0x4000];
+        /// <summary>
+        /// Size of the bitheap in bytes.
+        /// </summary>
+        public const int BYTEHEAP_LENGTH = 0x4000;
+
+        /// <summary>
+        /// Size of the bitheap in bits.
+        /// </summary>
+        public const int BITHEAP_LENGTH = BYTEHEAP_LENGTH * 8;
+
+        public byte[] ByteHeap { get; private set; } = new byte[BYTEHEAP_LENGTH];
 
         public int NumBitsUsed { get; private set; }
 
@@ -103,6 +113,24 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             foreach(var entry in Stack)
                 entry.ToWriter(writer, platform);
+        }
+
+        /// <summary>
+        /// Check if the object's data is valid.
+        /// </summary>
+        /// <returns>If the object's data is valid.</returns>
+        public bool IsValid()
+        {
+            if (ByteHeap == null)
+                return false;
+
+            if (ByteHeap.Length != BYTEHEAP_LENGTH)
+                return false;
+
+            if (NumBitsUsed < 0)
+                return false;
+
+            return true;
         }
 
 
@@ -159,7 +187,7 @@ namespace AHT_SaveFileUtil.Save.Slot
              */
 
             //Run through all bits
-            for (; bitCount != 0; bitCount--)
+            for (; bitCount > 0; bitCount--)
             {
                 //If current bit is 1, write it to the buffer
                 if (((ByteHeap[readByte] >> readBit) & 1) != 0)
@@ -239,7 +267,7 @@ namespace AHT_SaveFileUtil.Save.Slot
              * writeBit/Byte: Index into bitheap.
              */
 
-            for (; bitCount != 0; bitCount--)
+            for (; bitCount > 0; bitCount--)
             {
                 //If current bit is 1, write it to the heap, else clear it
                 if (((buffer[readByte] >> readBit) & 1) != 0)

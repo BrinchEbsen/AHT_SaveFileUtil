@@ -55,6 +55,26 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public MapGameState[] MapStates { get; private set; } = new MapGameState[200];
 
+        public float CompletionPercentage
+        {
+            get
+            {
+                if (PlayerState == null) return 0f;
+
+                int tally =
+                    PlayerState.TotalDragonEggs +
+                    PlayerState.TotalDarkGems +
+                    PlayerState.TotalLightGems;
+
+                if (GetObjective(EXHashCode.HT_Objective_Boss4_Beaten))
+                    tally += 1;
+
+                // tally = 221 if the game is 100% complete
+
+                return (tally / 221f) * 100f;
+            }
+        }
+
 
 
         private GameState() { }
@@ -269,23 +289,6 @@ namespace AHT_SaveFileUtil.Save.Slot
 
 
 
-        public float GetCompletionPercentage()
-        {
-            if (PlayerState == null) return 0f;
-
-            int tally =
-                PlayerState.TotalDragonEggs +
-                PlayerState.TotalDarkGems +
-                PlayerState.TotalLightGems;
-
-            if (GetObjective(EXHashCode.HT_Objective_Boss4_Beaten))
-                tally += 1;
-
-            // tally = 221 if the game is 100% complete
-
-            return (tally / 221f) * 100f;
-        }
-
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -304,7 +307,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             sb.AppendLine($"Light Gems: {PlayerState.TotalLightGems}");
             sb.AppendLine($"Dragon Eggs: {PlayerState.TotalDragonEggs}");
 
-            sb.AppendLine($"Completed: {GetCompletionPercentage():0.00}%");
+            sb.AppendLine($"Completed: {CompletionPercentage:0.00}%");
 
             sb.AppendLine($"Character: {PlayerState.Setup.Player}");
             sb.AppendLine($"Level: {StartingMap}");

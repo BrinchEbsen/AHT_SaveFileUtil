@@ -2,6 +2,7 @@
 using AHT_SaveFileUtil.Extensions;
 using System;
 using System.IO;
+using System.Text;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -240,6 +241,48 @@ namespace AHT_SaveFileUtil.Save.Slot
                 default:
                     throw new IOException("Invalid TrigInfo type: " + Type);
             }
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Map: {MapIndex}, Trigger: {TrigIndex}");
+            sb.AppendLine($"Type: {Type}");
+            sb.AppendLine(string.Format("Position: X: {0:0.00}, Y: {1:0.00}, Z: {2:0.00}",
+                XYZ.X, XYZ.Y, XYZ.Z));
+
+            switch(Type)
+            {
+                case TrigInfoType.RestartPoint:
+                    {
+                        var data = (TrigInfo_RestartPoint)Data;
+                        sb.AppendLine($"Has visited: {data.HasVisited}");
+                        sb.AppendLine($"StartPoint HashCode: {data.HashCode.ToString("X")}");
+                        sb.AppendLine($"Name HashCode: {data.NameTextHashCode.ToString("X")}");
+
+                        break;
+                    }
+                case TrigInfoType.LightGem:
+                    {
+                        var data = (TrigInfo_LightGem)Data;
+                        sb.AppendLine($"Is light: {data.IsLight}");
+
+                        break;
+                    }
+                case TrigInfoType.MapReveal:
+                    {
+                        var data = (TrigInfo_MapReveal)Data;
+                        sb.AppendLine($"Identifier HashCode: {data.IdentifierHashCode}");
+                        sb.AppendLine($"Is visited: {data.IsRevealed}");
+
+                        break;
+                    }
+                default:
+                    throw new IOException("Invalid TrigInfo type: " + Type);
+            }
+
+            return sb.ToString();
         }
     }
 }
