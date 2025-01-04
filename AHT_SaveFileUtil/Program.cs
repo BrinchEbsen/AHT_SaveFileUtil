@@ -3,9 +3,11 @@ using AHT_SaveFileUtil.Extensions;
 using AHT_SaveFileUtil.Save;
 using AHT_SaveFileUtil.Save.MiniMap;
 using AHT_SaveFileUtil.Save.Slot;
+using AHT_SaveFileUtil.Save.Triggers;
 using System;
 using System.IO;
 using System.IO.Hashing;
+using System.Text;
 
 namespace AHT_SaveFileUtil
 {
@@ -23,13 +25,27 @@ namespace AHT_SaveFileUtil
         private static readonly string MainDol_Path = "../../../../main.dol";
         private static readonly int MainDol_NumMiniMapInfo = 30;
         private static readonly long MainDol_MiniMapInfo_Offset = 0x3DF5BC;
+        private static readonly long MainDol_TriggerTable_Offset = 0x3DAC40;
+
+        private static readonly string MiniMapsYamlPath = "../../../../minimaps.yaml";
+        private static readonly string TriggerTableYamlPath = "../../../../triggertable.yaml";
+        private static readonly string TriggerDataYamlPath_Temp = "../../../../triggerdata_temp.yaml";
+        private static readonly string TriggerDataYamlPath = "../../../../triggerdata.yaml";
+
+        private static readonly string TestMapYaml = "../../../../temp_5000009.yaml";
 
         public static void Main(string[] args)
         {
-            //GenerateYamlFromGCExe();
-            //return; 
+            //var def = TriggerDataDefinitions.FromYAML(File.ReadAllText(TriggerDataYamlPath));
+            //return;
 
-            string yaml = File.ReadAllText("../../../../minimaps.yaml");
+            //GenerateMinimapsYamlFromGCExe();
+            //return;
+
+            //GenerateTriggerTableYamlFromGCExe();
+            //return;
+
+            string yaml = File.ReadAllText(MiniMapsYamlPath);
             var miniMaps = MiniMaps.FromYAML(yaml);
 
             File.Copy(gc_input, gc_output, true);
@@ -42,7 +58,7 @@ namespace AHT_SaveFileUtil
                 {
                     Console.WriteLine(SaveFile.GetGCCheckSum(stream, GamePlatform.GameCube).ToString("X"));
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
 
                 foreach (var slot in file.Slots)
                 {
@@ -77,7 +93,71 @@ namespace AHT_SaveFileUtil
             }
         }
 
-        public static void GenerateYamlFromGCExe()
+        public static void GenerateTriggerTableYamlFromGCExe()
+        {
+            using (BinaryReader reader = new(File.OpenRead(MainDol_Path)))
+            {
+                TriggerTable triggerTable = new();
+                var ttYaml = new StringBuilder();
+                var tdYaml = new StringBuilder();
+
+                triggerTable.NumEntries = 426;
+                ttYaml.AppendLine("num_entries: " + triggerTable.NumEntries);
+                triggerTable.NumPreservingEntries = 168;
+                ttYaml.AppendLine("num_preserving_entries: " + triggerTable.NumPreservingEntries);
+
+                tdYaml.AppendLine("trigger_data:");
+
+                reader.BaseStream.Seek(MainDol_TriggerTable_Offset, SeekOrigin.Begin);
+                triggerTable.Entries = new TriggerTableEntry[triggerTable.NumEntries];
+
+                int preserveCount = 0;
+
+                ttYaml.AppendLine("entries:");
+                for (int i = 0; i < triggerTable.NumEntries; i++)
+                {
+                    triggerTable.Entries[i] = new TriggerTableEntry();
+
+                    triggerTable.Entries[i].PrimaryHash = reader.ReadUInt32(true);
+                    ttYaml.Append("- primary_hash: 0x" + triggerTable.Entries[i].PrimaryHash.ToString("X"));
+                    string primaryHashStr = ((EXHashCode)triggerTable.Entries[i].PrimaryHash).ToString();
+                    ttYaml.AppendLine(" # " + primaryHashStr);
+
+                    triggerTable.Entries[i].SubHash = reader.ReadUInt32(true);
+                    ttYaml.Append("  sub_hash: 0x" + triggerTable.Entries[i].SubHash.ToString("X"));
+                    string subHashStr = ((EXHashCode)triggerTable.Entries[i].SubHash).ToString();
+                    ttYaml.AppendLine(" # " + subHashStr);
+
+                    reader.BaseStream.Seek(0x10, SeekOrigin.Current);
+
+                    triggerTable.Entries[i].StoredDataSize = reader.ReadInt32(true);
+                    ttYaml.AppendLine("  stored_data_size: " + triggerTable.Entries[i].StoredDataSize);
+
+                    reader.BaseStream.Seek(0xc, SeekOrigin.Current);
+
+                    if (triggerTable.Entries[i].StoredDataSize > 0)
+                    {
+                        preserveCount++;
+
+                        tdYaml.AppendLine("- trigger_table_entry: " + i);
+                        tdYaml.Append("  object_name: " + primaryHashStr.Replace("HT_TriggerType_", ""));
+                        if (subHashStr != "HT_TriggerSubType_Undefined")
+                        {
+                            tdYaml.AppendLine("_" + subHashStr.Replace("HT_TriggerSubType_", ""));
+                        } else { tdYaml.AppendLine(); }
+                        tdYaml.AppendLine("  data:");
+                        tdYaml.AppendLine("  - name: Data");
+                        tdYaml.AppendLine("    type: Flags");
+                        tdYaml.AppendLine("    num_bits: " + triggerTable.Entries[i].StoredDataSize);
+                    }
+                }
+
+                File.WriteAllText(TriggerTableYamlPath, ttYaml.ToString());
+                File.WriteAllText(TriggerDataYamlPath_Temp, tdYaml.ToString());
+            }
+        }
+        
+        public static void GenerateMinimapsYamlFromGCExe()
         {
             using (BinaryReader reader = new(File.OpenRead(MainDol_Path)))
             {
@@ -115,7 +195,7 @@ namespace AHT_SaveFileUtil
                 }
 
                 string yaml = miniMaps.ToYaml();
-                File.WriteAllText("../../../../minimaps.yaml", yaml);
+                File.WriteAllText(MiniMapsYamlPath, yaml);
             }
         }
     }

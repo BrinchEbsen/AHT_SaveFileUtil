@@ -159,11 +159,11 @@ namespace AHT_SaveFileUtil.Save.Slot
                 throw new ArgumentException($"Parameter {nameof(writeBit)} cannot be negative.");
 
             if (writeBit > 7)
-                throw new ArgumentOutOfRangeException($"Parameter {nameof(writeBit)} cannot exceed or equal number of bits in a byte.");
+                throw new ArgumentOutOfRangeException(nameof(writeBit));
 
             //Check if resulting read parameters would exceed number of bits in the heap.
             if (readAddress + bitCount > (ByteHeap.Length * 8))
-                throw new ArgumentOutOfRangeException($"Parameters {nameof(readAddress)} and {nameof(bitCount)} exceed bounds of the bitheap.");
+                throw new ArgumentOutOfRangeException(nameof(readAddress));
             
             /*
              * PRE:
@@ -238,11 +238,11 @@ namespace AHT_SaveFileUtil.Save.Slot
                 throw new ArgumentException($"Parameter {nameof(readBit)} cannot be negative.");
 
             if (readBit > 7)
-                throw new ArgumentOutOfRangeException($"Parameter {nameof(readBit)} cannot exceed or equal number of bits in a byte.");
+                throw new ArgumentOutOfRangeException(nameof(readBit));
 
             //Check if resulting write parameters would exceed number of bits in the heap.
             if (writeAddress + bitCount > (ByteHeap.Length * 8))
-                throw new ArgumentOutOfRangeException($"Parameters {nameof(writeAddress)} and {nameof(bitCount)} exceed bounds of the bitheap.");
+                throw new ArgumentOutOfRangeException(nameof(writeAddress));
 
             //Check that there are enough bytes in the buffer to read from.
             if (GetNumRequiredBytes(bitCount + readBit) > buffer.Length)
