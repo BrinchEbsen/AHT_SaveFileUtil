@@ -1,4 +1,5 @@
 using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Save;
 
 namespace AHT_SaveFileEditor
 {
@@ -55,6 +56,7 @@ namespace AHT_SaveFileEditor
             SC_SaveFile.Visible = true;
 
             PopulateSaveSlotPanel();
+            PopulateGlobalSaveInfo();
         }
 
         private void PopulateSaveSlotPanel()
@@ -72,10 +74,53 @@ namespace AHT_SaveFileEditor
             }
         }
 
+        private void PopulateGlobalSaveInfo()
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            Lbl_BuildTime.Text = saveFile.SaveInfo.BuildDateString + " | " + saveFile.SaveInfo.BuildTimeString;
+            Lbl_SaveVersion.Text = saveFile.SaveInfo.SaveVersion.ToString();
+
+            var globalGameState = saveFile.SaveInfo.GlobalGameState;
+
+            for (int i = 0; i < 8; i++)
+            {
+                ushort eggBit = (ushort)(1 << i);
+                var cb = new EggSetCheckBox(globalGameState, eggBit);
+                cb.Text = GlobalGameState.EggSetNames[eggBit];
+                FlowPanel_EggSets.Controls.Add(cb);
+            }
+
+            DataGrid_MiniGameTimes.Rows.Clear();
+            DataGrid_MiniGameTimes.Rows.Add(16);
+
+            for (int i = 0; i < 16; i++)
+            {
+                var row = DataGrid_MiniGameTimes.Rows[i];
+                row.Cells[0].Value = MiniGameBestTime.MiniGameNames[i];
+                row.Cells[1] = new MiniGameBestTimeCell(globalGameState.MiniGameBestTimes[i], false);
+                row.Cells[2] = new MiniGameBestTimeCell(globalGameState.MiniGameBestTimes[i], true);
+            }
+        }
+
         private void flowLayoutPanel_SaveSlots_Resize(object sender, EventArgs e)
         {
-            foreach(Control ctrl in flowLayoutPanel_SaveSlots.Controls)
+            foreach (Control ctrl in flowLayoutPanel_SaveSlots.Controls)
                 ctrl.Width = flowLayoutPanel_SaveSlots.Width;
+        }
+
+        private void DataGrid_MiniGameTimes_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = (MiniGameBestTimeCell)DataGrid_MiniGameTimes.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            bool success = cell.CheckChangeValue();
+
+            if (!success)
+            {
+                MessageBox.Show("Time must be formatted as \"[minutes]:[seconds]\".", "Invalid format",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

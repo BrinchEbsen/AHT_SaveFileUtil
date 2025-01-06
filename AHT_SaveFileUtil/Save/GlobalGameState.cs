@@ -3,32 +3,71 @@ using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save
 {
-    public struct MiniGameBestTime
+    public class MiniGameBestTime
     {
-        public uint FileHash;
-        public float EasyTime;
-        public float HardTime;
+        public static string[] MiniGameNames { get; } =
+        {
+            /*  0 */ "Completely Swamped",
+            /*  1 */ "Island Speedway",
+            /*  2 */ "Cavern Chaos",
+            /*  3 */ "Critter Calamity",
+            /*  4 */ "All Washed Up",
+            /*  5 */ "Cloudy Speedway",
+            /*  6 */ "Outlandish Inlet",
+            /*  7 */ "Turtle Turmoil",
+            /*  8 */ "Snowed Under",
+            /*  9 */ "Iceberg Aerobatics",
+            /* 10 */ "Frosty Flight",
+            /* 11 */ "Iced TNT",
+            /* 12 */ "Mined Out",
+            /* 13 */ "Lava Palaver",
+            /* 14 */ "Sparx Will Fly",
+            /* 15 */ "Storming the Beach"
+        };
+
+        public uint FileHash { get; set; }
+        public float EasyTime { get; set; }
+        public float HardTime { get; set; }
 
         public float EasyTimeSeconds
         {
-            get
-            {
-                return EasyTime / 60;
-            }
+            get => EasyTime / 60;
+            set => EasyTime = value * 60;
+        }
+
+        public float EasyTimeMinutes
+        {
+            get => EasyTime / (60*60);
+            set => EasyTime = value * (60*60);
         }
 
         public float HardTimeSeconds
         {
-            get
-            {
-                return HardTime / 60;
-            }
+            get => HardTime / 60;
+            set => HardTime = value * 60;
+        }
+
+        public float HardTimeMinutes
+        {
+            get => HardTime / (60 * 60);
+            set => HardTime = value * (60 * 60);
+        }
+
+        public string EasyTimeString
+        {
+            get => string.Format("{0}:{1:00}",
+                Math.Floor(EasyTimeMinutes),
+                Math.Floor(EasyTimeSeconds % 60));
+        }
+
+        public string HardTimeString
+        {
+            get => string.Format("{0}:{1:00}",
+                Math.Floor(HardTimeMinutes),
+                Math.Floor(HardTimeSeconds % 60));
         }
     }
 
@@ -44,23 +83,83 @@ namespace AHT_SaveFileUtil.Save
         public const ushort EGG_SETS_SPARX_MINIGAMES    = 0x40;
         public const ushort EGG_SETS_BLINK_MINIGAMES    = 0x80;
 
-        public ushort EggSets { get; private set; }
+        public static Dictionary<ushort, string> EggSetNames { get; } = new Dictionary<ushort, string>
+        {
+            { EGG_SETS_CONCEPT_ART,        "Concept Art" },
+            { EGG_SETS_CHARACTER_VIEWER,   "Model Viewer" },
+            { EGG_SETS_EMBER_MODEL,        "Ember" },
+            { EGG_SETS_FLAME_MODEL,        "Flame" },
+            { EGG_SETS_SGT_BYRD_MINIGAMES, "Sgt. Byrd Minigames" },
+            { EGG_SETS_SPYRO_MINIGAMES,    "Spyro Minigames" },
+            { EGG_SETS_SPARX_MINIGAMES,    "Sparx Minigames" },
+            { EGG_SETS_BLINK_MINIGAMES,    "Blink Minigames" }
+        };
 
-        public bool GotEggsConceptArt       => (EggSets & EGG_SETS_CONCEPT_ART) != 0;
+        public ushort EggSets { get; set; }
 
-        public bool GotEggsCharacterViewer  => (EggSets & EGG_SETS_CHARACTER_VIEWER) != 0;
+        public bool GotEggsConceptArt
+        {
+            get => (EggSets & EGG_SETS_CONCEPT_ART) != 0;
+            set => EggSets = (ushort) (value ?
+                EggSets | EGG_SETS_CONCEPT_ART :
+                EggSets & ~EGG_SETS_CONCEPT_ART);
+        }
 
-        public bool GotEggsEmberModel       => (EggSets & EGG_SETS_EMBER_MODEL) != 0;
+        public bool GotEggsCharacterViewer
+        {
+            get => (EggSets & EGG_SETS_CHARACTER_VIEWER) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_CHARACTER_VIEWER :
+                EggSets & ~EGG_SETS_CHARACTER_VIEWER);
+        }
 
-        public bool GotEggsFlameModel       => (EggSets & EGG_SETS_FLAME_MODEL) != 0;
+        public bool GotEggsEmberModel
+        {
+            get => (EggSets & EGG_SETS_EMBER_MODEL) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_EMBER_MODEL :
+                EggSets & ~EGG_SETS_EMBER_MODEL);
+        }
 
-        public bool GotEggsSgtByrdMinigames => (EggSets & EGG_SETS_SGT_BYRD_MINIGAMES) != 0;
+        public bool GotEggsFlameModel
+        {
+            get => (EggSets & EGG_SETS_FLAME_MODEL) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_FLAME_MODEL :
+                EggSets & ~EGG_SETS_FLAME_MODEL);
+        }
 
-        public bool GotEggsSpyroMinigames   => (EggSets & EGG_SETS_SPYRO_MINIGAMES) != 0;
+        public bool GotEggsSgtByrdMinigames
+        {
+            get => (EggSets & EGG_SETS_SGT_BYRD_MINIGAMES) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_SGT_BYRD_MINIGAMES :
+                EggSets & ~EGG_SETS_SGT_BYRD_MINIGAMES);
+        }
 
-        public bool GotEggsSparxMinigames   => (EggSets & EGG_SETS_SPARX_MINIGAMES) != 0;
+        public bool GotEggsSpyroMinigames
+        {
+            get => (EggSets & EGG_SETS_SPYRO_MINIGAMES) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_SPYRO_MINIGAMES :
+                EggSets & ~EGG_SETS_SPYRO_MINIGAMES);
+        }
 
-        public bool GotEggsBlinkMinigames   => (EggSets & EGG_SETS_BLINK_MINIGAMES) != 0;
+        public bool GotEggsSparxMinigames
+        {
+            get => (EggSets & EGG_SETS_SPARX_MINIGAMES) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_SPARX_MINIGAMES :
+                EggSets & ~EGG_SETS_SPARX_MINIGAMES);
+        }
+
+        public bool GotEggsBlinkMinigames
+        {
+            get => (EggSets & EGG_SETS_BLINK_MINIGAMES) != 0;
+            set => EggSets = (ushort) (value?
+                EggSets | EGG_SETS_BLINK_MINIGAMES :
+                EggSets & ~EGG_SETS_BLINK_MINIGAMES);
+        }
 
         public MiniGameBestTime[] MiniGameBestTimes { get; private set; } = new MiniGameBestTime[16];
 
