@@ -19,21 +19,21 @@ namespace AHT_SaveFileUtil.Save
 
         public GlobalGameState GlobalGameState { get; private set; }
 
-        public float SfxVolume { get; private set; }
+        public float SfxVolume { get; set; }
 
-        public int MusicVolume { get; private set; }
+        public int MusicVolume { get; set; }
 
-        public bool FirstPersonYAxisInverted { get; private set; } //4 BYTES
+        public bool FirstPersonYAxisInverted { get; set; } //4 BYTES
 
-        public bool SgtByrdYAxisInverted { get; private set; } //4 BYTES
+        public bool SgtByrdYAxisInverted { get; set; } //4 BYTES
 
-        public bool SparxFlyingYAxisInverted { get; private set; } //4 BYTES
+        public bool SparxFlyingYAxisInverted { get; set; } //4 BYTES
 
-        public bool CameraModeActive { get; private set; } //4 BYTES
+        public bool CameraModeActive { get; set; } //4 BYTES
 
-        public bool RumbleEnabled { get; private set; } //4 BYTES
+        public bool RumbleEnabled { get; set; } //4 BYTES
 
-        public Players SelectedSpyroSkin { get; private set; }
+        public Players SelectedSpyroSkin { get; set; }
 
 
 

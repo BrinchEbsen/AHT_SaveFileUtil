@@ -18,6 +18,8 @@ namespace AHT_SaveFileEditor
 
         private static SaveFileHandler? instance;
 
+        private static string BackupsDir => Path.Join(Path.GetDirectoryName(Application.ExecutablePath), "backups");
+
         private SaveFileHandler() { }
 
         public static SaveFileHandler Instance => instance ??= new SaveFileHandler();
@@ -31,12 +33,26 @@ namespace AHT_SaveFileEditor
             saveFile = SaveFile.FromFileStream(stream, platform);
         }
 
+        /// <summary>
+        /// Copy the current working file to a "backups" folder
+        /// </summary>
+        public void CreateBackup()
+        {
+            if (workingFile == null) return;
+
+            string backupsDir = BackupsDir;
+
+            if (!Directory.Exists(backupsDir))
+                Directory.CreateDirectory(backupsDir);
+
+            File.Copy(workingFile, Path.Join(backupsDir, Path.GetFileName(workingFile)), true);
+        }
+
         public void CloseStream()
         {
             stream?.Dispose();
             stream?.Close();
             stream = null;
-            workingFile = null;
         }
 
         public void WriteFile()
@@ -56,7 +72,8 @@ namespace AHT_SaveFileEditor
                 {
                     CloseStream();
                     File.Copy(workingFile, filename, true);
-                    stream = File.Open(filename, FileMode.Open, FileAccess.Write, FileShare.None);
+                    stream = File.Open(filename, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+                    workingFile = filename;
                 }
 
             saveFile.ToFileStream(stream);

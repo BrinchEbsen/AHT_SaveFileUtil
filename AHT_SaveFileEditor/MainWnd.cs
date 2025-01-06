@@ -30,8 +30,18 @@ namespace AHT_SaveFileEditor
 
                     string file = openFileDialog.FileName;
 
-                    SaveFileHandler.Instance.CloseStream();
-                    SaveFileHandler.Instance.OpenFile(file, platform);
+                    try
+                    {
+                        SaveFileHandler.Instance.CloseStream();
+                        SaveFileHandler.Instance.OpenFile(file, platform);
+                    } catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error reading file",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        DisableSaveFileControls();
+                        return;
+                    }
+                    
                     EnableSaveFileControls();
                 }
             }
@@ -39,7 +49,17 @@ namespace AHT_SaveFileEditor
 
         private void toolStripMenuItem_Export_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                SaveFileHandler.Instance.CreateBackup();
+                SaveFileHandler.Instance.WriteFile();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error writing file",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void toolStripMenuItem_ExportAs_Click(object sender, EventArgs e)
@@ -59,12 +79,18 @@ namespace AHT_SaveFileEditor
             PopulateGlobalSaveInfo();
         }
 
+        private void DisableSaveFileControls()
+        {
+            SC_SaveFile.Visible = false;
+        }
+
         private void PopulateSaveSlotPanel()
         {
             var saveFile = SaveFileHandler.Instance.SaveFile;
             if (saveFile == null)
                 return;
 
+            flowLayoutPanel_SaveSlots.Controls.Clear();
             for (int i = 0; i < saveFile.Slots.Length; i++)
             {
                 flowLayoutPanel_SaveSlots.Controls.Add(new Label() { Text = "Slot " + i });
@@ -85,6 +111,7 @@ namespace AHT_SaveFileEditor
 
             var globalGameState = saveFile.SaveInfo.GlobalGameState;
 
+            FlowPanel_EggSets.Controls.Clear();
             for (int i = 0; i < 8; i++)
             {
                 ushort eggBit = (ushort)(1 << i);
@@ -103,6 +130,22 @@ namespace AHT_SaveFileEditor
                 row.Cells[1] = new MiniGameBestTimeCell(globalGameState.MiniGameBestTimes[i], false);
                 row.Cells[2] = new MiniGameBestTimeCell(globalGameState.MiniGameBestTimes[i], true);
             }
+
+            TrackBar_SFXVolume.Value = (int)saveFile.SaveInfo.SfxVolume;
+            TrackBar_MusicVolume.Value = saveFile.SaveInfo.MusicVolume;
+
+            Check_FPAxisInverted.Checked = saveFile.SaveInfo.FirstPersonYAxisInverted;
+            Check_SgtAxisInverted.Checked = saveFile.SaveInfo.SgtByrdYAxisInverted;
+            Check_SparxAxisInverted.Checked = saveFile.SaveInfo.SparxFlyingYAxisInverted;
+            Check_CamActive.Checked = saveFile.SaveInfo.CameraModeActive;
+            Check_Rumble.Checked = saveFile.SaveInfo.RumbleEnabled;
+
+            ComboBox_BonusCharacter.Items.Clear();
+            var playerNames = Enum.GetValues<Players>();
+            foreach (var name in playerNames)
+                ComboBox_BonusCharacter.Items.Add(name);
+
+            ComboBox_BonusCharacter.SelectedIndex = (int)saveFile.SaveInfo.SelectedSpyroSkin;
         }
 
         private void flowLayoutPanel_SaveSlots_Resize(object sender, EventArgs e)
@@ -121,6 +164,78 @@ namespace AHT_SaveFileEditor
                 MessageBox.Show("Time must be formatted as \"[minutes]:[seconds]\".", "Invalid format",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void TrackBar_SFXVolume_Scroll(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.SfxVolume = TrackBar_SFXVolume.Value;
+        }
+
+        private void TrackBar_MusicVolume_Scroll(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.MusicVolume = TrackBar_MusicVolume.Value;
+        }
+
+        private void Check_FPAxisInverted_CheckedChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.FirstPersonYAxisInverted = Check_FPAxisInverted.Checked;
+        }
+
+        private void Check_SgtAxisInverted_CheckedChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.SgtByrdYAxisInverted = Check_SgtAxisInverted.Checked;
+        }
+
+        private void Check_SparxAxisInverted_CheckedChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.SparxFlyingYAxisInverted = Check_SparxAxisInverted.Checked;
+        }
+
+        private void Check_CamActive_CheckedChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.CameraModeActive = Check_CamActive.Checked;
+        }
+
+        private void Check_Rumble_CheckedChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.RumbleEnabled = Check_Rumble.Checked;
+        }
+
+        private void ComboBox_BonusCharacter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile == null)
+                return;
+
+            saveFile.SaveInfo.SelectedSpyroSkin = (Players)ComboBox_BonusCharacter.SelectedIndex;
         }
     }
 }
