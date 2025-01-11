@@ -1,17 +1,53 @@
 ﻿using AHT_SaveFileUtil.Save.Slot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace AHT_SaveFileUtil.Save.MiniMap
 {
+    /// <summary>
+    /// The name of each of the two bits in every entry
+    /// in the minimap status array in the bitheap.
+    /// </summary>
+    public enum BitNames
+    {
+        Visible = 0,
+        Selectable = 1
+    }
+
+    public class MapOrderInfo
+    {
+        public uint FileHash { get; set; }
+        public uint MapHash { get; set; }
+    }
+
     public class MiniMaps
     {
         public int NumMapInfo { get; set; }
 
+        public int NumMapStatus { get; set; }
+
         public MiniMapInfo[] MiniMapInfo { get; set; } = [];
+
+        public MapOrderInfo[] MiniMapOrder { get; set; } = [];
+
+        public int MiniMaps_TotalBitheapSize
+        {
+            get
+            {
+                int size = 0;
+
+                foreach (var map in MiniMapInfo)
+                    size += map.BitHeapSize;
+
+                return size;
+            }
+        }
+
+        public int MiniMapStatus_BitHeapAddress => MiniMaps_TotalBitheapSize;
 
         public MiniMaps() { }
 
@@ -74,6 +110,37 @@ namespace AHT_SaveFileUtil.Save.MiniMap
                     offset += MiniMapInfo[i].BitHeapSize;
 
             return offset;
+        }
+
+        public bool MiniMapStatus_GetBitName(BitHeap bitHeap, int index, BitNames name)
+        {
+            int address = MiniMapStatus_BitHeapAddress;
+
+            //Find address of the entry
+            address += index * 2;
+
+            byte value = bitHeap.ReadBits(2, address)[0];
+
+            return name switch
+            {
+                BitNames.Visible    => (value & 0b01) != 0,
+                BitNames.Selectable => (value & 0b10) != 0,
+                _ => false
+            };
+        }
+
+        public void MiniMapStatus_SetBitName(BitHeap bitHeap, int index, BitNames name, bool set)
+        {
+            int address = MiniMapStatus_BitHeapAddress;
+
+            //Find address of the entry
+            address += index * 2;
+
+            //Add 1 if we're targeting the second bit
+            if (name == BitNames.Selectable) address++;
+
+            //Write the bit
+            bitHeap.WriteBits(1, [set ? (byte)1 : (byte)0], address);
         }
 
         public static MiniMaps FromYAML(string yaml)

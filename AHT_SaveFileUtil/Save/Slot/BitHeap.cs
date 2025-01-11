@@ -1,14 +1,13 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
+    /// <summary>
+    /// The current operation of a stack entry.
+    /// </summary>
     public enum PreserveMode
     {
         Stop = 0,
@@ -17,6 +16,9 @@ namespace AHT_SaveFileUtil.Save.Slot
         GetSize = 3
     }
 
+    /// <summary>
+    /// Entry into the BitHeap stack.
+    /// </summary>
     public class StackEntry : ISaveFileIO<StackEntry>
     {
         public int Start;
@@ -59,6 +61,10 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
     }
 
+    /// <summary>
+    /// Stores data in a stream of bits 0x4000 bytes long.
+    /// Data can be allocated, written to and read from.
+    /// </summary>
     public class BitHeap : ISaveFileIO<BitHeap>
     {
         /// <summary>

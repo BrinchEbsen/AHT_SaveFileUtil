@@ -20,8 +20,16 @@ namespace AHT_SaveFileUtil.Save.Slot
         private byte SpareFlag2;
         private byte SpareFlag3;
 
-        public bool IsUsed => UsedFlag != 0;
-        public bool DisplayedSaveMessage => DisplayedSaveMessageFlag != 0;
+        public bool IsUsed
+        {
+            get => UsedFlag != 0;
+            set => UsedFlag = value ? (byte)1 : (byte)0;
+        }
+        public bool DisplayedSaveMessage
+        {
+            get => DisplayedSaveMessageFlag != 0;
+            set => DisplayedSaveMessageFlag = value ? (byte)1 : (byte)0;
+        }
 
         public GameState GameState { get; private set; }
 

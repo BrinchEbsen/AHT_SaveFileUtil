@@ -10,7 +10,17 @@ namespace AHT_SaveFileEditor
             InitializeComponent();
         }
 
+        private void MainWnd_Load(object sender, EventArgs e)
+        {
+            OpenSaveFile("../../../../7D-G5SE-G5SE.gci", GamePlatform.GameCube);
+        }
+
         private void toolStripMenuItem_Open_Click(object sender, EventArgs e)
+        {
+            OpenSaveFileDialog();
+        }
+
+        private void OpenSaveFileDialog()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -30,21 +40,27 @@ namespace AHT_SaveFileEditor
 
                     string file = openFileDialog.FileName;
 
-                    try
-                    {
-                        SaveFileHandler.Instance.CloseStream();
-                        SaveFileHandler.Instance.OpenFile(file, platform);
-                    } catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error reading file",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        DisableSaveFileControls();
-                        return;
-                    }
-                    
-                    EnableSaveFileControls();
+                    OpenSaveFile(file, platform);
                 }
             }
+        }
+
+        private void OpenSaveFile(string file, GamePlatform platform)
+        {
+            try
+            {
+                SaveFileHandler.Instance.CloseStream();
+                SaveFileHandler.Instance.OpenFile(file, platform);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error reading file",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisableSaveFileControls();
+                return;
+            }
+
+            EnableSaveFileControls();
         }
 
         private void toolStripMenuItem_Export_Click(object sender, EventArgs e)
@@ -93,7 +109,11 @@ namespace AHT_SaveFileEditor
             flowLayoutPanel_SaveSlots.Controls.Clear();
             for (int i = 0; i < saveFile.Slots.Length; i++)
             {
-                flowLayoutPanel_SaveSlots.Controls.Add(new Label() { Text = "Slot " + i });
+                flowLayoutPanel_SaveSlots.Controls.Add(new Label() {
+                    Text = "Slot " + (i+1),
+                    Height = 18,
+                    Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
+                });
                 var panel = new SaveSlotPanel(saveFile.Slots[i]);
                 flowLayoutPanel_SaveSlots.Controls.Add(panel);
                 panel.Width = flowLayoutPanel_SaveSlots.Width;
@@ -151,7 +171,7 @@ namespace AHT_SaveFileEditor
         private void flowLayoutPanel_SaveSlots_Resize(object sender, EventArgs e)
         {
             foreach (Control ctrl in flowLayoutPanel_SaveSlots.Controls)
-                ctrl.Width = flowLayoutPanel_SaveSlots.Width;
+                ctrl.Width = flowLayoutPanel_SaveSlots.Width - 25;
         }
 
         private void DataGrid_MiniGameTimes_CellEndEdit(object sender, DataGridViewCellEventArgs e)

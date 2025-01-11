@@ -39,6 +39,9 @@ namespace AHT_SaveFileUtil
             //var def = TriggerDataDefinitions.FromYAML(File.ReadAllText(TriggerDataYamlPath));
             //return;
 
+            var miniMap = MiniMaps.FromYAML(File.ReadAllText(MiniMapsYamlPath));
+            return;
+
             //GenerateMinimapsYamlFromGCExe();
             //return;
 

@@ -41,6 +41,9 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public float PlayTimer { get; private set; }
 
+        public string PlayTimerString
+            => $"{(int)(PlayTimer / (60*60))}:{(int)(PlayTimer / 60) % 60:00}:{(int)PlayTimer % 60:00}";
+
         public float TimeoutTimer { get; private set; }
 
         public PlayerState PlayerState { get; private set; }

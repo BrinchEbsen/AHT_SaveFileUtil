@@ -40,6 +40,7 @@ namespace AHT_SaveFileEditor
             SC_SaveFile = new SplitContainer();
             flowLayoutPanel_SaveSlots = new FlowLayoutPanel();
             groupBox2 = new GroupBox();
+            label8 = new Label();
             label7 = new Label();
             ComboBox_BonusCharacter = new ComboBox();
             Check_Rumble = new CheckBox();
@@ -63,7 +64,6 @@ namespace AHT_SaveFileEditor
             label2 = new Label();
             Lbl_BuildTime = new Label();
             label1 = new Label();
-            label8 = new Label();
             menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)SC_SaveFile).BeginInit();
             SC_SaveFile.Panel1.SuspendLayout();
@@ -154,19 +154,20 @@ namespace AHT_SaveFileEditor
             SC_SaveFile.Panel2.Controls.Add(label2);
             SC_SaveFile.Panel2.Controls.Add(Lbl_BuildTime);
             SC_SaveFile.Panel2.Controls.Add(label1);
-            SC_SaveFile.Size = new Size(926, 626);
+            SC_SaveFile.Size = new Size(926, 655);
             SC_SaveFile.SplitterDistance = 286;
             SC_SaveFile.TabIndex = 1;
             SC_SaveFile.Visible = false;
             // 
             // flowLayoutPanel_SaveSlots
             // 
+            flowLayoutPanel_SaveSlots.AutoScroll = true;
             flowLayoutPanel_SaveSlots.BackColor = SystemColors.ControlLight;
             flowLayoutPanel_SaveSlots.Dock = DockStyle.Fill;
             flowLayoutPanel_SaveSlots.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel_SaveSlots.Location = new Point(0, 0);
             flowLayoutPanel_SaveSlots.Name = "flowLayoutPanel_SaveSlots";
-            flowLayoutPanel_SaveSlots.Size = new Size(286, 626);
+            flowLayoutPanel_SaveSlots.Size = new Size(286, 655);
             flowLayoutPanel_SaveSlots.TabIndex = 0;
             flowLayoutPanel_SaveSlots.WrapContents = false;
             flowLayoutPanel_SaveSlots.Resize += flowLayoutPanel_SaveSlots_Resize;
@@ -188,10 +189,20 @@ namespace AHT_SaveFileEditor
             groupBox2.Controls.Add(TrackBar_SFXVolume);
             groupBox2.Location = new Point(3, 336);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(630, 287);
+            groupBox2.Size = new Size(630, 316);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Settings";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(6, 201);
+            label8.Name = "label8";
+            label8.Size = new Size(209, 13);
+            label8.TabIndex = 14;
+            label8.Text = "Intended values: Spyro, Ember or Flame";
             // 
             // label7
             // 
@@ -361,17 +372,20 @@ namespace AHT_SaveFileEditor
             MiniGameName.HeaderText = "Name";
             MiniGameName.Name = "MiniGameName";
             MiniGameName.ReadOnly = true;
+            MiniGameName.SortMode = DataGridViewColumnSortMode.NotSortable;
             MiniGameName.Width = 150;
             // 
             // EasyTime
             // 
             EasyTime.HeaderText = "Easy Time";
             EasyTime.Name = "EasyTime";
+            EasyTime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // HardTime
             // 
             HardTime.HeaderText = "Hard Time";
             HardTime.Name = "HardTime";
+            HardTime.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // FlowPanel_EggSets
             // 
@@ -424,27 +438,18 @@ namespace AHT_SaveFileEditor
             label1.TabIndex = 0;
             label1.Text = "Build time:";
             // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(6, 201);
-            label8.Name = "label8";
-            label8.Size = new Size(209, 13);
-            label8.TabIndex = 14;
-            label8.Text = "Intended values: Spyro, Ember or Flame";
-            // 
             // MainWnd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(926, 650);
+            ClientSize = new Size(926, 679);
             Controls.Add(SC_SaveFile);
             Controls.Add(menuStrip);
             MainMenuStrip = menuStrip;
             Name = "MainWnd";
             ShowIcon = false;
             Text = "Save File Editor";
+            Load += MainWnd_Load;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             SC_SaveFile.Panel1.ResumeLayout(false);
@@ -481,9 +486,6 @@ namespace AHT_SaveFileEditor
         private GroupBox groupBox1;
         private FlowLayoutPanel FlowPanel_EggSets;
         private DataGridView DataGrid_MiniGameTimes;
-        private DataGridViewTextBoxColumn MiniGameName;
-        private DataGridViewTextBoxColumn EasyTime;
-        private DataGridViewTextBoxColumn HardTime;
         private GroupBox groupBox2;
         private Label label4;
         private Label label3;
@@ -499,5 +501,8 @@ namespace AHT_SaveFileEditor
         private ComboBox ComboBox_BonusCharacter;
         private Label label7;
         private Label label8;
+        private DataGridViewTextBoxColumn MiniGameName;
+        private DataGridViewTextBoxColumn EasyTime;
+        private DataGridViewTextBoxColumn HardTime;
     }
 }
