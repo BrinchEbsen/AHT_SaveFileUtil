@@ -244,5 +244,31 @@ namespace AHT_SaveFileUtil.Save
 
             throw new NotImplementedException();
         }
+
+        public void ValidateSlotUsageFlags()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                //If slot isn't used, write 0 to the flag
+                if (!Slots[i].IsUsed)
+                {
+                    Slots[i].UsageFlag = 0;
+                    SaveInfo.UsageFlags[i] = 0;
+                }
+                //If the slot is used and the flag is 0 (or the flags don't match), regenerate.
+                else if (Slots[i].UsageFlag == 0)
+                    RegenerateSlotUsageFlag(i);
+                else if (Slots[i].UsageFlag != SaveInfo.UsageFlags[i])
+                    RegenerateSlotUsageFlag(i);
+            }
+        }
+
+        public void RegenerateSlotUsageFlag(int slot)
+        {
+            uint newFlag = EXRand.Rand32();
+
+            Slots[slot].UsageFlag = newFlag;
+            SaveInfo.UsageFlags[slot] = newFlag;
+        }
     }
 }

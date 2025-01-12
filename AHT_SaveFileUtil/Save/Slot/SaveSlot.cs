@@ -13,7 +13,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 {
     public class SaveSlot : ISaveFileIO<SaveSlot>
     {
-        public uint CheckSum { get; private set; }
+        public uint UsageFlag { get; set; }
 
         private byte UsedFlag;
         private byte DisplayedSaveMessageFlag;
@@ -41,7 +41,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             var slot = new SaveSlot();
 
-            slot.CheckSum = reader.ReadUInt32(bigEndian);
+            slot.UsageFlag = reader.ReadUInt32(bigEndian);
 
             slot.UsedFlag = reader.ReadByte();
             slot.DisplayedSaveMessageFlag = reader.ReadByte();
@@ -60,7 +60,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            writer.Write(CheckSum, bigEndian);
+            writer.Write(UsageFlag, bigEndian);
             writer.Write(UsedFlag);
             writer.Write(DisplayedSaveMessageFlag);
             writer.Write(SpareFlag2);

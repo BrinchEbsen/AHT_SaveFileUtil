@@ -11,8 +11,8 @@ namespace AHT_SaveFileUtil.Save.Slot
     {
         Undiscovered = 0x0,
         Found = 0x1,
-        ClearedButHidden = 0x2,
-        FoundAndCleared = 0x3
+        Done = 0x2,
+        FoundAndDone = 0x3
     }
 
     public class GameState : ISaveFileIO<GameState>
@@ -248,7 +248,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
                 return false;
 
-            Objectives[index] &= ~((uint)(value ? 0 : 1) << bit);
+            if (value)
+                Objectives[index] |= (uint)(1 << bit);
+            else
+                Objectives[index] &= ~(uint)(1 << bit);
+
             return true;
         }
 

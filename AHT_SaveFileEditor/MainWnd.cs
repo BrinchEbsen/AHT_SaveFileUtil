@@ -65,6 +65,8 @@ namespace AHT_SaveFileEditor
 
         private void toolStripMenuItem_Export_Click(object sender, EventArgs e)
         {
+            SaveFileHandler.Instance.SaveFile?.ValidateSlotUsageFlags();
+
             try
             {
                 SaveFileHandler.Instance.CreateBackup();
@@ -100,11 +102,15 @@ namespace AHT_SaveFileEditor
             SC_SaveFile.Visible = false;
         }
 
-        private void PopulateSaveSlotPanel()
+        internal void PopulateSaveSlotPanel()
         {
             var saveFile = SaveFileHandler.Instance.SaveFile;
             if (saveFile == null)
                 return;
+
+            foreach(var ctrl in flowLayoutPanel_SaveSlots.Controls)
+                if (ctrl is SaveSlotPanel)
+                    ((SaveSlotPanel)ctrl).Dispose();
 
             flowLayoutPanel_SaveSlots.Controls.Clear();
             for (int i = 0; i < saveFile.Slots.Length; i++)
@@ -114,7 +120,7 @@ namespace AHT_SaveFileEditor
                     Height = 18,
                     Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
                 });
-                var panel = new SaveSlotPanel(saveFile.Slots[i]);
+                var panel = new SaveSlotPanel(this, saveFile.Slots[i]);
                 flowLayoutPanel_SaveSlots.Controls.Add(panel);
                 panel.Width = flowLayoutPanel_SaveSlots.Width;
             }

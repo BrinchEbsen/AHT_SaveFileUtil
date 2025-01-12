@@ -6,10 +6,12 @@ namespace AHT_SaveFileEditor
 {
     internal class SaveSlotPanel : FlowLayoutPanel
     {
+        private MainWnd mainWnd;
         private SaveSlot slot;
 
-        public SaveSlotPanel(SaveSlot slot) : base()
+        public SaveSlotPanel(MainWnd mainWnd, SaveSlot slot) : base()
         {
+            this.mainWnd = mainWnd;
             this.slot = slot;
             FlowDirection = FlowDirection.TopDown;
             WrapContents = false;
@@ -53,7 +55,7 @@ namespace AHT_SaveFileEditor
 
         private void OpenSlotEditorWnd(object? sender, EventArgs e)
         {
-            new SaveSlotEditor(slot).ShowDialog();
+            new SaveSlotEditor(mainWnd, slot).ShowDialog();
         }
 
         private void AddLabel(string text)

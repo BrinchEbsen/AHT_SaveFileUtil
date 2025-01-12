@@ -13,7 +13,7 @@ namespace AHT_SaveFileUtil.Save
 
         public int SaveVersion { get; private set; }
 
-        public uint[] SaveChecksums { get; private set; } = new uint[3];
+        public uint[] UsageFlags { get; private set; } = new uint[3];
 
         public int GameStateSize { get; private set; }
 
@@ -95,9 +95,9 @@ namespace AHT_SaveFileUtil.Save
 
             info.SaveVersion = reader.ReadInt32(bigEndian);
 
-            info.SaveChecksums[0] = reader.ReadUInt32(bigEndian);
-            info.SaveChecksums[1] = reader.ReadUInt32(bigEndian);
-            info.SaveChecksums[2] = reader.ReadUInt32(bigEndian);
+            info.UsageFlags[0] = reader.ReadUInt32(bigEndian);
+            info.UsageFlags[1] = reader.ReadUInt32(bigEndian);
+            info.UsageFlags[2] = reader.ReadUInt32(bigEndian);
 
             info.GameStateSize = reader.ReadInt32(bigEndian);
 
@@ -139,9 +139,9 @@ namespace AHT_SaveFileUtil.Save
                 writer.Write(chr);
 
             writer.Write(SaveVersion, bigEndian);
-            writer.Write(SaveChecksums[0], bigEndian);
-            writer.Write(SaveChecksums[1], bigEndian);
-            writer.Write(SaveChecksums[2], bigEndian);
+            writer.Write(UsageFlags[0], bigEndian);
+            writer.Write(UsageFlags[1], bigEndian);
+            writer.Write(UsageFlags[2], bigEndian);
             writer.Write(GameStateSize, bigEndian);
             GlobalGameState.ToWriter(writer, platform);
             writer.BaseStream.Seek(4, SeekOrigin.Current);

@@ -6,16 +6,19 @@ namespace AHT_SaveFileEditor
 {
     public partial class SaveSlotEditor : Form
     {
+        private MainWnd mainWnd;
+
         private readonly SaveSlot Slot;
 
         private bool monitorPlayTimerFields = true;
 
         private Dictionary<int, EXHashCode> CheckList_Objectives_Mapping = [];
 
-        public SaveSlotEditor(SaveSlot slot)
+        public SaveSlotEditor(MainWnd mainWnd, SaveSlot slot)
         {
             InitializeComponent();
 
+            this.mainWnd = mainWnd;
             Slot = slot;
         }
 
@@ -36,6 +39,7 @@ namespace AHT_SaveFileEditor
 
             InitializeObjectivesMapping();
             PopulateObjectivesCheckList();
+            PopulateTasksFlowPanel();
 
             Check_FileUsed.Checked = Slot.IsUsed;
         }
@@ -70,6 +74,30 @@ namespace AHT_SaveFileEditor
                     entry.Value.ToString().Replace("HT_Objective_", ""),
                     Slot.GameState.GetObjective(entry.Value)
                     );
+            }
+        }
+
+        private void PopulateTasksFlowPanel()
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.Dispose();
+
+            FlowPanel_Tasks.Controls.Clear();
+
+            for (uint hash = (uint)EXHashCode.HT_Tasks_NONE + 1;
+                 hash < (uint)EXHashCode.HT_Tasks_HASHCODE_END;
+                 hash++)
+            {
+                if (!Enum.IsDefined(typeof(EXHashCode), hash))
+                    continue;
+
+                FlowPanel_Tasks.Controls.Add(
+                    new TaskPanel(
+                        FlowPanel_Tasks,
+                        Slot.GameState,
+                        (EXHashCode)hash
+                    )
+                );
             }
         }
 
@@ -246,6 +274,29 @@ namespace AHT_SaveFileEditor
         {
             for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
                 CheckList_Objectives.SetItemChecked(i, false);
+        }
+
+        private void SaveSlotEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainWnd.PopulateSaveSlotPanel();
+        }
+
+        private void Btn_FindAllTasks_Click(object sender, EventArgs e)
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetFound(true);
+        }
+
+        private void Btn_DoAllTasks_Click(object sender, EventArgs e)
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetDone(true);
+        }
+
+        private void Btn_ClearAllTasks_Click(object sender, EventArgs e)
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetState(TaskStates.Undiscovered);
         }
     }
 }
