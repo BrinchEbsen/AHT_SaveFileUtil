@@ -1,16 +1,6 @@
 ﻿using AHT_SaveFileEditor.SlotEditor;
 using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace AHT_SaveFileEditor
 {
@@ -19,6 +9,8 @@ namespace AHT_SaveFileEditor
         private readonly SaveSlot Slot;
 
         private bool monitorPlayTimerFields = true;
+
+        private Dictionary<int, EXHashCode> CheckList_Objectives_Mapping = [];
 
         public SaveSlotEditor(SaveSlot slot)
         {
@@ -42,7 +34,51 @@ namespace AHT_SaveFileEditor
 
             Label_Completion.Text = $"{Slot.GameState.CompletionPercentage:0.00}%";
 
+            InitializeObjectivesMapping();
+            PopulateObjectivesCheckList();
+
             Check_FileUsed.Checked = Slot.IsUsed;
+        }
+
+        private void InitializeObjectivesMapping()
+        {
+            int index = 0;
+            uint mask = (uint)EXHashCode.HT_Objective_HASHCODE_BASE;
+
+            for (int i = 0; i < GameState.NUM_OBJECTIVES; i++)
+            {
+                uint hash = ((uint)i + 1) | mask;
+
+                if (hash == (uint)EXHashCode.HT_Objective_HASHCODE_END)
+                    continue;
+
+                if (Enum.IsDefined(typeof(EXHashCode), hash))
+                {
+                    CheckList_Objectives_Mapping.Add(index, (EXHashCode)hash);
+                    index++;
+                }
+            }
+        }
+
+        private void PopulateObjectivesCheckList()
+        {
+            CheckList_Objectives.Items.Clear();
+
+            foreach (var entry in CheckList_Objectives_Mapping)
+            {
+                CheckList_Objectives.Items.Add(
+                    entry.Value.ToString().Replace("HT_Objective_", ""),
+                    Slot.GameState.GetObjective(entry.Value)
+                    );
+            }
+        }
+
+        private void CheckList_Objectives_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            bool newValue = e.NewValue == CheckState.Checked;
+
+            EXHashCode obj = CheckList_Objectives_Mapping[e.Index];
+            Slot.GameState.SetObjective(obj, newValue);
         }
 
         private void UpdateStartingLevelLabel()
@@ -198,6 +234,18 @@ namespace AHT_SaveFileEditor
                 MessageBox.Show("Time must be formatted as \"D-M-YYYY | H:MM:SS\".", "Invalid format",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Btn_SetAllObjectives_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
+                CheckList_Objectives.SetItemChecked(i, true);
+        }
+
+        private void Btn_ClearAllObjectives_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
+                CheckList_Objectives.SetItemChecked(i, false);
         }
     }
 }

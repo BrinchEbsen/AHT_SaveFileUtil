@@ -34,6 +34,10 @@ namespace AHT_SaveFileEditor
             Check_ShowUnused = new CheckBox();
             Check_ShowNonPreserving = new CheckBox();
             FlowPanel_Levels = new FlowLayoutPanel();
+            Btn_ClearAllObjectives = new Button();
+            Btn_SetAllObjectives = new Button();
+            label8 = new Label();
+            CheckList_Objectives = new CheckedListBox();
             Label_Completion = new Label();
             label7 = new Label();
             Btn_SetStartTime = new Button();
@@ -76,6 +80,10 @@ namespace AHT_SaveFileEditor
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(Btn_ClearAllObjectives);
+            splitContainer1.Panel2.Controls.Add(Btn_SetAllObjectives);
+            splitContainer1.Panel2.Controls.Add(label8);
+            splitContainer1.Panel2.Controls.Add(CheckList_Objectives);
             splitContainer1.Panel2.Controls.Add(Label_Completion);
             splitContainer1.Panel2.Controls.Add(label7);
             splitContainer1.Panel2.Controls.Add(Btn_SetStartTime);
@@ -147,6 +155,47 @@ namespace AHT_SaveFileEditor
             FlowPanel_Levels.Size = new Size(316, 816);
             FlowPanel_Levels.TabIndex = 0;
             FlowPanel_Levels.WrapContents = false;
+            // 
+            // Btn_ClearAllObjectives
+            // 
+            Btn_ClearAllObjectives.BackColor = Color.FromArgb(255, 192, 192);
+            Btn_ClearAllObjectives.Location = new Point(84, 558);
+            Btn_ClearAllObjectives.Name = "Btn_ClearAllObjectives";
+            Btn_ClearAllObjectives.Size = new Size(75, 23);
+            Btn_ClearAllObjectives.TabIndex = 18;
+            Btn_ClearAllObjectives.Text = "Clear All";
+            Btn_ClearAllObjectives.UseVisualStyleBackColor = false;
+            Btn_ClearAllObjectives.Click += Btn_ClearAllObjectives_Click;
+            // 
+            // Btn_SetAllObjectives
+            // 
+            Btn_SetAllObjectives.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_SetAllObjectives.Location = new Point(3, 558);
+            Btn_SetAllObjectives.Name = "Btn_SetAllObjectives";
+            Btn_SetAllObjectives.Size = new Size(75, 23);
+            Btn_SetAllObjectives.TabIndex = 17;
+            Btn_SetAllObjectives.Text = "Set All";
+            Btn_SetAllObjectives.UseVisualStyleBackColor = false;
+            Btn_SetAllObjectives.Click += Btn_SetAllObjectives_Click;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(3, 165);
+            label8.Name = "label8";
+            label8.Size = new Size(81, 20);
+            label8.TabIndex = 16;
+            label8.Text = "Objectives:";
+            // 
+            // CheckList_Objectives
+            // 
+            CheckList_Objectives.FormattingEnabled = true;
+            CheckList_Objectives.Location = new Point(3, 188);
+            CheckList_Objectives.Name = "CheckList_Objectives";
+            CheckList_Objectives.Size = new Size(246, 364);
+            CheckList_Objectives.TabIndex = 15;
+            CheckList_Objectives.ItemCheck += CheckList_Objectives_ItemCheck;
             // 
             // Label_Completion
             // 
@@ -340,5 +389,9 @@ namespace AHT_SaveFileEditor
         private Button Btn_SetStartTime;
         private Label Label_Completion;
         private Label label7;
+        private CheckedListBox CheckList_Objectives;
+        private Label label8;
+        private Button Btn_ClearAllObjectives;
+        private Button Btn_SetAllObjectives;
     }
 }

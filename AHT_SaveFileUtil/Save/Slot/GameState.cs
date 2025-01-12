@@ -17,6 +17,10 @@ namespace AHT_SaveFileUtil.Save.Slot
 
     public class GameState : ISaveFileIO<GameState>
     {
+        public const int NUM_OBJECTIVES = 0x200;
+
+        public const int NUM_TASKS = 0x50;
+
         public uint Version { get; private set; }
 
         private int VersionValidFlag;
@@ -246,6 +250,17 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             Objectives[index] &= ~((uint)(value ? 0 : 1) << bit);
             return true;
+        }
+
+        public void SetAllObjectives(bool set)
+        {
+            for (uint hash = (uint)EXHashCode.HT_Objective_HASHCODE_BASE + 1;
+                hash < (uint)EXHashCode.HT_Objective_HASHCODE_END;
+                hash++)
+            {
+                if (Enum.IsDefined(typeof(EXHashCode), hash))
+                    SetObjective((EXHashCode)hash, set);
+            }
         }
 
         private static bool ObjectiveToIndexAndBit(EXHashCode objectiveHash, out int index, out int bit)
