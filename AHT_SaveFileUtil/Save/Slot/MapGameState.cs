@@ -49,6 +49,15 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public int TriggerListBitHeapSize { get; private set; }
 
+        public int SumOfEggs => NumEggs_ConceptArt +
+                NumEggs_ModelViewer +
+                NumEggs_Ember +
+                NumEggs_Flame +
+                NumEggs_SgtByrd +
+                NumEggs_Turret +
+                NumEggs_Sparx +
+                NumEggs_Blink;
+
         private MapGameState() { }
 
         public static MapGameState FromReader(BinaryReader reader, GamePlatform platform)
@@ -133,23 +142,10 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             sb.AppendLine($"Startpoint: {LastStartPoint.ToString("X")} | Character: {LastStartPointPlayer}");
             sb.AppendLine($"Dark Gems: {NumDarkGems}/{(MaxDarkGems < 0 ? 0 : MaxDarkGems)}");
-            sb.AppendLine($"Dragon Eggs: {SumOfEggs()}/{(MaxDragonEggs < 0 ? 0 : MaxDragonEggs)}");
+            sb.AppendLine($"Dragon Eggs: {SumOfEggs}/{(MaxDragonEggs < 0 ? 0 : MaxDragonEggs)}");
             sb.AppendLine($"Light Gems: {NumLightGems}/{(MaxLightGems < 0 ? 0 : MaxLightGems)}");
 
             return sb.ToString();
-        }
-
-        public int SumOfEggs()
-        {
-            return
-                NumEggs_ConceptArt +
-                NumEggs_ModelViewer +
-                NumEggs_Ember +
-                NumEggs_Flame +
-                NumEggs_SgtByrd +
-                NumEggs_Turret +
-                NumEggs_Sparx +
-                NumEggs_Blink;
         }
     }
 }

@@ -27,8 +27,6 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public uint NameTextHashCode { get; set; }
 
-        private TrigInfo_RestartPoint() { }
-
         public static TrigInfo_RestartPoint FromReader(BinaryReader reader, GamePlatform platform)
         {
             bool bigEndian = platform == GamePlatform.GameCube;
@@ -70,8 +68,6 @@ namespace AHT_SaveFileUtil.Save.Slot
     {
         public bool IsLight { get; set; }
 
-        private TrigInfo_LightGem() { }
-
         public static TrigInfo_LightGem FromReader(BinaryReader reader, GamePlatform platform)
         {
             bool bigEndian = platform == GamePlatform.GameCube;
@@ -111,8 +107,6 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public bool IsRevealed { get; set; }
 
-        private TrigInfo_MapReveal() { }
-
         public static TrigInfo_MapReveal FromReader(BinaryReader reader, GamePlatform platform)
         {
             bool bigEndian = platform == GamePlatform.GameCube;
@@ -151,13 +145,13 @@ namespace AHT_SaveFileUtil.Save.Slot
 
     public class GameStateTrigInfo : ISaveFileIO<GameStateTrigInfo>
     {
-        public short MapIndex { get; private set; }
+        public short MapIndex { get; internal set; }
 
-        public short TrigIndex { get; private set; }
+        public short TrigIndex { get; internal set; }
 
-        public EXVector3 XYZ { get; private set; }
+        public EXVector3 XYZ { get; internal set; }
 
-        public TrigInfoType Type { get; private set; }
+        public TrigInfoType Type { get; internal set; }
 
         public Type TrigInfoDataType
         {
@@ -173,9 +167,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
-        public ITrigInfoData Data { get; private set; }
-
-        private GameStateTrigInfo() { }
+        public ITrigInfoData Data { get; internal set; }
 
         public static GameStateTrigInfo FromReader(BinaryReader reader, GamePlatform platform)
         {

@@ -3,11 +3,7 @@ using AHT_SaveFileUtil.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Security.AccessControl;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -27,9 +23,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public bool VersionValid => VersionValidFlag != 0;
 
-        public Map StartingMap { get; private set; }
+        public Map StartingMap { get; set; }
 
         public uint Flags { get; private set; }
+
+        public const int TotalNumTrigInfo = 256;
 
         public int NumTrigInfo { get; private set; }
 
@@ -39,10 +37,23 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public XAppTime StartTime { get; private set; }
 
-        public float PlayTimer { get; private set; }
+        /// <summary>
+        /// A timer that counts up by 1 every second the game is running.
+        /// </summary>
+        public float PlayTimer { get; set; }
+
+        /// <summary>
+        /// The <see cref="PlayTimer" converted to minutes./>
+        /// </summary>
+        public int PlayTimerMinutes => (int)PlayTimer / 60;
+
+        /// <summary>
+        /// The <see cref="PlayTimer" converted to hours./>
+        /// </summary>
+        public int PlayTimerHours => (int)PlayTimer / (60*60);
 
         public string PlayTimerString
-            => $"{(int)(PlayTimer / (60*60))}:{(int)(PlayTimer / 60) % 60:00}:{(int)PlayTimer % 60:00}";
+            => $"{PlayTimerHours}:{PlayTimerMinutes % 60:00}:{(int)PlayTimer % 60:00}";
 
         public float TimeoutTimer { get; private set; }
 
@@ -78,9 +89,9 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
-
-
         private GameState() { }
+
+
 
         public static GameState FromReader(BinaryReader reader, GamePlatform platform)
         {
@@ -100,16 +111,16 @@ namespace AHT_SaveFileUtil.Save.Slot
             state.Flags = reader.ReadUInt32(bigEndian);
 
             state.NumTrigInfo = reader.ReadInt32(bigEndian);
-            if (state.NumTrigInfo < 0 || state.NumTrigInfo > 256)
+            if (state.NumTrigInfo < 0 || state.NumTrigInfo > TotalNumTrigInfo)
                 throw new IOException($"Invalid number of TrigInfo: {state.NumTrigInfo}");
 
-            state.TrigInfo = new GameStateTrigInfo[state.NumTrigInfo];
-            for (int i = 0; i < state.TrigInfo.Length; i++)
+            state.TrigInfo = new GameStateTrigInfo[TotalNumTrigInfo];
+            for (int i = 0; i < state.NumTrigInfo; i++)
                 state.TrigInfo[i] = GameStateTrigInfo.FromReader(reader, platform);
 
-            if (state.NumTrigInfo < 256)
+            if (state.NumTrigInfo < TotalNumTrigInfo)
                 reader.BaseStream.Seek(
-                    (256 - state.NumTrigInfo) * 0x20,
+                    (TotalNumTrigInfo - state.NumTrigInfo) * 0x20,
                     SeekOrigin.Current);
 
             int cheatsPlayerType = reader.ReadInt32(bigEndian);
@@ -162,12 +173,12 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.Write(Flags, bigEndian);
             writer.Write(NumTrigInfo, bigEndian);
 
-            foreach(var trigInfo in TrigInfo)
-                trigInfo.ToWriter(writer, platform);
+            for (int i = 0; i < NumTrigInfo; i++)
+                TrigInfo[i].ToWriter(writer, platform);
 
-            if (NumTrigInfo < 256)
+            if (NumTrigInfo < TotalNumTrigInfo)
                 writer.BaseStream.Seek(
-                    (256 - NumTrigInfo) * 0x20,
+                    (TotalNumTrigInfo - NumTrigInfo) * 0x20,
                     SeekOrigin.Current);
 
             writer.Write((int)CheatsPlayerType, bigEndian);
@@ -199,6 +210,24 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             writer.BaseStream.Seek(4, SeekOrigin.Current);
         }
+
+        public void SetPlayTimer(int hours, int minutes, int seconds)
+        {
+            if (hours < 0)
+                throw new ArgumentException(nameof(hours) + " cannot be negative.");
+            if (minutes < 0)
+                throw new ArgumentException(nameof(minutes) + " cannot be negative.");
+            if (seconds < 0)
+                throw new ArgumentException(nameof(seconds) + " cannot be negative.");
+            if (minutes > 59)
+                throw new ArgumentException(nameof(minutes) + " cannot exceed 59.");
+            if (seconds > 59)
+                throw new ArgumentException(nameof(seconds) + " cannot exceed 59.");
+
+            PlayTimer = (hours * 60*60) + (minutes * 60) + seconds;
+        }
+
+
 
         //OBJECTIVES
 
@@ -288,6 +317,82 @@ namespace AHT_SaveFileUtil.Save.Slot
             bit = (int)task & 0x1F;
 
             return true;
+        }
+
+        //TRIGINFO
+
+        public GameStateTrigInfo[] GetMapTrigInfo(Map map)
+        {
+            List<GameStateTrigInfo> list = [];
+
+            for (int i = 0; i < NumTrigInfo; i++)
+                if (TrigInfo[i].MapIndex == (short)map)
+                    list.Add(TrigInfo[i]);
+
+            return list.ToArray();
+        }
+
+        public bool AddStartPointTrigInfo(
+            Map map, int trigIndex, EXVector3 XYZ, uint hashCode, uint textHashCode, bool visited)
+        {
+            if (NumTrigInfo >= TotalNumTrigInfo)
+                return false;
+
+            GameStateTrigInfo info = new()
+            {
+                MapIndex = (short)map,
+                TrigIndex = (short)trigIndex,
+                XYZ = new EXVector3(XYZ),
+                Type = TrigInfoType.RestartPoint
+            };
+
+            info.Data = new TrigInfo_RestartPoint()
+            {
+                HashCode = hashCode,
+                NameTextHashCode = textHashCode,
+                HasVisited = visited
+            };
+
+            return AddStartPointTrigInfo(info);
+        }
+
+        public bool AddStartPointTrigInfo(GameStateTrigInfo info)
+        {
+            if (NumTrigInfo >= TotalNumTrigInfo)
+                return false;
+
+            TrigInfo[NumTrigInfo] = info;
+            NumTrigInfo++;
+
+            return true;
+        }
+
+        public bool RemoveTrigInfo(Map map, int trigIndex)
+        {
+            int index = FindTrigInfo(map, trigIndex);
+            if (index == -1) return false;
+
+            //Shift everything from this index onward back one index
+            for(int i = index; i < TotalNumTrigInfo-1; i++)
+            {
+                TrigInfo[i] = TrigInfo[i+1];
+                if (TrigInfo[i+1] == null)
+                    break;
+            }
+
+            NumTrigInfo--;
+
+            return true;
+        }
+
+        public int FindTrigInfo(Map map, int trigIndex)
+        {
+            for (int i = 0; i < NumTrigInfo; i++)
+                if ((TrigInfo[i].MapIndex  == (short)map) &&
+                    (TrigInfo[i].TrigIndex == (short)trigIndex))
+                    return i;
+
+            return -1;
         }
 
 

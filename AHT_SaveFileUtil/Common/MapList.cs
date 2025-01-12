@@ -388,7 +388,7 @@ namespace AHT_SaveFileUtil.Common
             },
             { Map.Test_MF, new()
                 {
-                    Name = "Test_MF",
+                    Name = "Test_MF (Rock Golem)",
                     FileHash = 0x0100001a,
                     Unused = true
                 }
