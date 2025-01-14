@@ -44,12 +44,34 @@ namespace AHT_SaveFileEditor
             Check_FileUsed.Checked = Slot.IsUsed;
         }
 
+        private void Check_FileUsed_CheckedChanged(object sender, EventArgs e)
+        {
+            Slot.IsUsed = Check_FileUsed.Checked;
+        }
+
+        private void Btn_SetStartTime_Click(object sender, EventArgs e)
+        {
+            if (!Slot.GameState.StartTime.SetFromString(TextBox_StartTime.Text))
+            {
+                TextBox_StartTime.Text = Slot.GameState.StartTime.ToString();
+
+                MessageBox.Show("Time must be formatted as \"D-M-YYYY | H:MM:SS\".", "Invalid format",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SaveSlotEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainWnd.PopulateSaveSlotPanel();
+        }
+
+        #region Objectives
         private void InitializeObjectivesMapping()
         {
             int index = 0;
             uint mask = (uint)EXHashCode.HT_Objective_HASHCODE_BASE;
 
-            for (int i = 0; i < GameState.NUM_OBJECTIVES; i++)
+            for (int i = 0; i < GameState.MAX_NUM_OBJECTIVES; i++)
             {
                 uint hash = ((uint)i + 1) | mask;
 
@@ -77,6 +99,28 @@ namespace AHT_SaveFileEditor
             }
         }
 
+        private void Btn_SetAllObjectives_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
+                CheckList_Objectives.SetItemChecked(i, true);
+        }
+
+        private void Btn_ClearAllObjectives_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
+                CheckList_Objectives.SetItemChecked(i, false);
+        }
+
+        private void CheckList_Objectives_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            bool newValue = e.NewValue == CheckState.Checked;
+
+            EXHashCode obj = CheckList_Objectives_Mapping[e.Index];
+            Slot.GameState.SetObjective(obj, newValue);
+        }
+        #endregion
+
+        #region Tasks
         private void PopulateTasksFlowPanel()
         {
             foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
@@ -101,14 +145,26 @@ namespace AHT_SaveFileEditor
             }
         }
 
-        private void CheckList_Objectives_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void Btn_FindAllTasks_Click(object sender, EventArgs e)
         {
-            bool newValue = e.NewValue == CheckState.Checked;
-
-            EXHashCode obj = CheckList_Objectives_Mapping[e.Index];
-            Slot.GameState.SetObjective(obj, newValue);
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetFound(true);
         }
 
+        private void Btn_DoAllTasks_Click(object sender, EventArgs e)
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetDone(true);
+        }
+
+        private void Btn_ClearAllTasks_Click(object sender, EventArgs e)
+        {
+            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
+                panel.SetState(TaskStates.Undiscovered);
+        }
+        #endregion
+
+        #region LevelPanel
         private void UpdateStartingLevelLabel()
         {
             bool entryExists =
@@ -171,12 +227,9 @@ namespace AHT_SaveFileEditor
                     entry.BackColor = Color.Azure;
             }
         }
+        #endregion
 
-        private void Check_FileUsed_CheckedChanged(object sender, EventArgs e)
-        {
-            Slot.IsUsed = Check_FileUsed.Checked;
-        }
-
+        #region PlayTimer
         private void Num_PlayTimeHours_ValueChanged(object sender, EventArgs e)
         {
             if (!monitorPlayTimerFields) return;
@@ -252,51 +305,6 @@ namespace AHT_SaveFileEditor
                 (int)Num_PlayTimeSeconds.Value
                 );
         }
-
-        private void Btn_SetStartTime_Click(object sender, EventArgs e)
-        {
-            if (!Slot.GameState.StartTime.SetFromString(TextBox_StartTime.Text))
-            {
-                TextBox_StartTime.Text = Slot.GameState.StartTime.ToString();
-
-                MessageBox.Show("Time must be formatted as \"D-M-YYYY | H:MM:SS\".", "Invalid format",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Btn_SetAllObjectives_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
-                CheckList_Objectives.SetItemChecked(i, true);
-        }
-
-        private void Btn_ClearAllObjectives_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < CheckList_Objectives.Items.Count; i++)
-                CheckList_Objectives.SetItemChecked(i, false);
-        }
-
-        private void SaveSlotEditor_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            mainWnd.PopulateSaveSlotPanel();
-        }
-
-        private void Btn_FindAllTasks_Click(object sender, EventArgs e)
-        {
-            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
-                panel.SetFound(true);
-        }
-
-        private void Btn_DoAllTasks_Click(object sender, EventArgs e)
-        {
-            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
-                panel.SetDone(true);
-        }
-
-        private void Btn_ClearAllTasks_Click(object sender, EventArgs e)
-        {
-            foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
-                panel.SetState(TaskStates.Undiscovered);
-        }
+        #endregion
     }
 }

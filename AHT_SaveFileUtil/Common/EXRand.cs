@@ -45,6 +45,7 @@ namespace AHT_SaveFileUtil.Common
             uint n = Rand32();
 
             byte[] bytes = BitConverter.GetBytes(C3);
+
             float f = BitConverter.ToSingle(bytes, 0);
 
             return (n >> 1) * f;

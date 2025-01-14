@@ -9,36 +9,74 @@ namespace AHT_SaveFileUtil.Save.Slot
 {
     public enum TaskStates
     {
-        Undiscovered = 0x0,
-        Found = 0x1,
-        Done = 0x2,
-        FoundAndDone = 0x3
+        Undiscovered = 0b00,
+        Found        = 0b01,
+        Done         = 0b10,
+        FoundAndDone = 0b11
     }
 
     public class GameState : ISaveFileIO<GameState>
     {
-        public const int NUM_OBJECTIVES = 0x200;
+        #region Variables
+        /// <summary>
+        /// Maximum number of objectives supported.
+        /// </summary>
+        public const int MAX_NUM_OBJECTIVES = 0x200;
 
-        public const int NUM_TASKS = 0x50;
+        /// <summary>
+        /// Maximum number of tasks supported.
+        /// </summary>
+        public const int MAX_NUM_TASKS = 0x50;
 
+        /// <summary>
+        /// Maximum number of <see cref="GameStateTrigInfo"/> supported.
+        /// </summary>
+        public const int MAX_NUM_TRIG_INFO = 256;
+
+        /// <summary>
+        /// A checksum-like value calculated from various static
+        /// variables related to the game's state.
+        /// </summary>
         public uint Version { get; private set; }
 
         private int VersionValidFlag;
 
+        /// <summary>
+        /// A flag denoting if the <see cref="Version"/> value is valid.
+        /// </summary>
         public bool VersionValid => VersionValidFlag != 0;
 
+        /// <summary>
+        /// The map the game will start on when the slot is loaded.
+        /// Set to <see cref="Map.Dragon_Village"/> on a new game.
+        /// </summary>
         public Map StartingMap { get; set; }
 
+        /// <summary>
+        /// A set of flags, usage currently unknown.
+        /// </summary>
         public uint Flags { get; private set; }
 
-        public const int TotalNumTrigInfo = 256;
-
+        /// <summary>
+        /// Amount of <see cref="GameStateTrigInfo"/> in use in <see cref="TrigInfo"/>.
+        /// </summary>
         public int NumTrigInfo { get; private set; }
 
+        /// <summary>
+        /// A fixed-size table of <see cref="GameStateTrigInfo"/>, used
+        /// to persistently store the properties of specific trigger types.
+        /// </summary>
         public GameStateTrigInfo[] TrigInfo { get; private set; }
+            = new GameStateTrigInfo[MAX_NUM_TRIG_INFO];
 
+        /// <summary>
+        /// Unused in the code, purpose unknown.
+        /// </summary>
         public Players CheatsPlayerType { get; private set; }
 
+        /// <summary>
+        /// The timestamp of the moment the save file was started.
+        /// </summary>
         public XAppTime StartTime { get; private set; }
 
         /// <summary>
@@ -47,32 +85,94 @@ namespace AHT_SaveFileUtil.Save.Slot
         public float PlayTimer { get; set; }
 
         /// <summary>
-        /// The <see cref="PlayTimer" converted to minutes./>
+        /// The <see cref="PlayTimer"/>  converted to minutes.
         /// </summary>
         public int PlayTimerMinutes => (int)PlayTimer / 60;
 
         /// <summary>
-        /// The <see cref="PlayTimer" converted to hours./>
+        /// The <see cref="PlayTimer"/>  converted to hours.
         /// </summary>
         public int PlayTimerHours => (int)PlayTimer / (60*60);
 
+        /// <summary>
+        /// A string of the <see cref="PlayTimer"/> with the format H:MM:SS.
+        /// </summary>
         public string PlayTimerString
             => $"{PlayTimerHours}:{PlayTimerMinutes % 60:00}:{(int)PlayTimer % 60:00}";
 
+        /// <summary>
+        /// Unused in the code, purpose unknown.
+        /// </summary>
         public float TimeoutTimer { get; private set; }
 
+        /// <summary>
+        /// The current state of the player and their collectables.
+        /// </summary>
         public PlayerState PlayerState { get; private set; }
 
+        /// <summary>
+        /// <para>
+        /// A table of sets of flags containing the state of objectives.
+        /// </para>
+        /// <para>
+        /// An <b>objective</b> is a persistent flag pertaining to player progression.
+        /// An example might be whether a door has been opened, or if a boss has
+        /// been defeated.
+        /// </para>
+        /// </summary>
         public uint[] Objectives { get; private set; } = new uint[16];
 
+        /// <summary>
+        /// <para>
+        /// A table of sets of flags containing the state of tasks.
+        /// </para>
+        /// <para>
+        /// A <b>task</b> refers to an entry in the in-game task list. Every task has two flags
+        /// associated with it, denoting whether it's found and whether the player has
+        /// completed the task respectively.
+        /// </para>
+        /// </summary>
         public uint[] Tasks { get; private set; } = new uint[5];
 
+        /// <summary>
+        /// A set of flags that denote whether items are available in the shop.
+        /// </summary>
         public uint ShopAvailableFlags { get; private set; }
 
+        /// <summary>
+        /// The <see cref="BitHeap"/> containing various information about the game's state.
+        /// <para>
+        /// In the final game code, the heap is used for (in allocated order):
+        /// <list type="bullet">
+        /// <item>The filled-out parts of every minimap.</item>
+        /// <item>Which minimaps are viewable and selectable.</item>
+        /// <item>The preserved state of triggers in maps.</item>
+        /// </list>
+        /// </para>
+        /// </summary>
         public BitHeap BitHeap { get; private set; }
 
+        /// <summary>
+        /// A table of <see cref="MapGameState"/>, storing the general state of every map.
+        /// The index correlates with the enum <see cref="Map"/>.
+        /// </summary>
         public MapGameState[] MapStates { get; private set; } = new MapGameState[200];
 
+        /// <summary>
+        /// The percentage of the game completed, according to the in-game status screen.
+        /// <para>
+        /// Calculated as such:
+        /// <code>
+        /// (
+        ///     Total Dragon Eggs +
+        ///     Total Light Gems +
+        ///     Total Dark Gems +
+        ///     1 (if objective HT_Objective_Boss4_Beaten is set)
+        /// )
+        /// / 221 * 100
+        /// </code>
+        /// </para>
+        /// </summary>
         public float CompletionPercentage
         {
             get
@@ -92,10 +192,9 @@ namespace AHT_SaveFileUtil.Save.Slot
                 return (tally / 221f) * 100f;
             }
         }
+        #endregion
 
         private GameState() { }
-
-
 
         public static GameState FromReader(BinaryReader reader, GamePlatform platform)
         {
@@ -115,16 +214,15 @@ namespace AHT_SaveFileUtil.Save.Slot
             state.Flags = reader.ReadUInt32(bigEndian);
 
             state.NumTrigInfo = reader.ReadInt32(bigEndian);
-            if (state.NumTrigInfo < 0 || state.NumTrigInfo > TotalNumTrigInfo)
+            if (state.NumTrigInfo < 0 || state.NumTrigInfo > MAX_NUM_TRIG_INFO)
                 throw new IOException($"Invalid number of TrigInfo: {state.NumTrigInfo}");
 
-            state.TrigInfo = new GameStateTrigInfo[TotalNumTrigInfo];
             for (int i = 0; i < state.NumTrigInfo; i++)
                 state.TrigInfo[i] = GameStateTrigInfo.FromReader(reader, platform);
 
-            if (state.NumTrigInfo < TotalNumTrigInfo)
+            if (state.NumTrigInfo < MAX_NUM_TRIG_INFO)
                 reader.BaseStream.Seek(
-                    (TotalNumTrigInfo - state.NumTrigInfo) * 0x20,
+                    (MAX_NUM_TRIG_INFO - state.NumTrigInfo) * 0x20,
                     SeekOrigin.Current);
 
             int cheatsPlayerType = reader.ReadInt32(bigEndian);
@@ -180,9 +278,9 @@ namespace AHT_SaveFileUtil.Save.Slot
             for (int i = 0; i < NumTrigInfo; i++)
                 TrigInfo[i].ToWriter(writer, platform);
 
-            if (NumTrigInfo < TotalNumTrigInfo)
+            if (NumTrigInfo < MAX_NUM_TRIG_INFO)
                 writer.BaseStream.Seek(
-                    (TotalNumTrigInfo - NumTrigInfo) * 0x20,
+                    (MAX_NUM_TRIG_INFO - NumTrigInfo) * 0x20,
                     SeekOrigin.Current);
 
             writer.Write((int)CheatsPlayerType, bigEndian);
@@ -215,6 +313,13 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.BaseStream.Seek(4, SeekOrigin.Current);
         }
 
+        /// <summary>
+        /// Set the <see cref="PlayTimer"/> to a certain number of hours, minutes and seconds.
+        /// </summary>
+        /// <param name="hours">The amount of hours.</param>
+        /// <param name="minutes">The amount of minutes (between 0 and 59).</param>
+        /// <param name="seconds">The amount of seconds (between 0 and 59).</param>
+        /// <exception cref="ArgumentException"></exception>
         public void SetPlayTimer(int hours, int minutes, int seconds)
         {
             if (hours < 0)
@@ -231,10 +336,12 @@ namespace AHT_SaveFileUtil.Save.Slot
             PlayTimer = (hours * 60*60) + (minutes * 60) + seconds;
         }
 
-
-
-        //OBJECTIVES
-
+        #region Objectives
+        /// <summary>
+        /// Get the state of an objective.
+        /// </summary>
+        /// <param name="objectiveHash">The hashcode of the objective.</param>
+        /// <returns>true if the objective is set, false if not.</returns>
         public bool GetObjective(EXHashCode objectiveHash)
         {
             if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
@@ -243,6 +350,12 @@ namespace AHT_SaveFileUtil.Save.Slot
             return (Objectives[index] & (1 << bit)) != 0;
         }
 
+        /// <summary>
+        /// Set the state of an objective.
+        /// </summary>
+        /// <param name="objectiveHash">The hashcode of the objective.</param>
+        /// <param name="value">The value to set the objective's state to.</param>
+        /// <returns>true if the hashcode points to a valid objective, false if not.</returns>
         public bool SetObjective(EXHashCode objectiveHash, bool value)
         {
             if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
@@ -256,6 +369,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             return true;
         }
 
+        /// <summary>
+        /// Set the state of every objective in the game.
+        /// </summary>
+        /// <param name="set">The value to set every objective's state to.</param>
         public void SetAllObjectives(bool set)
         {
             for (uint hash = (uint)EXHashCode.HT_Objective_HASHCODE_BASE + 1;
@@ -267,6 +384,13 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
+        /// <summary>
+        /// Get the table index and bit of an objective's state.
+        /// </summary>
+        /// <param name="objectiveHash">The hashcode of the objective.</param>
+        /// <param name="index">The index into the <see cref="Objectives"/> array.</param>
+        /// <param name="bit">The bit of the value indexed by <paramref name="index"/>.</param>
+        /// <returns>true if the hashcode corresponds to a valid objective, false if not.</returns>
         private static bool ObjectiveToIndexAndBit(EXHashCode objectiveHash, out int index, out int bit)
         {
             index = 0;
@@ -289,9 +413,14 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+        #endregion
 
-        //TASKS
-
+        #region Tasks
+        /// <summary>
+        /// Get the state of a task.
+        /// </summary>
+        /// <param name="taskHash">The hashcode of the task.</param>
+        /// <returns>The state of the task.</returns>
         public TaskStates GetTaskState(EXHashCode taskHash)
         {
             if (!TaskToIndexAndBit(taskHash, out int index, out int bit))
@@ -302,6 +431,12 @@ namespace AHT_SaveFileUtil.Save.Slot
             return (TaskStates)((Tasks[index] & valueMask) >> bit);
         }
 
+        /// <summary>
+        /// Set the state of a task.
+        /// </summary>
+        /// <param name="taskHash">The hashcode of the task.</param>
+        /// <param name="value">The value to set the task to.</param>
+        /// <returns>true if the hashcode corresponds to a valid task, false if not.</returns>
         public bool SetTaskState(EXHashCode taskHash, TaskStates value)
         {
             if (!TaskToIndexAndBit(taskHash, out int index, out int bit))
@@ -315,6 +450,13 @@ namespace AHT_SaveFileUtil.Save.Slot
             return true;
         }
 
+        /// <summary>
+        /// Get the table index and bit of an task's state.
+        /// </summary>
+        /// <param name="taskHash">The hashcode of the task.</param>
+        /// <param name="index">The index into the <see cref="Tasks"/> array.</param>
+        /// <param name="bit">The bit of the value indexed by <paramref name="index"/>.</param>
+        /// <returns>true if the hashcode corresponds to a valid task, false if not.</returns>
         private static bool TaskToIndexAndBit(EXHashCode taskHash, out int index, out int bit)
         {
             index = 0;
@@ -337,13 +479,19 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+        #endregion
 
-        //TRIGINFO
-
+        #region TrigInfo
+        /// <summary>
+        /// Get an array of <see cref="GameStateTrigInfo"/> that belong to a map.
+        /// </summary>
+        /// <param name="map">The map.</param>
+        /// <returns>An array of <see cref="GameStateTrigInfo"/> that belong to <paramref name="map"/></returns>
         public GameStateTrigInfo[] GetMapTrigInfo(Map map)
         {
             List<GameStateTrigInfo> list = [];
 
+            //Scoop up the triginfo that have the same map index
             for (int i = 0; i < NumTrigInfo; i++)
                 if (TrigInfo[i].MapIndex == (short)map)
                     list.Add(TrigInfo[i]);
@@ -351,10 +499,21 @@ namespace AHT_SaveFileUtil.Save.Slot
             return list.ToArray();
         }
 
+        /// <summary>
+        /// Add a new <see cref="TrigInfo_RestartPoint"/> to <see cref="TrigInfo"/>
+        /// if there is space for it in the array.
+        /// </summary>
+        /// <param name="map">Value of <see cref="GameStateTrigInfo.MapIndex"/></param>
+        /// <param name="trigIndex">Value of <see cref="GameStateTrigInfo.TrigIndex"/></param>
+        /// <param name="XYZ">Value of <see cref="GameStateTrigInfo.XYZ"/></param>
+        /// <param name="hashCode">Value of <see cref="TrigInfo_RestartPoint.HashCode"/></param>
+        /// <param name="textHashCode">Value of <see cref="TrigInfo_RestartPoint.NameTextHashCode"/></param>
+        /// <param name="visited">Value of <see cref="TrigInfo_RestartPoint.HasVisited"/></param>
+        /// <returns>true if the info could be added, false if not.</returns>
         public bool AddStartPointTrigInfo(
             Map map, int trigIndex, EXVector3 XYZ, uint hashCode, uint textHashCode, bool visited)
         {
-            if (NumTrigInfo >= TotalNumTrigInfo)
+            if (NumTrigInfo >= MAX_NUM_TRIG_INFO)
                 return false;
 
             GameStateTrigInfo info = new()
@@ -362,22 +521,27 @@ namespace AHT_SaveFileUtil.Save.Slot
                 MapIndex = (short)map,
                 TrigIndex = (short)trigIndex,
                 XYZ = new EXVector3(XYZ),
-                Type = TrigInfoType.RestartPoint
+                Type = TrigInfoType.RestartPoint,
+                Data = new TrigInfo_RestartPoint()
+                {
+                    HashCode = hashCode,
+                    NameTextHashCode = textHashCode,
+                    HasVisited = visited
+                }
             };
 
-            info.Data = new TrigInfo_RestartPoint()
-            {
-                HashCode = hashCode,
-                NameTextHashCode = textHashCode,
-                HasVisited = visited
-            };
-
-            return AddStartPointTrigInfo(info);
+            return AddPointTrigInfo(info);
         }
 
-        public bool AddStartPointTrigInfo(GameStateTrigInfo info)
+        /// <summary>
+        /// Add a new <see cref="GameStateTrigInfo"/> to <see cref="TrigInfo"/>
+        /// if there is space for it in the array.
+        /// </summary>
+        /// <param name="info">The info to add.</param>
+        /// <returns>true if the info could be added, false if not.</returns>
+        public bool AddPointTrigInfo(GameStateTrigInfo info)
         {
-            if (NumTrigInfo >= TotalNumTrigInfo)
+            if (NumTrigInfo >= MAX_NUM_TRIG_INFO)
                 return false;
 
             TrigInfo[NumTrigInfo] = info;
@@ -391,11 +555,30 @@ namespace AHT_SaveFileUtil.Save.Slot
             int index = FindTrigInfo(map, trigIndex);
             if (index == -1) return false;
 
+            return RemoveTrigInfo(index);
+        }
+
+        /// <summary>
+        /// Remove a <see cref="GameStateTrigInfo"/> from <see cref="TrigInfo"/>
+        /// at the given <paramref name="index"/>.
+        /// </summary>
+        /// <param name="index">Index of the info to remove.</param>
+        /// <returns>true if the index corresponds to a valid entry, false if not.</returns>
+        public bool RemoveTrigInfo(int index)
+        {
+            if (!TrigInfoIndexValid(index))
+                return false;
+
+            if (index >= NumTrigInfo)
+                return false;
+
             //Shift everything from this index onward back one index
-            for(int i = index; i < TotalNumTrigInfo-1; i++)
+            for (int i = index; i < MAX_NUM_TRIG_INFO - 1; i++)
             {
-                TrigInfo[i] = TrigInfo[i+1];
-                if (TrigInfo[i+1] == null)
+                TrigInfo[i] = TrigInfo[i + 1];
+
+                //Check if we've reached the end of the used triginfo.
+                if (TrigInfo[i + 1] == null)
                     break;
             }
 
@@ -404,6 +587,14 @@ namespace AHT_SaveFileUtil.Save.Slot
             return true;
         }
 
+        /// <summary>
+        /// Find the index of the <see cref="GameStateTrigInfo"/> with the given
+        /// map and trigger index.
+        /// </summary>
+        /// <param name="map">Value to match with <see cref="GameStateTrigInfo.MapIndex"/>.</param>
+        /// <param name="trigIndex">Value to match with <see cref="GameStateTrigInfo.TrigIndex"/>.</param>
+        /// <returns>The index into <see cref="TrigInfo"/>
+        /// of the found <see cref="GameStateTrigInfo"/>, or -1 if it could not be found.</returns>
         public int FindTrigInfo(Map map, int trigIndex)
         {
             for (int i = 0; i < NumTrigInfo; i++)
@@ -414,7 +605,16 @@ namespace AHT_SaveFileUtil.Save.Slot
             return -1;
         }
 
-
+        /// <summary>
+        /// Check if an index into <see cref="TrigInfo"/> is within the bounds of the array.
+        /// </summary>
+        /// <param name="index">Index to check against.</param>
+        /// <returns>true if the index is within the bounds of the <see cref="TrigInfo"/> array, false if not.</returns>
+        public static bool TrigInfoIndexValid(int index)
+        {
+            return (index >= 0) && (index < MAX_NUM_TRIG_INFO);
+        }
+        #endregion
 
         public override string ToString()
         {

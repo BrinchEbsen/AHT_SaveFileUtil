@@ -1,9 +1,11 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
-using System.Xml.Schema;
 
 namespace AHT_SaveFileEditor
 {
+    /// <summary>
+    /// A panel for a save slot placed in the list on the left side of the main window.
+    /// </summary>
     internal class SaveSlotPanel : FlowLayoutPanel
     {
         private MainWnd mainWnd;

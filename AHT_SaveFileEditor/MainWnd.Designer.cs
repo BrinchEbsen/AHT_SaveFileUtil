@@ -356,14 +356,14 @@ namespace AHT_SaveFileEditor
             DataGrid_MiniGameTimes.AllowUserToAddRows = false;
             DataGrid_MiniGameTimes.AllowUserToDeleteRows = false;
             DataGrid_MiniGameTimes.AllowUserToResizeRows = false;
-            DataGrid_MiniGameTimes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            DataGrid_MiniGameTimes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             DataGrid_MiniGameTimes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DataGrid_MiniGameTimes.Columns.AddRange(new DataGridViewColumn[] { MiniGameName, EasyTime, HardTime });
             DataGrid_MiniGameTimes.Location = new Point(209, 39);
             DataGrid_MiniGameTimes.Name = "DataGrid_MiniGameTimes";
             DataGrid_MiniGameTimes.RowHeadersVisible = false;
             DataGrid_MiniGameTimes.ShowEditingIcon = false;
-            DataGrid_MiniGameTimes.Size = new Size(415, 242);
+            DataGrid_MiniGameTimes.Size = new Size(377, 242);
             DataGrid_MiniGameTimes.TabIndex = 1;
             DataGrid_MiniGameTimes.CellEndEdit += DataGrid_MiniGameTimes_CellEndEdit;
             // 

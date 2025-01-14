@@ -2,36 +2,14 @@
 using AHT_SaveFileUtil.Extensions;
 using AHT_SaveFileUtil.Save.Slot;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Hashing;
 using System.Text;
 
 namespace AHT_SaveFileUtil.Save
 {
-    public class SaveFile
+    public class SaveFile : ISaveFileIO<SaveFile>
     {
-        public static readonly Dictionary<GamePlatform, long> SAVE_OFFSET_CHECKSUM = new()
-        {
-            [GamePlatform.GameCube] = 0x40,
-            [GamePlatform.PlayStation2] = 0, /* ??? */
-            [GamePlatform.Xbox] = 0, /* ??? */
-        };
-
-        public static readonly Dictionary<GamePlatform, long> SAVE_OFFSET_CHECKSUM_START = new()
-        {
-            [GamePlatform.GameCube] = 0x1c0,
-            [GamePlatform.PlayStation2] = 0, /* ??? */
-            [GamePlatform.Xbox] = 0 /* ??? */
-        };
-
-        public static readonly Dictionary<GamePlatform, long> SAVE_OFFSET_DATA = new()
-        {
-            [GamePlatform.GameCube] = 0x4040,
-            [GamePlatform.PlayStation2] = 0x800,
-            [GamePlatform.Xbox] = 0 /* ??? */
-        };
-
         public GamePlatform Platform { get; private set; }
 
         public bool UsesCheckSum { get; private set; }
@@ -46,6 +24,7 @@ namespace AHT_SaveFileUtil.Save
 
         private SaveFile() { }
 
+        #region InputOutput
         public static SaveFile FromFileStream(FileStream stream, GamePlatform platform)
         {
             if (!stream.CanRead)
@@ -54,14 +33,21 @@ namespace AHT_SaveFileUtil.Save
             if (platform == GamePlatform.Xbox)
                 throw new NotImplementedException("Xbox not supported yet!");
 
-            var file = new SaveFile();
-
-            file.Platform = platform;
-
             bool bigEndian = platform == GamePlatform.GameCube;
 
             using (BinaryReader reader = new(stream, Encoding.UTF8, true))
             {
+                long dataStart = FindDataStart(stream, platform);
+
+                if (dataStart < 0)
+                    throw new IOException("Could not find start of data.");
+
+                stream.Seek(dataStart, SeekOrigin.Begin);
+
+                SaveFile file = FromReader(reader, platform);
+
+                file.Platform = platform;
+
                 if (platform == GamePlatform.GameCube)
                 {
                     file.UsesCheckSum = true;
@@ -75,35 +61,8 @@ namespace AHT_SaveFileUtil.Save
                     file.UsesCheckSum = false;
                 }
 
-                long dataStart = FindDataStart(stream, platform);
-
-                if (dataStart < 0)
-                    throw new IOException("Could not find start of data.");
-
-                stream.Seek(dataStart, SeekOrigin.Begin);
-
-                //Start reading actual save data
-                file.SaveInfo = SaveInfo.FromReader(reader, platform);
-
-                long addr = stream.Position;
-                for (int i = 0; i < 3; i++)
-                {
-                    file.Slots[i] = SaveSlot.FromReader(reader, platform);
-
-                    if (i != 2)
-                    {
-                        //Seek forward the GameStateSize + the slot header data
-                        stream.Seek(addr + file.SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
-
-                        if (platform == GamePlatform.PlayStation2)
-                            stream.Seek(8, SeekOrigin.Current);
-
-                        addr = stream.Position;
-                    }
-                }
+                return file;
             }
-
-            return file;
         }
 
         public void ToFileStream(FileStream stream)
@@ -121,24 +80,8 @@ namespace AHT_SaveFileUtil.Save
                     throw new IOException("Could not find start of data.");
 
                 stream.Seek(dataStart, SeekOrigin.Begin);
-                SaveInfo.ToWriter(writer, Platform);
 
-                long addr = stream.Position;
-                for (int i = 0; i < Slots.Length; i++)
-                {
-                    Slots[i].ToWriter(writer, Platform);
-
-                    if (i != 2)
-                    {
-                        //Seek forward the GameStateSize + the slot header data
-                        stream.Seek(addr + SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
-
-                        if (Platform == GamePlatform.PlayStation2)
-                            stream.Seek(8, SeekOrigin.Current);
-
-                        addr = stream.Position;
-                    }
-                }
+                ToWriter(writer, Platform);
 
                 if (Platform == GamePlatform.GameCube)
                 {
@@ -146,6 +89,54 @@ namespace AHT_SaveFileUtil.Save
                     uint newChecksum = GetGCCheckSum(stream, Platform);
                     stream.Seek(0x40, SeekOrigin.Begin);
                     writer.Write(newChecksum, bigEndian);
+                }
+            }
+        }
+
+        public static SaveFile FromReader(BinaryReader reader, GamePlatform platform)
+        {
+            SaveFile file = new SaveFile();
+
+            file.SaveInfo = SaveInfo.FromReader(reader, platform);
+
+            long addr = reader.BaseStream.Position;
+            for (int i = 0; i < 3; i++)
+            {
+                file.Slots[i] = SaveSlot.FromReader(reader, platform);
+
+                if (i != 2)
+                {
+                    //Seek forward the GameStateSize + the slot header data
+                    reader.BaseStream.Seek(addr + file.SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
+
+                    if (platform == GamePlatform.PlayStation2)
+                        reader.BaseStream.Seek(8, SeekOrigin.Current);
+
+                    addr = reader.BaseStream.Position;
+                }
+            }
+
+            return file;
+        }
+
+        public void ToWriter(BinaryWriter writer, GamePlatform platform)
+        {
+            SaveInfo.ToWriter(writer, Platform);
+
+            long addr = writer.BaseStream.Position;
+            for (int i = 0; i < Slots.Length; i++)
+            {
+                Slots[i].ToWriter(writer, Platform);
+
+                if (i != 2)
+                {
+                    //Seek forward the GameStateSize + the slot header data
+                    writer.BaseStream.Seek(addr + SaveInfo.GameStateSize + 0x8, SeekOrigin.Begin);
+
+                    if (Platform == GamePlatform.PlayStation2)
+                        writer.BaseStream.Seek(8, SeekOrigin.Current);
+
+                    addr = writer.BaseStream.Position;
                 }
             }
         }
@@ -244,7 +235,11 @@ namespace AHT_SaveFileUtil.Save
 
             throw new NotImplementedException();
         }
+        #endregion
 
+        /// <summary>
+        /// Update the usage flag on all save slots.
+        /// </summary>
         public void ValidateSlotUsageFlags()
         {
             for (int i = 0; i < 3; i++)
@@ -263,6 +258,10 @@ namespace AHT_SaveFileUtil.Save
             }
         }
 
+        /// <summary>
+        /// Generate a new usage flag for a slot.
+        /// </summary>
+        /// <param name="slot">Slot index to generate the usage flag for. </param>
         public void RegenerateSlotUsageFlag(int slot)
         {
             uint newFlag = EXRand.Rand32();

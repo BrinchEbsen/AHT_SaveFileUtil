@@ -15,11 +15,6 @@ namespace AHT_SaveFileEditor
             OpenSaveFile("../../../../7D-G5SE-G5SE.gci", GamePlatform.GameCube);
         }
 
-        private void toolStripMenuItem_Open_Click(object sender, EventArgs e)
-        {
-            OpenSaveFileDialog();
-        }
-
         private void OpenSaveFileDialog()
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -63,28 +58,6 @@ namespace AHT_SaveFileEditor
             EnableSaveFileControls();
         }
 
-        private void toolStripMenuItem_Export_Click(object sender, EventArgs e)
-        {
-            SaveFileHandler.Instance.SaveFile?.ValidateSlotUsageFlags();
-
-            try
-            {
-                SaveFileHandler.Instance.CreateBackup();
-                SaveFileHandler.Instance.WriteFile();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error writing file",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-        }
-
-        private void toolStripMenuItem_ExportAs_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void EnableSaveFileControls()
         {
             var saveFile = SaveFileHandler.Instance.SaveFile;
@@ -108,15 +81,16 @@ namespace AHT_SaveFileEditor
             if (saveFile == null)
                 return;
 
-            foreach(var ctrl in flowLayoutPanel_SaveSlots.Controls)
+            foreach (var ctrl in flowLayoutPanel_SaveSlots.Controls)
                 if (ctrl is SaveSlotPanel)
                     ((SaveSlotPanel)ctrl).Dispose();
 
             flowLayoutPanel_SaveSlots.Controls.Clear();
             for (int i = 0; i < saveFile.Slots.Length; i++)
             {
-                flowLayoutPanel_SaveSlots.Controls.Add(new Label() {
-                    Text = "Slot " + (i+1),
+                flowLayoutPanel_SaveSlots.Controls.Add(new Label()
+                {
+                    Text = "Slot " + (i + 1),
                     Height = 18,
                     Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
                 });
@@ -172,6 +146,34 @@ namespace AHT_SaveFileEditor
                 ComboBox_BonusCharacter.Items.Add(name);
 
             ComboBox_BonusCharacter.SelectedIndex = (int)saveFile.SaveInfo.SelectedSpyroSkin;
+        }
+
+        #region Events
+        private void toolStripMenuItem_Open_Click(object sender, EventArgs e)
+        {
+            OpenSaveFileDialog();
+        }
+
+        private void toolStripMenuItem_Export_Click(object sender, EventArgs e)
+        {
+            SaveFileHandler.Instance.SaveFile?.ValidateSlotUsageFlags();
+
+            try
+            {
+                SaveFileHandler.Instance.CreateBackup();
+                SaveFileHandler.Instance.WriteFile();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error writing file",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void toolStripMenuItem_ExportAs_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void flowLayoutPanel_SaveSlots_Resize(object sender, EventArgs e)
@@ -263,5 +265,6 @@ namespace AHT_SaveFileEditor
 
             saveFile.SaveInfo.SelectedSpyroSkin = (Players)ComboBox_BonusCharacter.SelectedIndex;
         }
+        #endregion
     }
 }
