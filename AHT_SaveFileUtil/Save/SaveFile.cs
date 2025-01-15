@@ -8,23 +8,49 @@ using System.Text;
 
 namespace AHT_SaveFileUtil.Save
 {
+    /// <summary>
+    /// <para>
+    /// Represents a <i>Spyro: A Hero's Tail</i> save file, translating all the
+    /// binary data into/from classes with accessors and methods for manipulating the data.
+    /// </para>
+    /// </summary>
     public class SaveFile : ISaveFileIO<SaveFile>
     {
+        /// <summary>
+        /// The platform this savefile is for.
+        /// Among other things, dictates which endian the data should be read/written with.
+        /// </summary>
         public GamePlatform Platform { get; private set; }
 
+        /// <summary>
+        /// Whether the loaded file uses a checksum.
+        /// </summary>
         public bool UsesCheckSum { get; private set; }
 
+        /// <summary>
+        /// The checksum for the file, if <see cref="UsesCheckSum"/> is true.
+        /// </summary>
         public uint CheckSum { get; private set; } = 0;
 
+        /// <summary>
+        /// Whether the <see cref="CheckSum"/> read from the file is valid.
+        /// </summary>
         public bool CheckSumValid { get; private set; } = true;
 
+        /// <summary>
+        /// The savefile's general info.
+        /// </summary>
         public SaveInfo SaveInfo { get; private set; }
 
+        /// <summary>
+        /// The three save slots, representing the "Game 1, Game 2, Game 3"
+        /// slots seen in the in-game file select screen.
+        /// </summary>
         public SaveSlot[] Slots { get; private set; } = new SaveSlot[3];
 
         private SaveFile() { }
 
-        #region InputOutput
+        #region Input/Output
         public static SaveFile FromFileStream(FileStream stream, GamePlatform platform)
         {
             if (!stream.CanRead)

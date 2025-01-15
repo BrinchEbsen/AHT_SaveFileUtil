@@ -1,11 +1,7 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -55,11 +51,26 @@ namespace AHT_SaveFileUtil.Save.Slot
         ClonePos = 2
     }
 
+    /// <summary>
+    /// A 4-byte structure with info for a collectable.
+    /// </summary>
     public struct PowerupTally : ISaveFileIO<PowerupTally>
     {
+        /// <summary>
+        /// The number of items.
+        /// </summary>
         public byte Amount;
+        /// <summary>
+        /// The maximum number of the item the user can hold.
+        /// </summary>
         public byte Max;
+        /// <summary>
+        /// The maximum number of the item the user can hold with all magazines purchased.
+        /// </summary>
         public byte Total;
+        /// <summary>
+        /// The number of magazines purchased.
+        /// </summary>
         public byte Magazines;
 
         public static PowerupTally FromReader(BinaryReader reader, GamePlatform platform)
@@ -82,6 +93,11 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
     }
 
+    /// <summary>
+    /// Defines how the player will be set up on a map loading in.
+    /// There isn't usually a need to edit this structure, as it's overwritten
+    /// by the map when it loads.
+    /// </summary>
     public struct PlayerSetupInfo : ISaveFileIO<PlayerSetupInfo>
     {
         public EXVector Position;
@@ -220,162 +236,316 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
     }
 
+    /// <summary>
+    /// The current state of the player and their collectables, among other things.
+    /// </summary>
     public class PlayerState : ISaveFileIO<PlayerState>
     {
+        /// <summary>
+        /// The currently selected breath.
+        /// </summary>
         public BreathType CurrentBreath { get; private set; }
 
+        /// <summary>
+        /// The current health.
+        /// <para>
+        /// Full health is 0xA0 and decrements by 0x20 with every hit point lost.
+        /// Without the health upgrade, the player dies at 0x20 health. With the upgrade, they die at 0x0.
+        /// </para>
+        /// </summary>
         public int Health { get; private set; }
 
+        /// <summary>
+        /// The current amount of gems.
+        /// </summary>
         public int Gems { get; private set; }
 
+        /// <summary>
+        /// The total amount of gems collected on this save.
+        /// </summary>
         public int TotalGems { get; private set; }
 
+        /// <summary>
+        /// Stats for lock-picks.
+        /// </summary>
         public PowerupTally LockPickers { get; private set; }
         
+        /// <summary>
+        /// Stats for flame bombs.
+        /// </summary>
         public PowerupTally FlameBombs { get; private set; }
 
+        /// <summary>
+        /// Stats for ice missiles.
+        /// </summary>
         public PowerupTally IceBombs { get; private set; }
 
+        /// <summary>
+        /// Stats for water bombs.
+        /// </summary>
         public PowerupTally WaterBombs { get; private set; }
 
+        /// <summary>
+        /// Stats for electric missiles.
+        /// </summary>
         public PowerupTally ElectricBombs { get; private set; }
 
+        /// <summary>
+        /// The current amount of fire arrows.
+        /// </summary>
         public short FireArrows { get; private set; }
 
+        /// <summary>
+        /// The max amount of fire arrows.
+        /// </summary>
         public short FireArrowsMax { get; private set; }
 
+        /// <summary>
+        /// A set of flags for certain abilities/collectables.
+        /// </summary>
         public uint AbilityFlags { get; private set; }
 
+        #region Ability Flags Properties
+        /// <summary>
+        /// Gets or sets whether Spyro can double jump/horn dive.
+        /// </summary>
         public bool AF_DoubleJump
         {
             get => (AbilityFlags & 0x1) != 0;
             set => AbilityFlags = 
                 value ? (AbilityFlags & 0x1) : (AbilityFlags & ~(uint)0x1);
         }
+        /// <summary>
+        /// Gets or sets whether the player has the hit point upgrade.
+        /// </summary>
         public bool AF_HitPointUpgrade
         {
             get => (AbilityFlags & 0x4) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x4) : (AbilityFlags & ~(uint)0x4);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can pole spin.
+        /// </summary>
         public bool AF_PoleSpin
         {
             get => (AbilityFlags & 0x10) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x10) : (AbilityFlags & ~(uint)0x10);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can breathe ice.
+        /// </summary>
         public bool AF_IceBreath
         {
             get => (AbilityFlags & 0x20) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x20) : (AbilityFlags & ~(uint)0x20);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can breathe electricity.
+        /// </summary>
         public bool AF_ElectricBreath
         {
             get => (AbilityFlags & 0x40) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x40) : (AbilityFlags & ~(uint)0x40);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can breathe water.
+        /// </summary>
         public bool AF_WaterBreath
         {
             get => (AbilityFlags & 0x80) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x80) : (AbilityFlags & ~(uint)0x80);
         }
+        /// <summary>
+        /// Gets or sets whether the 2x gem multiplier is active.
+        /// </summary>
         public bool AF_DoubleGem
         {
             get => (AbilityFlags & 0x200) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x200) : (AbilityFlags & ~(uint)0x200);
         }
+        /// <summary>
+        /// Gets or sets whether aqualung is active (unused in the final game code).
+        /// </summary>
         public bool AF_Aqualung // Unused
         {
             get => (AbilityFlags & 0x800) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x800) : (AbilityFlags & ~(uint)0x800);
         }
+        /// <summary>
+        /// Gets or sets whether supercharge is active.
+        /// </summary>
         public bool AF_Supercharge
         {
             get => (AbilityFlags & 0x1000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x1000) : (AbilityFlags & ~(uint)0x1000);
         }
+        /// <summary>
+        /// Gets or sets whether invincibility is active.
+        /// </summary>
         public bool AF_Invincibility
         {
             get => (AbilityFlags & 0x2000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x2000) : (AbilityFlags & ~(uint)0x2000);
         }
+        /// <summary>
+        /// Gets or sets whether the player has bought a lock pick on this save.
+        /// This is used to unlock the other shop items for purchase.
+        /// </summary>
         public bool AF_BoughtLockPick
         {
             get => (AbilityFlags & 0x4000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x4000) : (AbilityFlags & ~(uint)0x4000);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can wing shield.
+        /// </summary>
         public bool AF_WingShield
         {
             get => (AbilityFlags & 0x8000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x8000) : (AbilityFlags & ~(uint)0x8000);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro can wall kick.
+        /// </summary>
         public bool AF_WallKick
         {
             get => (AbilityFlags & 0x10000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x10000) : (AbilityFlags & ~(uint)0x10000);
         }
+        /// <summary>
+        /// Gets or sets whether Spyro has the horn dive upgrade.
+        /// </summary>
         public bool AF_HornDiveUpgrade
         {
             get => (AbilityFlags & 0x20000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x20000) : (AbilityFlags & ~(uint)0x20000);
         }
+        /// <summary>
+        /// Gets or sets whether the player has the butterfly jar.
+        /// </summary>
         public bool AF_ButterflyJar
         {
             get => (AbilityFlags & 0x40000) != 0;
             set => AbilityFlags =
                 value ? (AbilityFlags & 0x40000) : (AbilityFlags & ~(uint)0x40000);
         }
+        #endregion
 
+        #region Timers
+        /// <summary>
+        /// The amount of time underwater before Spyro runs out of oxygen (unused in the final game code).
+        /// </summary>
         public float WaterDiveTimer { get; private set; }
 
+        /// <summary>
+        /// Amount of supercharge time left.
+        /// </summary>
         public float SuperchargeTimer { get; private set; }
 
+        /// <summary>
+        /// Current maximum for the supercharge gauge.
+        /// </summary>
         public float SuperchargeTimerMax { get; private set; }
 
+        /// <summary>
+        /// Amount of invincibility left.
+        /// </summary>
         public float InvincibleTimer { get; private set; }
 
+        /// <summary>
+        /// Current maximum for the invincibility gauge.
+        /// </summary>
         public float InvincibleTimerMax { get; private set; }
 
+        /// <summary>
+        /// The amount of time left of the double gem powerup.
+        /// </summary>
         public float DoubleGemTimer { get; private set; }
 
+        /// <summary>
+        /// The upper limit of the double gem powerup duration (usually 2 minutes/120 seconds).
+        /// </summary>
         public float DoubleGemTimerMax { get; private set; }
+        #endregion
 
+        /// <summary>
+        /// The amount of Sgt. Byrd boost fuel left.
+        /// </summary>
         public float SgtByrdFuel { get; private set; }
 
+        /// <summary>
+        /// The amount of Sgt. Byrd's bombs left.
+        /// Not shown to the player and set to 9999 when starting his minigame.
+        /// </summary>
         public short SgtByrdBombs { get; private set; }
 
+        /// <summary>
+        /// The amount of Sgt. Byrd's missiles left.
+        /// Not shown to the player and set to 9999 when starting his minigame.
+        /// </summary>
         public short SgtByrdMissiles { get; private set; }
 
+        /// <summary>
+        /// The amount of Sparx smart bombs left.
+        /// Set to a predetermined value when starting his minigame.
+        /// </summary>
         public short SparxSmartBombs { get; private set; }
 
+        /// <summary>
+        /// The amount of Sparx seeker missiles left.
+        /// Set to a predetermined value when starting his minigame.
+        /// </summary>
         public short SparxSeekers { get; private set; }
 
+        /// <summary>
+        /// The amount of Blink bombs left.
+        /// Set to a predetermined value when starting his minigame.
+        /// </summary>
         public short BlinkBombs { get; private set; }
 
+        /// <summary>
+        /// Total amount of light gems collected.
+        /// </summary>
         public byte TotalLightGems { get; private set; }
 
+        /// <summary>
+        /// Total amount of Dark Gems broken.
+        /// </summary>
         public byte TotalDarkGems { get; private set; }
 
+        /// <summary>
+        /// Total amount of Dragon Eggs collected.
+        /// </summary>
         public byte TotalDragonEggs { get; private set; }
 
+        /// <summary>
+        /// Unknown field.
+        /// </summary>
         public byte UNK_0 { get; private set; }
 
+        /// <summary>
+        /// The setup information for the player.
+        /// Editing this struct is not needed as it's overwritten on a map loading.
+        /// </summary>
         public PlayerSetupInfo Setup { get; private set; }
 
+        /// <summary>
+        /// The last player character to be set up.
+        /// </summary>
         public Players LastPlayerSetup { get; private set; }
-
-
 
         private PlayerState() { }
 

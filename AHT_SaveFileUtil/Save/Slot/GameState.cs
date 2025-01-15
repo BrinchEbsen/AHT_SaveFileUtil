@@ -481,7 +481,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
         #endregion
 
-        #region TrigInfo
+        #region Trigger Info
         /// <summary>
         /// Get an array of <see cref="GameStateTrigInfo"/> that belong to a map.
         /// </summary>

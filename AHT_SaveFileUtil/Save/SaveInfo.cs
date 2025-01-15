@@ -5,38 +5,89 @@ using System.Text;
 
 namespace AHT_SaveFileUtil.Save
 {
+    /// <summary>
+    /// Contains any global information in a <see cref="SaveFile"/> not specific to any <see cref="Slot.SaveSlot"/>
+    /// </summary>
     public class SaveInfo : ISaveFileIO<SaveInfo>
     {
+        /// <summary>
+        /// 32-byte capacity UTF-8 string describing the timestamp when the game build was created.
+        /// </summary>
         private byte[] BuildTime = new byte[32];
 
+        /// <summary>
+        /// 32-byte capacity UTF-8 string describing the date when the game build was created.
+        /// </summary>
         private byte[] BuildDate = new byte[32];
 
+        /// <summary>
+        /// A version number. Not used and should remain unchanged.
+        /// </summary>
         public int SaveVersion { get; private set; }
 
+        /// <summary>
+        /// The usage flags for each of the three <see cref="Slot.SaveSlot"/> in the file.
+        /// <para>
+        /// Should match the usage flags in each slot. The save data will be determined
+        /// to be invalid if not.
+        /// </para>
+        /// </summary>
         public uint[] UsageFlags { get; private set; } = new uint[3];
 
+        /// <summary>
+        /// The size in bytes of each slot's <see cref="Slot.GameState"/> struct.
+        /// </summary>
         public int GameStateSize { get; private set; }
 
+        /// <summary>
+        /// The global state of in-game stats.
+        /// </summary>
         public GlobalGameState GlobalGameState { get; private set; }
 
+        /// <summary>
+        /// The current SFX volume in the settings.
+        /// </summary>
         public float SfxVolume { get; set; }
 
+        /// <summary>
+        /// The current music volume in the settings.
+        /// </summary>
         public int MusicVolume { get; set; }
 
+        /// <summary>
+        /// Whether the first person y-axis invertion option is enabled in the settings.
+        /// </summary>
         public bool FirstPersonYAxisInverted { get; set; } //4 BYTES
 
+        /// <summary>
+        /// Whether the Sgt. Byrd flying y-axis invertion option is enabled in the settings.
+        /// </summary>
         public bool SgtByrdYAxisInverted { get; set; } //4 BYTES
 
+        /// <summary>
+        /// Whether the Sparx flying y-axis invertion option is enabled in the settings.
+        /// </summary>
         public bool SparxFlyingYAxisInverted { get; set; } //4 BYTES
 
+        /// <summary>
+        /// Whether the camera mode is set to 'Active' in the settings.
+        /// </summary>
         public bool CameraModeActive { get; set; } //4 BYTES
 
+        /// <summary>
+        /// Whether the rumble feature is enabled in the settings.
+        /// </summary>
         public bool RumbleEnabled { get; set; } //4 BYTES
 
+        /// <summary>
+        /// Which unlockable Spyro skin is selected from the 'Unlockables' menu.
+        /// Intended values are Spyro, Ember and Flame.
+        /// </summary>
         public Players SelectedSpyroSkin { get; set; }
 
-
-
+        /// <summary>
+        /// String representation of the timestamp when the game build was created.
+        /// </summary>
         public string BuildTimeString
         {
             get
@@ -53,6 +104,9 @@ namespace AHT_SaveFileUtil.Save
             }
         }
 
+        /// <summary>
+        /// String representation of the date when the game build was created.
+        /// </summary>
         public string BuildDateString
         {
             get
