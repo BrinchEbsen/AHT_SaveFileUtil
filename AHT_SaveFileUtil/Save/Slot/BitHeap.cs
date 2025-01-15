@@ -77,12 +77,24 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         public const int BITHEAP_LENGTH = BYTEHEAP_LENGTH * 8;
 
+        /// <summary>
+        /// The array of bytes containing the data of the bitheap.
+        /// </summary>
         public byte[] ByteHeap { get; private set; } = new byte[BYTEHEAP_LENGTH];
 
+        /// <summary>
+        /// The amount of bits currently used in the heap.
+        /// </summary>
         public int NumBitsUsed { get; private set; }
 
+        /// <summary>
+        /// The stack pointer. Only used during runtime.
+        /// </summary>
         public int StackPtr { get; private set; }
 
+        /// <summary>
+        /// The heap stack. Only used during runtime.
+        /// </summary>
         public StackEntry[] Stack { get; private set; } = new StackEntry[32];
 
         /// <summary>
@@ -141,10 +153,7 @@ namespace AHT_SaveFileUtil.Save.Slot
                 entry.ToWriter(writer, platform);
         }
 
-
-        //BITHEAP OPERATIONS:
-
-
+        #region BitHeap Operations
         /// <summary>
         /// Read a string of bits from the bitheap.
         /// </summary>
@@ -158,18 +167,15 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             if (bitCount <= 0) return [];
 
-            if (readAddress < 0)
-                throw new ArgumentException($"Parameter {nameof(readAddress)} cannot be negative.");
+            if (ValidBitHeapAddress(readAddress, bitCount))
+                throw new ArgumentException(
+                    $"{nameof(readAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 
             if (writeBit < 0)
                 throw new ArgumentException($"Parameter {nameof(writeBit)} cannot be negative.");
 
             if (writeBit > 7)
                 throw new ArgumentOutOfRangeException(nameof(writeBit));
-
-            //Check if resulting read parameters would exceed number of bits in the heap.
-            if (readAddress + bitCount > (ByteHeap.Length * 8))
-                throw new ArgumentOutOfRangeException(nameof(readAddress));
             
             /*
              * PRE:
@@ -237,18 +243,15 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             if (bitCount <= 0) return;
 
-            if (writeAddress < 0)
-                throw new ArgumentException($"Parameter {nameof(writeAddress)} cannot be negative.");
+            if (ValidBitHeapAddress(writeAddress, bitCount))
+                throw new ArgumentException(
+                    $"{nameof(writeAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 
             if (readBit < 0)
                 throw new ArgumentException($"Parameter {nameof(readBit)} cannot be negative.");
 
             if (readBit > 7)
                 throw new ArgumentOutOfRangeException(nameof(readBit));
-
-            //Check if resulting write parameters would exceed number of bits in the heap.
-            if (writeAddress + bitCount > (ByteHeap.Length * 8))
-                throw new ArgumentOutOfRangeException(nameof(writeAddress));
 
             //Check that there are enough bytes in the buffer to read from.
             if (GetNumRequiredBytes(bitCount + readBit) > buffer.Length)
@@ -306,16 +309,173 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
+        /// Read an <see cref="int"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="int"/>.</returns>
+        public int ReadInt32(int readAddress)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            return BitConverter.ToInt32(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="uint"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="uint"/>.</returns>
+        public uint ReadUInt32(int readAddress)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            return BitConverter.ToUInt32(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="float"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="float"/>.</returns>
+        public float ReadSingle(int readAddress)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            return BitConverter.ToSingle(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="short"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="short"/>.</returns>
+        public short ReadInt16(int readAddress)
+        {
+            byte[] buff = ReadBits(16, readAddress);
+
+            return BitConverter.ToInt16(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="ushort"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="ushort"/>.</returns>
+        public ushort ReadUInt16(int readAddress)
+        {
+            byte[] buff = ReadBits(16, readAddress);
+
+            return BitConverter.ToUInt16(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="byte"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="byte"/>.</returns>
+        public byte ReadByte(int readAddress)
+        {
+            return ReadBits(8, readAddress)[0];
+        }
+
+        /// <summary>
+        /// Write an <see cref="int"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="int"/> to write.</param>
+        public void WriteInt32(int writeAddress, int value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+
+            WriteBits(32, buff, writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="uint"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="uint"/> to write.</param>
+        public void WriteUInt32(int writeAddress, uint value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+
+            WriteBits(32, buff, writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="float"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="float"/> to write.</param>
+        public void WriteSingle(int writeAddress, float value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+
+            WriteBits(32, buff, writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="short"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="short"/> to write.</param>
+        public void WriteInt16(int writeAddress, short value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+
+            WriteBits(16, buff, writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="ushort"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="ushort"/> to write.</param>
+        public void WriteUInt16(int writeAddress, ushort value)
+        {
+            byte[] buff = BitConverter.GetBytes(value);
+
+            WriteBits(16, buff, writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="byte"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="byte"/> to write.</param>
+        public void WriteByte(int writeAddress, byte value)
+        {
+            WriteBits(8, [value], writeAddress);
+        }
+
+        /// <summary>
         /// Get the amount of bytes required to fit a number of bits.
         /// </summary>
         /// <param name="bitCount">The number of bits.</param>
         /// <returns>The amount of bytes needed to contain the given number of bits.</returns>
-        private static int GetNumRequiredBytes(int bitCount)
+        public static int GetNumRequiredBytes(int bitCount)
         {
             if (bitCount <= 0) return 0;
 
             return (bitCount / 8) //Number of sets of 8 bits
                  + (bitCount % 8 == 0 ? 0 : 1); //An extra byte if there are leftover bits
         }
+
+        /// <summary>
+        /// Check if a bitheap address or range of bits is valid.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <param name="range">The number of bits to check ahead of <paramref name="address"/>.</param>
+        /// <returns>Whether the given address/range is valid.</returns>
+        public static bool ValidBitHeapAddress(int address, int range = 0)
+        {
+            if (address < 0) return false;
+            if (range < 0) return false;
+
+            if (address + range >= BITHEAP_LENGTH) return false;
+
+            return true;
+        }
+        #endregion
     }
 }
