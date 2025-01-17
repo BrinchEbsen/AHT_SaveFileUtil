@@ -81,20 +81,13 @@ namespace AHT_SaveFileEditor
             if (saveFile == null)
                 return;
 
-            foreach (var ctrl in flowLayoutPanel_SaveSlots.Controls)
-                if (ctrl is SaveSlotPanel)
-                    ((SaveSlotPanel)ctrl).Dispose();
+            foreach (SaveSlotPanel ctrl in flowLayoutPanel_SaveSlots.Controls)
+                    ctrl.Dispose();
 
             flowLayoutPanel_SaveSlots.Controls.Clear();
             for (int i = 0; i < saveFile.Slots.Length; i++)
             {
-                flowLayoutPanel_SaveSlots.Controls.Add(new Label()
-                {
-                    Text = "Slot " + (i + 1),
-                    Height = 18,
-                    Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
-                });
-                var panel = new SaveSlotPanel(this, saveFile.Slots[i]);
+                var panel = new SaveSlotPanel(this, saveFile.Slots[i], i);
                 flowLayoutPanel_SaveSlots.Controls.Add(panel);
                 panel.Width = flowLayoutPanel_SaveSlots.Width;
             }

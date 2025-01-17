@@ -1,6 +1,7 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AHT_SaveFileUtil.Save.Slot
@@ -305,96 +306,150 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         public uint AbilityFlags { get; private set; }
 
+        #region Ability Flags Constants
+        public const uint AF_MASK_DOUBLE_JUMP = 0x1;
+        public const uint AF_MASK_HIT_POINT_UPGRADE = 0x4;
+        public const uint AF_MASK_POLE_SPIN = 0x10;
+        public const uint AF_MASK_ICE_BREATH = 0x20;
+        public const uint AF_MASK_ELECTRIC_BREATH = 0x40;
+        public const uint AF_MASK_WATER_BREATH = 0x80;
+        public const uint AF_MASK_DOUBLE_GEM = 0x200;
+        public const uint AF_MASK_AQUALUNG = 0x800;
+        public const uint AF_MASK_SUPERCHARGE = 0x1000;
+        public const uint AF_MASK_INVINCIBILITY = 0x2000;
+        public const uint AF_MASK_BOUGHT_LOCK_PICK = 0x4000;
+        public const uint AF_MASK_WING_SHIELD = 0x8000;
+        public const uint AF_MASK_WALL_KICK = 0x10000;
+        public const uint AF_MASK_HORN_DIVE_UPGRADE = 0x20000;
+        public const uint AF_MASK_BUTTERFLY_JAR = 0x40000;
+
+        public const uint ABILITY_FLAGS_MASK = 
+            AF_MASK_DOUBLE_JUMP |
+            AF_MASK_HIT_POINT_UPGRADE |
+            AF_MASK_POLE_SPIN |
+            AF_MASK_ICE_BREATH |
+            AF_MASK_ELECTRIC_BREATH |
+            AF_MASK_WATER_BREATH |
+            AF_MASK_DOUBLE_GEM |
+            AF_MASK_AQUALUNG |
+            AF_MASK_SUPERCHARGE |
+            AF_MASK_INVINCIBILITY |
+            AF_MASK_BOUGHT_LOCK_PICK |
+            AF_MASK_WING_SHIELD |
+            AF_MASK_WALL_KICK |
+            AF_MASK_HORN_DIVE_UPGRADE |
+            AF_MASK_BUTTERFLY_JAR;
+
+        public static readonly Dictionary<uint, string> AbilityFlagNames = new()
+        {
+            { AF_MASK_DOUBLE_JUMP, "Double Jump" },
+            { AF_MASK_HIT_POINT_UPGRADE, "Hit Point Upgrade" },
+            { AF_MASK_POLE_SPIN, "Pole Spin" },
+            { AF_MASK_ICE_BREATH, "Ice Breath" },
+            { AF_MASK_ELECTRIC_BREATH, "Electric Breath" },
+            { AF_MASK_WATER_BREATH, "Water Breath" },
+            { AF_MASK_DOUBLE_GEM, "Double Gem" },
+            { AF_MASK_AQUALUNG, "Aqualung" },
+            { AF_MASK_SUPERCHARGE, "Supercharge" },
+            { AF_MASK_INVINCIBILITY, "Invincibility" },
+            { AF_MASK_BOUGHT_LOCK_PICK, "Bought Lock Pick" },
+            { AF_MASK_WING_SHIELD, "Wing Shield" },
+            { AF_MASK_WALL_KICK, "Wall Kick" },
+            { AF_MASK_HORN_DIVE_UPGRADE, "Horn Dive Upgrade" },
+            { AF_MASK_BUTTERFLY_JAR, "Butterfly Jar" }
+        };
+        #endregion
+
         #region Ability Flags Properties
         /// <summary>
         /// Gets or sets whether Spyro can double jump/horn dive.
         /// </summary>
         public bool AF_DoubleJump
         {
-            get => (AbilityFlags & 0x1) != 0;
+            get => (AbilityFlags & AF_MASK_DOUBLE_JUMP) != 0;
             set => AbilityFlags = 
-                value ? (AbilityFlags & 0x1) : (AbilityFlags & ~(uint)0x1);
+                value ? (AbilityFlags & AF_MASK_DOUBLE_JUMP) : (AbilityFlags & ~AF_MASK_DOUBLE_JUMP);
         }
         /// <summary>
         /// Gets or sets whether the player has the hit point upgrade.
         /// </summary>
         public bool AF_HitPointUpgrade
         {
-            get => (AbilityFlags & 0x4) != 0;
+            get => (AbilityFlags & AF_MASK_HIT_POINT_UPGRADE) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x4) : (AbilityFlags & ~(uint)0x4);
+                value ? (AbilityFlags & AF_MASK_HIT_POINT_UPGRADE) : (AbilityFlags & ~AF_MASK_HIT_POINT_UPGRADE);
         }
         /// <summary>
         /// Gets or sets whether Spyro can pole spin.
         /// </summary>
         public bool AF_PoleSpin
         {
-            get => (AbilityFlags & 0x10) != 0;
+            get => (AbilityFlags & AF_MASK_POLE_SPIN) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x10) : (AbilityFlags & ~(uint)0x10);
+                value ? (AbilityFlags & AF_MASK_POLE_SPIN) : (AbilityFlags & ~AF_MASK_POLE_SPIN);
         }
         /// <summary>
         /// Gets or sets whether Spyro can breathe ice.
         /// </summary>
         public bool AF_IceBreath
         {
-            get => (AbilityFlags & 0x20) != 0;
+            get => (AbilityFlags & AF_MASK_ICE_BREATH) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x20) : (AbilityFlags & ~(uint)0x20);
+                value ? (AbilityFlags & AF_MASK_ICE_BREATH) : (AbilityFlags & ~AF_MASK_ICE_BREATH);
         }
         /// <summary>
         /// Gets or sets whether Spyro can breathe electricity.
         /// </summary>
         public bool AF_ElectricBreath
         {
-            get => (AbilityFlags & 0x40) != 0;
+            get => (AbilityFlags & AF_MASK_ELECTRIC_BREATH) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x40) : (AbilityFlags & ~(uint)0x40);
+                value ? (AbilityFlags & AF_MASK_ELECTRIC_BREATH) : (AbilityFlags & ~AF_MASK_ELECTRIC_BREATH);
         }
         /// <summary>
         /// Gets or sets whether Spyro can breathe water.
         /// </summary>
         public bool AF_WaterBreath
         {
-            get => (AbilityFlags & 0x80) != 0;
+            get => (AbilityFlags & AF_MASK_WATER_BREATH) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x80) : (AbilityFlags & ~(uint)0x80);
+                value ? (AbilityFlags & AF_MASK_WATER_BREATH) : (AbilityFlags & ~AF_MASK_WATER_BREATH);
         }
         /// <summary>
         /// Gets or sets whether the 2x gem multiplier is active.
         /// </summary>
         public bool AF_DoubleGem
         {
-            get => (AbilityFlags & 0x200) != 0;
+            get => (AbilityFlags & AF_MASK_DOUBLE_GEM) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x200) : (AbilityFlags & ~(uint)0x200);
+                value ? (AbilityFlags & AF_MASK_DOUBLE_GEM) : (AbilityFlags & ~AF_MASK_DOUBLE_GEM);
         }
         /// <summary>
         /// Gets or sets whether aqualung is active (unused in the final game code).
         /// </summary>
         public bool AF_Aqualung // Unused
         {
-            get => (AbilityFlags & 0x800) != 0;
+            get => (AbilityFlags & AF_MASK_AQUALUNG) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x800) : (AbilityFlags & ~(uint)0x800);
+                value ? (AbilityFlags & AF_MASK_AQUALUNG) : (AbilityFlags & ~AF_MASK_AQUALUNG);
         }
         /// <summary>
         /// Gets or sets whether supercharge is active.
         /// </summary>
         public bool AF_Supercharge
         {
-            get => (AbilityFlags & 0x1000) != 0;
+            get => (AbilityFlags & AF_MASK_SUPERCHARGE) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x1000) : (AbilityFlags & ~(uint)0x1000);
+                value ? (AbilityFlags & AF_MASK_SUPERCHARGE) : (AbilityFlags & ~AF_MASK_SUPERCHARGE);
         }
         /// <summary>
         /// Gets or sets whether invincibility is active.
         /// </summary>
         public bool AF_Invincibility
         {
-            get => (AbilityFlags & 0x2000) != 0;
+            get => (AbilityFlags & AF_MASK_INVINCIBILITY) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x2000) : (AbilityFlags & ~(uint)0x2000);
+                value ? (AbilityFlags & AF_MASK_INVINCIBILITY) : (AbilityFlags & ~AF_MASK_INVINCIBILITY);
         }
         /// <summary>
         /// Gets or sets whether the player has bought a lock pick on this save.
@@ -402,45 +457,45 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         public bool AF_BoughtLockPick
         {
-            get => (AbilityFlags & 0x4000) != 0;
+            get => (AbilityFlags & AF_MASK_BOUGHT_LOCK_PICK) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x4000) : (AbilityFlags & ~(uint)0x4000);
+                value ? (AbilityFlags & AF_MASK_BOUGHT_LOCK_PICK) : (AbilityFlags & ~AF_MASK_BOUGHT_LOCK_PICK);
         }
         /// <summary>
         /// Gets or sets whether Spyro can wing shield.
         /// </summary>
         public bool AF_WingShield
         {
-            get => (AbilityFlags & 0x8000) != 0;
+            get => (AbilityFlags & AF_MASK_WING_SHIELD) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x8000) : (AbilityFlags & ~(uint)0x8000);
+                value ? (AbilityFlags & AF_MASK_WING_SHIELD) : (AbilityFlags & ~AF_MASK_WING_SHIELD);
         }
         /// <summary>
         /// Gets or sets whether Spyro can wall kick.
         /// </summary>
         public bool AF_WallKick
         {
-            get => (AbilityFlags & 0x10000) != 0;
+            get => (AbilityFlags & AF_MASK_WALL_KICK) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x10000) : (AbilityFlags & ~(uint)0x10000);
+                value ? (AbilityFlags & AF_MASK_WALL_KICK) : (AbilityFlags & ~AF_MASK_WALL_KICK);
         }
         /// <summary>
         /// Gets or sets whether Spyro has the horn dive upgrade.
         /// </summary>
         public bool AF_HornDiveUpgrade
         {
-            get => (AbilityFlags & 0x20000) != 0;
+            get => (AbilityFlags & AF_MASK_HORN_DIVE_UPGRADE) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x20000) : (AbilityFlags & ~(uint)0x20000);
+                value ? (AbilityFlags & AF_MASK_HORN_DIVE_UPGRADE) : (AbilityFlags & ~AF_MASK_HORN_DIVE_UPGRADE);
         }
         /// <summary>
         /// Gets or sets whether the player has the butterfly jar.
         /// </summary>
         public bool AF_ButterflyJar
         {
-            get => (AbilityFlags & 0x40000) != 0;
+            get => (AbilityFlags & AF_MASK_BUTTERFLY_JAR) != 0;
             set => AbilityFlags =
-                value ? (AbilityFlags & 0x40000) : (AbilityFlags & ~(uint)0x40000);
+                value ? (AbilityFlags & AF_MASK_BUTTERFLY_JAR) : (AbilityFlags & ~AF_MASK_BUTTERFLY_JAR);
         }
         #endregion
 
@@ -481,6 +536,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         public float DoubleGemTimerMax { get; private set; }
         #endregion
 
+        #region MiniGame Characters
         /// <summary>
         /// The amount of Sgt. Byrd boost fuel left.
         /// </summary>
@@ -515,6 +571,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// Set to a predetermined value when starting his minigame.
         /// </summary>
         public short BlinkBombs { get; private set; }
+        #endregion
 
         /// <summary>
         /// Total amount of light gems collected.
@@ -669,6 +726,33 @@ namespace AHT_SaveFileUtil.Save.Slot
             Setup.ToWriter(writer, platform);
             writer.Write((int)LastPlayerSetup, bigEndian);
             writer.BaseStream.Seek(4, SeekOrigin.Current);
+        }
+
+        /// <summary>
+        /// Get the state of an ability flag, where <paramref name="mask"/> is
+        /// one of the constants AF_MASK_*.
+        /// </summary>
+        /// <param name="mask">Mask to check against.</param>
+        /// <returns>true if the ability flag is set, false if not.</returns>
+        public bool GetAbilityFlag(uint mask)
+        {
+            return (AbilityFlags & mask) != 0;
+        }
+
+        /// <summary>
+        /// Set the state of an ability flag, where <paramref name="mask"/> is
+        /// one of the constants AF_MASK_*.
+        /// </summary>
+        /// <param name="mask">Mask for the flag to set.</param>
+        /// <param name="value">Value to set the flag's state to.</param>
+        public void SetAbilityFlag(uint mask, bool value)
+        {
+            if ((mask & ABILITY_FLAGS_MASK) == 0) return;
+
+            if (value)
+                AbilityFlags |= mask;
+            else
+                AbilityFlags &= ~mask;
         }
     }
 }

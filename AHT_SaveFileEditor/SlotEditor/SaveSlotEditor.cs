@@ -14,12 +14,16 @@ namespace AHT_SaveFileEditor
 
         private Dictionary<int, EXHashCode> CheckList_Objectives_Mapping = [];
 
-        public SaveSlotEditor(MainWnd mainWnd, SaveSlot slot)
+        private Dictionary<int, uint> CheckList_AbilityFlags_Mapping = [];
+
+        public SaveSlotEditor(MainWnd mainWnd, SaveSlot slot, int slotIndex)
         {
             InitializeComponent();
 
             this.mainWnd = mainWnd;
             Slot = slot;
+
+            Lbl_SlotIndex.Text = "Slot " + (slotIndex + 1);
         }
 
         private void SaveSlotEditor_Load(object sender, EventArgs e)
@@ -35,11 +39,14 @@ namespace AHT_SaveFileEditor
 
             TextBox_StartTime.Text = Slot.GameState.StartTime.ToString();
 
-            Label_Completion.Text = $"{Slot.GameState.CompletionPercentage:0.00}%";
+            UpdateCompletionPercentage();
 
             InitializeObjectivesMapping();
+            InitializeAbilityFlagsMapping();
+
             PopulateObjectivesCheckList();
             PopulateTasksFlowPanel();
+            PopulateAbilityFlagsCheckList();
 
             Check_FileUsed.Checked = Slot.IsUsed;
         }
@@ -63,6 +70,11 @@ namespace AHT_SaveFileEditor
         private void SaveSlotEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             mainWnd.PopulateSaveSlotPanel();
+        }
+
+        private void UpdateCompletionPercentage()
+        {
+            Label_Completion.Text = $"{Slot.GameState.CompletionPercentage:0.00}%";
         }
 
         #region Objectives
@@ -117,6 +129,9 @@ namespace AHT_SaveFileEditor
 
             EXHashCode obj = CheckList_Objectives_Mapping[e.Index];
             Slot.GameState.SetObjective(obj, newValue);
+
+            if (obj == EXHashCode.HT_Objective_Boss4_Beaten)
+                UpdateCompletionPercentage();
         }
         #endregion
 
@@ -161,6 +176,55 @@ namespace AHT_SaveFileEditor
         {
             foreach (TaskPanel panel in FlowPanel_Tasks.Controls)
                 panel.SetState(TaskStates.Undiscovered);
+        }
+        #endregion
+
+        #region Ability Flags
+        private void InitializeAbilityFlagsMapping()
+        {
+            int i = 0;
+            foreach (var pair in PlayerState.AbilityFlagNames)
+            {
+                //Aqualung is unused, so skip it
+                if (pair.Key != PlayerState.AF_MASK_AQUALUNG)
+                {
+                    CheckList_AbilityFlags_Mapping.Add(i, pair.Key);
+                    i++;
+                }
+            }
+        }
+
+        private void PopulateAbilityFlagsCheckList()
+        {
+            CheckList_AbilityFlags.Items.Clear();
+
+            foreach (var pair in CheckList_AbilityFlags_Mapping)
+            {
+                CheckList_AbilityFlags.Items.Add(
+                    PlayerState.AbilityFlagNames[pair.Value],
+                    Slot.GameState.PlayerState.GetAbilityFlag(pair.Value)
+                    );
+            }
+        }
+
+        private void CheckList_AbilityFlags_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            bool newValue = e.NewValue == CheckState.Checked;
+
+            uint mask = CheckList_AbilityFlags_Mapping[e.Index];
+            Slot.GameState.PlayerState.SetAbilityFlag(mask, newValue);
+        }
+
+        private void Btn_SetAllAbilityFlags_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_AbilityFlags.Items.Count; i++)
+                CheckList_AbilityFlags.SetItemChecked(i, true);
+        }
+
+        private void Btn_ClearAllAbilityFlags_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < CheckList_AbilityFlags.Items.Count; i++)
+                CheckList_AbilityFlags.SetItemChecked(i, false);
         }
         #endregion
 

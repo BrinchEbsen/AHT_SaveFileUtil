@@ -10,17 +10,26 @@ namespace AHT_SaveFileEditor
     {
         private MainWnd mainWnd;
         private SaveSlot slot;
+        private int slotIndex;
 
-        public SaveSlotPanel(MainWnd mainWnd, SaveSlot slot) : base()
+        public SaveSlotPanel(MainWnd mainWnd, SaveSlot slot, int slotIndex)
         {
             this.mainWnd = mainWnd;
             this.slot = slot;
+            this.slotIndex = slotIndex;
             FlowDirection = FlowDirection.TopDown;
             WrapContents = false;
 
+            Controls.Add(new Label
+            {
+                Text = "Slot " + (slotIndex + 1),
+                Height = 18,
+                Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold)
+            });
+
             if (slot.IsUsed)
             {
-                Size = new Size(Width, 180);
+                Size = new Size(Width, 200);
                 BackColor = Color.LightBlue;
 
                 AddLabel($"Started: {slot.GameState.StartTime.ToString()}");
@@ -38,7 +47,7 @@ namespace AHT_SaveFileEditor
                     AddLabel($"Level: {slot.GameState.StartingMap}");
             } else
             {
-                Size = new Size(Width, 54);
+                Size = new Size(Width, 74);
                 BackColor = Color.AliceBlue;
                 AddLabel("Unused");
             }
@@ -57,7 +66,7 @@ namespace AHT_SaveFileEditor
 
         private void OpenSlotEditorWnd(object? sender, EventArgs e)
         {
-            new SaveSlotEditor(mainWnd, slot).ShowDialog();
+            new SaveSlotEditor(mainWnd, slot, slotIndex).ShowDialog();
         }
 
         private void AddLabel(string text)

@@ -34,6 +34,15 @@ namespace AHT_SaveFileEditor
             Check_ShowUnused = new CheckBox();
             Check_ShowNonPreserving = new CheckBox();
             FlowPanel_Levels = new FlowLayoutPanel();
+            Btn_ClearAllAbilityFlags = new Button();
+            Btn_SetAllAbilityFlags = new Button();
+            label10 = new Label();
+            CheckList_AbilityFlags = new CheckedListBox();
+            Lbl_SlotIndex = new Label();
+            Btn_DoAllTasks = new Button();
+            Btn_FindAllTasks = new Button();
+            Btn_ClearAllTasks = new Button();
+            label9 = new Label();
             FlowPanel_Tasks = new FlowLayoutPanel();
             Btn_ClearAllObjectives = new Button();
             Btn_SetAllObjectives = new Button();
@@ -54,10 +63,6 @@ namespace AHT_SaveFileEditor
             label1 = new Label();
             Label_StartingLevel = new Label();
             Check_FileUsed = new CheckBox();
-            label9 = new Label();
-            Btn_ClearAllTasks = new Button();
-            Btn_FindAllTasks = new Button();
-            Btn_DoAllTasks = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -85,6 +90,11 @@ namespace AHT_SaveFileEditor
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(Btn_ClearAllAbilityFlags);
+            splitContainer1.Panel2.Controls.Add(Btn_SetAllAbilityFlags);
+            splitContainer1.Panel2.Controls.Add(label10);
+            splitContainer1.Panel2.Controls.Add(CheckList_AbilityFlags);
+            splitContainer1.Panel2.Controls.Add(Lbl_SlotIndex);
             splitContainer1.Panel2.Controls.Add(Btn_DoAllTasks);
             splitContainer1.Panel2.Controls.Add(Btn_FindAllTasks);
             splitContainer1.Panel2.Controls.Add(Btn_ClearAllTasks);
@@ -109,7 +119,7 @@ namespace AHT_SaveFileEditor
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(Label_StartingLevel);
             splitContainer1.Panel2.Controls.Add(Check_FileUsed);
-            splitContainer1.Size = new Size(1426, 703);
+            splitContainer1.Size = new Size(1426, 880);
             splitContainer1.SplitterDistance = 316;
             splitContainer1.TabIndex = 0;
             // 
@@ -130,7 +140,7 @@ namespace AHT_SaveFileEditor
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(FlowPanel_Levels);
-            splitContainer2.Size = new Size(316, 703);
+            splitContainer2.Size = new Size(316, 880);
             splitContainer2.SplitterDistance = 64;
             splitContainer2.TabIndex = 0;
             // 
@@ -163,9 +173,103 @@ namespace AHT_SaveFileEditor
             FlowPanel_Levels.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Levels.Location = new Point(0, 0);
             FlowPanel_Levels.Name = "FlowPanel_Levels";
-            FlowPanel_Levels.Size = new Size(316, 635);
+            FlowPanel_Levels.Size = new Size(316, 812);
             FlowPanel_Levels.TabIndex = 0;
             FlowPanel_Levels.WrapContents = false;
+            // 
+            // Btn_ClearAllAbilityFlags
+            // 
+            Btn_ClearAllAbilityFlags.BackColor = Color.FromArgb(255, 192, 192);
+            Btn_ClearAllAbilityFlags.Location = new Point(696, 769);
+            Btn_ClearAllAbilityFlags.Name = "Btn_ClearAllAbilityFlags";
+            Btn_ClearAllAbilityFlags.Size = new Size(75, 23);
+            Btn_ClearAllAbilityFlags.TabIndex = 28;
+            Btn_ClearAllAbilityFlags.Text = "Clear All";
+            Btn_ClearAllAbilityFlags.UseVisualStyleBackColor = false;
+            Btn_ClearAllAbilityFlags.Click += Btn_ClearAllAbilityFlags_Click;
+            // 
+            // Btn_SetAllAbilityFlags
+            // 
+            Btn_SetAllAbilityFlags.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_SetAllAbilityFlags.Location = new Point(615, 769);
+            Btn_SetAllAbilityFlags.Name = "Btn_SetAllAbilityFlags";
+            Btn_SetAllAbilityFlags.Size = new Size(75, 23);
+            Btn_SetAllAbilityFlags.TabIndex = 27;
+            Btn_SetAllAbilityFlags.Text = "Set All";
+            Btn_SetAllAbilityFlags.UseVisualStyleBackColor = false;
+            Btn_SetAllAbilityFlags.Click += Btn_SetAllAbilityFlags_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.Location = new Point(615, 376);
+            label10.Name = "label10";
+            label10.Size = new Size(93, 20);
+            label10.TabIndex = 26;
+            label10.Text = "Ability Flags:";
+            // 
+            // CheckList_AbilityFlags
+            // 
+            CheckList_AbilityFlags.FormattingEnabled = true;
+            CheckList_AbilityFlags.Location = new Point(615, 399);
+            CheckList_AbilityFlags.Name = "CheckList_AbilityFlags";
+            CheckList_AbilityFlags.Size = new Size(300, 364);
+            CheckList_AbilityFlags.TabIndex = 25;
+            CheckList_AbilityFlags.ItemCheck += CheckList_AbilityFlags_ItemCheck;
+            // 
+            // Lbl_SlotIndex
+            // 
+            Lbl_SlotIndex.AutoSize = true;
+            Lbl_SlotIndex.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Lbl_SlotIndex.Location = new Point(3, 9);
+            Lbl_SlotIndex.Name = "Lbl_SlotIndex";
+            Lbl_SlotIndex.Size = new Size(63, 25);
+            Lbl_SlotIndex.TabIndex = 24;
+            Lbl_SlotIndex.Text = "Slot #";
+            // 
+            // Btn_DoAllTasks
+            // 
+            Btn_DoAllTasks.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_DoAllTasks.Location = new Point(390, 769);
+            Btn_DoAllTasks.Name = "Btn_DoAllTasks";
+            Btn_DoAllTasks.Size = new Size(75, 23);
+            Btn_DoAllTasks.TabIndex = 23;
+            Btn_DoAllTasks.Text = "Do All";
+            Btn_DoAllTasks.UseVisualStyleBackColor = false;
+            Btn_DoAllTasks.Click += Btn_DoAllTasks_Click;
+            // 
+            // Btn_FindAllTasks
+            // 
+            Btn_FindAllTasks.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_FindAllTasks.Location = new Point(309, 769);
+            Btn_FindAllTasks.Name = "Btn_FindAllTasks";
+            Btn_FindAllTasks.Size = new Size(75, 23);
+            Btn_FindAllTasks.TabIndex = 22;
+            Btn_FindAllTasks.Text = "Find All";
+            Btn_FindAllTasks.UseVisualStyleBackColor = false;
+            Btn_FindAllTasks.Click += Btn_FindAllTasks_Click;
+            // 
+            // Btn_ClearAllTasks
+            // 
+            Btn_ClearAllTasks.BackColor = Color.FromArgb(255, 192, 192);
+            Btn_ClearAllTasks.Location = new Point(471, 769);
+            Btn_ClearAllTasks.Name = "Btn_ClearAllTasks";
+            Btn_ClearAllTasks.Size = new Size(75, 23);
+            Btn_ClearAllTasks.TabIndex = 21;
+            Btn_ClearAllTasks.Text = "Clear All";
+            Btn_ClearAllTasks.UseVisualStyleBackColor = false;
+            Btn_ClearAllTasks.Click += Btn_ClearAllTasks_Click;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(309, 376);
+            label9.Name = "label9";
+            label9.Size = new Size(65, 20);
+            label9.TabIndex = 20;
+            label9.Text = "Task List:";
             // 
             // FlowPanel_Tasks
             // 
@@ -174,7 +278,7 @@ namespace AHT_SaveFileEditor
             FlowPanel_Tasks.BorderStyle = BorderStyle.FixedSingle;
             FlowPanel_Tasks.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Tasks.ForeColor = SystemColors.ControlText;
-            FlowPanel_Tasks.Location = new Point(309, 188);
+            FlowPanel_Tasks.Location = new Point(309, 399);
             FlowPanel_Tasks.Name = "FlowPanel_Tasks";
             FlowPanel_Tasks.Size = new Size(300, 364);
             FlowPanel_Tasks.TabIndex = 19;
@@ -183,7 +287,7 @@ namespace AHT_SaveFileEditor
             // Btn_ClearAllObjectives
             // 
             Btn_ClearAllObjectives.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_ClearAllObjectives.Location = new Point(84, 558);
+            Btn_ClearAllObjectives.Location = new Point(84, 769);
             Btn_ClearAllObjectives.Name = "Btn_ClearAllObjectives";
             Btn_ClearAllObjectives.Size = new Size(75, 23);
             Btn_ClearAllObjectives.TabIndex = 18;
@@ -194,7 +298,7 @@ namespace AHT_SaveFileEditor
             // Btn_SetAllObjectives
             // 
             Btn_SetAllObjectives.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_SetAllObjectives.Location = new Point(3, 558);
+            Btn_SetAllObjectives.Location = new Point(3, 769);
             Btn_SetAllObjectives.Name = "Btn_SetAllObjectives";
             Btn_SetAllObjectives.Size = new Size(75, 23);
             Btn_SetAllObjectives.TabIndex = 17;
@@ -206,7 +310,7 @@ namespace AHT_SaveFileEditor
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(3, 165);
+            label8.Location = new Point(3, 376);
             label8.Name = "label8";
             label8.Size = new Size(81, 20);
             label8.TabIndex = 16;
@@ -215,7 +319,7 @@ namespace AHT_SaveFileEditor
             // CheckList_Objectives
             // 
             CheckList_Objectives.FormattingEnabled = true;
-            CheckList_Objectives.Location = new Point(3, 188);
+            CheckList_Objectives.Location = new Point(3, 399);
             CheckList_Objectives.Name = "CheckList_Objectives";
             CheckList_Objectives.Size = new Size(300, 364);
             CheckList_Objectives.TabIndex = 15;
@@ -357,7 +461,7 @@ namespace AHT_SaveFileEditor
             // Check_FileUsed
             // 
             Check_FileUsed.AutoSize = true;
-            Check_FileUsed.Location = new Point(3, 12);
+            Check_FileUsed.Location = new Point(72, 12);
             Check_FileUsed.Name = "Check_FileUsed";
             Check_FileUsed.Size = new Size(90, 19);
             Check_FileUsed.TabIndex = 0;
@@ -365,54 +469,11 @@ namespace AHT_SaveFileEditor
             Check_FileUsed.UseVisualStyleBackColor = true;
             Check_FileUsed.CheckedChanged += Check_FileUsed_CheckedChanged;
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(309, 165);
-            label9.Name = "label9";
-            label9.Size = new Size(65, 20);
-            label9.TabIndex = 20;
-            label9.Text = "Task List:";
-            // 
-            // Btn_ClearAllTasks
-            // 
-            Btn_ClearAllTasks.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_ClearAllTasks.Location = new Point(471, 558);
-            Btn_ClearAllTasks.Name = "Btn_ClearAllTasks";
-            Btn_ClearAllTasks.Size = new Size(75, 23);
-            Btn_ClearAllTasks.TabIndex = 21;
-            Btn_ClearAllTasks.Text = "Clear All";
-            Btn_ClearAllTasks.UseVisualStyleBackColor = false;
-            Btn_ClearAllTasks.Click += Btn_ClearAllTasks_Click;
-            // 
-            // Btn_FindAllTasks
-            // 
-            Btn_FindAllTasks.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_FindAllTasks.Location = new Point(309, 558);
-            Btn_FindAllTasks.Name = "Btn_FindAllTasks";
-            Btn_FindAllTasks.Size = new Size(75, 23);
-            Btn_FindAllTasks.TabIndex = 22;
-            Btn_FindAllTasks.Text = "Find All";
-            Btn_FindAllTasks.UseVisualStyleBackColor = false;
-            Btn_FindAllTasks.Click += Btn_FindAllTasks_Click;
-            // 
-            // Btn_DoAllTasks
-            // 
-            Btn_DoAllTasks.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_DoAllTasks.Location = new Point(390, 558);
-            Btn_DoAllTasks.Name = "Btn_DoAllTasks";
-            Btn_DoAllTasks.Size = new Size(75, 23);
-            Btn_DoAllTasks.TabIndex = 23;
-            Btn_DoAllTasks.Text = "Do All";
-            Btn_DoAllTasks.UseVisualStyleBackColor = false;
-            Btn_DoAllTasks.Click += Btn_DoAllTasks_Click;
-            // 
             // SaveSlotEditor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1426, 703);
+            ClientSize = new Size(1426, 880);
             Controls.Add(splitContainer1);
             Name = "SaveSlotEditor";
             ShowIcon = false;
@@ -466,5 +527,10 @@ namespace AHT_SaveFileEditor
         private Button Btn_DoAllTasks;
         private Button Btn_FindAllTasks;
         private Button Btn_ClearAllTasks;
+        private Label Lbl_SlotIndex;
+        private CheckedListBox CheckList_AbilityFlags;
+        private Label label10;
+        private Button Btn_ClearAllAbilityFlags;
+        private Button Btn_SetAllAbilityFlags;
     }
 }
