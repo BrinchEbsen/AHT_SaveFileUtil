@@ -1,9 +1,4 @@
 ﻿using AHT_SaveFileUtil.Save.Slot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileEditor.SlotEditor
 {
@@ -19,14 +14,16 @@ namespace AHT_SaveFileEditor.SlotEditor
 
     internal class CollectableStatsPanel : Panel
     {
-        private PlayerState playerState;
-        private CollectableStatsPanelType type;
+        private readonly PlayerState playerState;
+        private readonly CollectableStatsPanelType type;
 
-        private NumericUpDown? Num_1 = null;
-        private NumericUpDown? Num_2 = null;
-        private NumericUpDown? Num_3 = null;
-        private NumericUpDown? Num_4 = null;
+        //Numeric controls
+        private NumericUpDown? num_1 = null;
+        private NumericUpDown? num_2 = null;
+        private NumericUpDown? num_3 = null;
+        private NumericUpDown? num_4 = null;
 
+        //Positions for the controls+labels
         private static readonly int[] yPositions =
         [
             25,
@@ -35,8 +32,10 @@ namespace AHT_SaveFileEditor.SlotEditor
             100
         ];
 
+        //x-Offset for the numeric controls
         private static readonly int xOffset = 65;
 
+        //Width of the numeric controls
         private static readonly int numWidth = 65;
 
         private string TypeName => type switch
@@ -74,26 +73,25 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold),
             });
 
+            //Fire arrows is the special case
             if (type == CollectableStatsPanelType.FireArrows)
                 AddFireArrowStats();
             else
                 AddGenericStats();
 
-            if (Num_1 != null)
-                Num_1.ValueChanged += Num_1_ValueChanged;
-            if (Num_2 != null)
-                Num_2.ValueChanged += Num_2_ValueChanged;
-            if (Num_3 != null)
-                Num_3.ValueChanged += Num_3_ValueChanged;
-            if (Num_4 != null)
-                Num_4.ValueChanged += Num_4_ValueChanged;
+            //Add event methods
+            if (num_1 != null) num_1.ValueChanged += Num_1_ValueChanged;
+            if (num_2 != null) num_2.ValueChanged += Num_2_ValueChanged;
+            if (num_3 != null) num_3.ValueChanged += Num_3_ValueChanged;
+            if (num_4 != null) num_4.ValueChanged += Num_4_ValueChanged;
         }
 
-        public void AddGenericStats()
+        //Add controls for anything other than fire arrows
+        private void AddGenericStats()
         {
             var tally = TypeTally;
 
-            Num_1 = new NumericUpDown()
+            num_1 = new NumericUpDown()
             {
                 Maximum = sbyte.MaxValue,
                 Minimum = sbyte.MinValue,
@@ -102,7 +100,7 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Width = numWidth
             };
 
-            Num_2 = new NumericUpDown()
+            num_2 = new NumericUpDown()
             {
                 Maximum = sbyte.MaxValue,
                 Minimum = sbyte.MinValue,
@@ -111,7 +109,7 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Width = numWidth
             };
 
-            Num_3 = new NumericUpDown()
+            num_3 = new NumericUpDown()
             {
                 Maximum = sbyte.MaxValue,
                 Minimum = sbyte.MinValue,
@@ -120,7 +118,7 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Width = numWidth
             };
 
-            Num_4 = new NumericUpDown()
+            num_4 = new NumericUpDown()
             {
                 Maximum = sbyte.MaxValue,
                 Minimum = sbyte.MinValue,
@@ -129,7 +127,7 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Width = numWidth
             };
 
-            Controls.AddRange(Num_1, Num_2, Num_3, Num_4);
+            Controls.AddRange(num_1, num_2, num_3, num_4);
 
             Controls.AddRange(
             [
@@ -156,27 +154,28 @@ namespace AHT_SaveFileEditor.SlotEditor
             ]);
         }
 
-        public void AddFireArrowStats()
+        //Add controls for fire arrows
+        private void AddFireArrowStats()
         {
-            Num_1 = new NumericUpDown()
+            num_1 = new NumericUpDown()
             {
-                Maximum = sbyte.MaxValue,
-                Minimum = sbyte.MinValue,
+                Maximum = short.MaxValue,
+                Minimum = short.MinValue,
                 Value = playerState.FireArrows,
                 Location = new Point(xOffset, yPositions[0]),
                 Width = numWidth
             };
 
-            Num_2 = new NumericUpDown()
+            num_2 = new NumericUpDown()
             {
-                Maximum = sbyte.MaxValue,
-                Minimum = sbyte.MinValue,
+                Maximum = short.MaxValue,
+                Minimum = short.MinValue,
                 Value = playerState.FireArrowsMax,
                 Location = new Point(xOffset, yPositions[1]),
                 Width = numWidth
             };
 
-            Controls.AddRange(Num_1, Num_2);
+            Controls.AddRange(num_1, num_2);
 
             Controls.AddRange(
             [
@@ -193,25 +192,27 @@ namespace AHT_SaveFileEditor.SlotEditor
             ]);
         }
 
+        #region Numeric Controls Events
+
         private void Num_1_ValueChanged(object? sender, EventArgs e)
         {
             if (type == CollectableStatsPanelType.FireArrows)
-                playerState.FireArrows = (short)Num_1!.Value;
+                playerState.FireArrows = (short)num_1!.Value;
             else
             {
                 var tally = TypeTally;
-                tally.Amount = (sbyte)Num_1!.Value;
+                tally.Amount = (sbyte)num_1!.Value;
             }
         }
 
         private void Num_2_ValueChanged(object? sender, EventArgs e)
         {
             if (type == CollectableStatsPanelType.FireArrows)
-                playerState.FireArrowsMax = (short)Num_2!.Value;
+                playerState.FireArrowsMax = (short)num_2!.Value;
             else
             {
                 var tally = TypeTally;
-                tally.Max = (sbyte)Num_2!.Value;
+                tally.Max = (sbyte)num_2!.Value;
             }
         }
 
@@ -222,7 +223,7 @@ namespace AHT_SaveFileEditor.SlotEditor
             else
             {
                 var tally = TypeTally;
-                tally.Total = (sbyte)Num_3!.Value;
+                tally.Total = (sbyte)num_3!.Value;
             }
         }
 
@@ -233,8 +234,10 @@ namespace AHT_SaveFileEditor.SlotEditor
             else
             {
                 var tally = TypeTally;
-                tally.Magazines = (sbyte)Num_4!.Value;
+                tally.Magazines = (sbyte)num_4!.Value;
             }
         }
+
+        #endregion
     }
 }

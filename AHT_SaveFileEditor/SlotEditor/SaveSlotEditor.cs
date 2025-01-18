@@ -28,6 +28,11 @@ namespace AHT_SaveFileEditor
 
         private void SaveSlotEditor_Load(object sender, EventArgs e)
         {
+            InitializeControls();
+        }
+
+        private void InitializeControls()
+        {
             PopulateLevelsPanel();
             UpdateStartingLevelLabel();
 
@@ -50,10 +55,10 @@ namespace AHT_SaveFileEditor
 
             Check_FileUsed.Checked = Slot.IsUsed;
 
-            Num_Gems.Value = Slot.GameState.PlayerState.Gems;
-            Num_TotalGems.Value = Slot.GameState.PlayerState.TotalGems;
-
             var playerState = Slot.GameState.PlayerState;
+
+            Num_Gems.Value = playerState.Gems;
+            Num_TotalGems.Value = playerState.TotalGems;
 
             FlowPanel_PowerUps.Controls.AddRange([
                 new CollectableStatsPanel(playerState, CollectableStatsPanelType.LockPickers),
@@ -63,6 +68,23 @@ namespace AHT_SaveFileEditor
                 new CollectableStatsPanel(playerState, CollectableStatsPanelType.ElectricBombs),
                 new CollectableStatsPanel(playerState, CollectableStatsPanelType.FireArrows),
             ]);
+
+            Num_LightGems.Value = playerState.TotalLightGems;
+            Num_DarkGems.Value = playerState.TotalDarkGems;
+            Num_DragonEggs.Value = playerState.TotalDragonEggs;
+
+            Num_SgtByrdBombs.Value = playerState.SgtByrdBombs;
+            Num_SgtByrdMissiles.Value = playerState.SgtByrdMissiles;
+            Num_SparxBombs.Value = playerState.SparxSmartBombs;
+            Num_SparxMissiles.Value = playerState.SparxSeekers;
+            Num_BlinkBombs.Value = playerState.BlinkBombs;
+
+            Num_Supercharge.Value = (decimal)playerState.SuperchargeTimer;
+            Num_SuperchargeMax.Value = (decimal)playerState.SuperchargeTimerMax;
+            Num_Invincibility.Value = (decimal)playerState.InvincibleTimer;
+            Num_InvincibilityMax.Value = (decimal)playerState.InvincibleTimerMax;
+            Num_DoubleGem.Value = (decimal)playerState.DoubleGemTimer;
+            Num_DoubleGemMax.Value = (decimal)playerState.DoubleGemTimerMax;
         }
 
         private void Check_FileUsed_CheckedChanged(object sender, EventArgs e)
@@ -89,6 +111,13 @@ namespace AHT_SaveFileEditor
         private void UpdateCompletionPercentage()
         {
             Label_Completion.Text = $"{Slot.GameState.CompletionPercentage:0.00}%";
+            Lbl_CompletionCalc.Text = string.Format(
+                "= (Light Gems ({0}) + Dark Gems ({1}) + Dragon Eggs ({2}) + Final Boss Beaten ({3})) / 221 * 100",
+                Slot.GameState.PlayerState.TotalLightGems,
+                Slot.GameState.PlayerState.TotalDarkGems,
+                Slot.GameState.PlayerState.TotalDragonEggs,
+                Slot.GameState.GetObjective(EXHashCode.HT_Objective_Boss4_Beaten) ? 1 : 0
+                );
         }
 
         #region PlayerState Vars
@@ -396,5 +425,78 @@ namespace AHT_SaveFileEditor
                 );
         }
         #endregion
+
+        private void Num_LightGems_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.TotalLightGems = (sbyte)Num_LightGems.Value;
+            UpdateCompletionPercentage();
+        }
+
+        private void Num_DarkGems_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.TotalDarkGems = (sbyte)Num_DarkGems.Value;
+            UpdateCompletionPercentage();
+        }
+
+        private void Num_DragonEggs_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.TotalDragonEggs = (sbyte)Num_DragonEggs.Value;
+            UpdateCompletionPercentage();
+        }
+
+        private void Num_SgtByrdBombs_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SgtByrdBombs = (short)Num_SgtByrdBombs.Value;
+        }
+
+        private void Num_SgtByrdMissiles_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SgtByrdMissiles = (short)Num_SgtByrdMissiles.Value;
+        }
+
+        private void Num_SparxBombs_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SparxSmartBombs = (short)Num_SparxBombs.Value;
+        }
+
+        private void Num_SparxMissiles_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SparxSeekers = (short)Num_SparxMissiles.Value;
+        }
+
+        private void Num_BlinkBombs_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.BlinkBombs = (short)Num_BlinkBombs.Value;
+        }
+
+        private void Num_Supercharge_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SuperchargeTimer = (float)Num_Supercharge.Value;
+        }
+
+        private void Num_SuperchargeMax_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.SuperchargeTimerMax = (float)Num_SuperchargeMax.Value;
+        }
+
+        private void Num_Invincibility_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.InvincibleTimer = (float)Num_Invincibility.Value;
+        }
+
+        private void Num_InvincibilityMax_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.InvincibleTimerMax = (float)Num_InvincibilityMax.Value;
+        }
+
+        private void Num_DoubleGem_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.DoubleGemTimer = (float)Num_DoubleGem.Value;
+        }
+
+        private void Num_DoubleGemMax_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.DoubleGemTimerMax = (float)Num_DoubleGemMax.Value;
+        }
     }
 }

@@ -34,6 +34,39 @@ namespace AHT_SaveFileEditor
             Check_ShowUnused = new CheckBox();
             Check_ShowNonPreserving = new CheckBox();
             FlowPanel_Levels = new FlowLayoutPanel();
+            Lbl_CompletionCalc = new Label();
+            label30 = new Label();
+            label29 = new Label();
+            label28 = new Label();
+            Num_DoubleGemMax = new NumericUpDown();
+            Num_DoubleGem = new NumericUpDown();
+            Num_Supercharge = new NumericUpDown();
+            Num_SuperchargeMax = new NumericUpDown();
+            Num_Invincibility = new NumericUpDown();
+            Num_InvincibilityMax = new NumericUpDown();
+            label27 = new Label();
+            label26 = new Label();
+            label25 = new Label();
+            label24 = new Label();
+            label23 = new Label();
+            label22 = new Label();
+            label21 = new Label();
+            Num_BlinkBombs = new NumericUpDown();
+            Num_SgtByrdBombs = new NumericUpDown();
+            Num_SgtByrdMissiles = new NumericUpDown();
+            Num_SparxBombs = new NumericUpDown();
+            Num_SparxMissiles = new NumericUpDown();
+            label20 = new Label();
+            label19 = new Label();
+            label18 = new Label();
+            label17 = new Label();
+            label16 = new Label();
+            label15 = new Label();
+            Num_DragonEggs = new NumericUpDown();
+            Num_DarkGems = new NumericUpDown();
+            label14 = new Label();
+            label13 = new Label();
+            Num_LightGems = new NumericUpDown();
             FlowPanel_PowerUps = new FlowLayoutPanel();
             label12 = new Label();
             Num_TotalGems = new NumericUpDown();
@@ -76,6 +109,20 @@ namespace AHT_SaveFileEditor
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Num_DoubleGemMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DoubleGem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_Supercharge).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SuperchargeMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_Invincibility).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_InvincibilityMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_BlinkBombs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SgtByrdBombs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SgtByrdMissiles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SparxBombs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SparxMissiles).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGems).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_TotalGems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_Gems).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeSeconds).BeginInit();
@@ -97,6 +144,39 @@ namespace AHT_SaveFileEditor
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(Lbl_CompletionCalc);
+            splitContainer1.Panel2.Controls.Add(label30);
+            splitContainer1.Panel2.Controls.Add(label29);
+            splitContainer1.Panel2.Controls.Add(label28);
+            splitContainer1.Panel2.Controls.Add(Num_DoubleGemMax);
+            splitContainer1.Panel2.Controls.Add(Num_DoubleGem);
+            splitContainer1.Panel2.Controls.Add(Num_Supercharge);
+            splitContainer1.Panel2.Controls.Add(Num_SuperchargeMax);
+            splitContainer1.Panel2.Controls.Add(Num_Invincibility);
+            splitContainer1.Panel2.Controls.Add(Num_InvincibilityMax);
+            splitContainer1.Panel2.Controls.Add(label27);
+            splitContainer1.Panel2.Controls.Add(label26);
+            splitContainer1.Panel2.Controls.Add(label25);
+            splitContainer1.Panel2.Controls.Add(label24);
+            splitContainer1.Panel2.Controls.Add(label23);
+            splitContainer1.Panel2.Controls.Add(label22);
+            splitContainer1.Panel2.Controls.Add(label21);
+            splitContainer1.Panel2.Controls.Add(Num_BlinkBombs);
+            splitContainer1.Panel2.Controls.Add(Num_SgtByrdBombs);
+            splitContainer1.Panel2.Controls.Add(Num_SgtByrdMissiles);
+            splitContainer1.Panel2.Controls.Add(Num_SparxBombs);
+            splitContainer1.Panel2.Controls.Add(Num_SparxMissiles);
+            splitContainer1.Panel2.Controls.Add(label20);
+            splitContainer1.Panel2.Controls.Add(label19);
+            splitContainer1.Panel2.Controls.Add(label18);
+            splitContainer1.Panel2.Controls.Add(label17);
+            splitContainer1.Panel2.Controls.Add(label16);
+            splitContainer1.Panel2.Controls.Add(label15);
+            splitContainer1.Panel2.Controls.Add(Num_DragonEggs);
+            splitContainer1.Panel2.Controls.Add(Num_DarkGems);
+            splitContainer1.Panel2.Controls.Add(label14);
+            splitContainer1.Panel2.Controls.Add(label13);
+            splitContainer1.Panel2.Controls.Add(Num_LightGems);
             splitContainer1.Panel2.Controls.Add(FlowPanel_PowerUps);
             splitContainer1.Panel2.Controls.Add(label12);
             splitContainer1.Panel2.Controls.Add(Num_TotalGems);
@@ -131,7 +211,7 @@ namespace AHT_SaveFileEditor
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(Label_StartingLevel);
             splitContainer1.Panel2.Controls.Add(Check_FileUsed);
-            splitContainer1.Size = new Size(1324, 880);
+            splitContainer1.Size = new Size(1243, 917);
             splitContainer1.SplitterDistance = 316;
             splitContainer1.TabIndex = 0;
             // 
@@ -152,7 +232,7 @@ namespace AHT_SaveFileEditor
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(FlowPanel_Levels);
-            splitContainer2.Size = new Size(316, 880);
+            splitContainer2.Size = new Size(316, 917);
             splitContainer2.SplitterDistance = 64;
             splitContainer2.TabIndex = 0;
             // 
@@ -185,13 +265,346 @@ namespace AHT_SaveFileEditor
             FlowPanel_Levels.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Levels.Location = new Point(0, 0);
             FlowPanel_Levels.Name = "FlowPanel_Levels";
-            FlowPanel_Levels.Size = new Size(316, 812);
+            FlowPanel_Levels.Size = new Size(316, 849);
             FlowPanel_Levels.TabIndex = 0;
             FlowPanel_Levels.WrapContents = false;
             // 
+            // Lbl_CompletionCalc
+            // 
+            Lbl_CompletionCalc.AutoSize = true;
+            Lbl_CompletionCalc.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            Lbl_CompletionCalc.ForeColor = Color.FromArgb(64, 64, 64);
+            Lbl_CompletionCalc.Location = new Point(150, 120);
+            Lbl_CompletionCalc.Name = "Lbl_CompletionCalc";
+            Lbl_CompletionCalc.Size = new Size(34, 15);
+            Lbl_CompletionCalc.TabIndex = 66;
+            Lbl_CompletionCalc.Text = "temp";
+            // 
+            // label30
+            // 
+            label30.AutoSize = true;
+            label30.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label30.Location = new Point(485, 153);
+            label30.Name = "label30";
+            label30.Size = new Size(108, 15);
+            label30.TabIndex = 65;
+            label30.Text = "Timers (in frames)";
+            // 
+            // label29
+            // 
+            label29.AutoSize = true;
+            label29.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label29.Location = new Point(235, 153);
+            label29.Name = "label29";
+            label29.Size = new Size(133, 15);
+            label29.TabIndex = 64;
+            label29.Text = "MiniGame Collectables";
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label28.Location = new Point(2, 153);
+            label28.Name = "label28";
+            label28.Size = new Size(120, 15);
+            label28.TabIndex = 63;
+            label28.Text = "Generic Collectables";
+            // 
+            // Num_DoubleGemMax
+            // 
+            Num_DoubleGemMax.Location = new Point(619, 315);
+            Num_DoubleGemMax.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_DoubleGemMax.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_DoubleGemMax.Name = "Num_DoubleGemMax";
+            Num_DoubleGemMax.Size = new Size(86, 23);
+            Num_DoubleGemMax.TabIndex = 62;
+            Num_DoubleGemMax.ValueChanged += Num_DoubleGemMax_ValueChanged;
+            // 
+            // Num_DoubleGem
+            // 
+            Num_DoubleGem.Location = new Point(619, 286);
+            Num_DoubleGem.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_DoubleGem.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_DoubleGem.Name = "Num_DoubleGem";
+            Num_DoubleGem.Size = new Size(86, 23);
+            Num_DoubleGem.TabIndex = 61;
+            Num_DoubleGem.ValueChanged += Num_DoubleGem_ValueChanged;
+            // 
+            // Num_Supercharge
+            // 
+            Num_Supercharge.Location = new Point(619, 170);
+            Num_Supercharge.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_Supercharge.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_Supercharge.Name = "Num_Supercharge";
+            Num_Supercharge.Size = new Size(86, 23);
+            Num_Supercharge.TabIndex = 60;
+            Num_Supercharge.ValueChanged += Num_Supercharge_ValueChanged;
+            // 
+            // Num_SuperchargeMax
+            // 
+            Num_SuperchargeMax.Location = new Point(619, 199);
+            Num_SuperchargeMax.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_SuperchargeMax.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_SuperchargeMax.Name = "Num_SuperchargeMax";
+            Num_SuperchargeMax.Size = new Size(86, 23);
+            Num_SuperchargeMax.TabIndex = 59;
+            Num_SuperchargeMax.ValueChanged += Num_SuperchargeMax_ValueChanged;
+            // 
+            // Num_Invincibility
+            // 
+            Num_Invincibility.Location = new Point(619, 228);
+            Num_Invincibility.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_Invincibility.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_Invincibility.Name = "Num_Invincibility";
+            Num_Invincibility.Size = new Size(86, 23);
+            Num_Invincibility.TabIndex = 58;
+            Num_Invincibility.ValueChanged += Num_Invincibility_ValueChanged;
+            // 
+            // Num_InvincibilityMax
+            // 
+            Num_InvincibilityMax.Location = new Point(619, 257);
+            Num_InvincibilityMax.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            Num_InvincibilityMax.Minimum = new decimal(new int[] { 9999999, 0, 0, int.MinValue });
+            Num_InvincibilityMax.Name = "Num_InvincibilityMax";
+            Num_InvincibilityMax.Size = new Size(86, 23);
+            Num_InvincibilityMax.TabIndex = 57;
+            Num_InvincibilityMax.ValueChanged += Num_InvincibilityMax_ValueChanged;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label27.Location = new Point(485, 318);
+            label27.Name = "label27";
+            label27.Size = new Size(128, 20);
+            label27.TabIndex = 56;
+            label27.Text = "Double Gem Max:";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label26.Location = new Point(485, 289);
+            label26.Name = "label26";
+            label26.Size = new Size(96, 20);
+            label26.TabIndex = 55;
+            label26.Text = "Double Gem:";
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label25.Location = new Point(485, 260);
+            label25.Name = "label25";
+            label25.Size = new Size(119, 20);
+            label25.TabIndex = 54;
+            label25.Text = "Invincibility Max:";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label24.Location = new Point(485, 231);
+            label24.Name = "label24";
+            label24.Size = new Size(87, 20);
+            label24.TabIndex = 53;
+            label24.Text = "Invincibility:";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label23.Location = new Point(485, 202);
+            label23.Name = "label23";
+            label23.Size = new Size(127, 20);
+            label23.TabIndex = 52;
+            label23.Text = "Supercharge Max:";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label22.Location = new Point(485, 173);
+            label22.Name = "label22";
+            label22.Size = new Size(95, 20);
+            label22.TabIndex = 51;
+            label22.Text = "Supercharge:";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label21.ForeColor = Color.Gray;
+            label21.Location = new Point(267, 312);
+            label21.Name = "label21";
+            label21.Size = new Size(190, 26);
+            label21.TabIndex = 50;
+            label21.Text = "(Note: These are usually overwritten\r\nwhen starting a minigame)";
+            label21.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // Num_BlinkBombs
+            // 
+            Num_BlinkBombs.Location = new Point(393, 286);
+            Num_BlinkBombs.Maximum = new decimal(new int[] { 32767, 0, 0, 0 });
+            Num_BlinkBombs.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
+            Num_BlinkBombs.Name = "Num_BlinkBombs";
+            Num_BlinkBombs.Size = new Size(86, 23);
+            Num_BlinkBombs.TabIndex = 49;
+            Num_BlinkBombs.ValueChanged += Num_BlinkBombs_ValueChanged;
+            // 
+            // Num_SgtByrdBombs
+            // 
+            Num_SgtByrdBombs.Location = new Point(393, 170);
+            Num_SgtByrdBombs.Maximum = new decimal(new int[] { 32767, 0, 0, 0 });
+            Num_SgtByrdBombs.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
+            Num_SgtByrdBombs.Name = "Num_SgtByrdBombs";
+            Num_SgtByrdBombs.Size = new Size(86, 23);
+            Num_SgtByrdBombs.TabIndex = 48;
+            Num_SgtByrdBombs.ValueChanged += Num_SgtByrdBombs_ValueChanged;
+            // 
+            // Num_SgtByrdMissiles
+            // 
+            Num_SgtByrdMissiles.Location = new Point(393, 199);
+            Num_SgtByrdMissiles.Maximum = new decimal(new int[] { 32767, 0, 0, 0 });
+            Num_SgtByrdMissiles.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
+            Num_SgtByrdMissiles.Name = "Num_SgtByrdMissiles";
+            Num_SgtByrdMissiles.Size = new Size(86, 23);
+            Num_SgtByrdMissiles.TabIndex = 47;
+            Num_SgtByrdMissiles.ValueChanged += Num_SgtByrdMissiles_ValueChanged;
+            // 
+            // Num_SparxBombs
+            // 
+            Num_SparxBombs.Location = new Point(393, 228);
+            Num_SparxBombs.Maximum = new decimal(new int[] { 32767, 0, 0, 0 });
+            Num_SparxBombs.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
+            Num_SparxBombs.Name = "Num_SparxBombs";
+            Num_SparxBombs.Size = new Size(86, 23);
+            Num_SparxBombs.TabIndex = 46;
+            Num_SparxBombs.ValueChanged += Num_SparxBombs_ValueChanged;
+            // 
+            // Num_SparxMissiles
+            // 
+            Num_SparxMissiles.Location = new Point(393, 257);
+            Num_SparxMissiles.Maximum = new decimal(new int[] { 32767, 0, 0, 0 });
+            Num_SparxMissiles.Minimum = new decimal(new int[] { 32768, 0, 0, int.MinValue });
+            Num_SparxMissiles.Name = "Num_SparxMissiles";
+            Num_SparxMissiles.Size = new Size(86, 23);
+            Num_SparxMissiles.TabIndex = 45;
+            Num_SparxMissiles.ValueChanged += Num_SparxMissiles_ValueChanged;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.Location = new Point(235, 289);
+            label20.Name = "label20";
+            label20.Size = new Size(94, 20);
+            label20.TabIndex = 44;
+            label20.Text = "Blink Bombs:";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label19.Location = new Point(235, 260);
+            label19.Name = "label19";
+            label19.Size = new Size(152, 20);
+            label19.TabIndex = 43;
+            label19.Text = "Sparx Seeker Missiles:";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label18.Location = new Point(235, 231);
+            label18.Name = "label18";
+            label18.Size = new Size(142, 20);
+            label18.TabIndex = 42;
+            label18.Text = "Sparx Smart Bombs:";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.Location = new Point(235, 202);
+            label17.Name = "label17";
+            label17.Size = new Size(126, 20);
+            label17.TabIndex = 41;
+            label17.Text = "Sgt. Byrd Missiles:";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label16.Location = new Point(235, 173);
+            label16.Name = "label16";
+            label16.Size = new Size(121, 20);
+            label16.TabIndex = 40;
+            label16.Text = "Sgt. Byrd Bombs:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label15.Location = new Point(2, 289);
+            label15.Name = "label15";
+            label15.Size = new Size(135, 20);
+            label15.TabIndex = 39;
+            label15.Text = "Total Dragon Eggs:";
+            // 
+            // Num_DragonEggs
+            // 
+            Num_DragonEggs.Location = new Point(143, 286);
+            Num_DragonEggs.Maximum = new decimal(new int[] { 127, 0, 0, 0 });
+            Num_DragonEggs.Minimum = new decimal(new int[] { 128, 0, 0, int.MinValue });
+            Num_DragonEggs.Name = "Num_DragonEggs";
+            Num_DragonEggs.Size = new Size(86, 23);
+            Num_DragonEggs.TabIndex = 38;
+            Num_DragonEggs.ValueChanged += Num_DragonEggs_ValueChanged;
+            // 
+            // Num_DarkGems
+            // 
+            Num_DarkGems.Location = new Point(143, 257);
+            Num_DarkGems.Maximum = new decimal(new int[] { 127, 0, 0, 0 });
+            Num_DarkGems.Minimum = new decimal(new int[] { 128, 0, 0, int.MinValue });
+            Num_DarkGems.Name = "Num_DarkGems";
+            Num_DarkGems.Size = new Size(86, 23);
+            Num_DarkGems.TabIndex = 37;
+            Num_DarkGems.ValueChanged += Num_DarkGems_ValueChanged;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.Location = new Point(2, 260);
+            label14.Name = "label14";
+            label14.Size = new Size(121, 20);
+            label14.TabIndex = 36;
+            label14.Text = "Total Dark Gems:";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.Location = new Point(2, 231);
+            label13.Name = "label13";
+            label13.Size = new Size(123, 20);
+            label13.TabIndex = 35;
+            label13.Text = "Total Light Gems:";
+            // 
+            // Num_LightGems
+            // 
+            Num_LightGems.Location = new Point(143, 228);
+            Num_LightGems.Maximum = new decimal(new int[] { 127, 0, 0, 0 });
+            Num_LightGems.Minimum = new decimal(new int[] { 128, 0, 0, int.MinValue });
+            Num_LightGems.Name = "Num_LightGems";
+            Num_LightGems.Size = new Size(86, 23);
+            Num_LightGems.TabIndex = 34;
+            Num_LightGems.ValueChanged += Num_LightGems_ValueChanged;
+            // 
             // FlowPanel_PowerUps
             // 
-            FlowPanel_PowerUps.Location = new Point(3, 204);
+            FlowPanel_PowerUps.Location = new Point(3, 363);
             FlowPanel_PowerUps.Name = "FlowPanel_PowerUps";
             FlowPanel_PowerUps.Size = new Size(912, 130);
             FlowPanel_PowerUps.TabIndex = 33;
@@ -201,7 +614,7 @@ namespace AHT_SaveFileEditor
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(3, 178);
+            label12.Location = new Point(2, 202);
             label12.Name = "label12";
             label12.Size = new Size(86, 20);
             label12.TabIndex = 32;
@@ -209,21 +622,21 @@ namespace AHT_SaveFileEditor
             // 
             // Num_TotalGems
             // 
-            Num_TotalGems.Location = new Point(95, 175);
+            Num_TotalGems.Location = new Point(143, 199);
             Num_TotalGems.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             Num_TotalGems.Minimum = new decimal(new int[] { int.MinValue, 0, 0, int.MinValue });
             Num_TotalGems.Name = "Num_TotalGems";
-            Num_TotalGems.Size = new Size(120, 23);
+            Num_TotalGems.Size = new Size(86, 23);
             Num_TotalGems.TabIndex = 31;
             Num_TotalGems.ValueChanged += Num_TotalGems_ValueChanged;
             // 
             // Num_Gems
             // 
-            Num_Gems.Location = new Point(95, 146);
+            Num_Gems.Location = new Point(143, 170);
             Num_Gems.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             Num_Gems.Minimum = new decimal(new int[] { int.MinValue, 0, 0, int.MinValue });
             Num_Gems.Name = "Num_Gems";
-            Num_Gems.Size = new Size(120, 23);
+            Num_Gems.Size = new Size(86, 23);
             Num_Gems.TabIndex = 30;
             Num_Gems.ValueChanged += Num_Gems_ValueChanged;
             // 
@@ -231,7 +644,7 @@ namespace AHT_SaveFileEditor
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(3, 149);
+            label11.Location = new Point(2, 173);
             label11.Name = "label11";
             label11.Size = new Size(49, 20);
             label11.TabIndex = 29;
@@ -240,7 +653,7 @@ namespace AHT_SaveFileEditor
             // Btn_ClearAllAbilityFlags
             // 
             Btn_ClearAllAbilityFlags.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_ClearAllAbilityFlags.Location = new Point(695, 730);
+            Btn_ClearAllAbilityFlags.Location = new Point(695, 889);
             Btn_ClearAllAbilityFlags.Name = "Btn_ClearAllAbilityFlags";
             Btn_ClearAllAbilityFlags.Size = new Size(75, 23);
             Btn_ClearAllAbilityFlags.TabIndex = 28;
@@ -251,7 +664,7 @@ namespace AHT_SaveFileEditor
             // Btn_SetAllAbilityFlags
             // 
             Btn_SetAllAbilityFlags.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_SetAllAbilityFlags.Location = new Point(614, 730);
+            Btn_SetAllAbilityFlags.Location = new Point(614, 889);
             Btn_SetAllAbilityFlags.Name = "Btn_SetAllAbilityFlags";
             Btn_SetAllAbilityFlags.Size = new Size(75, 23);
             Btn_SetAllAbilityFlags.TabIndex = 27;
@@ -263,7 +676,7 @@ namespace AHT_SaveFileEditor
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(614, 337);
+            label10.Location = new Point(614, 496);
             label10.Name = "label10";
             label10.Size = new Size(93, 20);
             label10.TabIndex = 26;
@@ -272,7 +685,7 @@ namespace AHT_SaveFileEditor
             // CheckList_AbilityFlags
             // 
             CheckList_AbilityFlags.FormattingEnabled = true;
-            CheckList_AbilityFlags.Location = new Point(614, 360);
+            CheckList_AbilityFlags.Location = new Point(614, 519);
             CheckList_AbilityFlags.Name = "CheckList_AbilityFlags";
             CheckList_AbilityFlags.Size = new Size(300, 364);
             CheckList_AbilityFlags.TabIndex = 25;
@@ -291,7 +704,7 @@ namespace AHT_SaveFileEditor
             // Btn_DoAllTasks
             // 
             Btn_DoAllTasks.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_DoAllTasks.Location = new Point(389, 730);
+            Btn_DoAllTasks.Location = new Point(389, 889);
             Btn_DoAllTasks.Name = "Btn_DoAllTasks";
             Btn_DoAllTasks.Size = new Size(75, 23);
             Btn_DoAllTasks.TabIndex = 23;
@@ -302,7 +715,7 @@ namespace AHT_SaveFileEditor
             // Btn_FindAllTasks
             // 
             Btn_FindAllTasks.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_FindAllTasks.Location = new Point(308, 730);
+            Btn_FindAllTasks.Location = new Point(308, 889);
             Btn_FindAllTasks.Name = "Btn_FindAllTasks";
             Btn_FindAllTasks.Size = new Size(75, 23);
             Btn_FindAllTasks.TabIndex = 22;
@@ -313,7 +726,7 @@ namespace AHT_SaveFileEditor
             // Btn_ClearAllTasks
             // 
             Btn_ClearAllTasks.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_ClearAllTasks.Location = new Point(470, 730);
+            Btn_ClearAllTasks.Location = new Point(470, 889);
             Btn_ClearAllTasks.Name = "Btn_ClearAllTasks";
             Btn_ClearAllTasks.Size = new Size(75, 23);
             Btn_ClearAllTasks.TabIndex = 21;
@@ -325,7 +738,7 @@ namespace AHT_SaveFileEditor
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(308, 337);
+            label9.Location = new Point(308, 496);
             label9.Name = "label9";
             label9.Size = new Size(65, 20);
             label9.TabIndex = 20;
@@ -338,7 +751,7 @@ namespace AHT_SaveFileEditor
             FlowPanel_Tasks.BorderStyle = BorderStyle.FixedSingle;
             FlowPanel_Tasks.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Tasks.ForeColor = SystemColors.ControlText;
-            FlowPanel_Tasks.Location = new Point(308, 360);
+            FlowPanel_Tasks.Location = new Point(308, 519);
             FlowPanel_Tasks.Name = "FlowPanel_Tasks";
             FlowPanel_Tasks.Size = new Size(300, 364);
             FlowPanel_Tasks.TabIndex = 19;
@@ -347,7 +760,7 @@ namespace AHT_SaveFileEditor
             // Btn_ClearAllObjectives
             // 
             Btn_ClearAllObjectives.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_ClearAllObjectives.Location = new Point(83, 730);
+            Btn_ClearAllObjectives.Location = new Point(83, 889);
             Btn_ClearAllObjectives.Name = "Btn_ClearAllObjectives";
             Btn_ClearAllObjectives.Size = new Size(75, 23);
             Btn_ClearAllObjectives.TabIndex = 18;
@@ -358,7 +771,7 @@ namespace AHT_SaveFileEditor
             // Btn_SetAllObjectives
             // 
             Btn_SetAllObjectives.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_SetAllObjectives.Location = new Point(2, 730);
+            Btn_SetAllObjectives.Location = new Point(2, 889);
             Btn_SetAllObjectives.Name = "Btn_SetAllObjectives";
             Btn_SetAllObjectives.Size = new Size(75, 23);
             Btn_SetAllObjectives.TabIndex = 17;
@@ -370,7 +783,7 @@ namespace AHT_SaveFileEditor
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(2, 337);
+            label8.Location = new Point(2, 496);
             label8.Name = "label8";
             label8.Size = new Size(81, 20);
             label8.TabIndex = 16;
@@ -379,7 +792,7 @@ namespace AHT_SaveFileEditor
             // CheckList_Objectives
             // 
             CheckList_Objectives.FormattingEnabled = true;
-            CheckList_Objectives.Location = new Point(2, 360);
+            CheckList_Objectives.Location = new Point(2, 519);
             CheckList_Objectives.Name = "CheckList_Objectives";
             CheckList_Objectives.Size = new Size(300, 364);
             CheckList_Objectives.TabIndex = 15;
@@ -533,7 +946,7 @@ namespace AHT_SaveFileEditor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1324, 880);
+            ClientSize = new Size(1243, 917);
             Controls.Add(splitContainer1);
             Name = "SaveSlotEditor";
             ShowIcon = false;
@@ -550,6 +963,20 @@ namespace AHT_SaveFileEditor
             splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Num_DoubleGemMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DoubleGem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_Supercharge).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SuperchargeMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_Invincibility).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_InvincibilityMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_BlinkBombs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SgtByrdBombs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SgtByrdMissiles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SparxBombs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_SparxMissiles).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGems).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGems).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_TotalGems).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_Gems).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeSeconds).EndInit();
@@ -599,5 +1026,38 @@ namespace AHT_SaveFileEditor
         private Label label12;
         private NumericUpDown Num_TotalGems;
         private FlowLayoutPanel FlowPanel_PowerUps;
+        private Label label15;
+        private NumericUpDown Num_DragonEggs;
+        private NumericUpDown Num_DarkGems;
+        private Label label14;
+        private Label label13;
+        private NumericUpDown Num_LightGems;
+        private Label label16;
+        private Label label17;
+        private Label label19;
+        private Label label18;
+        private Label label20;
+        private NumericUpDown Num_BlinkBombs;
+        private NumericUpDown Num_SgtByrdBombs;
+        private NumericUpDown Num_SgtByrdMissiles;
+        private NumericUpDown Num_SparxBombs;
+        private NumericUpDown Num_SparxMissiles;
+        private Label label21;
+        private Label label22;
+        private NumericUpDown Num_DoubleGem;
+        private NumericUpDown Num_Supercharge;
+        private NumericUpDown Num_SuperchargeMax;
+        private NumericUpDown Num_Invincibility;
+        private NumericUpDown Num_InvincibilityMax;
+        private Label label27;
+        private Label label26;
+        private Label label25;
+        private Label label24;
+        private Label label23;
+        private NumericUpDown Num_DoubleGemMax;
+        private Label label30;
+        private Label label29;
+        private Label label28;
+        private Label Lbl_CompletionCalc;
     }
 }

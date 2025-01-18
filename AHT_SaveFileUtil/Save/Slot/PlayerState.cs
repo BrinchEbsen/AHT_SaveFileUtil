@@ -391,7 +391,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             { AF_MASK_BUTTERFLY_JAR, "Butterfly Jar" }
         };
         #endregion
-
+        
         #region Ability Flags Properties
         /// <summary>
         /// Gets or sets whether Spyro can double jump/horn dive.
@@ -535,95 +535,95 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <summary>
         /// The amount of time underwater before Spyro runs out of oxygen (unused in the final game code).
         /// </summary>
-        public float WaterDiveTimer { get; private set; }
+        public float WaterDiveTimer { get; set; }
 
         /// <summary>
         /// Amount of supercharge time left.
         /// </summary>
-        public float SuperchargeTimer { get; private set; }
+        public float SuperchargeTimer { get; set; }
 
         /// <summary>
         /// Current maximum for the supercharge gauge.
         /// </summary>
-        public float SuperchargeTimerMax { get; private set; }
+        public float SuperchargeTimerMax { get; set; }
 
         /// <summary>
         /// Amount of invincibility left.
         /// </summary>
-        public float InvincibleTimer { get; private set; }
+        public float InvincibleTimer { get; set; }
 
         /// <summary>
         /// Current maximum for the invincibility gauge.
         /// </summary>
-        public float InvincibleTimerMax { get; private set; }
+        public float InvincibleTimerMax { get; set; }
 
         /// <summary>
         /// The amount of time left of the double gem powerup.
         /// </summary>
-        public float DoubleGemTimer { get; private set; }
+        public float DoubleGemTimer { get; set; }
 
         /// <summary>
         /// The upper limit of the double gem powerup duration (usually 2 minutes/120 seconds).
         /// </summary>
-        public float DoubleGemTimerMax { get; private set; }
+        public float DoubleGemTimerMax { get; set; }
         #endregion
 
         #region MiniGame Characters
         /// <summary>
         /// The amount of Sgt. Byrd boost fuel left.
         /// </summary>
-        public float SgtByrdFuel { get; private set; }
+        public float SgtByrdFuel { get; set; }
 
         /// <summary>
         /// The amount of Sgt. Byrd's bombs left.
         /// Not shown to the player and set to 9999 when starting his minigame.
         /// </summary>
-        public short SgtByrdBombs { get; private set; }
+        public short SgtByrdBombs { get; set; }
 
         /// <summary>
         /// The amount of Sgt. Byrd's missiles left.
         /// Not shown to the player and set to 9999 when starting his minigame.
         /// </summary>
-        public short SgtByrdMissiles { get; private set; }
+        public short SgtByrdMissiles { get; set; }
 
         /// <summary>
         /// The amount of Sparx smart bombs left.
         /// Set to a predetermined value when starting his minigame.
         /// </summary>
-        public short SparxSmartBombs { get; private set; }
+        public short SparxSmartBombs { get; set; }
 
         /// <summary>
         /// The amount of Sparx seeker missiles left.
         /// Set to a predetermined value when starting his minigame.
         /// </summary>
-        public short SparxSeekers { get; private set; }
+        public short SparxSeekers { get; set; }
 
         /// <summary>
         /// The amount of Blink bombs left.
         /// Set to a predetermined value when starting his minigame.
         /// </summary>
-        public short BlinkBombs { get; private set; }
+        public short BlinkBombs { get; set; }
         #endregion
 
         /// <summary>
         /// Total amount of light gems collected.
         /// </summary>
-        public byte TotalLightGems { get; private set; }
+        public sbyte TotalLightGems { get; set; }
 
         /// <summary>
         /// Total amount of Dark Gems broken.
         /// </summary>
-        public byte TotalDarkGems { get; private set; }
+        public sbyte TotalDarkGems { get; set; }
 
         /// <summary>
         /// Total amount of Dragon Eggs collected.
         /// </summary>
-        public byte TotalDragonEggs { get; private set; }
+        public sbyte TotalDragonEggs { get; set; }
 
         /// <summary>
         /// Unknown field.
         /// </summary>
-        public byte UNK_0 { get; private set; }
+        public sbyte UNK_0 { get; private set; }
 
         /// <summary>
         /// The setup information for the player.
@@ -699,13 +699,13 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             state.BlinkBombs = reader.ReadInt16(bigEndian);
 
-            state.TotalLightGems = reader.ReadByte();
+            state.TotalLightGems = reader.ReadSByte();
 
-            state.TotalDarkGems = reader.ReadByte();
+            state.TotalDarkGems = reader.ReadSByte();
 
-            state.TotalDragonEggs = reader.ReadByte();
+            state.TotalDragonEggs = reader.ReadSByte();
 
-            state.UNK_0 = reader.ReadByte();
+            state.UNK_0 = reader.ReadSByte();
 
             reader.BaseStream.Seek(6, SeekOrigin.Current);
 
