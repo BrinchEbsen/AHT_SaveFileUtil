@@ -49,6 +49,20 @@ namespace AHT_SaveFileEditor
             PopulateAbilityFlagsCheckList();
 
             Check_FileUsed.Checked = Slot.IsUsed;
+
+            Num_Gems.Value = Slot.GameState.PlayerState.Gems;
+            Num_TotalGems.Value = Slot.GameState.PlayerState.TotalGems;
+
+            var playerState = Slot.GameState.PlayerState;
+
+            FlowPanel_PowerUps.Controls.AddRange([
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.LockPickers),
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.FireBombs),
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.IceBombs),
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.WaterBombs),
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.ElectricBombs),
+                new CollectableStatsPanel(playerState, CollectableStatsPanelType.FireArrows),
+            ]);
         }
 
         private void Check_FileUsed_CheckedChanged(object sender, EventArgs e)
@@ -76,6 +90,18 @@ namespace AHT_SaveFileEditor
         {
             Label_Completion.Text = $"{Slot.GameState.CompletionPercentage:0.00}%";
         }
+
+        #region PlayerState Vars
+        private void Num_Gems_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.Gems = (int)Num_Gems.Value;
+        }
+
+        private void Num_TotalGems_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.TotalGems = (int)Num_TotalGems.Value;
+        }
+        #endregion
 
         #region Objectives
         private void InitializeObjectivesMapping()

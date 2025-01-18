@@ -32,7 +32,7 @@ namespace AHT_SaveFileEditor
                 Size = new Size(Width, 200);
                 BackColor = Color.LightBlue;
 
-                AddLabel($"Started: {slot.GameState.StartTime.ToString()}");
+                AddLabel($"Started: {slot.GameState.StartTime}");
                 AddLabel($"Played: {slot.GameState.PlayTimerString}");
                 AddLabel($"Dark Gems: {slot.GameState.PlayerState.TotalDarkGems}");
                 AddLabel($"Light Gems: {slot.GameState.PlayerState.TotalLightGems}");

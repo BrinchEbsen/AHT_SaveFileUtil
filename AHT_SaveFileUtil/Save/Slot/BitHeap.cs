@@ -171,12 +171,10 @@ namespace AHT_SaveFileUtil.Save.Slot
                 throw new ArgumentException(
                     $"{nameof(readAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 
-            if (writeBit < 0)
-                throw new ArgumentException($"Parameter {nameof(writeBit)} cannot be negative.");
+            ArgumentOutOfRangeException.ThrowIfLessThan(writeBit, 0);
 
-            if (writeBit > 7)
-                throw new ArgumentOutOfRangeException(nameof(writeBit));
-            
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(writeBit, 7);
+
             /*
              * PRE:
              * - bitCount is a positive non-zero integer.
@@ -247,11 +245,9 @@ namespace AHT_SaveFileUtil.Save.Slot
                 throw new ArgumentException(
                     $"{nameof(writeAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 
-            if (readBit < 0)
-                throw new ArgumentException($"Parameter {nameof(readBit)} cannot be negative.");
+            ArgumentOutOfRangeException.ThrowIfLessThan(readBit, 0);
 
-            if (readBit > 7)
-                throw new ArgumentOutOfRangeException(nameof(readBit));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(readBit, 7);
 
             //Check that there are enough bytes in the buffer to read from.
             if (GetNumRequiredBytes(bitCount + readBit) > buffer.Length)
@@ -309,6 +305,45 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
+        /// Allocate a range of bits on the bitheap.
+        /// </summary>
+        /// <param name="bitCount">Number of bits to allocate.</param>
+        /// <returns>The address at the start of the allocated range.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        public int Allocate(int bitCount)
+        {
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(bitCount, 0);
+
+            if ((NumBitsUsed + bitCount) > BITHEAP_LENGTH)
+                throw new OverflowException(
+                    $"Cannot allocate {bitCount} bits, as there are only " +
+                    $"{BITHEAP_LENGTH - NumBitsUsed} bits free.");
+
+            //Get the address to allocate from
+            int writeAddress = NumBitsUsed;
+
+            //Clear the allocated space
+            ClearBits(writeAddress, bitCount);
+
+            //Increase the number of bits used
+            NumBitsUsed += bitCount;
+
+            return writeAddress;
+        }
+
+        /// <summary>
+        /// Set a range of bits to zero.
+        /// </summary>
+        /// <param name="address">Address to start clearing from.</param>
+        /// <param name="bitCount">Number of bits to clear.</param>
+        public void ClearBits(int address, int bitCount)
+        {
+            byte[] zeros = new byte[GetNumRequiredBytes(bitCount)];
+            WriteBits(bitCount, zeros, address);
+        }
+
+        /// <summary>
         /// Read an <see cref="int"/> from the bitheap.
         /// </summary>
         /// <param name="readAddress">Starting bit to read from.</param>
@@ -342,6 +377,24 @@ namespace AHT_SaveFileUtil.Save.Slot
             byte[] buff = ReadBits(32, readAddress);
 
             return BitConverter.ToSingle(buff, 0);
+        }
+
+        /// <summary>
+        /// Read an <see cref="EXVector"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="EXVector"/>.</returns>
+        public EXVector ReadEXVector(int readAddress)
+        {
+            byte[] buff = ReadBits(32*4, readAddress);
+
+            return new EXVector()
+            {
+                X = BitConverter.ToSingle(buff, 0),
+                Y = BitConverter.ToSingle(buff, 4),
+                Z = BitConverter.ToSingle(buff, 8),
+                W = BitConverter.ToSingle(buff, 12)
+            };
         }
 
         /// <summary>
@@ -415,6 +468,19 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
+        /// Write an <see cref="EXVector"/> to the bitheap.
+        /// </summary>
+        /// <param name="writeAddress">Starting bit to write to.</param>
+        /// <param name="value">The <see cref="EXVector"/> to write.</param>
+        public void WriteEXVector(int writeAddress, EXVector value)
+        {
+            WriteSingle(writeAddress,          value.X);
+            WriteSingle(writeAddress + 32,     value.Y);
+            WriteSingle(writeAddress + (32*2), value.Z);
+            WriteSingle(writeAddress + (32*3), value.W);
+        }
+
+        /// <summary>
         /// Write a <see cref="short"/> to the bitheap.
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
@@ -473,6 +539,21 @@ namespace AHT_SaveFileUtil.Save.Slot
             if (range < 0) return false;
 
             if (address + range >= BITHEAP_LENGTH) return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// Check if a bitheap address or range of bits is valid and within the allocated space.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <param name="range">The number of bits to check ahead of <paramref name="address"/>.</param>
+        /// <returns>Whether the given address/range is valid and within the allocated space.</returns>
+        public bool ValidAllocatedBitHeapAddress(int address, int range = 0)
+        {
+            if (!ValidBitHeapAddress(address, range)) return false;
+
+            if (address + range >= NumBitsUsed) return false;
 
             return true;
         }

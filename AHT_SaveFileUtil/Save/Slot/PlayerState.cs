@@ -6,6 +6,7 @@ using System.IO;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
+    #region Enums
     public enum BreathType
     {
         None     = 0x0,
@@ -51,37 +52,38 @@ namespace AHT_SaveFileUtil.Save.Slot
         ForcePos = 1,
         ClonePos = 2
     }
+    #endregion
 
     /// <summary>
     /// A 4-byte structure with info for a collectable.
     /// </summary>
-    public struct PowerupTally : ISaveFileIO<PowerupTally>
+    public class PowerupTally : ISaveFileIO<PowerupTally>
     {
         /// <summary>
         /// The number of items.
         /// </summary>
-        public byte Amount;
+        public sbyte Amount { get; set; }
         /// <summary>
         /// The maximum number of the item the user can hold.
         /// </summary>
-        public byte Max;
+        public sbyte Max { get; set; }
         /// <summary>
         /// The maximum number of the item the user can hold with all magazines purchased.
         /// </summary>
-        public byte Total;
+        public sbyte Total { get; set; }
         /// <summary>
         /// The number of magazines purchased.
         /// </summary>
-        public byte Magazines;
+        public sbyte Magazines { get; set; }
 
         public static PowerupTally FromReader(BinaryReader reader, GamePlatform platform)
         {
             return new PowerupTally
             {
-                Amount = reader.ReadByte(),
-                Max = reader.ReadByte(),
-                Total = reader.ReadByte(),
-                Magazines = reader.ReadByte()
+                Amount = reader.ReadSByte(),
+                Max = reader.ReadSByte(),
+                Total = reader.ReadSByte(),
+                Magazines = reader.ReadSByte()
             };
         }
 
@@ -242,11 +244,13 @@ namespace AHT_SaveFileUtil.Save.Slot
     /// </summary>
     public class PlayerState : ISaveFileIO<PlayerState>
     {
+        #region Variables
         /// <summary>
         /// The currently selected breath.
         /// </summary>
         public BreathType CurrentBreath { get; private set; }
 
+        #region Health
         /// <summary>
         /// The current health.
         /// <para>
@@ -257,14 +261,42 @@ namespace AHT_SaveFileUtil.Save.Slot
         public int Health { get; private set; }
 
         /// <summary>
+        /// Get whether <see cref="Health"/> is an intended value.
+        /// </summary>
+        public bool HealthIsValid =>
+            (Health % 0x20 == 0) && (Health >= 0) && (Health <= 0xA0);
+
+        public static readonly Dictionary<int, string> HealthStrings_NoUpgrade = new()
+        {
+            { 0x0, "No Health" },
+            { 0x20, "No Health" },
+            { 0x40, "No Sparx" },
+            { 0x60, "Green" },
+            { 0x80, "Blue" },
+            { 0xA0, "Gold" }
+        };
+
+        public static readonly Dictionary<int, string> HealthStrings_Upgrade = new()
+        {
+            { 0x0, "No Health" },
+            { 0x20, "No Sparx" },
+            { 0x40, "Red" },
+            { 0x60, "Green" },
+            { 0x80, "Blue" },
+            { 0xA0, "Gold" }
+        };
+        #endregion
+
+        /// <summary>
         /// The current amount of gems.
         /// </summary>
-        public int Gems { get; private set; }
+        public int Gems { get; set; }
 
         /// <summary>
         /// The total amount of gems collected on this save.
+        /// Never shown to the player.
         /// </summary>
-        public int TotalGems { get; private set; }
+        public int TotalGems { get; set; }
 
         /// <summary>
         /// Stats for lock-picks.
@@ -294,12 +326,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <summary>
         /// The current amount of fire arrows.
         /// </summary>
-        public short FireArrows { get; private set; }
+        public short FireArrows { get; set; }
 
         /// <summary>
         /// The max amount of fire arrows.
         /// </summary>
-        public short FireArrowsMax { get; private set; }
+        public short FireArrowsMax { get; set; }
 
         /// <summary>
         /// A set of flags for certain abilities/collectables.
@@ -603,6 +635,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// The last player character to be set up.
         /// </summary>
         public Players LastPlayerSetup { get; private set; }
+        #endregion
 
         private PlayerState() { }
 
@@ -728,6 +761,39 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.BaseStream.Seek(4, SeekOrigin.Current);
         }
 
+        #region Health Methods
+        /// <summary>
+        /// Ensure that <see cref="Health"/> is rounded to a valid health value.
+        /// </summary>
+        public void RoundHealthToValid()
+        {
+            Health = RoundHealthToValid(Health);
+        }
+
+        /// <summary>
+        /// Take a health value and ensure it's rounded to a valid health value.
+        /// </summary>
+        /// <param name="health">Health value to round.</param>
+        /// <returns>The rounded health value.</returns>
+        public static int RoundHealthToValid(int health)
+        {
+            int fraction = health % 0x20;
+
+            //Round up
+            if (fraction != 0)
+                health += 0x20 - fraction;
+
+            //Put within range
+            if (health > 0xA0)
+                health = 0xA0;
+            else if (health < 0)
+                health = 0;
+
+            return health;
+        }
+        #endregion
+
+        #region Ability Flag Methods
         /// <summary>
         /// Get the state of an ability flag, where <paramref name="mask"/> is
         /// one of the constants AF_MASK_*.
@@ -754,5 +820,6 @@ namespace AHT_SaveFileUtil.Save.Slot
             else
                 AbilityFlags &= ~mask;
         }
+        #endregion
     }
 }

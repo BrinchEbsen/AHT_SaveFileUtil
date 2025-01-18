@@ -17,7 +17,7 @@ namespace AHT_SaveFileEditor
 
         private void OpenSaveFileDialog()
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            using (OpenFileDialog openFileDialog = new())
             {
                 openFileDialog.InitialDirectory = "c:\\";
                 openFileDialog.Filter = "GameCube Saves (*.gci)|*.gci|PS2 Save for EMS Adapter (*.psu)|*.psu";
