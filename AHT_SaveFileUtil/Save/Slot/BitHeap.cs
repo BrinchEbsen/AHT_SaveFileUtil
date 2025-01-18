@@ -344,6 +344,17 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
+        /// Clear every bit in the bitheap.
+        /// </summary>
+        public void ClearAll()
+        {
+            for (int i = 0; i < ByteHeap.Length; i++)
+                ByteHeap[i] = 0;
+
+            NumBitsUsed = 0;
+        }
+
+        /// <summary>
         /// Read an <see cref="int"/> from the bitheap.
         /// </summary>
         /// <param name="readAddress">Starting bit to read from.</param>

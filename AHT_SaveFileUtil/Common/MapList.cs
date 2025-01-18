@@ -459,13 +459,6 @@ namespace AHT_SaveFileUtil.Common
                     Unused = true
                 }
             },
-            { Map.Platform_Area, new()
-                {
-                    Name = "Test_WTS (Platform_Area)",
-                    FileHash = 0x01000020,
-                    Unused = true
-                }
-            },
             { Map.TestBeach, new()
                 {
                     Name = "TestBeach",

@@ -1,3 +1,5 @@
+using AHT_SaveFileEditor.SlotEditor.MapEditor;
+
 namespace AHT_SaveFileEditor
 {
     internal static class Program
@@ -8,8 +10,6 @@ namespace AHT_SaveFileEditor
         [STAThread]
         static void Main()
         {
-            //AHT_SaveFileUtil.Program.Main(null);
-
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();

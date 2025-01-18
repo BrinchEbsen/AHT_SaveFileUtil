@@ -1,3 +1,4 @@
+using AHT_SaveFileEditor.SlotEditor.MapEditor;
 using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save;
 
@@ -12,6 +13,22 @@ namespace AHT_SaveFileEditor
 
         private void MainWnd_Load(object sender, EventArgs e)
         {
+            bool result = ResourceHandler.Instance.LoadYamlFiles(out string message);
+
+            if (!result)
+            {
+                MessageBox.Show(message, "Error loading yaml files.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            result = ResourceHandler.Instance.LoadMapTextures(out message);
+
+            if (!result)
+            {
+                MessageBox.Show(message, "Error loading texture files.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             OpenSaveFile("../../../../7D-G5SE-G5SE.gci", GamePlatform.GameCube);
         }
 
