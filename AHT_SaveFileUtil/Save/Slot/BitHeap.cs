@@ -167,7 +167,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             if (bitCount <= 0) return [];
 
-            if (ValidBitHeapAddress(readAddress, bitCount))
+            if (!ValidBitHeapAddress(readAddress, bitCount))
                 throw new ArgumentException(
                     $"{nameof(readAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 
@@ -241,7 +241,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             if (bitCount <= 0) return;
 
-            if (ValidBitHeapAddress(writeAddress, bitCount))
+            if (!ValidBitHeapAddress(writeAddress, bitCount))
                 throw new ArgumentException(
                     $"{nameof(writeAddress)} and {nameof(bitCount)} map to out-of-bounds addresses.");
 

@@ -1,4 +1,5 @@
-﻿using AHT_SaveFileUtil.Save.Slot;
+﻿using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Save.Slot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -92,6 +93,36 @@ namespace AHT_SaveFileUtil.Save.MiniMap
                 if (MiniMapInfo[i] == info) return i;
 
             return -1;
+        }
+
+        public MiniMapInfo? GetInfo(uint fileHash, uint mapHash, InfoType type)
+        {
+            if (Enum.IsDefined(typeof(EXHashCode), mapHash) && mapHash != 0)
+            {
+                foreach(var info in MiniMapInfo)
+                {
+                    if (info.MapFile == fileHash &&
+                        info.Map == mapHash &&
+                        info.Type == type)
+                        return info;
+                }
+
+                return null;
+            } else
+            {
+                return GetInfo(fileHash, type);
+            }
+        }
+
+        public MiniMapInfo? GetInfo(uint fileHash, InfoType type)
+        {
+            foreach(var info in MiniMapInfo)
+            {
+                if (fileHash == info.MapFile && info.Type == type)
+                    return info;
+            }
+
+            return null;
         }
 
         public int GetMiniMapInfoOffset(MiniMapInfo info)

@@ -12,14 +12,33 @@ namespace AHT_SaveFileUtil.Save.MiniMap
 
     public class MiniMapInfo
     {
+        public const int TEXTURE_DIM = 256;
+
+        /// <summary>
+        /// Hashcode for the map geofile.
+        /// </summary>
         public uint MapFile { get; set; }
 
+        /// <summary>
+        /// Hashcode for the map.
+        /// If distinguishing a map with a hashcode is
+        /// unnecessary, this value will be 0xFFFFFFFF.
+        /// </summary>
         public uint Map { get; set; }
 
+        /// <summary>
+        /// The type of this info.
+        /// </summary>
         public InfoType Type { get; set; }
 
+        /// <summary>
+        /// The geofile containing the texture for the texture for this minimap.
+        /// </summary>
         public uint TextureFile { get; set; }
 
+        /// <summary>
+        /// The texture hashcode for this minimap.
+        /// </summary>
         public uint Texture { get; set; }
 
         /// <summary>
@@ -127,11 +146,42 @@ namespace AHT_SaveFileUtil.Save.MiniMap
                 z >= WorldEdge[3];
         }
 
+        /// <summary>
+        /// For info type "Background".
+        /// </summary>
+        public int[] GetPixelCoordsFromWorldPosition(float x, float z, int textureSize)
+        {
+            if (Type != InfoType.Background) return [0, 0];
+
+            bool success = GetTextureWorldEdges(
+                out float xLeft, out float xRight, out float zUp, out float zBottom);
+
+            if (!success) return [0, 0];
+
+            //Get the world measurements of the background
+            float xSpan = Math.Abs(xRight - xLeft);
+            float zSpan = Math.Abs(zUp - zBottom);
+
+            //Get the relative coordinates of the given position
+            float localX = Math.Abs(x - xLeft);
+            float localZ = Math.Abs(z - zUp);
+
+            //Get the ratios of how far the position is along the minimap
+            float xRatio = localX / xSpan;
+            float zRatio = localZ / zSpan;
+
+            //Multiply by texture size to get final position
+            return [
+                (int)(textureSize * xRatio),
+                (int)(textureSize * zRatio)
+                ];
+        }
+
         //reference: 0x002f7c80 in prototype
         /// <summary>
-        /// Get the world positions for the edges of a texture with a given width/height.
+        /// Get the world positions for the edges of the background texture. For info type "Background".
         /// </summary>
-        public bool GetTextureWorldEdges(int texWidth, int texHeight, out float xLeft, out float xRight, out float zUp, out float zBottom)
+        public bool GetTextureWorldEdges(out float xLeft, out float xRight, out float zUp, out float zBottom)
         {
             float worldXSpan = WorldEdge[2] - WorldEdge[0];
             float worldZSpan = WorldEdge[1] - WorldEdge[3];
@@ -139,7 +189,7 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             float pixelZSpan = PixelEdge[3] - PixelEdge[1];
 
             //Div by 0 guard + other checks
-            if (pixelXSpan == 0 || pixelZSpan == 0 || texWidth <= 0 || texHeight <= 0)
+            if (pixelXSpan == 0 || pixelZSpan == 0 || TEXTURE_DIM <= 0 || TEXTURE_DIM <= 0)
             {
                 xLeft = 0;
                 xRight = 0;
@@ -152,8 +202,8 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             float zRatio = worldZSpan / pixelZSpan;
 
             zUp     = WorldEdge[1] + PixelEdge[1] * zRatio;
-            xRight  = WorldEdge[2] + (( (float)texWidth  * 2) - PixelEdge[2]) * xRatio;
-            zBottom = WorldEdge[3] - (( (float)texHeight * 2) - PixelEdge[3]) * zRatio;
+            xRight  = WorldEdge[2] + (( (float)TEXTURE_DIM * 2) - PixelEdge[2]) * xRatio;
+            zBottom = WorldEdge[3] - (( (float)TEXTURE_DIM * 2) - PixelEdge[3]) * zRatio;
             xLeft   = WorldEdge[0] - PixelEdge[0] * xRatio;
 
             return true;

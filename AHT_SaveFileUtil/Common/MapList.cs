@@ -84,6 +84,11 @@ namespace AHT_SaveFileUtil.Common
         public uint MapHash2 { get; set; } = 0;
         public bool Unused { get; set; } = false;
         public bool DoesPreserve { get; set; } = true;
+        /// <summary>
+        /// Whether the map to use for a minimap is ambiguous in a file and
+        /// should be distinguished by a map hash.
+        /// </summary>
+        public bool MiniMapDistinguishedByMapHash { get; set; } = false;
     }
 
     public static class MapData
@@ -246,14 +251,16 @@ namespace AHT_SaveFileUtil.Common
                 {
                     Name = "Cloudy Domain",
                     FileHash = 0x0100005b,
-                    MapHash1 = 0x0500000c
+                    MapHash1 = 0x0500000c,
+                    MiniMapDistinguishedByMapHash = true
                 }
             },
             { Map.Cloudy_Domain_Ball_Gadget, new()
                 {
                     Name = "Cloudy Domain (Ball Gadget)",
                     FileHash = 0x0100005b,
-                    MapHash1 = 0x0500000b
+                    MapHash1 = 0x0500000b,
+                    MiniMapDistinguishedByMapHash = true
                 }
             },
             { Map.Dragonfly_Falls, new()
@@ -502,21 +509,24 @@ namespace AHT_SaveFileUtil.Common
                 {
                     Name = "Magma Falls Top",
                     FileHash = 0x0100005F,
-                    MapHash1 = 0x0500000b
+                    MapHash1 = 0x0500000b,
+                    MiniMapDistinguishedByMapHash = true
                 }
             },
             { Map.Magma_Falls_Ball_Gadget, new()
                 {
                     Name = "Magma Falls (Ball Gadget)",
                     FileHash = 0x0100005F,
-                    MapHash1 = 0x0500000c
+                    MapHash1 = 0x0500000c,
+                    MiniMapDistinguishedByMapHash = true
                 }
             },
             { Map.Magma_Falls_Bottom, new()
                 {
                     Name = "Magma Falls Bottom",
                     FileHash = 0x0100005F,
-                    MapHash1 = 0x0500000d
+                    MapHash1 = 0x0500000d,
+                    MiniMapDistinguishedByMapHash = true
                 }
             },
             { Map.Watery_Tomb, new()

@@ -1,4 +1,5 @@
-﻿using AHT_SaveFileUtil.Common;
+﻿using AHT_SaveFileEditor.SlotEditor.MapEditor;
+using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
 
 namespace AHT_SaveFileEditor.SlotEditor
@@ -56,6 +57,21 @@ namespace AHT_SaveFileEditor.SlotEditor
             setStartMapBtn.Click += SetStartMapBtn_Click;
 
             Controls.Add(setStartMapBtn);
+
+            Button openMapEditorBtn = new()
+            {
+                Text = "Open Editor",
+                Width = 100
+            };
+
+            openMapEditorBtn.Click += OpenMapEditorBtn_Click;
+
+            Controls.Add(openMapEditorBtn);
+        }
+
+        private void OpenMapEditorBtn_Click(object? sender, EventArgs e)
+        {
+            new MapEditorWnd(gameState, entryNr).ShowDialog();
         }
 
         private void SetStartMapBtn_Click(object? sender, EventArgs e)

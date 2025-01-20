@@ -5,6 +5,9 @@ using System.Text;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
+    /// <summary>
+    /// Handles resources or something
+    /// </summary>
     internal class ResourceHandler
     {
         private ResourceHandler() { }
@@ -33,6 +36,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             (TriggerTable != null) &
             (TriggerDataDefinitions != null) &
             (Maps != null);
+
+        public bool AllTexturesLoaded => MapTextures != null;
 
         public bool LoadYamlFiles(out string message)
         {
