@@ -115,8 +115,6 @@
             // Check_ShowSquares
             // 
             Check_ShowSquares.AutoSize = true;
-            Check_ShowSquares.Checked = true;
-            Check_ShowSquares.CheckState = CheckState.Checked;
             Check_ShowSquares.Location = new Point(158, 12);
             Check_ShowSquares.Name = "Check_ShowSquares";
             Check_ShowSquares.Size = new Size(105, 19);
@@ -159,7 +157,6 @@
             // 
             // Btn_PaintReveal
             // 
-            Btn_PaintReveal.Enabled = false;
             Btn_PaintReveal.Location = new Point(3, 37);
             Btn_PaintReveal.Name = "Btn_PaintReveal";
             Btn_PaintReveal.Size = new Size(75, 23);

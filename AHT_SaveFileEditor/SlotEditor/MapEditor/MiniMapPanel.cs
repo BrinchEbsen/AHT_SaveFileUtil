@@ -22,13 +22,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private Image? _miniMapTexture = null;
         private Image? _revealBlob = null;
 
-        private Pen redPen = new Pen(Color.Red);
-
-        private int testx = 0;
-        private int testy = 0;
-        private int testoffset = 0;
-        private float testwx = 0;
-        private float testwz = 0;
+        private readonly Pen redPen = new(Color.Red);
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PaintMode PaintMode { get; set; } = PaintMode.None;
@@ -77,13 +71,16 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             DoMouseEvent(e);
         }
 
+        /// <summary>
+        /// Called when the mouse should draw on the minimap.
+        /// </summary>
         private void DoMouseEvent(MouseEventArgs e)
         {
+            //If no map reveal blobs, no need to process mouse events
+            if (UsingDefault) return;
+
             if (e.X < 0 || e.X >= 512) return;
             if (e.Y < 0 || e.Y >= 512) return;
-
-            testx = e.X;
-            testy = e.Y;
 
             if (e.Button == MouseButtons.Left)
             {
@@ -101,20 +98,16 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             float[] worldPos = _backgroundInfo.GetWorldPositionFromPixelCoords(e.X, 512-e.Y, 512);
 
-            testwx = worldPos[0];
-            testwz = worldPos[1];
-
             if (worldPos[0] < _mappedInfo.WorldEdge[0] ||
-                worldPos[0] > _mappedInfo.WorldEdge[2] + _mappedInfo.PixelEdge[0] * 0.5f ||
+                worldPos[0] > _mappedInfo.WorldEdge[2] + _mappedInfo.PixelEdge[2] * 0.5f ||
                 worldPos[1] < _mappedInfo.WorldEdge[3] ||
-                worldPos[1] > _mappedInfo.WorldEdge[1] + _mappedInfo.PixelEdge[0] * 0.5f)
+                worldPos[1] > _mappedInfo.WorldEdge[1] + _mappedInfo.PixelEdge[3] * 0.5f)
                 return;
 
             int offset = _mappedInfo.GetBitHeapOffset(
                 worldPos[0],
                 worldPos[1]);
 
-            testoffset = offset;
             int size = _mappedInfo.BitHeapSize;
 
             if (offset > size) return;
@@ -279,7 +272,11 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
                         if (ShowSquares)
                             graphics.DrawRectangle(redPen,
-                            new Rectangle(pixPos[0] - 5, pixPos[1] - 5, 10, 10));
+                            new Rectangle(
+                                pixPos[0] - 5,
+                                pixPos[1] - 5,
+                                10,
+                                10));
                         else
                             graphics.DrawImage(_revealBlob,
                             pixPos[0] - _mappedInfo.PixelEdge[0],
