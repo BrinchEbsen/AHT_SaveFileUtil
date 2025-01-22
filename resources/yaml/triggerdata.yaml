@@ -1,0 +1,1009 @@
+trigger_data:
+- trigger_table_entry: 1
+  object_name: StartPoint
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 3
+  object_name: fodder_Sheep
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 11
+  object_name: Switch
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 12
+  object_name: Door
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 13
+  object_name: Switch_Charge
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 14
+  object_name: Switch_Horndive
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 15
+  object_name: Switch_Electric
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 16
+  object_name: Switch_Charge_Platform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 17
+  object_name: Switch_Horndive_Platform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 18
+  object_name: Switch_Padlock
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 19
+  object_name: Switch_Laser
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 20
+  object_name: Switch_LightGem
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 21
+  object_name: Switch_Timed_Controller
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 22
+  object_name: Switch_Controller
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 23
+  object_name: GenericGate_Scripted
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 24
+  object_name: GenericGate
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 25
+  object_name: DestroyMe
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 26
+  object_name: DestroyMe_Scripted
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 27
+  object_name: DestroyMe_Archways
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 28
+  object_name: DestroyMe_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 32
+  object_name: EggThief
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 259
+- trigger_table_entry: 33
+  object_name: GemStealer
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 37
+  object_name: PoleGrab_Slider
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 39
+  object_name: Chest_Metal
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 40
+  object_name: Chest_Metal_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 41
+  object_name: Chest_Strong
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 7
+- trigger_table_entry: 42
+  object_name: Chest_Locked
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 7
+- trigger_table_entry: 43
+  object_name: Chest_Explosive
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 44
+  object_name: Chest_HornDive
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 7
+- trigger_table_entry: 45
+  object_name: Vase
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 46
+  object_name: DarkGemShards
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 47
+  object_name: FireWorks
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 48
+  object_name: Chest_BLK_Weak
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 49
+  object_name: Chest_BLK_Strong
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 59
+  object_name: Bird_Circling
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 60
+  object_name: Bird_Circling_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 65
+  object_name: CirclingBirdsCont
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 32
+- trigger_table_entry: 68
+  object_name: PopUp
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 71
+  object_name: BallGadgetSwitch
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 76
+  object_name: Tentacle
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 84
+  object_name: MorphEnvControl
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 125
+  object_name: Cannon_OnPedestal
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 135
+  object_name: BallGadgetPathGate
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 32
+- trigger_table_entry: 136
+  object_name: WaterCurrent
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 32
+- trigger_table_entry: 137
+  object_name: DigWall
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 138
+  object_name: DigFloor
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 139
+  object_name: HornDiveFloor
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 149
+  object_name: HintCamera
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 16
+- trigger_table_entry: 165
+  object_name: SwitchActivatedPlatform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 166
+  object_name: R4Exit_Switch
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 167
+  object_name: weight_switch_R4E
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 168
+  object_name: weight_switch
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 171
+  object_name: Axe
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 186
+  object_name: Pickup_Fuel
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 187
+  object_name: Pickup_Missiles
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 188
+  object_name: Pickup_Time
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 189
+  object_name: Pickup_FireBreath
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 190
+  object_name: Pickup_IceBreath
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 191
+  object_name: Pickup_WaterBreath
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 192
+  object_name: Pickup_ElectricityBreath
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 193
+  object_name: Pickup_Health
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 194
+  object_name: Pickup_FullHealthPickup
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 195
+  object_name: Pickup_SmartBomb
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 196
+  object_name: Pickup_WeaponPowerup
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 197
+  object_name: Pickup_BlinkBomb
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 198
+  object_name: Pickup_LockPicker
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 200
+  object_name: Gems_Gem
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 201
+  object_name: Gems_GemChain
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 33
+- trigger_table_entry: 202
+  object_name: DarkXtal
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 203
+  object_name: LightXtal
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 204
+  object_name: DragonEgg_DragonEgg1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 205
+  object_name: DragonEgg_DragonEgg2
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 206
+  object_name: DragonEgg_DragonEgg3
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 207
+  object_name: DragonEgg_DragonEgg4
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 208
+  object_name: DragonEgg_DragonEgg5
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 209
+  object_name: DragonEgg_DragonEgg6
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 210
+  object_name: DragonEgg_DragonEgg7
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 211
+  object_name: DragonEgg_DragonEgg8
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 212
+  object_name: DragonEgg
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 213
+  object_name: SmashBoulder
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 214
+  object_name: SmashBoulder_IceBoulder
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 216
+  object_name: Pickup_FlameArrowPU
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 217
+  object_name: Generator
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 219
+  object_name: Jupiter
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 222
+  object_name: Gnorc_Sentry
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 223
+  object_name: Gnorc_Sentry_Patrol
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 224
+  object_name: Gnorc_Sentry_Robot
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 225
+  object_name: RoboPatrol
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 226
+  object_name: Bowman_Path
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 227
+  object_name: Bowman
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 228
+  object_name: Robowman_Path
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 229
+  object_name: Robowman
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 233
+  object_name: Gnorc_Gang
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 234
+  object_name: MineRobot
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 235
+  object_name: Rollbot
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 236
+  object_name: SmashbotPatrol
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 237
+  object_name: CrocoVile
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 238
+  object_name: CrocoVile_Spawned
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 239
+  object_name: CrocoClub_Spawned
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 240
+  object_name: CrocGate_Sentry_Spawned
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 241
+  object_name: Critter_Tongue
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 242
+  object_name: Critter_Charge
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 243
+  object_name: Critter_Fire
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 244
+  object_name: Critter_Winged
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 245
+  object_name: Critter_Spin
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 246
+  object_name: Critter
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 247
+  object_name: Splitter
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 248
+  object_name: JawSnapper
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 250
+  object_name: Pygmy
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 259
+  object_name: RMonster
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 261
+  object_name: MerGnorcSentry
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 262
+  object_name: MerGnorc
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 263
+  object_name: Clam
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 264
+  object_name: FireImpHover
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 265
+  object_name: FireImps
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 266
+  object_name: Wizard_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 267
+  object_name: Wizard_2
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 268
+  object_name: Skeleton
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 269
+  object_name: Skeleton_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 270
+  object_name: FireBird
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 271
+  object_name: BalloonARang
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 273
+  object_name: BirdMan
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 274
+  object_name: PiranhaPack_Controller
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 32
+- trigger_table_entry: 276
+  object_name: LillyPad
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 279
+  object_name: R1C_CannonPillar
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 282
+  object_name: GnastyGnorc
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 283
+  object_name: TreeDweller
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 284
+  object_name: Shepherd
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 285
+  object_name: ShepherdGoatComms
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 16
+- trigger_table_entry: 289
+  object_name: Dynamo
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 290
+  object_name: WaterWheelPoleGrabDriven
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 291
+  object_name: WaterWheelPlatformDriven
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 293
+  object_name: Water
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 64
+- trigger_table_entry: 294
+  object_name: RisingBeachPlatform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 33
+- trigger_table_entry: 296
+  object_name: PoleGrab_PoleGrabPath
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 297
+  object_name: SnapperCrab
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 298
+  object_name: SnapperCrabLeader
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 300
+  object_name: FlippingPlatform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 303
+  object_name: Fan
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 304
+  object_name: Hazard
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 308
+  object_name: Ineptune
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 35
+- trigger_table_entry: 309
+  object_name: IneptunePlatform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 312
+  object_name: PygmyLeader
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 313
+  object_name: SwitchIndicator
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 318
+  object_name: Lift2A_2C
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 321
+  object_name: SwitchActivatedPlatform2A
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 323
+  object_name: HaywireIcePlatform
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 334
+  object_name: Yeti_SnowballYeti
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 335
+  object_name: Yeti_BarrelYeti
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 336
+  object_name: Yeti_UnarmedYeti
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 337
+  object_name: Yeti_ArcherYeti
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 340
+  object_name: BossRed
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 345
+  object_name: LaserRing
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 347
+  object_name: MrFreeze
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 349
+  object_name: PhilsElecNodePuzzleCtrlr
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 8
+- trigger_table_entry: 352
+  object_name: Thermal_1
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 2
+- trigger_table_entry: 361
+  object_name: R5B_WWplatController
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 367
+  object_name: R4E_AssemblyController
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 368
+  object_name: R4E_AssemblyCenter
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 373
+  object_name: Planets
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 4
+- trigger_table_entry: 376
+  object_name: R4D_LaserTurret
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 377
+  object_name: R4D_LaserSentinal
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 378
+  object_name: SteamBlast
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 383
+  object_name: MechaRed
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 3
+- trigger_table_entry: 391
+  object_name: BossRobowman
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 392
+  object_name: R4ZFireWorks
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 404
+  object_name: Generator_MG2_Spy
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1
+- trigger_table_entry: 422
+  object_name: SmashBoulder_MG2_Blk
+  data:
+  - name: Data
+    type: Flags
+    num_bits: 1

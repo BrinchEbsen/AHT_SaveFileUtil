@@ -1,0 +1,1281 @@
+num_entries: 426
+num_preserving_entries: 168
+entries:
+- primary_hash: 0x41000001 # HT_TriggerType_Undefined
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000003 # HT_TriggerType_StartPoint
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000054 # HT_TriggerType_BallGadget
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x42000011 # HT_TriggerSubType_Sheep
+  stored_data_size: 1
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x4200002C # HT_TriggerSubType_SwampRat
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x42000038 # HT_TriggerSubType_HermitCB
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x4200000C # HT_TriggerSubType_Chicken
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x4200000E # HT_TriggerSubType_Rabbit
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x42000024 # HT_TriggerSubType_Tuna
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x4200005D # HT_TriggerSubType_Bat
+  stored_data_size: 0
+- primary_hash: 0x41000007 # HT_TriggerType_fodder
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 0
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000011 # HT_TriggerType_Door
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000014 # HT_TriggerSubType_Charge
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000015 # HT_TriggerSubType_Horndive
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000069 # HT_TriggerSubType_Electric
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x4200001D # HT_TriggerSubType_Charge_Platform
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x4200001E # HT_TriggerSubType_Horndive_Platform
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000042 # HT_TriggerSubType_Padlock
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000060 # HT_TriggerSubType_Laser
+  stored_data_size: 2
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000067 # HT_TriggerSubType_LightGem
+  stored_data_size: 2
+- primary_hash: 0x410000D5 # HT_TriggerType_Switch_Timed_Controller
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000145 # HT_TriggerType_Switch_Controller
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000039 # HT_TriggerType_GenericGate
+  sub_hash: 0x4200005B # HT_TriggerSubType_Scripted
+  stored_data_size: 3
+- primary_hash: 0x41000039 # HT_TriggerType_GenericGate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000051 # HT_TriggerType_DestroyMe
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000051 # HT_TriggerType_DestroyMe
+  sub_hash: 0x4200005B # HT_TriggerSubType_Scripted
+  stored_data_size: 2
+- primary_hash: 0x4100018C # HT_TriggerType_DestroyMe_Archways
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000051 # HT_TriggerType_DestroyMe
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 3
+- primary_hash: 0x41000034 # HT_TriggerType_NPC_Talker
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000176 # HT_TriggerType_TalkIndicator
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000153 # HT_TriggerType_Projector
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000033 # HT_TriggerType_EggThief
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 259
+- primary_hash: 0x41000016 # HT_TriggerType_GemStealer
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 3
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x42000012 # HT_TriggerSubType_Winder
+  stored_data_size: 0
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x4200003B # HT_TriggerSubType_Valve
+  stored_data_size: 0
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x42000037 # HT_TriggerSubType_Slider
+  stored_data_size: 2
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x42000065 # HT_TriggerSubType_WaterIce
+  stored_data_size: 0
+- primary_hash: 0x41000026 # HT_TriggerType_Chest_Metal
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000026 # HT_TriggerType_Chest_Metal
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 1
+- primary_hash: 0x41000027 # HT_TriggerType_Chest_Strong
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 7
+- primary_hash: 0x41000028 # HT_TriggerType_Chest_Locked
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 7
+- primary_hash: 0x41000029 # HT_TriggerType_Chest_Explosive
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100002A # HT_TriggerType_Chest_HornDive
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 7
+- primary_hash: 0x4100003B # HT_TriggerType_Vase
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000115 # HT_TriggerType_DarkGemShards
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100013D # HT_TriggerType_FireWorks
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100018D # HT_TriggerType_Chest_BLK_Weak
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100018E # HT_TriggerType_Chest_BLK_Strong
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100015E # HT_TriggerType_ShockWaveRing
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100015B # HT_TriggerType_ShockWaveTower
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100011C # HT_TriggerType_ElectricWave
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000CC # HT_TriggerType_Rock
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000179 # HT_TriggerType_MechRedShockWave
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100019D # HT_TriggerType_MechaRedShockWaveWall
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100003A # HT_TriggerType_ShopPad
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100016C # HT_TriggerType_TeleportPad
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000174 # HT_TriggerType_MapChangePopup
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000045 # HT_TriggerType_Bird_Circling
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000045 # HT_TriggerType_Bird_Circling
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 1
+- primary_hash: 0x4100011A # HT_TriggerType_BirdBombBag
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100011B # HT_TriggerType_BirdBombCont
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100006E # HT_TriggerType_BirdBomb
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000046 # HT_TriggerType_Bird_Tracking
+  sub_hash: 0x42000030 # HT_TriggerSubType_Vulture
+  stored_data_size: 0
+- primary_hash: 0x4100015F # HT_TriggerType_CirclingBirdsCont
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 32
+- primary_hash: 0x41000160 # HT_TriggerType_CirclingBird
+  sub_hash: 0x4200002F # HT_TriggerSubType_SwampBat
+  stored_data_size: 0
+- primary_hash: 0x41000160 # HT_TriggerType_CirclingBird
+  sub_hash: 0x42000030 # HT_TriggerSubType_Vulture
+  stored_data_size: 0
+- primary_hash: 0x41000116 # HT_TriggerType_PopUp
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000078 # HT_TriggerType_Monitor
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000066 # HT_TriggerType_GadgetPad
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000FA # HT_TriggerType_BallGadgetSwitch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x410000AC # HT_TriggerType_Fluff_Pathed
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 0
+- primary_hash: 0x410000AC # HT_TriggerType_Fluff_Pathed
+  sub_hash: 0x42000003 # HT_TriggerSubType_2
+  stored_data_size: 0
+- primary_hash: 0x410000AA # HT_TriggerType_Fluff_Zoned
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000112 # HT_TriggerType_BadVine
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000182 # HT_TriggerType_Tentacle
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000BE # HT_TriggerType_SoundBank
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000032 # HT_TriggerType_Projectile
+  sub_hash: 0x4200006E # HT_TriggerSubType_EnemyBase
+  stored_data_size: 0
+- primary_hash: 0x41000162 # HT_TriggerType_SnowEffect
+  sub_hash: 0x42000003 # HT_TriggerSubType_2
+  stored_data_size: 0
+- primary_hash: 0x41000162 # HT_TriggerType_SnowEffect
+  sub_hash: 0x42000004 # HT_TriggerSubType_3
+  stored_data_size: 0
+- primary_hash: 0x41000169 # HT_TriggerType_WaterBomb
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000023 # HT_TriggerType_Script
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000024 # HT_TriggerType_MorphEnv
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000031 # HT_TriggerType_MorphEnvControl
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x4200001A # HT_TriggerSubType_LoadMap
+  stored_data_size: 0
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x4200001B # HT_TriggerSubType_CloseMap
+  stored_data_size: 0
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x4200002B # HT_TriggerSubType_SwapMap
+  stored_data_size: 0
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000E8 # HT_TriggerType_CutScene
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100014C # HT_TriggerType_HandlerIndex
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x42000084 # HT_TriggerSubType_LoadMapLift
+  stored_data_size: 0
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x42000083 # HT_TriggerSubType_CloseMapLift
+  stored_data_size: 0
+- primary_hash: 0x41000041 # HT_TriggerType_Player_Spyro
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000EC # HT_TriggerType_Player_Ember
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000ED # HT_TriggerType_Player_Flame
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000042 # HT_TriggerType_Player_Hunter
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000048 # HT_TriggerType_Player_Sparx
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000087 # HT_TriggerType_Player_Blinky
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000091 # HT_TriggerType_Player_SgtBird
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100000E # HT_TriggerType_Sparx
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100017A # HT_TriggerType_Treena
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000035 # HT_TriggerType_FlameBomb
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000096 # HT_TriggerType_Bomb
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x4100004C # HT_TriggerType_CannonShell
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000EE # HT_TriggerType_TurretShell
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000059 # HT_TriggerType_ProjWater
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x4100003D # HT_TriggerType_IceBomb
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000A4 # HT_TriggerType_BlinkyBullet
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000A8 # HT_TriggerType_BlinkyBomb
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000044 # HT_TriggerType_HunterArrow
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000049 # HT_TriggerType_Seeker
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000D0 # HT_TriggerType_ElecBolt
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x4100016E # HT_TriggerType_SnowBall
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000DA # HT_TriggerType_SparxFireball
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000DB # HT_TriggerType_SparxSeeker
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000E4 # HT_TriggerType_SparxBullet
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000196 # HT_TriggerType_SparxBulletRapid
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x41000124 # HT_TriggerType_LaserBolt
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x4100016A # HT_TriggerType_LaserSeeker
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x4100013F # HT_TriggerType_Mine
+  sub_hash: 0x42000039 # HT_TriggerSubType_Projectile
+  stored_data_size: 0
+- primary_hash: 0x410000E0 # HT_TriggerType_SparxPickup
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000E3 # HT_TriggerType_SparxGate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000038 # HT_TriggerType_CollisionPlane
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100004A # HT_TriggerType_Cannon
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100004A # HT_TriggerType_Cannon
+  sub_hash: 0x4200003E # HT_TriggerSubType_OnPedestal
+  stored_data_size: 2
+- primary_hash: 0x4100006B # HT_TriggerType_Turret
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000053 # HT_TriggerType_Thermal
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000076 # HT_TriggerType_WaterDrops
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000077 # HT_TriggerType_WaterSurface
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000089 # HT_TriggerType_CameraSpecial
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000190 # HT_TriggerType_MapInfo
+  sub_hash: 0x4200007F # HT_TriggerSubType_MapInfoWater
+  stored_data_size: 0
+- primary_hash: 0x41000092 # HT_TriggerType_BirdGate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C2 # HT_TriggerType_EndGate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000099 # HT_TriggerType_MapHeight
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000DF # HT_TriggerType_BallGadgetPathGate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 32
+- primary_hash: 0x410000F6 # HT_TriggerType_WaterCurrent
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 32
+- primary_hash: 0x410000FC # HT_TriggerType_DigWall
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000FD # HT_TriggerType_DigFloor
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x41000100 # HT_TriggerType_HornDiveFloor
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x41000105 # HT_TriggerType_Fireball
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000106 # HT_TriggerType_Fireball_ball
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100010B # HT_TriggerType_SparxHornet
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000122 # HT_TriggerType_LaserCannon
+  sub_hash: 0x42000060 # HT_TriggerSubType_Laser
+  stored_data_size: 0
+- primary_hash: 0x41000122 # HT_TriggerType_LaserCannon
+  sub_hash: 0x42000061 # HT_TriggerSubType_Missile
+  stored_data_size: 0
+- primary_hash: 0x41000138 # HT_TriggerType_Generic
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000140 # HT_TriggerType_KillHornet
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100016B # HT_TriggerType_BoxOfRockets
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100016D # HT_TriggerType_YetiSgt
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100017E # HT_TriggerType_HintCamera
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 16
+- primary_hash: 0x41000188 # HT_TriggerType_TestJS
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000189 # HT_TriggerType_Worm
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000008 # HT_TriggerType_plaform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100000C # HT_TriggerType_weightform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100000A # HT_TriggerType_pathplatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100000D # HT_TriggerType_launchform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100004B # HT_TriggerType_ScriptPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000BF # HT_TriggerType_LiftPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100012C # HT_TriggerType_PressurePlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C1 # HT_TriggerType_SeeSawPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100002F # HT_TriggerType_Mechanic
+  sub_hash: 0x42000013 # HT_TriggerSubType_R1A_puzzle
+  stored_data_size: 0
+- primary_hash: 0x4100001D # HT_TriggerType_WindUpPlatfrom
+  sub_hash: 0x4200007E # HT_TriggerSubType_Driven
+  stored_data_size: 0
+- primary_hash: 0x4100001D # HT_TriggerType_WindUpPlatfrom
+  sub_hash: 0x42000080 # HT_TriggerSubType_Fixed
+  stored_data_size: 0
+- primary_hash: 0x4100001D # HT_TriggerType_WindUpPlatfrom
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100001C # HT_TriggerType_boiler
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100005B # HT_TriggerType_SwitchActivatedPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x410001A0 # HT_TriggerType_R4Exit_Switch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000063 # HT_TriggerType_weight_switch
+  sub_hash: 0x42000081 # HT_TriggerSubType_R4E
+  stored_data_size: 2
+- primary_hash: 0x41000063 # HT_TriggerType_weight_switch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x4100011D # HT_TriggerType_FoldingPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100011D # HT_TriggerType_FoldingPlatform
+  sub_hash: 0x42000065 # HT_TriggerSubType_WaterIce
+  stored_data_size: 0
+- primary_hash: 0x41000068 # HT_TriggerType_Axe
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000081 # HT_TriggerType_Sequencer
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100009A # HT_TriggerType_conveyor
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100009B # HT_TriggerType_wallpiston
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100009F # HT_TriggerType_WaterDrivenWheel
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A1 # HT_TriggerType_SlidingWallKick
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A5 # HT_TriggerType_Stamper
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000AD # HT_TriggerType_Kickwheel
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100012B # HT_TriggerType_SteamPiston
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000AE # HT_TriggerType_PressureGauge
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C3 # HT_TriggerType_PoleSpinPole
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C8 # HT_TriggerType_PoleSpinController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000129 # HT_TriggerType_SweepingLaser
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000128 # HT_TriggerType_FixedLaser
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100018A # HT_TriggerType_MapBoiler
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000033 # HT_TriggerSubType_Fuel
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000034 # HT_TriggerSubType_Missiles
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000035 # HT_TriggerSubType_Time
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000045 # HT_TriggerSubType_FireBreath
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000046 # HT_TriggerSubType_IceBreath
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000047 # HT_TriggerSubType_WaterBreath
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000048 # HT_TriggerSubType_ElectricityBreath
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200005E # HT_TriggerSubType_Health
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200007D # HT_TriggerSubType_FullHealthPickup
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200006B # HT_TriggerSubType_SmartBomb
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200004B # HT_TriggerSubType_WeaponPowerup
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200006D # HT_TriggerSubType_BlinkBomb
+  stored_data_size: 1
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x4200007C # HT_TriggerSubType_LockPicker
+  stored_data_size: 1
+- primary_hash: 0x41000097 # HT_TriggerType_Gems
+  sub_hash: 0x4200000F # HT_TriggerSubType_GemController
+  stored_data_size: 0
+- primary_hash: 0x41000097 # HT_TriggerType_Gems
+  sub_hash: 0x4200000B # HT_TriggerSubType_Gem
+  stored_data_size: 1
+- primary_hash: 0x41000097 # HT_TriggerType_Gems
+  sub_hash: 0x42000010 # HT_TriggerSubType_GemChain
+  stored_data_size: 33
+- primary_hash: 0x41000020 # HT_TriggerType_DarkXtal
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100001F # HT_TriggerType_LightXtal
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x4200004D # HT_TriggerSubType_DragonEgg1
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x4200004E # HT_TriggerSubType_DragonEgg2
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x4200004F # HT_TriggerSubType_DragonEgg3
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000050 # HT_TriggerSubType_DragonEgg4
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000051 # HT_TriggerSubType_DragonEgg5
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000052 # HT_TriggerSubType_DragonEgg6
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000053 # HT_TriggerSubType_DragonEgg7
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000054 # HT_TriggerSubType_DragonEgg8
+  stored_data_size: 1
+- primary_hash: 0x41000036 # HT_TriggerType_DragonEgg
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000EF # HT_TriggerType_SmashBoulder
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000EF # HT_TriggerType_SmashBoulder
+  sub_hash: 0x42000055 # HT_TriggerSubType_IceBoulder
+  stored_data_size: 1
+- primary_hash: 0x41000139 # HT_TriggerType_GemsFlyToPoint
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000002 # HT_TriggerType_Pickup
+  sub_hash: 0x42000082 # HT_TriggerSubType_FlameArrowPU
+  stored_data_size: 1
+- primary_hash: 0x4100003F # HT_TriggerType_Generator
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000058 # HT_TriggerType_Site
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000040 # HT_TriggerType_Jupiter
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000D2 # HT_TriggerType_Jupiter_Missile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000004 # HT_TriggerType_Grunt
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000013 # HT_TriggerType_Gnorc_Sentry
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000013 # HT_TriggerType_Gnorc_Sentry
+  sub_hash: 0x42000017 # HT_TriggerSubType_Patrol
+  stored_data_size: 1
+- primary_hash: 0x41000013 # HT_TriggerType_Gnorc_Sentry
+  sub_hash: 0x4200007A # HT_TriggerSubType_Robot
+  stored_data_size: 1
+- primary_hash: 0x4100019E # HT_TriggerType_RoboPatrol
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000DC # HT_TriggerType_Bowman
+  sub_hash: 0x42000064 # HT_TriggerSubType_Path
+  stored_data_size: 1
+- primary_hash: 0x410000DC # HT_TriggerType_Bowman
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000F4 # HT_TriggerType_Robowman
+  sub_hash: 0x42000064 # HT_TriggerSubType_Path
+  stored_data_size: 1
+- primary_hash: 0x410000F4 # HT_TriggerType_Robowman
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000F2 # HT_TriggerType_Missile
+  sub_hash: 0x42000060 # HT_TriggerSubType_Laser
+  stored_data_size: 0
+- primary_hash: 0x410000F2 # HT_TriggerType_Missile
+  sub_hash: 0x42000056 # HT_TriggerSubType_Arrow
+  stored_data_size: 0
+- primary_hash: 0x410000F2 # HT_TriggerType_Missile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000019 # HT_TriggerType_Gnorc_Gang
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000E2 # HT_TriggerType_MineRobot
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000F9 # HT_TriggerType_Rollbot
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100013E # HT_TriggerType_SmashbotPatrol
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000052 # HT_TriggerType_CrocoVile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000052 # HT_TriggerType_CrocoVile
+  sub_hash: 0x42000019 # HT_TriggerSubType_Spawned
+  stored_data_size: 1
+- primary_hash: 0x4100018F # HT_TriggerType_CrocoClub
+  sub_hash: 0x42000019 # HT_TriggerSubType_Spawned
+  stored_data_size: 1
+- primary_hash: 0x4100008E # HT_TriggerType_CrocGate_Sentry
+  sub_hash: 0x42000019 # HT_TriggerSubType_Spawned
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000071 # HT_TriggerSubType_Tongue
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000014 # HT_TriggerSubType_Charge
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000072 # HT_TriggerSubType_Fire
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000074 # HT_TriggerSubType_Winged
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000073 # HT_TriggerSubType_Spin
+  stored_data_size: 1
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100015C # HT_TriggerType_Splitter
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100014D # HT_TriggerType_JawSnapper
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000075 # HT_TriggerType_Bonerang
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000056 # HT_TriggerType_Pygmy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000056 # HT_TriggerType_Pygmy
+  sub_hash: 0x42000019 # HT_TriggerSubType_Spawned
+  stored_data_size: 0
+- primary_hash: 0x4100006D # HT_TriggerType_Shark
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000074 # HT_TriggerType_PufferFish
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000071 # HT_TriggerType_LizHard
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100007C # HT_TriggerType_LizHard_Controller
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000072 # HT_TriggerType_LizHard_Tongue
+  sub_hash: 0x42000075 # HT_TriggerSubType_Critter
+  stored_data_size: 0
+- primary_hash: 0x41000072 # HT_TriggerType_LizHard_Tongue
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000D3 # HT_TriggerType_JellyFish
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000D7 # HT_TriggerType_RMonster
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000D7 # HT_TriggerType_RMonster
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 0
+- primary_hash: 0x410000FE # HT_TriggerType_MerGnorcSentry
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000E5 # HT_TriggerType_MerGnorc
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000E6 # HT_TriggerType_Clam
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000FF # HT_TriggerType_FireImpHover
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000F7 # HT_TriggerType_FireImps
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000EB # HT_TriggerType_Wizard
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 2
+- primary_hash: 0x410000EB # HT_TriggerType_Wizard
+  sub_hash: 0x42000003 # HT_TriggerSubType_2
+  stored_data_size: 2
+- primary_hash: 0x41000101 # HT_TriggerType_Skeleton
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000101 # HT_TriggerType_Skeleton
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 1
+- primary_hash: 0x41000108 # HT_TriggerType_FireBird
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100010E # HT_TriggerType_BalloonARang
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000111 # HT_TriggerType_BalloonARangWeapon
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000126 # HT_TriggerType_BirdMan
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100016F # HT_TriggerType_PiranhaPack_Controller
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 32
+- primary_hash: 0x41000062 # HT_TriggerType_Piranha
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 0
+- primary_hash: 0x4100005E # HT_TriggerType_LillyPad
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000080 # HT_TriggerType_SinkPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000079 # HT_TriggerType_R1C_Dummy_Cannon
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100007A # HT_TriggerType_R1C_CannonPillar
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x4100004A # HT_TriggerType_Cannon
+  sub_hash: 0x42000026 # HT_TriggerSubType_Sleeping
+  stored_data_size: 0
+- primary_hash: 0x41000084 # HT_TriggerType_R1C_Archer
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000090 # HT_TriggerType_GnastyGnorc
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 3
+- primary_hash: 0x41000110 # HT_TriggerType_TreeDweller
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000E1 # HT_TriggerType_Shepherd
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000113 # HT_TriggerType_ShepherdGoatComms
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 16
+- primary_hash: 0x41000050 # HT_TriggerType_Mountain_Goat
+  sub_hash: 0x4200001C # HT_TriggerSubType_Goat_R1C
+  stored_data_size: 0
+- primary_hash: 0x41000186 # HT_TriggerType_CameraShake
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100005C # HT_TriggerType_WaterWheel
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000107 # HT_TriggerType_Dynamo
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000060 # HT_TriggerType_WaterWheelPoleGrabDriven
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000061 # HT_TriggerType_WaterWheelPlatformDriven
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000064 # HT_TriggerType_WaterWheelPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000DD # HT_TriggerType_Water
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 64
+- primary_hash: 0x4100006F # HT_TriggerType_RisingBeachPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 33
+- primary_hash: 0x41000073 # HT_TriggerType_SpikeTrap
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100001A # HT_TriggerType_PoleGrab
+  sub_hash: 0x42000036 # HT_TriggerSubType_PoleGrabPath
+  stored_data_size: 1
+- primary_hash: 0x4100009E # HT_TriggerType_SnapperCrab
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000171 # HT_TriggerType_SnapperCrabLeader
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000B0 # HT_TriggerType_PoweredPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C9 # HT_TriggerType_FlippingPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000109 # HT_TriggerType_ProjectileLauncher
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100010A # HT_TriggerType_LaunchedProjectile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000F1 # HT_TriggerType_Fan
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100010C # HT_TriggerType_Hazard
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x4100010F # HT_TriggerType_VanishingPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000114 # HT_TriggerType_TetheredPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100012D # HT_TriggerType_BirdManShockWave
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000154 # HT_TriggerType_Ineptune
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 35
+- primary_hash: 0x4100015A # HT_TriggerType_IneptunePlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x4100019C # HT_TriggerType_IneptuneLaser
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000163 # HT_TriggerType_LaserController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000170 # HT_TriggerType_PygmyLeader
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100017B # HT_TriggerType_SwitchIndicator
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x4100005A # HT_TriggerType_CrossPlane
+  sub_hash: 0x4200007B # HT_TriggerSubType_RenderSpecial
+  stored_data_size: 0
+- primary_hash: 0x4100017F # HT_TriggerType_BallGadgetTimedController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000180 # HT_TriggerType_BallHazardOscillating
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000192 # HT_TriggerType_Cloud
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000191 # HT_TriggerType_Lift2A_2C
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000193 # HT_TriggerType_MapPlacementCtrl
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410001A1 # HT_TriggerType_LiftPlatform2C
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410001A3 # HT_TriggerType_SwitchActivatedPlatform2A
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x4100005F # HT_TriggerType_FallingIciclePlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000069 # HT_TriggerType_HaywireIcePlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x4100006C # HT_TriggerType_NastyFallingIcicle
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100009C # HT_TriggerType_Eskimole
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000D8 # HT_TriggerType_EskimoleCrouched
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C4 # HT_TriggerType_SnowballFalling
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C5 # HT_TriggerType_SnowballOscillating
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000D6 # HT_TriggerType_ExpCrate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000E9 # HT_TriggerType_SpinningPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000EA # HT_TriggerType_BoneSpider
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000F0 # HT_TriggerType_Turnstile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000F3 # HT_TriggerType_GloomyCrusher
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000F5 # HT_TriggerType_Yeti
+  sub_hash: 0x42000057 # HT_TriggerSubType_SnowballYeti
+  stored_data_size: 1
+- primary_hash: 0x410000F5 # HT_TriggerType_Yeti
+  sub_hash: 0x42000059 # HT_TriggerSubType_BarrelYeti
+  stored_data_size: 1
+- primary_hash: 0x410000F5 # HT_TriggerType_Yeti
+  sub_hash: 0x4200005A # HT_TriggerSubType_UnarmedYeti
+  stored_data_size: 1
+- primary_hash: 0x410000F5 # HT_TriggerType_Yeti
+  sub_hash: 0x42000058 # HT_TriggerSubType_ArcherYeti
+  stored_data_size: 1
+- primary_hash: 0x41000177 # HT_TriggerType_BouncingBarrel
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100019F # HT_TriggerType_DummyBarrel
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100012E # HT_TriggerType_BossRed
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 3
+- primary_hash: 0x41000137 # HT_TriggerType_SlidingCrate
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000032 # HT_TriggerType_Projectile
+  sub_hash: 0x42000066 # HT_TriggerSubType_HomingTornado
+  stored_data_size: 0
+- primary_hash: 0x41000032 # HT_TriggerType_Projectile
+  sub_hash: 0x42000077 # HT_TriggerSubType_BossFireBall
+  stored_data_size: 0
+- primary_hash: 0x41000158 # HT_TriggerType_PlatformShrinking
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000166 # HT_TriggerType_LaserRing
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 2
+- primary_hash: 0x41000144 # HT_TriggerType_DangerZone
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100012F # HT_TriggerType_MrFreeze
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000131 # HT_TriggerType_Boiler3C
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000167 # HT_TriggerType_PhilsElecNodePuzzleCtrlr
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 8
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000078 # HT_TriggerSubType_PhilsElecNode
+  stored_data_size: 0
+- primary_hash: 0x410001A2 # HT_TriggerType_Ouch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000053 # HT_TriggerType_Thermal
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 2
+- primary_hash: 0x41000133 # HT_TriggerType_R4D_SlidingWallKick
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100009D # HT_TriggerType_R5B_WallPiston
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A2 # HT_TriggerType_R5B_SlidingWallKick
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A3 # HT_TriggerType_R5B_WWSlidingWallKick
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A6 # HT_TriggerType_R5B_Stamper
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A9 # HT_TriggerType_R5B_Stamper2
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100011F # HT_TriggerType_R5B_StamperCtrl
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000A7 # HT_TriggerType_R5B_WWRising_Platform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000157 # HT_TriggerType_R5B_WWplatController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100011E # HT_TriggerType_WallKick_Switcher
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B2 # HT_TriggerType_Flamer
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B3 # HT_TriggerType_FlamerZone
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B4 # HT_TriggerType_R5B_Nut
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B5 # HT_TriggerType_R5B_NutSource
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000121 # HT_TriggerType_R4E_AssemblyController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100019B # HT_TriggerType_R4E_AssemblyCenter
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000120 # HT_TriggerType_R4E_AssemblyGnorc
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000DE # HT_TriggerType_LavaFlamers
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000DE # HT_TriggerType_LavaFlamers
+  sub_hash: 0x42000002 # HT_TriggerSubType_1
+  stored_data_size: 0
+- primary_hash: 0x410000E7 # HT_TriggerType_MineCart
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000119 # HT_TriggerType_Planets
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 4
+- primary_hash: 0x41000132 # HT_TriggerType_R4DPoleController
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000133 # HT_TriggerType_R4D_SlidingWallKick
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000135 # HT_TriggerType_R4D_LaserTurret
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000136 # HT_TriggerType_R4D_LaserSentinal
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000147 # HT_TriggerType_SteamBlast
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x4100014A # HT_TriggerType_LaserMirror
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100014B # HT_TriggerType_OrryLaser
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100014E # HT_TriggerType_BoulderParent
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100014F # HT_TriggerType_BoulderChild
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000155 # HT_TriggerType_MechaRed
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 3
+- primary_hash: 0x41000183 # HT_TriggerType_FleshRed
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000172 # HT_TriggerType_EyeLaser
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000175 # HT_TriggerType_BouncingMine
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000178 # HT_TriggerType_HomingMissile
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000F2 # HT_TriggerType_Missile
+  sub_hash: 0x42000079 # HT_TriggerSubType_LaserHitBoss
+  stored_data_size: 0
+- primary_hash: 0x4100017D # HT_TriggerType_R4ZMultiPlatform
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100017C # HT_TriggerType_R4ZMultiPlatformDoor
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000181 # HT_TriggerType_BossRobowman
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000185 # HT_TriggerType_R4ZFireWorks
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x41000194 # HT_TriggerType_DarkeGemCover
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000195 # HT_TriggerType_TimedDoorSwitch
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000046 # HT_TriggerType_Bird_Tracking
+  sub_hash: 0x42000029 # HT_TriggerSubType_Bird_Tracking_MG1A
+  stored_data_size: 0
+- primary_hash: 0x4100007D # HT_TriggerType_Supplies_MG1A
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000082 # HT_TriggerType_Critter
+  sub_hash: 0x4200002D # HT_TriggerSubType_Critter_MG1A
+  stored_data_size: 0
+- primary_hash: 0x4100006E # HT_TriggerType_BirdBomb
+  sub_hash: 0x4200002E # HT_TriggerSubType_BirdBomb_MG1A
+  stored_data_size: 0
+- primary_hash: 0x4100007B # HT_TriggerType_MiniGameEnemyWave
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B8 # HT_TriggerType_TurtleNest_MG2_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B7 # HT_TriggerType_BabyTurtle_MG2_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000B9 # HT_TriggerType_TurtleHunterCrab_MG2_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000BD # HT_TriggerType_TurtleHunterBird_MG2_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000C0 # HT_TriggerType_Generator_MG2_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 1
+- primary_hash: 0x410000C6 # HT_TriggerType_Hornet_MG1_Spx
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000CB # HT_TriggerType_StaticEnemy_MG1_Spx
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000071 # HT_TriggerType_LizHard
+  sub_hash: 0x42000040 # HT_TriggerSubType_MG1_Spx
+  stored_data_size: 0
+- primary_hash: 0x41000072 # HT_TriggerType_LizHard_Tongue
+  sub_hash: 0x42000040 # HT_TriggerSubType_MG1_Spx
+  stored_data_size: 0
+- primary_hash: 0x410000D9 # HT_TriggerType_Obstacle_MG1_Spx
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000102 # HT_TriggerType_Eskimole_MR3_Spy
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000CD # HT_TriggerType_Tracking_Arrow
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x4100010D # HT_TriggerType_Gnorc_Sgt
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000010 # HT_TriggerType_Switch
+  sub_hash: 0x42000040 # HT_TriggerSubType_MG1_Spx
+  stored_data_size: 0
+- primary_hash: 0x41000141 # HT_TriggerType_Yeti_MG3_Spy
+  sub_hash: 0x42000057 # HT_TriggerSubType_SnowballYeti
+  stored_data_size: 0
+- primary_hash: 0x41000141 # HT_TriggerType_Yeti_MG3_Spy
+  sub_hash: 0x42000059 # HT_TriggerSubType_BarrelYeti
+  stored_data_size: 0
+- primary_hash: 0x41000013 # HT_TriggerType_Gnorc_Sentry
+  sub_hash: 0x42000063 # HT_TriggerSubType_MG4_Spy
+  stored_data_size: 0
+- primary_hash: 0x41000134 # HT_TriggerType_TrapDoorSpider
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000146 # HT_TriggerType_PoisonBlob
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000115 # HT_TriggerType_DarkGemShards
+  sub_hash: 0x4200006A # HT_TriggerSubType_MG2_Blk
+  stored_data_size: 0
+- primary_hash: 0x41000159 # HT_TriggerType_DarkGemVine
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000164 # HT_TriggerType_MutantWorm
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x410000EF # HT_TriggerType_SmashBoulder
+  sub_hash: 0x4200006A # HT_TriggerSubType_MG2_Blk
+  stored_data_size: 1
+- primary_hash: 0x4100009C # HT_TriggerType_Eskimole
+  sub_hash: 0x42000040 # HT_TriggerSubType_MG1_Spx
+  stored_data_size: 0
+- primary_hash: 0x41000197 # HT_TriggerType_BalloonARang_Sgt
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0
+- primary_hash: 0x41000152 # HT_TriggerType_PickupGenerator
+  sub_hash: 0x42000001 # HT_TriggerSubType_Undefined
+  stored_data_size: 0

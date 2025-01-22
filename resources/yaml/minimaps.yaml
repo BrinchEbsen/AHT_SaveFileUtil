@@ -1,0 +1,494 @@
+num_map_info: 30
+num_map_status: 20 # Game defines it as 40 but it's probably a mistake
+mini_map_info:
+- map_file: 0x01000037
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -130
+  - 220
+  - 430
+  - -180
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x01000037
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x06000034
+  world_edge:
+  - 209.377
+  - -12.2594
+  - 415.007
+  - 18.2042
+  pixel_edge:
+  - 292
+  - 251
+  - 446
+  - 229
+- map_file: 0x01000039
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -122
+  - 740
+  - 340
+  - 399
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x01000039
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x06000035
+  world_edge:
+  - 196.367
+  - 436.74
+  - 324.391
+  - 556.178
+  pixel_edge:
+  - 305
+  - 330
+  - 404
+  - 238
+- map_file: 0x0100003A
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - 400
+  - -250
+  - 1280
+  - -970
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100003A
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x0600003B
+  world_edge:
+  - 969.529
+  - -958.336
+  - 1263.03
+  - -377.64
+  pixel_edge:
+  - 284
+  - 446
+  - 429
+  - 156
+- map_file: 0x0100003B
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -550
+  - 200
+  - 450
+  - -350
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100003B
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D0
+  world_edge:
+  - -425.237
+  - -28.9598
+  - 365.914
+  - -9.36909
+  pixel_edge:
+  - 85
+  - 249
+  - 417
+  - 240
+- map_file: 0x0100005A
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -940
+  - 150
+  - -400
+  - -200
+  pixel_edge:
+  - 32
+  - 0
+  - 16
+  - 16
+- map_file: 0x0100005A
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D1
+  world_edge:
+  - -869.708
+  - 112.867
+  - -693.17
+  - -100.643
+  pixel_edge:
+  - 89
+  - 119
+  - 250
+  - 312
+- map_file: 0x0100005B
+  map: 0x0500000C
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -140
+  - 110
+  - 450
+  - -350
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100005B
+  map: 0x0500000C
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D2
+  world_edge:
+  - -50.6886
+  - 78.0925
+  - 252.349
+  - -176.926
+  pixel_edge:
+  - 109
+  - 143
+  - 322
+  - 322
+- map_file: 0x01000038
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -220
+  - 360
+  - 310
+  - -490
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x01000038
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D3
+  world_edge:
+  - -143.691
+  - 254.592
+  - 76.8139
+  - -434.494
+  pixel_edge:
+  - 147
+  - 102
+  - 255
+  - 439
+- map_file: 0x0100005C
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - 10
+  - -580
+  - 370
+  - -1450
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100005C
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D4
+  world_edge:
+  - 165.364
+  - -1033.96
+  - 360.562
+  - -1389.14
+  pixel_edge:
+  - 236
+  - 269
+  - 330
+  - 440
+- map_file: 0x01000059
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -842
+  - -100
+  - -200
+  - -520
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x01000059
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D5
+  world_edge:
+  - -842.644
+  - -113.601
+  - -370.537
+  - -449.052
+  pixel_edge:
+  - 37
+  - 122
+  - 369
+  - 377
+- map_file: 0x0100005D
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -310
+  - 320
+  - 110
+  - -190
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100005D
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D6
+  world_edge:
+  - -279.302
+  - -55.6748
+  - 49.2129
+  - -73.074
+  pixel_edge:
+  - 127
+  - 370
+  - 341
+  - 381
+- map_file: 0x0100005E
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -370
+  - 1250
+  - 350
+  - 400
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100005E
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D7
+  world_edge:
+  - -10.8159
+  - 575.694
+  - 148.443
+  - 1183.25
+  pixel_edge:
+  - 234
+  - 421
+  - 325
+  - 69
+- map_file: 0x0100005F
+  map: 0x0500000B
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - 160
+  - 980
+  - 280
+  - 800
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 10
+- map_file: 0x0100005F
+  map: 0x0500000B
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D9
+  world_edge:
+  - 189.053
+  - 922.876
+  - 260.348
+  - 861.824
+  pixel_edge:
+  - 159
+  - 185
+  - 335
+  - 335
+- map_file: 0x0100005F
+  map: 0x0500000D
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -260
+  - -970
+  - 140
+  - -1290
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x0100005F
+  map: 0x0500000D
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000D8
+  world_edge:
+  - -219.295
+  - -980.168
+  - 41.2223
+  - -1179.57
+  pixel_edge:
+  - 89
+  - 90
+  - 353
+  - 293
+- map_file: 0x010000A1
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -720
+  - -1360
+  - -300
+  - -1800
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x010000A1
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000DA
+  world_edge:
+  - -657.794
+  - -1423.7
+  - -495.84
+  - -1669.88
+  pixel_edge:
+  - 108
+  - 115
+  - 259
+  - 345
+- map_file: 0x010000A2
+  map: 0xFFFFFFFF
+  type: Mapped
+  texture_file: 0x01000028
+  texture: 0x060000A3
+  world_edge:
+  - -1585
+  - -1180
+  - -925
+  - -1650
+  pixel_edge:
+  - 32
+  - 0
+  - 20
+  - 20
+- map_file: 0x010000A2
+  map: 0xFFFFFFFF
+  type: Background
+  texture_file: 0x010000BC
+  texture: 0x060000DB
+  world_edge:
+  - -1312.58
+  - -1180.78
+  - -949.934
+  - -1524.3
+  pixel_edge:
+  - 217
+  - 116
+  - 447
+  - 335
+mini_map_order:
+- file_hash: 0x01000037
+  map_hash: 0x00000000
+- file_hash: 0x01000037
+  map_hash: 0x00000000
+- file_hash: 0x01000039
+  map_hash: 0x00000000
+- file_hash: 0x0100003A
+  map_hash: 0x00000000
+- file_hash: 0x01000087
+  map_hash: 0x00000000
+- file_hash: 0x0100003B
+  map_hash: 0x00000000
+- file_hash: 0x0100005A
+  map_hash: 0x00000000
+- file_hash: 0x0100005B
+  map_hash: 0x0500000C
+- file_hash: 0x010000EC
+  map_hash: 0x00000000
+- file_hash: 0x01000038
+  map_hash: 0x00000000
+- file_hash: 0x0100005C
+  map_hash: 0x00000000
+- file_hash: 0x01000059
+  map_hash: 0x00000000
+- file_hash: 0x010000E5
+  map_hash: 0x00000000
+- file_hash: 0x0100005D
+  map_hash: 0x00000000
+- file_hash: 0x0100005E
+  map_hash: 0x00000000
+- file_hash: 0x0100005F
+  map_hash: 0x0500000B
+- file_hash: 0x0100005F
+  map_hash: 0x0500000D
+- file_hash: 0x010000A1
+  map_hash: 0x00000000
+- file_hash: 0x010000A2
+  map_hash: 0x00000000
+- file_hash: 0x010000ED
+  map_hash: 0x00000000

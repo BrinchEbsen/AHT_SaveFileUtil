@@ -1,0 +1,73 @@
+file_hash: 0x1000058
+map_hash: 0x85000000
+trigger_list:
+- type: 0x4100014C
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1012601
+  position:
+    x: 5.901474
+    y: 1.727107
+    z: -11.29567
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0x0
+  - 0x0
+  - 0x4
+  - 0x78000000
+  links:
+  - 1
+  gfx_hash_ref: 0x82000009
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100014C
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1003601
+  position:
+    x: 2.979758
+    y: 2.829577
+    z: -12.41862
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0x0
+  - 0x0
+  - 0x4
+  - 0x1
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x8200000A
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000003
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x227F
+  position:
+    x: -0.01691185
+    y: 2.107829
+    z: 0.007013755
+  rotation:
+    x: 3.141593
+    y: 0.1733398
+    z: -5.20661E-15
+  data:
+  - 0x4A000000
+  - 0x28000000
+  - 0x56000000
+  - 0x1000000
+  - 0x5000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0

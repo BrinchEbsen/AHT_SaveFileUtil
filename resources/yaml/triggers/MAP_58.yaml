@@ -1,0 +1,268 @@
+file_hash: 0x1000156
+map_hash: 0x85000000
+trigger_list:
+- type: 0x4100000A
+  sub_type: 0x42000001
+  game_flags: 0x29
+  trig_flags: 0x10026C7
+  position:
+    x: -364.3246
+    y: -260.9713
+    z: -1296.616
+  rotation:
+    x: 0
+    y: 1.692219
+    z: 0
+  data:
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x3F800000
+  - 0xB000285
+  - 0x0
+  - 0x0
+  - 0xC0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100000A
+  sub_type: 0x42000001
+  game_flags: 0x29
+  trig_flags: 0x10026C7
+  position:
+    x: -406.7325
+    y: -260.9713
+    z: -1254.267
+  rotation:
+    x: 0
+    y: -2.356944
+    z: 0
+  data:
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x3F800000
+  - 0xB000284
+  - 0x0
+  - 0x0
+  - 0xC0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001B
+  game_flags: 0x0
+  trig_flags: 0x220F
+  position:
+    x: -387.8072
+    y: -255.169
+    z: -1274.916
+  rotation:
+    x: 0
+    y: -0.8903224
+    z: 0
+  data:
+  - 0x41A00000
+  - 0x41A00000
+  - 0x10000A1
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001A
+  game_flags: 0x0
+  trig_flags: 0x221F
+  position:
+    x: -402.7455
+    y: -255.169
+    z: -1259.419
+  rotation:
+    x: 0
+    y: 2.163424
+    z: 0
+  data:
+  - 0x41A00000
+  - 0x41A00000
+  - 0x10000A1
+  - 0x4A000011
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001B
+  game_flags: 0x0
+  trig_flags: 0x220F
+  position:
+    x: -385.8613
+    y: -255.2731
+    z: -1277.187
+  rotation:
+    x: 0
+    y: 2.443256
+    z: 0
+  data:
+  - 0x41A00000
+  - 0x41A00000
+  - 0x100005F
+  - 0x500000D
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001A
+  game_flags: 0x0
+  trig_flags: 0x221F
+  position:
+    x: -374.1625
+    y: -255.3152
+    z: -1287.077
+  rotation:
+    x: 0
+    y: -0.9258085
+    z: 0
+  data:
+  - 0x41A00000
+  - 0x41A00000
+  - 0x100005F
+  - 0x4A000011
+  - 0x500000D
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100000A
+  sub_type: 0x42000001
+  game_flags: 0x29
+  trig_flags: 0x10026C7
+  position:
+    x: -392.4499
+    y: -260.9713
+    z: -1266.66
+  rotation:
+    x: 0
+    y: -0.4545355
+    z: 0
+  data:
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x0
+  - 0xC0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100000A
+  sub_type: 0x42000001
+  game_flags: 0x29
+  trig_flags: 0x10026C7
+  position:
+    x: -465.0919
+    y: -260.9713
+    z: -1242.649
+  rotation:
+    x: 0
+    y: -0.4545355
+    z: 0
+  data:
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x0
+  - 0xC0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100000A
+  sub_type: 0x42000001
+  game_flags: 0x29
+  trig_flags: 0x10026C7
+  position:
+    x: -474.1828
+    y: -260.9713
+    z: -1255.506
+  rotation:
+    x: 0
+    y: -2.828183
+    z: 0
+  data:
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x3F800000
+  - 0xB000286
+  - 0x0
+  - 0x0
+  - 0xC0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000BE
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x2201
+  position:
+    x: -444.8325
+    y: 0
+    z: -1232.036
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0x1AE0001E
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000AA
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x2E1F
+  position:
+    x: -295.9932
+    y: -261.8332
+    z: -1292.34
+  rotation:
+    x: 0
+    y: -1.065844
+    z: 0
+  data:
+  - 0xB000313
+  - 0xB000000
+  - 0x1E
+  - 0x3CA3D70A
+  - 0x3DA3D70A
+  - 0xFFFFFFFF
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0

@@ -372,6 +372,3 @@ FodyWeavers.xsd
 
 # Game Executable
 main.dol
-
-# YAML Files
-*.yaml

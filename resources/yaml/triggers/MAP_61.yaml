@@ -1,0 +1,1648 @@
+file_hash: 0x100005F
+map_hash: 0x500000B
+trigger_list:
+- type: 0x41000003
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x227F
+  position:
+    x: 221.2493
+    y: -144.6689
+    z: 959.1497
+  rotation:
+    x: 0
+    y: 2.1127
+    z: 0
+  data:
+  - 0x4A000000
+  - 0x56000000
+  - 0x56000001
+  - 0x1000154
+  - 0x5000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000066
+  sub_type: 0x42000001
+  game_flags: 0x8
+  trig_flags: 0x100026CF
+  position:
+    x: 260.8093
+    y: -127.6285
+    z: 931.9821
+  rotation:
+    x: 0
+    y: 0.6283185
+    z: 0
+  data:
+  - 0x40400000
+  - 0x0
+  - 0x28000083
+  - 0x28000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x40
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000051
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1002F7F
+  position:
+    x: 261.524
+    y: -123.8963
+    z: 868.7499
+  rotation:
+    x: 0
+    y: -1.431374
+    z: 0
+  data:
+  - 0x4000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x4000078
+  - 0x2000000
+  - 0x1D00
+  - 0x44000000
+  - 0x20000000
+  - 0x2
+  - 0x42F00000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000005
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000BE
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x2201
+  position:
+    x: 121.9205
+    y: -84.38966
+    z: 514.6418
+  rotation:
+    x: 0
+    y: 0.8552113
+    z: 0
+  data:
+  - 0x1AE0001D
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x2
+  trig_flags: 0x13002E03
+  position:
+    x: 204.6102
+    y: -140.234
+    z: 901.8053
+  rotation:
+    x: 0
+    y: 2.041217
+    z: 0
+  data:
+  - 0x40400000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 182.8516
+    y: -113.9028
+    z: 816.062
+  rotation:
+    x: 0
+    y: 2.547363
+    z: 0
+  data:
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 194.7608
+    y: -111.2105
+    z: 810.8386
+  rotation:
+    x: 0
+    y: 1.744511
+    z: 0
+  data:
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 185.1446
+    y: -113.9028
+    z: 860.9424
+  rotation:
+    x: 0
+    y: 0.7671267
+    z: 0
+  data:
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x41000108
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002E12
+  position:
+    x: 195.4725
+    y: -111.9768
+    z: 852.9353
+  rotation:
+    x: 0
+    y: 2.827433
+    z: 0
+  data:
+  - 0x40A00000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000D0
+  script_index: 0
+- type: 0x41000108
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002E12
+  position:
+    x: 194.6674
+    y: -111.6257
+    z: 825.0739
+  rotation:
+    x: 0
+    y: 0.3141592
+    z: 0
+  data:
+  - 0x40A00000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000D0
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002282
+  position:
+    x: 238.8616
+    y: -127.6871
+    z: 920.8214
+  rotation:
+    x: 0
+    y: 1.064139
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 237.9031
+    y: -127.6871
+    z: 925.6575
+  rotation:
+    x: 0
+    y: 1.709911
+    z: 0
+  data:
+  - 0x5100000F
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 209.7178
+    y: -144.4986
+    z: 922.0358
+  rotation:
+    x: 0
+    y: 0.139115
+    z: 0
+  data:
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 217.3258
+    y: -144.4986
+    z: 922.7888
+  rotation:
+    x: 0
+    y: -0.279764
+    z: 0
+  data:
+  - 0x5100000F
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 284.1943
+    y: -123.9923
+    z: 859.8203
+  rotation:
+    x: 0
+    y: 2.303323
+    z: 0
+  data:
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 286.2372
+    y: -123.8206
+    z: 868.2966
+  rotation:
+    x: 0
+    y: 0.9070598
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x4100003B
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 178.3909
+    y: -114.9982
+    z: 821.3509
+  rotation:
+    x: 0
+    y: 0.4532743
+    z: 0
+  data:
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000070
+  geo_file_hash_ref: 0x1000064
+  script_index: 0
+- type: 0x4100003B
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 189.329
+    y: -112.0175
+    z: 810.4044
+  rotation:
+    x: 0
+    y: 0.4532743
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x42700000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000070
+  geo_file_hash_ref: 0x1000064
+  script_index: 0
+- type: 0x4100003B
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 186.6809
+    y: -113.424
+    z: 863.6788
+  rotation:
+    x: 0
+    y: 0.4532743
+    z: 0
+  data:
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000070
+  geo_file_hash_ref: 0x1000064
+  script_index: 0
+- type: 0x4100013D
+  sub_type: 0x42000001
+  game_flags: 0x4001
+  trig_flags: 0x3012E01
+  position:
+    x: 194.5014
+    y: -110.8255
+    z: 864.8906
+  rotation:
+    x: 0.4446426
+    y: -0.4572738
+    z: 0.192318
+  data:
+  - 0xB00009D
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  - 22
+  gfx_hash_ref: 0x2000252
+  geo_file_hash_ref: 0x10000F3
+  script_index: 0
+- type: 0x41000029
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 219.3713
+    y: -144.4986
+    z: 934.2862
+  rotation:
+    x: 0
+    y: -1.605703
+    z: 0
+  data:
+  - 0x51000017
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004A
+  script_index: 0
+- type: 0x41000029
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 225.4631
+    y: -144.4902
+    z: 927.4052
+  rotation:
+    x: 0
+    y: 1.53589
+    z: 0
+  data:
+  - 0x5100001D
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004A
+  script_index: 0
+- type: 0x41000027
+  sub_type: 0x42000001
+  game_flags: 0x20
+  trig_flags: 0x13002283
+  position:
+    x: 197.4016
+    y: -111.8743
+    z: 845.4954
+  rotation:
+    x: 0
+    y: -0.2268928
+    z: 0
+  data:
+  - 0x52100000
+  - 0x5100001D
+  - 0x4400002A
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004E
+  script_index: 0
+- type: 0x41000051
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1002F7F
+  position:
+    x: 187.8521
+    y: -126.497
+    z: 809.3621
+  rotation:
+    x: 0
+    y: 0.4012212
+    z: 0
+  data:
+  - 0x4000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x4000078
+  - 0x2000000
+  - 0x1D00
+  - 0x44000000
+  - 0x20000000
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000028
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000051
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1002F7F
+  position:
+    x: 222.8455
+    y: -144.2596
+    z: 927.462
+  rotation:
+    x: 0
+    y: -1.413921
+    z: 0
+  data:
+  - 0x4000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x4000078
+  - 0x2000000
+  - 0x1D00
+  - 0x44000000
+  - 0x20000000
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000028
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000D7
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002D06
+  position:
+    x: 198.1153
+    y: -144.4436
+    z: 907.6603
+  rotation:
+    x: 0
+    y: 2.162572
+    z: 0
+  data:
+  - 0xB00018D
+  - 0x44000000
+  - 0x2
+  - 0x202
+  - 0x428C0000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x3000002
+  geo_file_hash_ref: 0x10000A0
+  script_index: 0
+- type: 0x41000013
+  sub_type: 0x42000001
+  game_flags: 0x808B
+  trig_flags: 0x13002FCE
+  position:
+    x: 249.6535
+    y: -127.8385
+    z: 914.9132
+  rotation:
+    x: 0
+    y: 0.3307944
+    z: 0
+  data:
+  - 0x1
+  - 0xB000000
+  - 0xB000000
+  - 0x20000064
+  - 0xB000000
+  - 0x52100000
+  - 0x0
+  - 0x202
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x1000139
+  script_index: 0
+- type: 0x41000013
+  sub_type: 0x42000017
+  game_flags: 0x793
+  trig_flags: 0x13002FDE
+  position:
+    x: 197.8956
+    y: -144.6522
+    z: 935.9653
+  rotation:
+    x: 0
+    y: -1.466895
+    z: 0
+  data:
+  - 0x9
+  - 0xB000000
+  - 0xB000000
+  - 0x8000
+  - 0x2000007D
+  - 0xB000125
+  - 0x52100000
+  - 0x0
+  - 0x2
+  - 0x42A00000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x3000030
+  geo_file_hash_ref: 0x100013F
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x2
+  trig_flags: 0x13002E03
+  position:
+    x: 225.4501
+    y: -133.2985
+    z: 890.3099
+  rotation:
+    x: 0
+    y: 1.901591
+    z: 0
+  data:
+  - 0x40400000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 242.1845
+    y: -128.9089
+    z: 895.3206
+  rotation:
+    x: 0
+    y: 0.5402339
+    z: 0
+  data:
+  - 0x40000000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 236.1348
+    y: -128.9089
+    z: 880.7496
+  rotation:
+    x: 0
+    y: 2.564816
+    z: 0
+  data:
+  - 0x40000000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42960000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x41000007
+  sub_type: 0x4200005D
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 210.3112
+    y: -124.1952
+    z: 836.3563
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0xB00027A
+  - 0xB0002D7
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002B
+  geo_file_hash_ref: 0x10000E2
+  script_index: 0
+- type: 0x41000007
+  sub_type: 0x4200005D
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 208.4119
+    y: -123.0933
+    z: 853.8151
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0xB00027A
+  - 0xB0002D7
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002B
+  geo_file_hash_ref: 0x10000E2
+  script_index: 0
+- type: 0x41000007
+  sub_type: 0x4200005D
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 185.3981
+    y: -124.2315
+    z: 831.9681
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0xB00027A
+  - 0xB0002D7
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002B
+  geo_file_hash_ref: 0x10000E2
+  script_index: 0
+- type: 0x41000034
+  sub_type: 0x42000001
+  game_flags: 0x2
+  trig_flags: 0x1700220F
+  position:
+    x: 248.1745
+    y: -125.7611
+    z: 867.3768
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0x200019D
+  - 0x1000000
+  - 0x1000000
+  - 0xB000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x1000147
+  script_index: 0
+- type: 0x41000003
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x227F
+  position:
+    x: 248.1592
+    y: -125.7625
+    z: 867.4189
+  rotation:
+    x: 0
+    y: -0.9078098
+    z: 0
+  data:
+  - 0x4A000012
+  - 0x280005D6
+  - 0x56000000
+  - 0x1000000
+  - 0x5000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100003A
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x2201
+  position:
+    x: 248.1138
+    y: -125.7627
+    z: 867.4321
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0x0
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000013
+  sub_type: 0x42000001
+  game_flags: 0x808B
+  trig_flags: 0x130023CE
+  position:
+    x: 272.9865
+    y: -123.8199
+    z: 865.2069
+  rotation:
+    x: 0
+    y: 1.779418
+    z: 0
+  data:
+  - 0x1
+  - 0xB000000
+  - 0xB000000
+  - 0x20000064
+  - 0xB000000
+  - 0x52100000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x1000139
+  script_index: 0
+- type: 0x41000013
+  sub_type: 0x42000001
+  game_flags: 0x808B
+  trig_flags: 0x130027CE
+  position:
+    x: 244.4167
+    y: -127.8385
+    z: 927.621
+  rotation:
+    x: 0
+    y: -0.2800708
+    z: 0
+  data:
+  - 0x1
+  - 0xB000000
+  - 0xB000000
+  - 0x20000064
+  - 0xB000000
+  - 0x52100000
+  - 0x0
+  - 0x200
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x1000139
+  script_index: 0
+- type: 0x41000028
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002283
+  position:
+    x: 286.53
+    y: -123.9923
+    z: 863.7054
+  rotation:
+    x: 0
+    y: 1.727876
+    z: 0
+  data:
+  - 0x5210000B
+  - 0x51000000
+  - 0x44000029
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000289
+  geo_file_hash_ref: 0x100004C
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 240.1587
+    y: -127.6871
+    z: 931.0869
+  rotation:
+    x: 0
+    y: 2.268417
+    z: 0
+  data:
+  - 0x51000014
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002E03
+  position:
+    x: 238.0002
+    y: -125.0783
+    z: 845.1647
+  rotation:
+    x: 0
+    y: -2.985331
+    z: 0
+  data:
+  - 0x40A00000
+  - 0xB000000
+  - 0x0
+  - 0x202
+  - 0x42700000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x41000051
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1002F7F
+  position:
+    x: 229.1588
+    y: -144.5192
+    z: 974.8329
+  rotation:
+    x: 0
+    y: -2.653105
+    z: 0
+  data:
+  - 0x4000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x4000078
+  - 0x2000000
+  - 0x1D00
+  - 0x44000000
+  - 0x20000000
+  - 0x2
+  - 0x42AA0000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000028
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001B
+  game_flags: 0x0
+  trig_flags: 0x220F
+  position:
+    x: 243.6768
+    y: -124.8876
+    z: 898.8586
+  rotation:
+    x: 0
+    y: 0.2965014
+    z: 0
+  data:
+  - 0x41A00000
+  - 0x41A00000
+  - 0x100005F
+  - 0x500000C
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001A
+  game_flags: 0x0
+  trig_flags: 0x221F
+  position:
+    x: 260.7897
+    y: -129.9539
+    z: 931.9582
+  rotation:
+    x: -1.570796
+    y: 0
+    z: 0
+  data:
+  - 0x41200000
+  - 0x41200000
+  - 0x100005F
+  - 0x4A000001
+  - 0x500000C
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001A
+  game_flags: 0x0
+  trig_flags: 0x221F
+  position:
+    x: 198.1859
+    y: -139.985
+    z: 905.592
+  rotation:
+    x: 0
+    y: 2.111064
+    z: 0
+  data:
+  - 0x41F00000
+  - 0x41F00000
+  - 0x1000154
+  - 0x4A000011
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001B
+  game_flags: 0x0
+  trig_flags: 0x220F
+  position:
+    x: 207.3029
+    y: -136.6547
+    z: 900.1433
+  rotation:
+    x: 0
+    y: -0.9775889
+    z: 0
+  data:
+  - 0x41F00000
+  - 0x41F00000
+  - 0x1000154
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x410000AA
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x1002E1F
+  position:
+    x: 277.7942
+    y: -119.7317
+    z: 863.7895
+  rotation:
+    x: 0
+    y: -1.065844
+    z: 0
+  data:
+  - 0xB0002CA
+  - 0xB000000
+  - 0x1E
+  - 0x3CA3D70A
+  - 0x3DA3D70A
+  - 0xFFFFFFFF
+  - 0x2
+  - 0x42480000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x82000009
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100003B
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 220.506
+    y: -122.1607
+    z: 897.1021
+  rotation:
+    x: 0
+    y: -0.9778957
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x425C0000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000070
+  geo_file_hash_ref: 0x1000064
+  script_index: 0
+- type: 0x41000028
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002E83
+  position:
+    x: 225.4277
+    y: -122.1438
+    z: 895.2509
+  rotation:
+    x: 0
+    y: -0.57647
+    z: 0
+  data:
+  - 0x52100001
+  - 0x51000000
+  - 0x44000029
+  - 0x0
+  - 0x2
+  - 0x425C0000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000289
+  geo_file_hash_ref: 0x100004C
+  script_index: 0
+- type: 0x4100003B
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002E82
+  position:
+    x: 224.1001
+    y: -122.1419
+    z: 899.5175
+  rotation:
+    x: 0
+    y: -0.9778957
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x2
+  - 0x425C0000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000070
+  geo_file_hash_ref: 0x1000064
+  script_index: 0
+- type: 0x41000007
+  sub_type: 0x4200005D
+  game_flags: 0x0
+  trig_flags: 0x13002E03
+  position:
+    x: 187.7927
+    y: -123.5467
+    z: 849.525
+  rotation:
+    x: 0
+    y: -1.029744
+    z: 0
+  data:
+  - 0xB00027A
+  - 0xB0002D7
+  - 0x0
+  - 0x2
+  - 0x42820000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002B
+  geo_file_hash_ref: 0x10000E2
+  script_index: 0
+- type: 0x410000FF
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x13002E03
+  position:
+    x: 230.4808
+    y: -125.0783
+    z: 832.5753
+  rotation:
+    x: 0
+    y: -2.095213
+    z: 0
+  data:
+  - 0x3F800000
+  - 0xB000000
+  - 0x0
+  - 0x202
+  - 0x42700000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x10000C1
+  script_index: 0
+- type: 0x41000105
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x10022FF
+  position:
+    x: 220.6463
+    y: -151.684
+    z: 881.4337
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0xB0002D9
+  - 0x40000000
+  - 0x40000000
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x400017A
+  - 0x400017A
+  - 0x100005F
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x84000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000105
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x10022FF
+  position:
+    x: 243.4156
+    y: -151.7092
+    z: 889.0466
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0xB0002DA
+  - 0x40000000
+  - 0x40000000
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x400017A
+  - 0x400017A
+  - 0x100005F
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x84000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000105
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x10022FF
+  position:
+    x: 201.5891
+    y: -151.5976
+    z: 895.3165
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0xB0002D8
+  - 0x40000000
+  - 0x40000000
+  - 0x3D23D70A
+  - 0x3F000000
+  - 0x400017A
+  - 0x400017A
+  - 0x100005F
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x84000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000003
+  sub_type: 0x42000001
+  game_flags: 0x8
+  trig_flags: 0x267F
+  position:
+    x: 260.8082
+    y: -127.6752
+    z: 931.9823
+  rotation:
+    x: 0
+    y: -2.583087
+    z: 0
+  data:
+  - 0x4A00001A
+  - 0x28000000
+  - 0x28000083
+  - 0x28000000
+  - 0x5000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x80
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100001F
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x3002283
+  position:
+    x: 196.7587
+    y: -110.2073
+    z: 834.2043
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0x50000000
+  - 0x44000000
+  - 0x78000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000058
+  geo_file_hash_ref: 0x1000062
+  script_index: 0
+- type: 0x41000034
+  sub_type: 0x42000001
+  game_flags: 0x1
+  trig_flags: 0x17002E0F
+  position:
+    x: 218.0208
+    y: -144.551
+    z: 961.6994
+  rotation:
+    x: 0
+    y: -1.378094
+    z: 0
+  data:
+  - 0x2000063
+  - 0x1000000
+  - 0x1000000
+  - 0xB000000
+  - 0x0
+  - 0x2
+  - 0x42700000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x300002E
+  geo_file_hash_ref: 0x1000063
+  script_index: 1
+- type: 0x41000003
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x227F
+  position:
+    x: 220.4547
+    y: -144.6689
+    z: 959.7758
+  rotation:
+    x: 0
+    y: 0.5768108
+    z: 0
+  data:
+  - 0x4A000001
+  - 0x28000000
+  - 0x56000001
+  - 0x1000154
+  - 0x5000000
+  - 0x1000000
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002282
+  position:
+    x: 230.7814
+    y: -144.5006
+    z: 977.153
+  rotation:
+    x: 0
+    y: 0.3660078
+    z: 0
+  data:
+  - 0x5100000C
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x41000026
+  sub_type: 0x42000001
+  game_flags: 0x8
+  trig_flags: 0x1300228E
+  position:
+    x: 186.4178
+    y: -126.4631
+    z: 806.1811
+  rotation:
+    x: 0
+    y: -2.793038
+    z: 0
+  data:
+  - 0x51000014
+  - 0xC1A00000
+  - 0x43340000
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004D
+  script_index: 0
+- type: 0x4100002A
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002283
+  position:
+    x: 225.7446
+    y: -144.5261
+    z: 950.9874
+  rotation:
+    x: 0
+    y: 0.139115
+    z: 0
+  data:
+  - 0x52100000
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004B
+  script_index: 0
+- type: 0x4100002A
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002283
+  position:
+    x: 210.9078
+    y: -144.5156
+    z: 964.4488
+  rotation:
+    x: 0
+    y: 0.139115
+    z: 0
+  data:
+  - 0x52100000
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004B
+  script_index: 0
+- type: 0x4100002A
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x13002283
+  position:
+    x: 235.7431
+    y: -144.5131
+    z: 966.907
+  rotation:
+    x: 0
+    y: 0.139115
+    z: 0
+  data:
+  - 0x52100000
+  - 0x51000011
+  - 0x44000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x2000018
+  geo_file_hash_ref: 0x100004B
+  script_index: 0
+- type: 0x41000100
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x1100227F
+  position:
+    x: 218.5457
+    y: -144.5168
+    z: 977.1493
+  rotation:
+    x: 0
+    y: 0.139115
+    z: 0
+  data:
+  - 0x1000000
+  - 0x51000011
+  - 0x3F800000
+  - 0x3F800000
+  - 0x2000000
+  - 0x19
+  - 0x1
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x8200001B
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000097
+  sub_type: 0x42000010
+  game_flags: 0x4
+  trig_flags: 0x2207
+  position:
+    x: 191.9338
+    y: -126.497
+    z: 854.738
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0xB0003C3
+  - 0x2000027
+  - 0x41200000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000105
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x10022FF
+  position:
+    x: 188.489
+    y: -127.1904
+    z: 815.2975
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0xB0003D0
+  - 0x40000000
+  - 0x40000000
+  - 0x3D4CCCCC
+  - 0x3F000000
+  - 0x400017A
+  - 0x400017A
+  - 0x100005F
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x84000000
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x41000193
+  sub_type: 0x42000001
+  game_flags: 0x0
+  trig_flags: 0x2EFF
+  position:
+    x: 225.0783
+    y: 1.686504
+    z: 831.775
+  rotation:
+    x: 0
+    y: 1.570796
+    z: 0
+  data:
+  - 0xB000372
+  - 0xB000000
+  - 0xB000000
+  - 0xB000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x2000000
+  - 0x0
+  - 0x82
+  - 0x43160000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
