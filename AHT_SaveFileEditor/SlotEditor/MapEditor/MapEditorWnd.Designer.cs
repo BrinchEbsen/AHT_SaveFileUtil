@@ -32,6 +32,11 @@
             splitContainer2 = new SplitContainer();
             splitContainer3 = new SplitContainer();
             Panel_MiniMap = new Panel();
+            Check_ShowSquares = new CheckBox();
+            Btn_PaintFill = new Button();
+            Btn_PaintClear = new Button();
+            Btn_PaintUnreveal = new Button();
+            Btn_PaintReveal = new Button();
             Check_ShowMiniMap = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +67,7 @@
             // 
             splitContainer2.Dock = DockStyle.Fill;
             splitContainer2.FixedPanel = FixedPanel.Panel1;
+            splitContainer2.IsSplitterFixed = true;
             splitContainer2.Location = new Point(0, 0);
             splitContainer2.Name = "splitContainer2";
             splitContainer2.Orientation = Orientation.Horizontal;
@@ -77,6 +83,7 @@
             // 
             splitContainer3.Dock = DockStyle.Fill;
             splitContainer3.FixedPanel = FixedPanel.Panel1;
+            splitContainer3.IsSplitterFixed = true;
             splitContainer3.Location = new Point(0, 0);
             splitContainer3.Name = "splitContainer3";
             // 
@@ -86,6 +93,11 @@
             // 
             // splitContainer3.Panel2
             // 
+            splitContainer3.Panel2.Controls.Add(Check_ShowSquares);
+            splitContainer3.Panel2.Controls.Add(Btn_PaintFill);
+            splitContainer3.Panel2.Controls.Add(Btn_PaintClear);
+            splitContainer3.Panel2.Controls.Add(Btn_PaintUnreveal);
+            splitContainer3.Panel2.Controls.Add(Btn_PaintReveal);
             splitContainer3.Panel2.Controls.Add(Check_ShowMiniMap);
             splitContainer3.Size = new Size(829, 512);
             splitContainer3.SplitterDistance = 512;
@@ -99,6 +111,62 @@
             Panel_MiniMap.Name = "Panel_MiniMap";
             Panel_MiniMap.Size = new Size(512, 512);
             Panel_MiniMap.TabIndex = 0;
+            // 
+            // Check_ShowSquares
+            // 
+            Check_ShowSquares.AutoSize = true;
+            Check_ShowSquares.Checked = true;
+            Check_ShowSquares.CheckState = CheckState.Checked;
+            Check_ShowSquares.Location = new Point(158, 12);
+            Check_ShowSquares.Name = "Check_ShowSquares";
+            Check_ShowSquares.Size = new Size(105, 19);
+            Check_ShowSquares.TabIndex = 5;
+            Check_ShowSquares.Text = "Debug Squares";
+            Check_ShowSquares.UseVisualStyleBackColor = true;
+            Check_ShowSquares.CheckedChanged += Check_ShowSquares_CheckedChanged;
+            // 
+            // Btn_PaintFill
+            // 
+            Btn_PaintFill.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_PaintFill.Location = new Point(84, 66);
+            Btn_PaintFill.Name = "Btn_PaintFill";
+            Btn_PaintFill.Size = new Size(75, 23);
+            Btn_PaintFill.TabIndex = 4;
+            Btn_PaintFill.Text = "Fill";
+            Btn_PaintFill.UseVisualStyleBackColor = false;
+            Btn_PaintFill.Click += Btn_PaintFill_Click;
+            // 
+            // Btn_PaintClear
+            // 
+            Btn_PaintClear.BackColor = Color.FromArgb(255, 192, 192);
+            Btn_PaintClear.Location = new Point(3, 66);
+            Btn_PaintClear.Name = "Btn_PaintClear";
+            Btn_PaintClear.Size = new Size(75, 23);
+            Btn_PaintClear.TabIndex = 3;
+            Btn_PaintClear.Text = "Clear";
+            Btn_PaintClear.UseVisualStyleBackColor = false;
+            Btn_PaintClear.Click += Btn_PaintClear_Click;
+            // 
+            // Btn_PaintUnreveal
+            // 
+            Btn_PaintUnreveal.Location = new Point(84, 37);
+            Btn_PaintUnreveal.Name = "Btn_PaintUnreveal";
+            Btn_PaintUnreveal.Size = new Size(75, 23);
+            Btn_PaintUnreveal.TabIndex = 2;
+            Btn_PaintUnreveal.Text = "Unreveal";
+            Btn_PaintUnreveal.UseVisualStyleBackColor = true;
+            Btn_PaintUnreveal.Click += Btn_PaintUnreveal_Click;
+            // 
+            // Btn_PaintReveal
+            // 
+            Btn_PaintReveal.Enabled = false;
+            Btn_PaintReveal.Location = new Point(3, 37);
+            Btn_PaintReveal.Name = "Btn_PaintReveal";
+            Btn_PaintReveal.Size = new Size(75, 23);
+            Btn_PaintReveal.TabIndex = 1;
+            Btn_PaintReveal.Text = "Reveal";
+            Btn_PaintReveal.UseVisualStyleBackColor = true;
+            Btn_PaintReveal.Click += Btn_PaintReveal_Click;
             // 
             // Check_ShowMiniMap
             // 
@@ -144,5 +212,10 @@
         private SplitContainer splitContainer3;
         private Panel Panel_MiniMap;
         private CheckBox Check_ShowMiniMap;
+        private Button Btn_PaintUnreveal;
+        private Button Btn_PaintReveal;
+        private Button Btn_PaintClear;
+        private Button Btn_PaintFill;
+        private CheckBox Check_ShowSquares;
     }
 }

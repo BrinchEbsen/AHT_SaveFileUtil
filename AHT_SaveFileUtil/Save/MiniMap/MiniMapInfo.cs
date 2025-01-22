@@ -126,8 +126,8 @@ namespace AHT_SaveFileUtil.Save.MiniMap
 
         public int GetBitHeapOffset(float x, float z)
         {
-            if (!WorldPosWithinWorldEdges(x, z))
-                return -1;
+            //if (!WorldPosWithinWorldEdges(x, z))
+            //    return -1;
 
             //Div by 0 guard
             if (PixelEdge[2] == 0 || PixelEdge[3] == 0)
@@ -174,6 +174,36 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             return [
                 (int)(textureSize * xRatio),
                 (int)(textureSize * zRatio)
+                ];
+        }
+
+        public float[] GetWorldPositionFromPixelCoords(int x, int z, int textureSize)
+        {
+            if (Type != InfoType.Background) return [0, 0];
+
+            if (textureSize <= 0) return [0, 0];
+
+            bool success = GetTextureWorldEdges(
+                out float xLeft, out float xRight, out float zUp, out float zBottom);
+
+            if (!success) return [0, 0];
+
+            //Get the world measurements of the background
+            float xSpan = Math.Abs(xRight - xLeft);
+            float zSpan = Math.Abs(zUp - zBottom);
+
+            //Get the ratios of how far the position is along the minimap
+            float xRatio = (float)x / (float)textureSize;
+            float zRatio = (float)z / (float)textureSize;
+
+            //Get the local position compared to the minimap's top-left
+            float localX = xSpan * xRatio;
+            float localZ = zSpan * zRatio;
+
+            //Get absolute position
+            return [
+                xLeft + localX,
+                zBottom + localZ,
                 ];
         }
 

@@ -5,15 +5,33 @@ using System.ComponentModel;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
+    public enum PaintMode
+    {
+        None = 0,
+        Reveal = 1,
+        Unreveal = 2
+    }
+
     internal class MiniMapPanel : Panel
     {
-        private GameState _gameState;
-        private Map _mapIndex;
+        private readonly GameState _gameState;
+        private readonly Map _mapIndex;
         private MiniMapInfo? _mappedInfo;
         private MiniMapInfo? _backgroundInfo;
 
         private Image? _miniMapTexture = null;
         private Image? _revealBlob = null;
+
+        private Pen redPen = new Pen(Color.Red);
+
+        private int testx = 0;
+        private int testy = 0;
+        private int testoffset = 0;
+        private float testwx = 0;
+        private float testwz = 0;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public PaintMode PaintMode { get; set; } = PaintMode.None;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool UsingDefault { get; set; } = false;
@@ -21,15 +39,21 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ShowMiniMap { get; set; } = true;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ShowSquares { get; set; } = true;
+
         public MiniMapPanel(GameState gameState, Map mapIndex)
         {
-            this._gameState = gameState;
-            this._mapIndex = mapIndex;
+            _gameState = gameState;
+            _mapIndex = mapIndex;
 
             Size = new Size(512, 512);
             DoubleBuffered = true;
 
             Paint += MiniMapPanel_Paint;
+
+            MouseClick += MiniMapPanel_MouseClick;
+            MouseMove += MiniMapPanel_MouseMove;
 
             var rsc = ResourceHandler.Instance;
             if (rsc.AllYamlLoaded && rsc.AllTexturesLoaded)
@@ -41,6 +65,67 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             {
                 Controls.Add(new Label() { Text = "Required YAML/Texture files could not be found." });
             }
+        }
+
+        private void MiniMapPanel_MouseMove(object? sender, MouseEventArgs e)
+        {
+            DoMouseEvent(e);
+        }
+
+        private void MiniMapPanel_MouseClick(object? sender, MouseEventArgs e)
+        {
+            DoMouseEvent(e);
+        }
+
+        private void DoMouseEvent(MouseEventArgs e)
+        {
+            if (e.X < 0 || e.X >= 512) return;
+            if (e.Y < 0 || e.Y >= 512) return;
+
+            testx = e.X;
+            testy = e.Y;
+
+            if (e.Button == MouseButtons.Left)
+            {
+                TryDrawReveal(e);
+                Invalidate();
+            }
+        }
+
+        private void TryDrawReveal(MouseEventArgs e)
+        {
+            if (PaintMode == PaintMode.None) return;
+            if (_mappedInfo == null) return;
+            if (_backgroundInfo == null) return;
+            if (ResourceHandler.Instance.MiniMaps == null) return;
+
+            float[] worldPos = _backgroundInfo.GetWorldPositionFromPixelCoords(e.X, 512-e.Y, 512);
+
+            testwx = worldPos[0];
+            testwz = worldPos[1];
+
+            if (worldPos[0] < _mappedInfo.WorldEdge[0] ||
+                worldPos[0] > _mappedInfo.WorldEdge[2] + _mappedInfo.PixelEdge[0] * 0.5f ||
+                worldPos[1] < _mappedInfo.WorldEdge[3] ||
+                worldPos[1] > _mappedInfo.WorldEdge[1] + _mappedInfo.PixelEdge[0] * 0.5f)
+                return;
+
+            int offset = _mappedInfo.GetBitHeapOffset(
+                worldPos[0],
+                worldPos[1]);
+
+            testoffset = offset;
+            int size = _mappedInfo.BitHeapSize;
+
+            if (offset > size) return;
+
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            if (address < 0) return;
+
+            byte value = PaintMode == PaintMode.Reveal ? (byte)1 : (byte)0;
+
+            if (_gameState.BitHeap.ValidAllocatedBitHeapAddress(address + offset))
+                _gameState.BitHeap.WriteBits(1, [value], address + offset);
         }
 
         private bool SetUpTextures()
@@ -125,12 +210,42 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             graphics.Clear(Color.Black);
 
             if (!UsingDefault)
-            {
                 DrawRevealedArea(graphics);
-            }
 
             if (ShowMiniMap)
                 graphics.DrawImage(_miniMapTexture, 0, 0);
+
+            /*
+            graphics.DrawString(testx.ToString(),
+                new Font(FontFamily.GenericSansSerif, 18),
+                new SolidBrush(Color.Red),
+                20, 20
+                );
+
+            graphics.DrawString(testy.ToString(),
+                new Font(FontFamily.GenericSansSerif, 18),
+                new SolidBrush(Color.Red),
+                20, 50
+                );
+
+            graphics.DrawString(testoffset.ToString(),
+                new Font(FontFamily.GenericSansSerif, 18),
+                new SolidBrush(Color.Red),
+                20, 80
+                );
+
+            graphics.DrawString(testwx.ToString(),
+                new Font(FontFamily.GenericSansSerif, 18),
+                new SolidBrush(Color.Red),
+                20, 110
+                );
+
+            graphics.DrawString(testwz.ToString(),
+                new Font(FontFamily.GenericSansSerif, 18),
+                new SolidBrush(Color.Red),
+                20, 140
+                );
+            */
         }
 
         private void DrawRevealedArea(Graphics graphics)
@@ -144,26 +259,29 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             int address = miniMaps.GetMiniMapInfoOffset(_mappedInfo);
             if (address < 0) return;
 
-            bool[][] array = _mappedInfo.GetArrayFromBitHeap(_gameState.BitHeap, address);
+            //Get dimensions
+            int[] dim = _mappedInfo.MappedGridSize;
 
-            float[] bottomLeft = [
-                    _mappedInfo.WorldEdge[0],
-                    _mappedInfo.WorldEdge[3]
-                ];
+            //Get bits
+            var span = new BitSpanReader(
+                _gameState.BitHeap.ReadBits(_mappedInfo.BitHeapSize, address));
 
-            for (int z = 0; z < array.Length; z++)
+            for (int z = 0; z < dim[1]; z++)
             {
-                for (int x = 0; x < array[z].Length; x++)
+                for (int x = 0; x < dim[0]; x++)
                 {
-                    float cellPosX = bottomLeft[0] + x * _mappedInfo.PixelEdge[2] + (_mappedInfo.PixelEdge[2] * 0.5f);
-                    float cellPosZ = bottomLeft[1] + z * _mappedInfo.PixelEdge[3] + (_mappedInfo.PixelEdge[3] * 0.5f);
-
-                    int[] pixPos = _backgroundInfo.GetPixelCoordsFromWorldPosition(
-                        cellPosX, cellPosZ, 512);
-
-                    if (array[z][x])
+                    if (span.NextBit != 0)
                     {
-                        graphics.DrawImage(_revealBlob,
+                        float[] cellPos = GetCellWorldPosition(x, z);
+
+                        int[] pixPos = _backgroundInfo.GetPixelCoordsFromWorldPosition(
+                            cellPos[0], cellPos[1], 512);
+
+                        if (ShowSquares)
+                            graphics.DrawRectangle(redPen,
+                            new Rectangle(pixPos[0] - 5, pixPos[1] - 5, 10, 10));
+                        else
+                            graphics.DrawImage(_revealBlob,
                             pixPos[0] - _mappedInfo.PixelEdge[0],
                             pixPos[1] - _mappedInfo.PixelEdge[0]);
                     }
@@ -171,30 +289,52 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
         }
 
-        private bool GetMappedAreaPointAndResolution(out PointF topLeft, out float resX, out float resY, int lenX, int lenY)
+        /// <summary>
+        /// Convert a cell coordinate into a world coordinate.
+        /// </summary>
+        private float[] GetCellWorldPosition(int x, int z)
         {
-            bool success = _backgroundInfo!.GetTextureWorldEdges(
-                out float xLeft, out float xRight, out float zUp, out float zBottom);
+            if (_mappedInfo == null) return [0, 0];
 
-            if (!success)
-            {
-                topLeft = new Point(0, 0);
-                resX = 0; resY = 0;
-                return false;
-            }
+            return [
+                _mappedInfo.WorldEdge[0] + (x * _mappedInfo.PixelEdge[2]) + (_mappedInfo.PixelEdge[2] * 0.5f),
+                _mappedInfo.WorldEdge[3] + (z * _mappedInfo.PixelEdge[3]) + (_mappedInfo.PixelEdge[3] * 0.5f)
+                ];
+        }
 
-            topLeft = new PointF(
-                0f,
-                0f
-                );
+        private int[] GetCellArrayPosition(float x, float z)
+        {
+            if (_mappedInfo == null) return [0, 0];
 
-            float xSpan = _mappedInfo.WorldEdge[2] - _mappedInfo.WorldEdge[0];
-            float ySpan = _mappedInfo.WorldEdge[1] - _mappedInfo.WorldEdge[3];
+            if (_mappedInfo.PixelEdge[2] == 0 || _mappedInfo.PixelEdge[3] == 0)
+                return [0, 0];
 
-            resX = xSpan / lenX;
-            resY = ySpan / lenY;
+            return [
+                (int)((x - _mappedInfo.WorldEdge[0] - (_mappedInfo.PixelEdge[2] * 0.5f)) / _mappedInfo.PixelEdge[2]),
+                (int)((z - _mappedInfo.WorldEdge[3] - (_mappedInfo.PixelEdge[3] * 0.5f)) / _mappedInfo.PixelEdge[3])
+                ];
+        }
 
-            return true;
+        public void ClearMiniMap()
+        {
+            if (_mappedInfo == null) return;
+            if (ResourceHandler.Instance.MiniMaps == null) return;
+
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            if (address < 0) return;
+
+            _gameState.BitHeap.ClearBits(address, _mappedInfo.BitHeapSize);
+        }
+
+        public void FillMiniMap()
+        {
+            if (_mappedInfo == null) return;
+            if (ResourceHandler.Instance.MiniMaps == null) return;
+
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            if (address < 0) return;
+
+            _gameState.BitHeap.SetBits(address, _mappedInfo.BitHeapSize);
         }
     }
 }

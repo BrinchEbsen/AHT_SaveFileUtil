@@ -281,7 +281,7 @@ namespace AHT_SaveFileUtil.Save.Slot
                     ByteHeap[writeByte] |= (byte)(1 << writeBit);
                 else
                     //Write inverse
-                    ByteHeap[writeByte] |= (byte)~(1 << writeBit);
+                    ByteHeap[writeByte] &= (byte)~(1 << writeBit);
 
                 //Go to next bit and check for rollover:
 
@@ -341,6 +341,21 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             byte[] zeros = new byte[GetNumRequiredBytes(bitCount)];
             WriteBits(bitCount, zeros, address);
+        }
+
+        /// <summary>
+        /// Set a range of bits to one.
+        /// </summary>
+        /// <param name="address">Address to start writing from.</param>
+        /// <param name="bitCount">Number of bits to set.</param>
+        public void SetBits(int address, int bitCount)
+        {
+            byte[] ones = new byte[GetNumRequiredBytes(bitCount)];
+
+            for(int i = 0; i < ones.Length; i++)
+                ones[i] = 0xFF;
+
+            WriteBits(bitCount, ones, address);
         }
 
         /// <summary>
