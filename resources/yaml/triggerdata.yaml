@@ -410,8 +410,8 @@ trigger_data:
 - trigger_table_entry: 202
   object_name: DarkXtal
   data:
-  - name: Data
-    type: Flags
+  - name: Destroyed
+    type: SingleFlag
     num_bits: 1
 - trigger_table_entry: 203
   object_name: LightXtal

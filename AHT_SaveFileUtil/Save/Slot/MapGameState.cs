@@ -13,41 +13,41 @@ namespace AHT_SaveFileUtil.Save.Slot
     {
         public int MapIndexValue { get; private set; }
 
-        public uint LastStartPoint { get; private set; }
+        public uint LastStartPoint { get; set; }
 
-        public Players LastStartPointPlayer { get; private set; }
+        public Players LastStartPointPlayer { get; set; }
 
-        public int MaxDarkGems { get; private set; }
+        public int MaxDarkGems { get; set; }
 
-        public int MaxDragonEggs { get; private set; }
+        public int MaxDragonEggs { get; set; }
 
-        public int MaxLightGems { get; private set; }
+        public int MaxLightGems { get; set; }
 
-        public int NumDarkGems { get; private set; }
+        public int NumDarkGems { get; set; }
 
-        public int NumLightGems { get; private set; }
+        public int NumLightGems { get; set; }
 
-        public int NumEggs_ConceptArt { get; private set; }
+        public int NumEggs_ConceptArt { get; set; }
 
-        public int NumEggs_ModelViewer { get; private set; }
+        public int NumEggs_ModelViewer { get; set; }
 
-        public int NumEggs_Ember { get; private set; }
+        public int NumEggs_Ember { get; set; }
 
-        public int NumEggs_Flame { get; private set; }
+        public int NumEggs_Flame { get; set; }
 
-        public int NumEggs_SgtByrd { get; private set; }
+        public int NumEggs_SgtByrd { get; set; }
 
-        public int NumEggs_Turret { get; private set; }
+        public int NumEggs_Turret { get; set; }
 
-        public int NumEggs_Sparx { get; private set; }
+        public int NumEggs_Sparx { get; set; }
 
-        public int NumEggs_Blink { get; private set; }
+        public int NumEggs_Blink { get; set; }
 
         public uint Flags { get; private set; }
 
-        public int TriggerListBitHeapAddress { get; private set; }
+        public int TriggerListBitHeapAddress { get; set; }
 
-        public int TriggerListBitHeapSize { get; private set; }
+        public int TriggerListBitHeapSize { get; set; }
 
         public int SumOfEggs => NumEggs_ConceptArt +
                 NumEggs_ModelViewer +

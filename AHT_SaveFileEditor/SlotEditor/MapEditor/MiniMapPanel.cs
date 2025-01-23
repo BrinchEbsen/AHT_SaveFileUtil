@@ -14,6 +14,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
     internal class MiniMapPanel : Panel
     {
+        private const int TEXTURE_SIZE = 512;
+
         private readonly GameState _gameState;
         private readonly Map _mapIndex;
         private MiniMapInfo? _mappedInfo;
@@ -22,7 +24,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private Image? _miniMapTexture = null;
         private Image? _revealBlob = null;
 
-        private readonly Pen redPen = new(Color.Red);
+        private readonly Pen redPen = new(Color.Red, 2);
+        private readonly Pen bluePen = new(Color.Blue, 5);
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PaintMode PaintMode { get; set; } = PaintMode.None;
@@ -36,12 +39,15 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ShowSquares { get; set; } = true;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public EXVector3? HighLight { get; private set; }
+
         public MiniMapPanel(GameState gameState, Map mapIndex)
         {
             _gameState = gameState;
             _mapIndex = mapIndex;
 
-            Size = new Size(512, 512);
+            Size = new Size(TEXTURE_SIZE, TEXTURE_SIZE);
             DoubleBuffered = true;
 
             Paint += MiniMapPanel_Paint;
@@ -79,8 +85,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             //If no map reveal blobs, no need to process mouse events
             if (UsingDefault) return;
 
-            if (e.X < 0 || e.X >= 512) return;
-            if (e.Y < 0 || e.Y >= 512) return;
+            if (e.X < 0 || e.X >= TEXTURE_SIZE) return;
+            if (e.Y < 0 || e.Y >= TEXTURE_SIZE) return;
 
             if (e.Button == MouseButtons.Left)
             {
@@ -96,7 +102,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (_backgroundInfo == null) return;
             if (ResourceHandler.Instance.MiniMaps == null) return;
 
-            float[] worldPos = _backgroundInfo.GetWorldPositionFromPixelCoords(e.X, 512-e.Y, 512);
+            float[] worldPos = _backgroundInfo.GetWorldPositionFromPixelCoords(e.X, TEXTURE_SIZE - e.Y, TEXTURE_SIZE);
 
             if (worldPos[0] < _mappedInfo.WorldEdge[0] ||
                 worldPos[0] > _mappedInfo.WorldEdge[2] + _mappedInfo.PixelEdge[2] * 0.5f ||
@@ -208,6 +214,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (ShowMiniMap)
                 graphics.DrawImage(_miniMapTexture, 0, 0);
 
+            if (!UsingDefault && HighLight != null)
+                DrawHighLight(graphics);
+
             /*
             graphics.DrawString(testx.ToString(),
                 new Font(FontFamily.GenericSansSerif, 18),
@@ -241,6 +250,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             */
         }
 
+        /// <summary>
+        /// Draw the "revealed" area from the minimap data.
+        /// </summary>
         private void DrawRevealedArea(Graphics graphics)
         {
             if (UsingDefault || _revealBlob == null) return; 
@@ -259,17 +271,22 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             var span = new BitSpanReader(
                 _gameState.BitHeap.ReadBits(_mappedInfo.BitHeapSize, address));
 
+            //Iterate through all cells and draw them
             for (int z = 0; z < dim[1]; z++)
             {
                 for (int x = 0; x < dim[0]; x++)
                 {
+                    //Only draw if this cell's bit is set
                     if (span.NextBit != 0)
                     {
+                        //Get the cell world position
                         float[] cellPos = GetCellWorldPosition(x, z);
 
+                        //Get the pixel coordinates of the cell
                         int[] pixPos = _backgroundInfo.GetPixelCoordsFromWorldPosition(
-                            cellPos[0], cellPos[1], 512);
+                            cellPos[0], cellPos[1], TEXTURE_SIZE);
 
+                        //Draw debug squares to easily see the grid
                         if (ShowSquares)
                             graphics.DrawRectangle(redPen,
                             new Rectangle(
@@ -277,6 +294,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                                 pixPos[1] - 5,
                                 10,
                                 10));
+                        //Draw the blob texture accurate to the game
                         else
                             graphics.DrawImage(_revealBlob,
                             pixPos[0] - _mappedInfo.PixelEdge[0],
@@ -284,6 +302,19 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                     }
                 }
             }
+        }
+
+        private void DrawHighLight(Graphics graphics)
+        {
+            if (_backgroundInfo == null) return;
+
+            int[] pixCoords = _backgroundInfo.GetPixelCoordsFromWorldPosition(HighLight!.X, HighLight!.Z, TEXTURE_SIZE);
+
+            if (pixCoords[0] < 0 || pixCoords[0] >= TEXTURE_SIZE ||
+                pixCoords[1] < 0 || pixCoords[1] >= TEXTURE_SIZE)
+                return;
+
+            graphics.DrawEllipse(bluePen, pixCoords[0] - 5, pixCoords[1] - 5, 10, 10);
         }
 
         /// <summary>
@@ -332,6 +363,16 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (address < 0) return;
 
             _gameState.BitHeap.SetBits(address, _mappedInfo.BitHeapSize);
+        }
+
+        public void SetHighLight(EXVector3 position)
+        {
+            HighLight = new EXVector3(position);
+        }
+
+        public void ClearHighLight()
+        {
+            HighLight = null;
         }
     }
 }

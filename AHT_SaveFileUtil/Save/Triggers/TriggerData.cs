@@ -1,12 +1,5 @@
-﻿using AHT_SaveFileUtil.Save.MiniMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
 
 namespace AHT_SaveFileUtil.Save.Triggers
 {
@@ -38,6 +31,17 @@ namespace AHT_SaveFileUtil.Save.Triggers
 
         public TriggerDataDefinitions() { }
 
+        public TriggerData? GetTriggerData(int triggerTableIndex)
+        {
+            foreach(var triggerData in TriggerData)
+                if (triggerData.TriggerTableEntry == triggerTableIndex) 
+                    return triggerData;
+
+            return null;
+        }
+
+        #region YAML
+
         public static TriggerDataDefinitions FromYAML(string yaml)
         {
             var deserializer = new DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
@@ -49,5 +53,7 @@ namespace AHT_SaveFileUtil.Save.Triggers
             var serializer = new SerializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
             return serializer.Serialize(this);
         }
+
+        #endregion
     }
 }

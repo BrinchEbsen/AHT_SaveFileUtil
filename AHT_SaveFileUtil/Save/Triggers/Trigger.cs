@@ -27,5 +27,19 @@ namespace AHT_SaveFileUtil.Save.Triggers
         public uint ScriptIndex { get; set; }
 
         public Trigger() { }
+
+        public int GetTriggerTableIndex(TriggerTable tTable)
+        {
+            if (tTable == null) return -1;
+
+            for(int i = 0; i < tTable.Entries.Length; i++)
+            {
+                if (tTable.Entries[i].PrimaryHash == Type &&
+                    tTable.Entries[i].SubHash == SubType)
+                    return i;
+            }
+
+            return -1;
+        }
     }
 }
