@@ -1,5 +1,3 @@
-using AHT_SaveFileEditor.SlotEditor.MapEditor;
-
 namespace AHT_SaveFileEditor
 {
     internal static class Program

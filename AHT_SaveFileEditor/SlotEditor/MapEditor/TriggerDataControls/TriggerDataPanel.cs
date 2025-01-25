@@ -24,8 +24,16 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             _gameState = gameState;
         }
 
+        /// <summary>
+        /// Write the data represented by the panel's controls
+        /// to the corresponding data unit in the bitheap.
+        /// </summary>
         public abstract void WriteData();
 
+        /// <summary>
+        /// Read a generic stream of bytes with the unit's data from the bitheap.
+        /// </summary>
+        /// <returns>A generic stream of bytes with the unit's data from the bitheap.</returns>
         public byte[] ReadData()
         {
             return _gameState.BitHeap.ReadBits(_definition!.NumBits, _bitHeapAddress);

@@ -28,9 +28,19 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         {
             InitializeComponent();
 
+            bool ps2Hack = false;
+
+            var saveFile = SaveFileHandler.Instance.SaveFile;
+            if (saveFile != null)
+                ps2Hack = saveFile.Platform == GamePlatform.PlayStation2;
+
             this.gameState = gameState;
             this.mapIndex = mapIndex;
-            mapGameState = gameState.MapStates[(int)mapIndex];
+
+            mapGameState =
+                ps2Hack ?
+                gameState.MapStates[(int)mapIndex - 2] :
+                gameState.MapStates[(int)mapIndex];
         }
 
         private void MapEditor_Load(object sender, EventArgs e)
@@ -189,7 +199,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (mapGameState.TriggerListBitHeapSize != bitHeapOffset)
                 MessageBox.Show(
                     $"This map has allocated {mapGameState.TriggerListBitHeapSize} bits, " +
-                    $"but the trigger list was only found to use {bitHeapOffset} bits.",
+                    $"but the trigger list was found to use {bitHeapOffset} bits.",
                     "Inconsistent bitheap allocation size.",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 

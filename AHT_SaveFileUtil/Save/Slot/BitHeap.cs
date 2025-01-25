@@ -67,6 +67,8 @@ namespace AHT_SaveFileUtil.Save.Slot
     /// </summary>
     public class BitHeap : ISaveFileIO<BitHeap>
     {
+        #region Constants
+
         /// <summary>
         /// Size of the bitheap in bytes.
         /// </summary>
@@ -76,6 +78,10 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// Size of the bitheap in bits.
         /// </summary>
         public const int BITHEAP_LENGTH = BYTEHEAP_LENGTH * 8;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The array of bytes containing the data of the bitheap.
@@ -117,7 +123,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
+        #endregion
+
         private BitHeap() { }
+
+        #region Savefile Read/Write
 
         public static BitHeap FromReader(BinaryReader reader, GamePlatform platform)
         {
@@ -152,6 +162,8 @@ namespace AHT_SaveFileUtil.Save.Slot
             foreach(var entry in Stack)
                 entry.ToWriter(writer, platform);
         }
+
+        #endregion
 
         #region BitHeap Operations
 

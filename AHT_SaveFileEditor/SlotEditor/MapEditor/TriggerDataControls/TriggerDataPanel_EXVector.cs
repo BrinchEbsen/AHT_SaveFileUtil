@@ -168,7 +168,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             if (saveFile != null)
                 bigEndian = saveFile.Platform == GamePlatform.GameCube;
 
-            return new EXVector(ReadData(), bigEndian);
+            return _gameState.BitHeap.ReadEXVector(_bitHeapAddress, bigEndian);
         }
 
         public override void WriteData()
