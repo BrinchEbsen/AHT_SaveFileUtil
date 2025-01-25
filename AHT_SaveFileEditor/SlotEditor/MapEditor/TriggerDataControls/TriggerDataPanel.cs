@@ -26,6 +26,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 
         public abstract void WriteData();
 
-        public abstract BitSpanReader ReadData();
+        public byte[] ReadData()
+        {
+            return _gameState.BitHeap.ReadBits(_definition!.NumBits, _bitHeapAddress);
+        }
     }
 }

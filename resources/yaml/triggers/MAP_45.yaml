@@ -3812,9 +3812,9 @@ trigger_list:
   game_flags: 0x0
   trig_flags: 0x1000220F
   position:
-    x: 13.04456
-    y: 0.670797
-    z: 105.3025
+    x: 34.54532
+    y: -11.07825
+    z: 121.9861
   rotation:
     x: 0
     y: 0.7853981
@@ -3835,12 +3835,12 @@ trigger_list:
   game_flags: 0x0
   trig_flags: 0x1000221F
   position:
-    x: 29.27946
-    y: -6.953069
-    z: 117.1702
+    x: 49.11502
+    y: -17.29223
+    z: 141.3976
   rotation:
     x: 0
-    y: -2.426008
+    y: -2.60054
     z: 0
   data:
   - 0x41A00000

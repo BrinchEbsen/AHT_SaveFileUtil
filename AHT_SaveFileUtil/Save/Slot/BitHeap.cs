@@ -154,6 +154,78 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         #region BitHeap Operations
+
+        #region General
+
+        /// <summary>
+        /// Allocate a range of bits on the bitheap.
+        /// </summary>
+        /// <param name="bitCount">Number of bits to allocate.</param>
+        /// <returns>The address at the start of the allocated range.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="OverflowException"></exception>
+        public int Allocate(int bitCount)
+        {
+            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(bitCount, 0);
+
+            if ((NumBitsUsed + bitCount) > BITHEAP_LENGTH)
+                throw new OverflowException(
+                    $"Cannot allocate {bitCount} bits, as there are only " +
+                    $"{BITHEAP_LENGTH - NumBitsUsed} bits free.");
+
+            //Get the address to allocate from
+            int writeAddress = NumBitsUsed;
+
+            //Clear the allocated space
+            ClearBits(writeAddress, bitCount);
+
+            //Increase the number of bits used
+            NumBitsUsed += bitCount;
+
+            return writeAddress;
+        }
+
+        /// <summary>
+        /// Set a range of bits to zero.
+        /// </summary>
+        /// <param name="address">Address to start clearing from.</param>
+        /// <param name="bitCount">Number of bits to clear.</param>
+        public void ClearBits(int address, int bitCount)
+        {
+            byte[] zeros = new byte[GetNumRequiredBytes(bitCount)];
+            WriteBits(bitCount, zeros, address);
+        }
+
+        /// <summary>
+        /// Set a range of bits to one.
+        /// </summary>
+        /// <param name="address">Address to start writing from.</param>
+        /// <param name="bitCount">Number of bits to set.</param>
+        public void SetBits(int address, int bitCount)
+        {
+            byte[] ones = new byte[GetNumRequiredBytes(bitCount)];
+
+            for(int i = 0; i < ones.Length; i++)
+                ones[i] = 0xFF;
+
+            WriteBits(bitCount, ones, address);
+        }
+
+        /// <summary>
+        /// Clear every bit in the bitheap.
+        /// </summary>
+        public void ClearAll()
+        {
+            for (int i = 0; i < ByteHeap.Length; i++)
+                ByteHeap[i] = 0;
+
+            NumBitsUsed = 0;
+        }
+
+        #endregion
+
+        #region Reading
+
         /// <summary>
         /// Read a string of bits from the bitheap.
         /// </summary>
@@ -227,6 +299,112 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return buffer;
         }
+
+        /// <summary>
+        /// Read an <see cref="int"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="int"/>.</returns>
+        public int ReadInt32(int readAddress, bool bigEndian = false)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            if (bigEndian) Array.Reverse(buff);
+
+            return BitConverter.ToInt32(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="uint"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="uint"/>.</returns>
+        public uint ReadUInt32(int readAddress, bool bigEndian = false)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            if (bigEndian) Array.Reverse(buff);
+
+            return BitConverter.ToUInt32(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="float"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="float"/>.</returns>
+        public float ReadSingle(int readAddress, bool bigEndian = false)
+        {
+            byte[] buff = ReadBits(32, readAddress);
+
+            if (bigEndian) Array.Reverse(buff);
+
+            return BitConverter.ToSingle(buff, 0);
+        }
+
+        /// <summary>
+        /// Read an <see cref="EXVector"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="EXVector"/>.</returns>
+        public EXVector ReadEXVector(int readAddress, bool bigEndian = false)
+        {
+            return new EXVector()
+            {
+                X = ReadSingle(readAddress + 32 * 0, bigEndian),
+                Y = ReadSingle(readAddress + 32 * 1, bigEndian),
+                Z = ReadSingle(readAddress + 32 * 2, bigEndian),
+                W = ReadSingle(readAddress + 32 * 3, bigEndian)
+            };
+        }
+
+        /// <summary>
+        /// Read a <see cref="short"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="short"/>.</returns>
+        public short ReadInt16(int readAddress, bool bigEndian = false)
+        {
+            byte[] buff = ReadBits(16, readAddress);
+
+            if (bigEndian) Array.Reverse(buff);
+
+            return BitConverter.ToInt16(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="ushort"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The <see cref="ushort"/>.</returns>
+        public ushort ReadUInt16(int readAddress, bool bigEndian = false)
+        {
+            byte[] buff = ReadBits(16, readAddress);
+
+            if (bigEndian) Array.Reverse(buff);
+
+            return BitConverter.ToUInt16(buff, 0);
+        }
+
+        /// <summary>
+        /// Read a <see cref="byte"/> from the bitheap.
+        /// </summary>
+        /// <param name="readAddress">Starting bit to read from.</param>
+        /// <returns>The <see cref="byte"/>.</returns>
+        public byte ReadByte(int readAddress)
+        {
+            return ReadBits(8, readAddress)[0];
+        }
+
+        #endregion
+
+        #region Writing
 
         /// <summary>
         /// Write a string of bits to the bitheap.
@@ -305,166 +483,16 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
-        /// Allocate a range of bits on the bitheap.
-        /// </summary>
-        /// <param name="bitCount">Number of bits to allocate.</param>
-        /// <returns>The address at the start of the allocated range.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="OverflowException"></exception>
-        public int Allocate(int bitCount)
-        {
-            ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(bitCount, 0);
-
-            if ((NumBitsUsed + bitCount) > BITHEAP_LENGTH)
-                throw new OverflowException(
-                    $"Cannot allocate {bitCount} bits, as there are only " +
-                    $"{BITHEAP_LENGTH - NumBitsUsed} bits free.");
-
-            //Get the address to allocate from
-            int writeAddress = NumBitsUsed;
-
-            //Clear the allocated space
-            ClearBits(writeAddress, bitCount);
-
-            //Increase the number of bits used
-            NumBitsUsed += bitCount;
-
-            return writeAddress;
-        }
-
-        /// <summary>
-        /// Set a range of bits to zero.
-        /// </summary>
-        /// <param name="address">Address to start clearing from.</param>
-        /// <param name="bitCount">Number of bits to clear.</param>
-        public void ClearBits(int address, int bitCount)
-        {
-            byte[] zeros = new byte[GetNumRequiredBytes(bitCount)];
-            WriteBits(bitCount, zeros, address);
-        }
-
-        /// <summary>
-        /// Set a range of bits to one.
-        /// </summary>
-        /// <param name="address">Address to start writing from.</param>
-        /// <param name="bitCount">Number of bits to set.</param>
-        public void SetBits(int address, int bitCount)
-        {
-            byte[] ones = new byte[GetNumRequiredBytes(bitCount)];
-
-            for(int i = 0; i < ones.Length; i++)
-                ones[i] = 0xFF;
-
-            WriteBits(bitCount, ones, address);
-        }
-
-        /// <summary>
-        /// Clear every bit in the bitheap.
-        /// </summary>
-        public void ClearAll()
-        {
-            for (int i = 0; i < ByteHeap.Length; i++)
-                ByteHeap[i] = 0;
-
-            NumBitsUsed = 0;
-        }
-
-        /// <summary>
-        /// Read an <see cref="int"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="int"/>.</returns>
-        public int ReadInt32(int readAddress)
-        {
-            byte[] buff = ReadBits(32, readAddress);
-
-            return BitConverter.ToInt32(buff, 0);
-        }
-
-        /// <summary>
-        /// Read a <see cref="uint"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="uint"/>.</returns>
-        public uint ReadUInt32(int readAddress)
-        {
-            byte[] buff = ReadBits(32, readAddress);
-
-            return BitConverter.ToUInt32(buff, 0);
-        }
-
-        /// <summary>
-        /// Read a <see cref="float"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="float"/>.</returns>
-        public float ReadSingle(int readAddress)
-        {
-            byte[] buff = ReadBits(32, readAddress);
-
-            return BitConverter.ToSingle(buff, 0);
-        }
-
-        /// <summary>
-        /// Read an <see cref="EXVector"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="EXVector"/>.</returns>
-        public EXVector ReadEXVector(int readAddress)
-        {
-            byte[] buff = ReadBits(32*4, readAddress);
-
-            return new EXVector()
-            {
-                X = BitConverter.ToSingle(buff, 0),
-                Y = BitConverter.ToSingle(buff, 4),
-                Z = BitConverter.ToSingle(buff, 8),
-                W = BitConverter.ToSingle(buff, 12)
-            };
-        }
-
-        /// <summary>
-        /// Read a <see cref="short"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="short"/>.</returns>
-        public short ReadInt16(int readAddress)
-        {
-            byte[] buff = ReadBits(16, readAddress);
-
-            return BitConverter.ToInt16(buff, 0);
-        }
-
-        /// <summary>
-        /// Read a <see cref="ushort"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="ushort"/>.</returns>
-        public ushort ReadUInt16(int readAddress)
-        {
-            byte[] buff = ReadBits(16, readAddress);
-
-            return BitConverter.ToUInt16(buff, 0);
-        }
-
-        /// <summary>
-        /// Read a <see cref="byte"/> from the bitheap.
-        /// </summary>
-        /// <param name="readAddress">Starting bit to read from.</param>
-        /// <returns>The <see cref="byte"/>.</returns>
-        public byte ReadByte(int readAddress)
-        {
-            return ReadBits(8, readAddress)[0];
-        }
-
-        /// <summary>
         /// Write an <see cref="int"/> to the bitheap.
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="int"/> to write.</param>
-        public void WriteInt32(int writeAddress, int value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteInt32(int writeAddress, int value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
+
+            if (bigEndian) Array.Reverse(buff);
 
             WriteBits(32, buff, writeAddress);
         }
@@ -474,9 +502,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="uint"/> to write.</param>
-        public void WriteUInt32(int writeAddress, uint value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteUInt32(int writeAddress, uint value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
+
+            if (bigEndian) Array.Reverse(buff);
 
             WriteBits(32, buff, writeAddress);
         }
@@ -486,9 +517,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="float"/> to write.</param>
-        public void WriteSingle(int writeAddress, float value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteSingle(int writeAddress, float value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
+
+            if (bigEndian) Array.Reverse(buff);
 
             WriteBits(32, buff, writeAddress);
         }
@@ -498,12 +532,13 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="EXVector"/> to write.</param>
-        public void WriteEXVector(int writeAddress, EXVector value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteEXVector(int writeAddress, EXVector value, bool bigEndian = false)
         {
-            WriteSingle(writeAddress,          value.X);
-            WriteSingle(writeAddress + 32,     value.Y);
-            WriteSingle(writeAddress + (32*2), value.Z);
-            WriteSingle(writeAddress + (32*3), value.W);
+            WriteSingle(writeAddress + 32 * 0, value.X, bigEndian);
+            WriteSingle(writeAddress + 32 * 1, value.Y, bigEndian);
+            WriteSingle(writeAddress + 32 * 2, value.Z, bigEndian);
+            WriteSingle(writeAddress + 32 * 3, value.W, bigEndian);
         }
 
         /// <summary>
@@ -511,9 +546,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="short"/> to write.</param>
-        public void WriteInt16(int writeAddress, short value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteInt16(int writeAddress, short value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
+
+            if (bigEndian) Array.Reverse(buff);
 
             WriteBits(16, buff, writeAddress);
         }
@@ -523,9 +561,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="ushort"/> to write.</param>
-        public void WriteUInt16(int writeAddress, ushort value)
+        /// <param name="bigEndian">Whether the value should be written as big endian.</param>
+        public void WriteUInt16(int writeAddress, ushort value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
+
+            if (bigEndian) Array.Reverse(buff);
 
             WriteBits(16, buff, writeAddress);
         }
@@ -539,6 +580,10 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             WriteBits(8, [value], writeAddress);
         }
+
+        #endregion
+
+        #region Helper Methods
 
         /// <summary>
         /// Get the amount of bytes required to fit a number of bits.
@@ -583,6 +628,9 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+
+        #endregion
+
         #endregion
     }
 }

@@ -32,11 +32,23 @@ namespace AHT_SaveFileUtil.Save.Triggers
         {
             if (tTable == null) return -1;
 
+            //Iteration 1: check both type and sybtype
             for(int i = 0; i < tTable.Entries.Length; i++)
             {
                 if (tTable.Entries[i].PrimaryHash == Type &&
                     tTable.Entries[i].SubHash == SubType)
                     return i;
+            }
+
+            //Iteration 2: check just type
+            if (SubType == (uint)EXHashCode.HT_TriggerSubType_Undefined ||
+                SubType == (uint)EXHashCode.HT_TriggerType_Undefined)
+            {
+                for (int i = 0; i < tTable.Entries.Length; i++)
+                {
+                    if (tTable.Entries[i].PrimaryHash == Type)
+                        return i;
+                }
             }
 
             return -1;

@@ -50,7 +50,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 
         private void PopulateList()
         {
-            var data = ReadData();
+            var data = new BitSpanReader(ReadData(), _definition!.NumBits, 0);
 
             Flags.Items.Clear();
 
@@ -61,12 +61,6 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
         private void Flags_ItemCheck(object? sender, ItemCheckEventArgs e)
         {
             WriteDataIndex(e.Index, e.NewValue == CheckState.Checked);
-        }
-
-        public override BitSpanReader ReadData()
-        {
-            byte[] buff = _gameState.BitHeap.ReadBits(_definition!.NumBits, _bitHeapAddress);
-            return new BitSpanReader(buff, _definition.NumBits, 0);
         }
 
         public override void WriteData()

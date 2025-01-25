@@ -20,7 +20,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             Check_Flag = new CheckBox()
             {
                 Text = _definition!.Name,
-                Checked = ReadData().NextBit != 0,
+                Checked = (ReadData()[0] & 1) != 0,
                 Location = new Point(5, 0)
             };
             Check_Flag.CheckedChanged += Check_Flag_CheckedChanged;
@@ -28,12 +28,6 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
         }
 
         private void Check_Flag_CheckedChanged(object? sender, EventArgs e) => WriteData();
-
-        public override BitSpanReader ReadData()
-        {
-            byte[] buff = _gameState.BitHeap.ReadBits(1, _bitHeapAddress);
-            return new BitSpanReader(buff, 1, 0);
-        }
 
         public override void WriteData()
         {

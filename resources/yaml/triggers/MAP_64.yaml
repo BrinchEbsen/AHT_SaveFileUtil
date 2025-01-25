@@ -172,12 +172,12 @@ trigger_list:
   - 0x78000000
   links:
   - 7
-  gfx_hash_ref: 0x82000016
+  gfx_hash_ref: 0x82000013
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x41000107
   sub_type: 0x42000001
-  game_flags: 0x8002
+  game_flags: 0x4002
   trig_flags: 0x10126FF
   position:
     x: 116.528
@@ -201,7 +201,7 @@ trigger_list:
   - 0x78000000
   links:
   - 5
-  gfx_hash_ref: 0x82000016
+  gfx_hash_ref: 0x82000013
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x410000DD
@@ -224,7 +224,7 @@ trigger_list:
   - 0x43480000
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000015
+  gfx_hash_ref: 0x82000012
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100015A
@@ -248,7 +248,7 @@ trigger_list:
   - 0x78000000
   links:
   - 43
-  gfx_hash_ref: 0x8200000D
+  gfx_hash_ref: 0x8200000A
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100015A
@@ -272,7 +272,7 @@ trigger_list:
   - 0x78000000
   links:
   - 43
-  gfx_hash_ref: 0x8200000D
+  gfx_hash_ref: 0x8200000A
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100015A
@@ -296,7 +296,7 @@ trigger_list:
   - 0x78000000
   links:
   - 43
-  gfx_hash_ref: 0x8200000D
+  gfx_hash_ref: 0x8200000A
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100015A
@@ -320,7 +320,7 @@ trigger_list:
   - 0x78000000
   links:
   - 43
-  gfx_hash_ref: 0x82000008
+  gfx_hash_ref: 0x82000005
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x41000163
@@ -372,7 +372,7 @@ trigger_list:
   links:
   - 13
   - 20
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -396,7 +396,7 @@ trigger_list:
   links:
   - 13
   - 21
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -420,7 +420,7 @@ trigger_list:
   links:
   - 13
   - 24
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -444,7 +444,7 @@ trigger_list:
   links:
   - 13
   - 25
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -468,7 +468,7 @@ trigger_list:
   links:
   - 13
   - 23
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -491,7 +491,7 @@ trigger_list:
   links:
   - 13
   - 22
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -513,7 +513,7 @@ trigger_list:
   - 0x78000000
   links:
   - 14
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -535,7 +535,7 @@ trigger_list:
   - 0x78000000
   links:
   - 15
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -557,7 +557,7 @@ trigger_list:
   - 0x78000000
   links:
   - 19
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -579,7 +579,7 @@ trigger_list:
   - 0x78000000
   links:
   - 18
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -601,7 +601,7 @@ trigger_list:
   - 0x78000000
   links:
   - 16
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100019C
@@ -623,7 +623,7 @@ trigger_list:
   - 0x78000000
   links:
   - 17
-  gfx_hash_ref: 0x82000004
+  gfx_hash_ref: 0x82000001
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x410000BE
@@ -687,7 +687,7 @@ trigger_list:
   - 0x4A000001
   - 0x28000000
   - 0x56000000
-  - 0x100003B
+  - 0x1000000
   - 0x5000000
   - 0x1000000
   - 0x5000000
@@ -720,7 +720,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000009
+  gfx_hash_ref: 0x82000006
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -748,7 +748,7 @@ trigger_list:
   - 0x1
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000009
+  gfx_hash_ref: 0x82000006
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -775,7 +775,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000009
+  gfx_hash_ref: 0x82000006
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -802,7 +802,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -829,7 +829,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -856,7 +856,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -883,7 +883,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -910,7 +910,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100018C
@@ -937,7 +937,7 @@ trigger_list:
   - 0xC0
   - 0x78000000
   links:
-  gfx_hash_ref: 0x82000007
+  gfx_hash_ref: 0x82000004
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x41000078
@@ -1076,7 +1076,7 @@ trigger_list:
   - 9
   - 8
   - 13
-  gfx_hash_ref: 0x8200000A
+  gfx_hash_ref: 0x82000007
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x41000078
@@ -1152,6 +1152,53 @@ trigger_list:
   - 0x0
   - 0x2
   - 0x41C80000
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001B
+  game_flags: 0x0
+  trig_flags: 0x220F
+  position:
+    x: 107.1387
+    y: -27.29958
+    z: 352.842
+  rotation:
+    x: 0
+    y: 3.089233
+    z: 0
+  data:
+  - 0x42200000
+  - 0x42200000
+  - 0x100003B
+  - 0x5000000
+  - 0x0
+  - 0x78000000
+  links:
+  gfx_hash_ref: 0x0
+  geo_file_hash_ref: 0x0
+  script_index: 0
+- type: 0x4100005A
+  sub_type: 0x4200001A
+  game_flags: 0x0
+  trig_flags: 0x221F
+  position:
+    x: 107.2984
+    y: -27.19802
+    z: 349.6122
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  data:
+  - 0x42200000
+  - 0x42200000
+  - 0x100003B
+  - 0x4A000011
+  - 0x5000000
+  - 0x0
   - 0x78000000
   links:
   gfx_hash_ref: 0x0

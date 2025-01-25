@@ -241,7 +241,7 @@ trigger_list:
   - 0x43160000
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x2000044
   geo_file_hash_ref: 0x1000062
   script_index: 0
@@ -533,7 +533,7 @@ trigger_list:
   - 0x42C80000
   - 0x78000000
   links:
-  - 107
+  - 105
   gfx_hash_ref: 0x2000044
   geo_file_hash_ref: 0x1000062
   script_index: 0
@@ -696,7 +696,7 @@ trigger_list:
   - 0x78000000
   links:
   - 39
-  - 371
+  - 369
   gfx_hash_ref: 0x2000063
   geo_file_hash_ref: 0x1000055
   script_index: 0
@@ -723,7 +723,7 @@ trigger_list:
   - 0x78000000
   links:
   - 38
-  - 371
+  - 369
   gfx_hash_ref: 0x2000063
   geo_file_hash_ref: 0x1000055
   script_index: 0
@@ -750,7 +750,7 @@ trigger_list:
   - 0x78000000
   links:
   - 37
-  - 371
+  - 369
   gfx_hash_ref: 0x2000063
   geo_file_hash_ref: 0x1000055
   script_index: 0
@@ -1559,7 +1559,7 @@ trigger_list:
   - 0x43160000
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x2000044
   geo_file_hash_ref: 0x1000062
   script_index: 0
@@ -1723,7 +1723,7 @@ trigger_list:
   - 0x200
   - 0x78000000
   links:
-  - 316
+  - 314
   gfx_hash_ref: 0x300002E
   geo_file_hash_ref: 0x10000C1
   script_index: 0
@@ -2326,7 +2326,7 @@ trigger_list:
 - type: 0x4100014E
   sub_type: 0x42000001
   game_flags: 0x2
-  trig_flags: 0x1032337
+  trig_flags: 0x1002337
   position:
     x: 127.2828
     y: 106.684
@@ -2345,59 +2345,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 97
-  - 98
   gfx_hash_ref: 0x82000007
-  geo_file_hash_ref: 0x0
-  script_index: 0
-- type: 0x4100014E
-  sub_type: 0x42000001
-  game_flags: 0x1
-  trig_flags: 0x11012333
-  position:
-    x: 165.1969
-    y: 70.68033
-    z: 882.3923
-  rotation:
-    x: 0
-    y: 0.1396263
-    z: 0
-  data:
-  - 0xB0000F0
-  - 0xB000000
-  - 0x400009A
-  - 0x400017A
-  - 0x202
-  - 0x0
-  - 0x78000000
-  links:
-  - 96
-  gfx_hash_ref: 0x82000008
-  geo_file_hash_ref: 0x0
-  script_index: 0
-- type: 0x4100014E
-  sub_type: 0x42000001
-  game_flags: 0x1
-  trig_flags: 0x11012333
-  position:
-    x: 166.1991
-    y: 70.69064
-    z: 883.3904
-  rotation:
-    x: 0
-    y: 0
-    z: 0
-  data:
-  - 0xB0000F0
-  - 0xB000000
-  - 0x400009A
-  - 0x400017A
-  - 0x202
-  - 0x0
-  - 0x78000000
-  links:
-  - 96
-  gfx_hash_ref: 0x82000008
   geo_file_hash_ref: 0x0
   script_index: 0
 - type: 0x4100014E
@@ -2421,7 +2369,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 101
+  - 99
   gfx_hash_ref: 0x82000008
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -2446,7 +2394,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 101
+  - 99
   gfx_hash_ref: 0x82000008
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -2472,8 +2420,8 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 99
-  - 100
+  - 97
+  - 98
   gfx_hash_ref: 0x82000007
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -2542,7 +2490,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x8200000D
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -2583,7 +2531,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x82000015
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -2624,7 +2572,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 107
+  - 105
   gfx_hash_ref: 0x8200000E
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -3203,7 +3151,7 @@ trigger_list:
   - 0x428C0000
   - 0x78000000
   links:
-  - 133
+  - 131
   gfx_hash_ref: 0x2000018
   geo_file_hash_ref: 0x100004E
   script_index: 0
@@ -3247,7 +3195,7 @@ trigger_list:
   - 0x42A00000
   - 0x78000000
   links:
-  - 132
+  - 130
   gfx_hash_ref: 0x2000108
   geo_file_hash_ref: 0x10000F3
   script_index: 0
@@ -4568,7 +4516,7 @@ trigger_list:
   - 0x42F00000
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x300002E
   geo_file_hash_ref: 0x10000CD
   script_index: 0
@@ -5280,7 +5228,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x82000010
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5301,7 +5249,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x8200000F
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5322,7 +5270,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x8200000F
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5343,7 +5291,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 103
+  - 101
   gfx_hash_ref: 0x82000012
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5364,7 +5312,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x82000012
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5385,7 +5333,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x8200000F
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5406,7 +5354,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x8200000F
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5427,7 +5375,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x82000010
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5448,7 +5396,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x82000010
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5469,7 +5417,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 105
+  - 103
   gfx_hash_ref: 0x82000012
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5490,7 +5438,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 107
+  - 105
   gfx_hash_ref: 0x82000012
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5511,7 +5459,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 107
+  - 105
   gfx_hash_ref: 0x8200000F
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -5532,7 +5480,7 @@ trigger_list:
   - 0x0
   - 0x78000000
   links:
-  - 107
+  - 105
   gfx_hash_ref: 0x82000010
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -6062,8 +6010,8 @@ trigger_list:
   - 0x42A00000
   - 0x78000000
   links:
-  - 209
-  - 296
+  - 207
+  - 294
   gfx_hash_ref: 0x3000030
   geo_file_hash_ref: 0x1000139
   script_index: 0
@@ -6090,7 +6038,7 @@ trigger_list:
   - 0x52100000
   - 0x0
   - 0x202
-  - 0x42A00000
+  - 0x42700000
   - 0x78000000
   links:
   gfx_hash_ref: 0x300002E
@@ -6119,7 +6067,7 @@ trigger_list:
   - 0x52100000
   - 0x0
   - 0x202
-  - 0x42A00000
+  - 0x42700000
   - 0x78000000
   links:
   gfx_hash_ref: 0x300002E
@@ -6210,7 +6158,7 @@ trigger_list:
   - 0x42700000
   - 0x78000000
   links:
-  - 259
+  - 257
   gfx_hash_ref: 0x300002E
   geo_file_hash_ref: 0x100013F
   script_index: 0
@@ -7120,7 +7068,7 @@ trigger_list:
   - 0x42A00000
   - 0x78000000
   links:
-  - 297
+  - 295
   gfx_hash_ref: 0x3000030
   geo_file_hash_ref: 0x100013F
   script_index: 0
@@ -7277,7 +7225,7 @@ trigger_list:
   - 0x42200000
   - 0x78000000
   links:
-  - 303
+  - 301
   gfx_hash_ref: 0x3000030
   geo_file_hash_ref: 0x100013F
   script_index: 0
@@ -7307,7 +7255,7 @@ trigger_list:
   - 0x42480000
   - 0x78000000
   links:
-  - 340
+  - 338
   gfx_hash_ref: 0x3000030
   geo_file_hash_ref: 0x100013F
   script_index: 0
@@ -8117,7 +8065,7 @@ trigger_list:
   - 0xB000000
   - 0x52100000
   - 0x0
-  - 0x202
+  - 0x282
   - 0x42A00000
   - 0x78000000
   links:
@@ -8145,8 +8093,8 @@ trigger_list:
   - 0xB000000
   - 0x52100000
   - 0x0
-  - 0x202
-  - 0x42A00000
+  - 0x282
+  - 0x42700000
   - 0x78000000
   links:
   gfx_hash_ref: 0x3000030
@@ -8912,7 +8860,7 @@ trigger_list:
   - 0x428C0000
   - 0x78000000
   links:
-  - 368
+  - 366
   gfx_hash_ref: 0x8200002B
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -8939,7 +8887,7 @@ trigger_list:
   - 0x428C0000
   - 0x78000000
   links:
-  - 367
+  - 365
   gfx_hash_ref: 0x8200002B
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -8969,7 +8917,7 @@ trigger_list:
   - 0x42200000
   - 0x78000000
   links:
-  - 370
+  - 368
   gfx_hash_ref: 0x3000030
   geo_file_hash_ref: 0x100013F
   script_index: 0
@@ -9652,7 +9600,7 @@ trigger_list:
   - 0x428C0000
   - 0x78000000
   links:
-  - 397
+  - 395
   gfx_hash_ref: 0x8200002B
   geo_file_hash_ref: 0x0
   script_index: 0
@@ -9679,7 +9627,7 @@ trigger_list:
   - 0x428C0000
   - 0x78000000
   links:
-  - 396
+  - 394
   gfx_hash_ref: 0x8200002B
   geo_file_hash_ref: 0x0
   script_index: 0

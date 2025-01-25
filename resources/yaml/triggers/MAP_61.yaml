@@ -656,7 +656,7 @@ trigger_list:
   - 0x52100000
   - 0x0
   - 0x2
-  - 0x42A00000
+  - 0x42700000
   - 0x78000000
   links:
   gfx_hash_ref: 0x3000030

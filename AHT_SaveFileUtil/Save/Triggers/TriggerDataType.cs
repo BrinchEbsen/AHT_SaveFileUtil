@@ -2,7 +2,7 @@
 {
     public enum TriggerDataType
     {
-        None,
+        Unused,
         SingleFlag,
         Flags,
         EXVector

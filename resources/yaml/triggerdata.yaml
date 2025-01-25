@@ -121,10 +121,16 @@ trigger_data:
     num_bits: 3
 - trigger_table_entry: 32
   object_name: EggThief
-  data:
+  data: # total: 259
   - name: Data
     type: Flags
-    num_bits: 259
+    num_bits: 3
+  - name: Egg Position
+    type: EXVector
+    num_bits: 128
+  - name: UNK
+    type: Unused
+    num_bits: 128
 - trigger_table_entry: 33
   object_name: GemStealer
   data:

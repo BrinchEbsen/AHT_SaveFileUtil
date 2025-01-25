@@ -90,9 +90,9 @@ trigger_list:
     y: -2.533454
     z: 0
   data:
-  - 0x5100000C
-  - 0xC2B40000
-  - 0x42340000
+  - 0x5100000F
+  - 0xC28C0000
+  - 0x43480000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -200,20 +200,18 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 284.8858
+    x: 285.3404
     y: 12.11749
-    z: -266.2132
+    z: -267.5772
   rotation:
     x: 0
     y: -1.605532
     z: 0
   data:
   - 0x5100000C
-  - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -223,8 +221,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 290.3363
     y: 12.10634
@@ -235,8 +233,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0xC2340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -469,8 +465,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 145.6051
     y: 8.786315
@@ -481,8 +477,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0x42F00000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -667,7 +661,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 124.6736
@@ -678,9 +672,9 @@ trigger_list:
     y: -1.747715
     z: 0
   data:
-  - 0x5100000C
-  - 0xC2B40000
-  - 0x41A00000
+  - 0x5100000F
+  - 0xC2D20000
+  - 0x43700000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -790,8 +784,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 70.28942
     y: 3.82505
@@ -802,8 +796,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -813,8 +805,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 61.8851
     y: 0.232143
@@ -825,8 +817,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0x43340000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -861,17 +851,17 @@ trigger_list:
   game_flags: 0x8
   trig_flags: 0x1300228E
   position:
-    x: 30.34365
+    x: 30.79268
     y: 7.950187
-    z: 103.811
+    z: 103.8559
   rotation:
     x: 0
     y: -2.303834
     z: 0
   data:
   - 0x5100000C
-  - 0xC2340000
-  - 0x42340000
+  - 0xC2D20000
+  - 0x43570000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -1094,8 +1084,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -70.17921
     y: 16.00057
@@ -1106,8 +1096,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0xC3070000
-  - 0x41200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -1371,7 +1359,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228F
   position:
     x: 189.532
@@ -1383,7 +1371,7 @@ trigger_list:
     z: 0
   data:
   - 0x50000000
-  - 0x5100000C
+  - 0x5100000F
   - 0xC2340000
   - 0x43340000
   - 0x44000000
@@ -1395,7 +1383,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 151.4016
@@ -1406,7 +1394,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x42B40000
   - 0x42B40000
   - 0x44000000
@@ -1651,7 +1639,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 152.4821
@@ -1662,7 +1650,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x5100000C
+  - 0x51000014
   - 0x43340000
   - 0x42F00000
   - 0x44000000
@@ -1729,8 +1717,8 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42B40000
-  - 0x42B40000
+  - 0x42DC0000
+  - 0x43200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -1843,8 +1831,8 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x43340000
-  - 0x42200000
+  - 0x42A00000
+  - 0x43610000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -1857,17 +1845,17 @@ trigger_list:
   game_flags: 0x8
   trig_flags: 0x1300228E
   position:
-    x: -74.90738
+    x: -75.88528
     y: -3.874919
-    z: 81.38721
+    z: 79.7108
   rotation:
     x: 0
     y: 1.571546
     z: 0
   data:
   - 0x51000010
-  - 0x43340000
-  - 0x42200000
+  - 0x430C0000
+  - 0x43610000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -1926,8 +1914,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x0
-  trig_flags: 0x13002282
+  game_flags: 0xA
+  trig_flags: 0x13002286
   position:
     x: -88.27949
     y: -19.2893
@@ -1937,7 +1925,8 @@ trigger_list:
     y: 1.604373
     z: 0
   data:
-  - 0x51000000
+  - 0x51000014
+  - 0x42F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2186,7 +2175,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 183.4377
@@ -2197,9 +2186,9 @@ trigger_list:
     y: 1.065128
     z: 0
   data:
-  - 0x51000015
-  - 0xC2B40000
-  - 0x42B40000
+  - 0x51000014
+  - 0xC30C0000
+  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2271,8 +2260,8 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0x42B40000
-  - 0x41F00000
+  - 0x42A00000
+  - 0x43610000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2304,8 +2293,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 21.74164
     y: 0.1159829
@@ -2316,8 +2305,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0xC3070000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2478,12 +2465,12 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
-    x: 304.5723
+    x: 304.9016
     y: -1.922101
-    z: -155.3952
+    z: -156.8022
   rotation:
     x: 0
     y: 0
@@ -2491,8 +2478,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0x43340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2502,20 +2487,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 307.1555
+    x: 301.4079
     y: -1.922101
-    z: -155.6509
+    z: -156.0101
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0x43340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2525,20 +2508,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 309.2632
+    x: 308.425
     y: -1.922101
-    z: -156.0539
+    z: -156.7723
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0x43340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2570,20 +2551,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 155.1567
+    x: 155.0893
     y: 32.18248
-    z: -397.3053
+    z: -398.1809
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0xC3070000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2593,20 +2572,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 156.3443
+    x: 156.5463
     y: 32.18248
-    z: -395.0154
+    z: -395.2174
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0xC2340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2640,8 +2617,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228A
+  game_flags: 0xA
+  trig_flags: 0x1300228E
   position:
     x: 78.50101
     y: 0.1638151
@@ -2651,8 +2628,9 @@ trigger_list:
     y: -2.617994
     z: 0
   data:
-  - 0x51000011
-  - 0x42B40000
+  - 0x51000014
+  - 0x425C0000
+  - 0x41200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2662,8 +2640,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228A
+  game_flags: 0xA
+  trig_flags: 0x1300228E
   position:
     x: 83.6946
     y: 0.2375155
@@ -2673,8 +2651,9 @@ trigger_list:
     y: 3.106686
     z: 0
   data:
-  - 0x5100000C
-  - 0x42B40000
+  - 0x51000014
+  - 0x425C0000
+  - 0x41200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2778,18 +2757,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
-    x: 361.4254
+    x: 361.605
     y: 32.21632
-    z: -455.8552
+    z: -456.3941
   rotation:
     x: 0
     y: 0.02048717
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x43340000
   - 0x42B40000
   - 0x44000000
@@ -2801,18 +2780,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
-    x: 356.8917
+    x: 356.7569
     y: 32.21632
-    z: -452.6659
+    z: -452.621
   rotation:
     x: 0
     y: 1.451691
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x43070000
   - 0x42340000
   - 0x44000000
@@ -2824,7 +2803,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 351.7223
@@ -2835,7 +2814,7 @@ trigger_list:
     y: 1.361165
     z: 0
   data:
-  - 0x5100000C
+  - 0x51000014
   - 0xC2340000
   - 0x42B40000
   - 0x44000000
@@ -2847,7 +2826,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228A
   position:
     x: 356.6388
@@ -2858,7 +2837,7 @@ trigger_list:
     y: 1.97169
     z: 0
   data:
-  - 0x5100000C
+  - 0x51000014
   - 0x43070000
   - 0x44000000
   - 0x0
@@ -2869,8 +2848,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
     x: 359.2874
     y: 32.21632
@@ -2882,8 +2861,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0x43070000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2963,8 +2940,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
     x: 284.2857
     y: 42.70647
@@ -2976,8 +2953,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0x43070000
-  - 0x43070000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -2987,7 +2962,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 286.4464
@@ -2998,7 +2973,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x43070000
   - 0x42B40000
   - 0x44000000
@@ -3010,7 +2985,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 285.4853
@@ -3021,7 +2996,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x42B40000
   - 0x42B40000
   - 0x44000000
@@ -3033,7 +3008,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 275.4461
@@ -3044,7 +3019,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0xC3070000
   - 0x42B40000
   - 0x44000000
@@ -3056,7 +3031,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 277.5977
@@ -3067,7 +3042,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0xC3070000
   - 0x42340000
   - 0x44000000
@@ -3151,8 +3126,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228A
+  game_flags: 0xA
+  trig_flags: 0x1300228E
   position:
     x: 169.1225
     y: 15.99746
@@ -3162,7 +3137,8 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
+  - 0x425C0000
   - 0x41200000
   - 0x44000000
   - 0x0
@@ -3173,7 +3149,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 171.9569
@@ -3184,9 +3160,9 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
+  - 0x425C0000
   - 0x41200000
-  - 0x42200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -3199,9 +3175,9 @@ trigger_list:
   game_flags: 0x8
   trig_flags: 0x1300228F
   position:
-    x: 81.09714
+    x: 81.63598
     y: 16.00512
-    z: 300.417
+    z: 300.6864
   rotation:
     x: 0
     y: 0
@@ -3209,8 +3185,8 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0xC2F00000
-  - 0x42340000
+  - 0xC2960000
+  - 0x43700000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -3220,20 +3196,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 82.8747
+    x: 83.81768
     y: 16.00512
-    z: 302.6652
+    z: 304.147
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0xC2340000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -3307,8 +3281,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228A
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 248.4471
     y: 15.9989
@@ -3319,7 +3293,6 @@ trigger_list:
     z: -0.005964455
   data:
   - 0x5100000C
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4329,8 +4302,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -107.1227
     y: -35.13763
@@ -4341,8 +4314,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4352,8 +4323,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -109.8819
     y: -35.27928
@@ -4364,8 +4335,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x43070000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4375,8 +4344,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228A
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -136.4699
     y: -35.44753
@@ -4387,7 +4356,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4397,8 +4365,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002286
   position:
     x: -133.5059
     y: -35.32861
@@ -4410,7 +4378,6 @@ trigger_list:
   data:
   - 0x51000015
   - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4420,8 +4387,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002286
   position:
     x: -135.4274
     y: -35.42978
@@ -4433,7 +4400,6 @@ trigger_list:
   data:
   - 0x51000015
   - 0xC2F00000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4748,7 +4714,7 @@ trigger_list:
     z: 0
   data:
   - 0x50000000
-  - 0x5100000F
+  - 0x5100000C
   - 0x44000000
   - 0x0
   - 0x2
@@ -4883,8 +4849,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x0
-  trig_flags: 0x13002282
+  game_flags: 0xA
+  trig_flags: 0x1300228E
   position:
     x: 168.219
     y: 5.497025
@@ -4894,7 +4860,9 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
+  - 0x43020000
+  - 0x41200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4904,8 +4872,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x0
-  trig_flags: 0x13002282
+  game_flags: 0xA
+  trig_flags: 0x1300228E
   position:
     x: 169.282
     y: 5.95224
@@ -4915,7 +4883,9 @@ trigger_list:
     y: -2.709164
     z: -0.156606
   data:
-  - 0x51000015
+  - 0x51000014
+  - 0x43020000
+  - 0x41200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -4968,18 +4938,20 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x0
-  trig_flags: 0x13002282
+  game_flags: 0x8
+  trig_flags: 0x1300228E
   position:
-    x: 150.9307
+    x: 151.9185
     y: 5.865037
-    z: 276.1147
+    z: 276.6535
   rotation:
     x: -0.1180505
     y: -2.416992
     z: -0.1321123
   data:
   - 0x51000015
+  - 0xC2960000
+  - 0x43700000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5049,9 +5021,9 @@ trigger_list:
     y: -1.643746
     z: 0
   data:
-  - 0x5100000C
-  - 0xC2B40000
-  - 0x42340000
+  - 0x5100000F
+  - 0xC28C0000
+  - 0x43480000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5137,7 +5109,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 121.757
@@ -5148,9 +5120,9 @@ trigger_list:
     y: -0.3430682
     z: 0.002681975
   data:
-  - 0x5100000C
-  - 0x42F00000
-  - 0x42340000
+  - 0x51000014
+  - 0x43570000
+  - 0x42200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5382,8 +5354,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 181.4535
     y: -10.06713
@@ -5394,8 +5366,6 @@ trigger_list:
     z: 0.02056507
   data:
   - 0x51000015
-  - 0x42F00000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5405,7 +5375,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 139.9662
@@ -5416,7 +5386,7 @@ trigger_list:
     y: 1.065128
     z: 0.05235988
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x42B40000
   - 0x42340000
   - 0x44000000
@@ -5428,7 +5398,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 141.3366
@@ -5439,7 +5409,7 @@ trigger_list:
     y: 1.065128
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x43340000
   - 0x42340000
   - 0x44000000
@@ -5579,8 +5549,8 @@ trigger_list:
   script_index: 8
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
     x: -179.4186
     y: 4.223516
@@ -5592,8 +5562,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0xC3070000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5615,9 +5583,9 @@ trigger_list:
     z: 0
   data:
   - 0x50000000
-  - 0x5100000F
-  - 0x42B40000
-  - 0x42B40000
+  - 0x51000017
+  - 0x428C0000
+  - 0x43610000
   - 0x44000000
   - 0x0
   - 0x2
@@ -5833,20 +5801,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: -2.199419
+    x: -3.05259
     y: -3.811028
-    z: -3.632593
+    z: -3.318266
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0x42B40000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -5859,9 +5825,9 @@ trigger_list:
   game_flags: 0x8
   trig_flags: 0x1300228F
   position:
-    x: -1.995837
+    x: -2.355067
     y: -3.878623
-    z: -6.69832
+    z: -6.877935
   rotation:
     x: -0.1127156
     y: -1.853349
@@ -5869,8 +5835,8 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0x43070000
-  - 0x42B40000
+  - 0x42340000
+  - 0x437F0000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -7073,12 +7039,12 @@ trigger_list:
   game_flags: 0x0
   trig_flags: 0x1000220F
   position:
-    x: -91.17101
+    x: -66.30573
     y: -0.6142532
-    z: -90.54719
+    z: -67.45814
   rotation:
     x: 0
-    y: -1.710423
+    y: -2.583087
     z: 0
   data:
   - 0x41A00000
@@ -7096,12 +7062,12 @@ trigger_list:
   game_flags: 0x0
   trig_flags: 0x1000221F
   position:
-    x: -106.6499
+    x: -72.35577
     y: -0.7663452
-    z: -91.56163
+    z: -83.96031
   rotation:
     x: 0
-    y: 1.343903
+    y: 0.5934119
     z: 0
   data:
   - 0x41A00000
@@ -8175,7 +8141,7 @@ trigger_list:
     z: 0
   data:
   - 0x3DCCCCCC
-  - 0x41C80000
+  - 0x41200000
   - 0x22
   - 0x4000000
   - 0x4000000
@@ -8294,7 +8260,7 @@ trigger_list:
 - type: 0x41000027
   sub_type: 0x42000001
   game_flags: 0x0
-  trig_flags: 0x1300228F
+  trig_flags: 0x13002283
   position:
     x: -99.34525
     y: 0.130775
@@ -8306,8 +8272,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x51000000
-  - 0x428C0000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -8317,12 +8281,12 @@ trigger_list:
   script_index: 0
 - type: 0x41000027
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
-    x: -97.3335
+    x: -97.13144
     y: 0.130775
-    z: -44.61916
+    z: -43.10365
   rotation:
     x: 0
     y: 1.971404
@@ -8330,8 +8294,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x51000000
-  - 0x42340000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -8821,7 +8783,7 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 348.3347
@@ -8832,7 +8794,7 @@ trigger_list:
     y: 1.500788
     z: -0.007534903
   data:
-  - 0x5100000C
+  - 0x51000014
   - 0x42B40000
   - 0x42B40000
   - 0x44000000
@@ -8866,8 +8828,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -175.3935
     y: 4.259542
@@ -8878,8 +8840,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000000
-  - 0xC2340000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -8889,8 +8849,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -179.1073
     y: 4.259542
@@ -8901,8 +8861,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000000
-  - 0x42700000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -10260,8 +10218,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228F
+  game_flags: 0x0
+  trig_flags: 0x13002283
   position:
     x: -17.16713
     y: 16.02075
@@ -10273,8 +10231,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x51000017
-  - 0xC3070000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -10284,8 +10240,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -2.696556
     y: 16.02075
@@ -10296,8 +10252,6 @@ trigger_list:
     z: -0.07730969
   data:
   - 0x5100000C
-  - 0x43070000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -10307,8 +10261,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -1.0927
     y: 16.02075
@@ -10319,8 +10273,6 @@ trigger_list:
     z: -0.02735793
   data:
   - 0x5100000C
-  - 0x43070000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11072,8 +11024,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 162.337
     y: -24.09272
@@ -11084,8 +11036,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42700000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11095,8 +11045,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 159.8788
     y: -24.52909
@@ -11107,8 +11057,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42700000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11118,8 +11066,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x18
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 151.4069
     y: -23.55146
@@ -11130,8 +11078,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42F00000
-  - 0x42200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11141,8 +11087,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 147.3246
     y: -23.85561
@@ -11153,8 +11099,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x42F00000
-  - 0x42200000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11164,8 +11108,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 125.8596
     y: -24.49016
@@ -11176,8 +11120,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11187,8 +11129,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 123.7526
     y: -24.08827
@@ -11199,8 +11141,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11210,8 +11150,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 141.9254
     y: -24.02371
@@ -11222,8 +11162,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC1A00000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11233,8 +11171,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 136.5263
     y: -24.04652
@@ -11245,8 +11183,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC1A00000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11256,8 +11192,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x1C
-  trig_flags: 0x1300228E
+  game_flags: 0x10
+  trig_flags: 0x13002282
   position:
     x: 125.9913
     y: -23.15627
@@ -11268,8 +11204,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11306,8 +11240,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 116.78
     y: 14.51899
@@ -11318,8 +11252,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC1A00000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11329,8 +11261,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 119.882
     y: 14.51899
@@ -11341,8 +11273,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC1A00000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11352,8 +11282,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100002A
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x11002E8F
+  game_flags: 0x0
+  trig_flags: 0x11002E83
   position:
     x: 149.3802
     y: 8.249965
@@ -11365,8 +11295,6 @@ trigger_list:
   data:
   - 0x50000000
   - 0x5100000C
-  - 0x42F00000
-  - 0x43340000
   - 0x44000000
   - 0x0
   - 0x2
@@ -11378,8 +11306,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002286
   position:
     x: 247.8326
     y: 15.9989
@@ -11391,7 +11319,6 @@ trigger_list:
   data:
   - 0x5100000C
   - 0x43340000
-  - 0x41F00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11401,8 +11328,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: -66.36028
     y: 16.00057
@@ -11413,8 +11340,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0x43340000
-  - 0x41A00000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11673,7 +11598,7 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
+  game_flags: 0xA
   trig_flags: 0x1300228E
   position:
     x: 151.226
@@ -11684,7 +11609,7 @@ trigger_list:
     y: 0
     z: 0
   data:
-  - 0x51000015
+  - 0x51000014
   - 0x42B40000
   - 0x42B40000
   - 0x44000000
@@ -11696,8 +11621,8 @@ trigger_list:
   script_index: 0
 - type: 0x41000026
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 285.4506
     y: 12.11749
@@ -11708,8 +11633,6 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0xC2340000
-  - 0x42B40000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11719,10 +11642,10 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 131.7622
+    x: 132.301
     y: 32.33623
     z: -333.1133
   rotation:
@@ -11731,8 +11654,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11742,20 +11663,18 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
-    x: 133.0791
+    x: 133.7526
     y: 32.33623
-    z: -330.1284
+    z: -329.9263
   rotation:
     x: 0
     y: 0
     z: 0
   data:
   - 0x51000015
-  - 0xC2B40000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -11765,8 +11684,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x300228E
+  game_flags: 0x0
+  trig_flags: 0x3002282
   position:
     x: 130.6063
     y: 0
@@ -11777,8 +11696,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0xC28C0000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -12038,8 +11955,8 @@ trigger_list:
     z: 0
   data:
   - 0x5100000C
-  - 0x43340000
-  - 0x41A00000
+  - 0x42A00000
+  - 0x43610000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -12271,8 +12188,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 287.6665
     y: 12.11785
@@ -12283,8 +12200,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x43070000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000
@@ -12294,8 +12209,8 @@ trigger_list:
   script_index: 0
 - type: 0x4100003B
   sub_type: 0x42000001
-  game_flags: 0x8
-  trig_flags: 0x1300228E
+  game_flags: 0x0
+  trig_flags: 0x13002282
   position:
     x: 291.7927
     y: 12.11785
@@ -12306,8 +12221,6 @@ trigger_list:
     z: 0
   data:
   - 0x51000015
-  - 0x43070000
-  - 0x42340000
   - 0x44000000
   - 0x0
   - 0x78000000

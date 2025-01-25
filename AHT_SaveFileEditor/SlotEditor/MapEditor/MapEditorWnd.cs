@@ -127,7 +127,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             if (Allocated)
             {
-                Lbl_IsAllocated.Text = "Allocated: Yes";
+                Lbl_IsAllocated.Text = $"Allocated: Yes ({mapGameState.TriggerListBitHeapAddress})";
                 Lbl_MapAllocatedSize.Text = "Size: " + mapGameState.TriggerListBitHeapSize;
             } else
             {
@@ -157,6 +157,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 mapIndex, out GeoMap? map))
                 return false;
 
+            if (map.TriggerList == null) return false;
+
             int bitHeapOffset = 0;
 
             for (int i = 0; i < map.TriggerList.Length; i++)
@@ -183,6 +185,13 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 //1+ for written flag
                 bitHeapOffset += tTableEntry.StoredDataSize + 1;
             }
+
+            if (mapGameState.TriggerListBitHeapSize != bitHeapOffset)
+                MessageBox.Show(
+                    $"This map has allocated {mapGameState.TriggerListBitHeapSize} bits, " +
+                    $"but the trigger list was only found to use {bitHeapOffset} bits.",
+                    "Inconsistent bitheap allocation size.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return true;
         }
@@ -213,6 +222,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             {
                 switch (definition.Type)
                 {
+                    case TriggerDataType.Unused:
+                        break;
                     case TriggerDataType.SingleFlag:
                         FlowPanel_TriggerData.Controls.Add(
                             new TriggerDataPanel_SingleFlag(
@@ -224,6 +235,14 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                     case TriggerDataType.Flags:
                         FlowPanel_TriggerData.Controls.Add(
                             new TriggerDataPanel_Flags(
+                                bitHeapOffset,
+                                definition,
+                                gameState
+                            ));
+                        break;
+                    case TriggerDataType.EXVector:
+                        FlowPanel_TriggerData.Controls.Add(
+                            new TriggerDataPanel_EXVector(
                                 bitHeapOffset,
                                 definition,
                                 gameState
@@ -258,6 +277,14 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             //this should always succeed but whatevs
             if (!maps.TryGetValue(mapIndex, out var map))
                 return;
+
+            if (map.TriggerList == null)
+            {
+                MessageBox.Show(
+                    "Cannot allocate data for triggers, as the map has none.",
+                    "Cannot allocate.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             int size = map.GetBitHeapSize(tTable);
 
@@ -328,6 +355,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
                 gameState.BitHeap.WriteBits(1, [set ? (byte)1 : (byte)0], address);
 
+                //+1 for the writtenflag
                 address += tTableEntry.StoredDataSize + 1;
             }
         }

@@ -55,7 +55,7 @@ trigger_list:
   trig_flags: 0x110022BF
   position:
     x: 109.897
-    y: -13.63162
+    y: -13.33162
     z: 572.5114
   rotation:
     x: 0
@@ -81,7 +81,7 @@ trigger_list:
   trig_flags: 0x110022BF
   position:
     x: 95.77995
-    y: -13.63162
+    y: -13.33162
     z: 582.8392
   rotation:
     x: 0
