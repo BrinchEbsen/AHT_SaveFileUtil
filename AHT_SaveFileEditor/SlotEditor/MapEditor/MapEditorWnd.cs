@@ -2,9 +2,17 @@
 using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
 using AHT_SaveFileUtil.Save.Triggers;
+using System.Drawing.Text;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
+    public enum SortMode
+    {
+        Index,
+        Name,
+        DataSize
+    }
+
     public partial class MapEditorWnd : Form
     {
         private readonly GameState gameState;
@@ -41,6 +49,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 ps2Hack ?
                 gameState.MapStates[(int)mapIndex - 2] :
                 gameState.MapStates[(int)mapIndex];
+
+            ComboBox_SortMode.SelectedIndex = (int)SortMode.Index;
         }
 
         private void MapEditor_Load(object sender, EventArgs e)
@@ -172,6 +182,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             int bitHeapOffset = 0;
 
+            List<TriggerPanel> list = new(rsc.TriggerTable.NumPreservingEntries);
+
             for (int i = 0; i < map.TriggerList.Length; i++)
             {
                 var trigger = map.TriggerList[i];
@@ -191,11 +203,23 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 //Add a new trigger panel
                 var triggerPanel
                     = new TriggerPanel(i, bitHeapOffset, trigger, tTableEntry, triggerData, this);
-                FlowPanel_Triggers.Controls.Add(triggerPanel);
+                list.Add(triggerPanel);
 
                 //1+ for written flag
                 bitHeapOffset += tTableEntry.StoredDataSize + 1;
             }
+
+            SortTriggerPanelList(list);
+
+            //Clear existing items
+            foreach (TriggerPanel panel in FlowPanel_Triggers.Controls)
+                panel.Dispose();
+
+            FlowPanel_Triggers.Controls.Clear();
+
+            //add new items
+            foreach (var panel in list)
+                FlowPanel_Triggers.Controls.Add(panel);
 
             if (mapGameState.TriggerListBitHeapSize != bitHeapOffset)
                 MessageBox.Show(
@@ -205,6 +229,58 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             return true;
+        }
+
+        private void ComboBox_SortMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FlowPanel_Triggers.SuspendLayout();
+
+            ReSortTriggerPanelList();
+
+            FlowPanel_Triggers.ResumeLayout();
+        }
+
+        private void ReSortTriggerPanelList()
+        {
+            List<TriggerPanel> list = new(FlowPanel_Triggers.Controls.Count);
+
+            foreach(TriggerPanel panel in FlowPanel_Triggers.Controls)
+                list.Add(panel);
+
+
+
+            FlowPanel_Triggers.Controls.Clear();
+
+            SortTriggerPanelList(list);
+
+            foreach(var panel in list)
+                FlowPanel_Triggers.Controls.Add(panel);
+        }
+
+        private void SortTriggerPanelList(List<TriggerPanel> list)
+        {
+            SortMode sortMode;
+            try
+            {
+                sortMode = (SortMode)ComboBox_SortMode.SelectedIndex;
+            }
+            catch { return; }
+
+            switch (sortMode)
+            {
+                case SortMode.Index:
+                    list.Sort((p1, p2)
+                        => p1.TrigIndex.CompareTo(p2.TrigIndex));
+                    break;
+                case SortMode.Name:
+                    list.Sort((p1, p2)
+                        => p1.TriggerData.ObjectName.CompareTo(p2.TriggerData.ObjectName));
+                    break;
+                case SortMode.DataSize:
+                    list.Sort((p1, p2)
+                        => p1.TriggerData.Size.CompareTo(p2.TriggerData.Size));
+                    break;
+            }
         }
 
         internal void PopulateTriggerData(TriggerPanel triggerPanel)
@@ -295,6 +371,17 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private void Btn_MapAllocate_Click(object sender, EventArgs e)
         {
             if (Allocated) return;
+
+            if (MapData.MapDataList.TryGetValue(mapIndex, out var mapData))
+            {
+                if (!mapData.DoesPreserve)
+                {
+                    MessageBox.Show(
+                        "This map does not preserve its state to the savefile, so data cannot be edited.",
+                        "Cannot allocate.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
 
             var maps = ResourceHandler.Instance.Maps;
             if (maps == null) return;

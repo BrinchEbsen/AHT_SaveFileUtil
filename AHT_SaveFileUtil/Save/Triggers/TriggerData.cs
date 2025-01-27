@@ -43,6 +43,21 @@ namespace AHT_SaveFileUtil.Save.Triggers
 
         public TriggerDataUnit[] Data { get; set; }
 
+        public int Size
+        {
+            get
+            {
+                int size = 0;
+
+                foreach(var def in Data)
+                {
+                    size += def.NumBits;
+                }
+
+                return size;
+            }
+        }
+
         public TriggerData() { }
     }
 

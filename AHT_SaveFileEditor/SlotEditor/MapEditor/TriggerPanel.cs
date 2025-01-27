@@ -5,7 +5,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
     internal class TriggerPanel : Panel
     {
-        private int _trigIndex;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int TrigIndex { get; set; }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal int BitHeapOffset { get; private set; }
@@ -29,7 +30,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             TriggerData triggerData,
             MapEditorWnd parentWnd)
         {
-            _trigIndex = trigIndex;
+            TrigIndex = trigIndex;
             BitHeapOffset = bitHeapOffset;
             Trigger = trigger;
             TriggerTableEntry = triggerTableEntry;
@@ -41,7 +42,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             Width = 300 - 24;
             
             Controls.Add(new Label() {
-                Text = "[" + _trigIndex + "] " + TriggerData.ObjectName,
+                Text = "[" + TrigIndex + "] " + TriggerData.ObjectName,
                 Location = new Point(0, 0),
                 Width = Width - 70
                 });

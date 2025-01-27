@@ -30,6 +30,8 @@
         {
             splitContainer1 = new SplitContainer();
             splitContainer4 = new SplitContainer();
+            label1 = new Label();
+            ComboBox_SortMode = new ComboBox();
             Lbl_MapAllocatedSize = new Label();
             Lbl_IsAllocated = new Label();
             Btn_MapAllocate = new Button();
@@ -97,6 +99,8 @@
             // 
             // splitContainer4.Panel1
             // 
+            splitContainer4.Panel1.Controls.Add(label1);
+            splitContainer4.Panel1.Controls.Add(ComboBox_SortMode);
             splitContainer4.Panel1.Controls.Add(Lbl_MapAllocatedSize);
             splitContainer4.Panel1.Controls.Add(Lbl_IsAllocated);
             splitContainer4.Panel1.Controls.Add(Btn_MapAllocate);
@@ -108,8 +112,28 @@
             // 
             splitContainer4.Panel2.Controls.Add(FlowPanel_Triggers);
             splitContainer4.Size = new Size(300, 775);
-            splitContainer4.SplitterDistance = 107;
+            splitContainer4.SplitterDistance = 136;
             splitContainer4.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 106);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Sort By:";
+            // 
+            // ComboBox_SortMode
+            // 
+            ComboBox_SortMode.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBox_SortMode.FormattingEnabled = true;
+            ComboBox_SortMode.Items.AddRange(new object[] { "Index", "Name", "Data Size" });
+            ComboBox_SortMode.Location = new Point(65, 103);
+            ComboBox_SortMode.Name = "ComboBox_SortMode";
+            ComboBox_SortMode.Size = new Size(121, 23);
+            ComboBox_SortMode.TabIndex = 6;
+            ComboBox_SortMode.SelectedIndexChanged += ComboBox_SortMode_SelectedIndexChanged;
             // 
             // Lbl_MapAllocatedSize
             // 
@@ -183,7 +207,7 @@
             FlowPanel_Triggers.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Triggers.Location = new Point(0, 0);
             FlowPanel_Triggers.Name = "FlowPanel_Triggers";
-            FlowPanel_Triggers.Size = new Size(300, 664);
+            FlowPanel_Triggers.Size = new Size(300, 635);
             FlowPanel_Triggers.TabIndex = 0;
             FlowPanel_Triggers.WrapContents = false;
             // 
@@ -382,5 +406,7 @@
         private CheckBox Check_ShowMiniMap;
         private Button Btn_PaintFill;
         private Button Btn_PaintClear;
+        private Label label1;
+        private ComboBox ComboBox_SortMode;
     }
 }
