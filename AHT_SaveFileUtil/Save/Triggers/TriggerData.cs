@@ -11,7 +11,28 @@ namespace AHT_SaveFileUtil.Save.Triggers
 
         public int NumBits { get; set; }
 
+        public uint Mask { get; set; } = 0;
+
         public TriggerDataUnit() { }
+
+        /// <summary>
+        /// Just a mask with bits filled from the bottom to match <see cref="NumBits"/>.
+        /// </summary>
+        public uint DefaultMask
+        {
+            get
+            {
+                uint mask = 0;
+
+                for (int i = 0; i < NumBits; i++)
+                {
+                    mask <<= 1;
+                    mask |= 1;
+                }
+
+                return mask;
+            }
+        }
     }
 
     public class TriggerData

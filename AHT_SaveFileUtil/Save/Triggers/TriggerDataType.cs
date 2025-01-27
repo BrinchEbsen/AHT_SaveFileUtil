@@ -5,6 +5,8 @@
         Unused,
         SingleFlag,
         Flags,
+        Int32,
+        Float,
         EXVector
     }
 }

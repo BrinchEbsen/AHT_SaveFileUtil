@@ -162,22 +162,14 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 
         private EXVector ReadVectorData()
         {
-            bool bigEndian = false;
-
-            var saveFile = SaveFileHandler.Instance.SaveFile;
-            if (saveFile != null)
-                bigEndian = saveFile.Platform == GamePlatform.GameCube;
+            bool bigEndian = SaveFileHandler.Instance.IsBigEndian;
 
             return _gameState.BitHeap.ReadEXVector(_bitHeapAddress, bigEndian);
         }
 
         public override void WriteData()
         {
-            bool bigEndian = false;
-
-            var saveFile = SaveFileHandler.Instance.SaveFile;
-            if (saveFile != null)
-                bigEndian = saveFile.Platform == GamePlatform.GameCube;
+            bool bigEndian = SaveFileHandler.Instance.IsBigEndian;
 
             var vec = new EXVector()
             {
@@ -187,7 +179,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
                 W = (float)numW.Value
             };
 
-            _gameState.BitHeap.WriteEXVector(_bitHeapAddress, vec, bigEndian);
+            _gameState.BitHeap.Write(_bitHeapAddress, vec, bigEndian);
         }
     }
 }

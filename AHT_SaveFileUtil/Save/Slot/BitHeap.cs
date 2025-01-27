@@ -2,6 +2,7 @@
 using AHT_SaveFileUtil.Extensions;
 using System;
 using System.IO;
+using System.Reflection.PortableExecutable;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -414,6 +415,44 @@ namespace AHT_SaveFileUtil.Save.Slot
             return ReadBits(8, readAddress)[0];
         }
 
+        /// <summary>
+        /// Read a <see cref="uint"/> value from the bitheap,
+        /// with the desired bits selected with a <paramref name="mask"/>.
+        /// </summary>
+        /// <param name="readAddress">Address to read bits from.</param>
+        /// <param name="mask">Mask dictating which bits in the value to read to.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        /// <returns>The value.</returns>
+        public uint ReadBitMask(int readAddress, uint mask, bool bigEndian = false)
+        {
+            if (mask == 0) return 0;
+            if (mask == 0xFFFFFFFF) return ReadUInt32(readAddress, bigEndian);
+
+            if (bigEndian)
+                mask = ReverseUIntBytes(mask);
+
+            int numBits = CountBits(mask);
+
+            var reader = new BitSpanReader(ReadBits(numBits, readAddress), numBits, 0);
+
+            uint value = 0;
+            
+            for (int i = 0; i < 32; i++)
+            {
+                if ((mask & (1 << i)) != 0)
+                {
+                    byte b = reader.NextBit;
+                    value |= (uint)(b << i);
+                }
+            }
+
+            //Swap back
+            if (bigEndian)
+                value = ReverseUIntBytes(value);
+
+            return value;
+        }
+
         #endregion
 
         #region Writing
@@ -500,7 +539,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="int"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteInt32(int writeAddress, int value, bool bigEndian = false)
+        public void Write(int writeAddress, int value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
 
@@ -515,7 +554,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="uint"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteUInt32(int writeAddress, uint value, bool bigEndian = false)
+        public void Write(int writeAddress, uint value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
 
@@ -530,7 +569,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="float"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteSingle(int writeAddress, float value, bool bigEndian = false)
+        public void Write(int writeAddress, float value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
 
@@ -545,12 +584,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="EXVector"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteEXVector(int writeAddress, EXVector value, bool bigEndian = false)
+        public void Write(int writeAddress, EXVector value, bool bigEndian = false)
         {
-            WriteSingle(writeAddress + 32 * 0, value.X, bigEndian);
-            WriteSingle(writeAddress + 32 * 1, value.Y, bigEndian);
-            WriteSingle(writeAddress + 32 * 2, value.Z, bigEndian);
-            WriteSingle(writeAddress + 32 * 3, value.W, bigEndian);
+            Write(writeAddress + 32 * 0, value.X, bigEndian);
+            Write(writeAddress + 32 * 1, value.Y, bigEndian);
+            Write(writeAddress + 32 * 2, value.Z, bigEndian);
+            Write(writeAddress + 32 * 3, value.W, bigEndian);
         }
 
         /// <summary>
@@ -559,7 +598,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="short"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteInt16(int writeAddress, short value, bool bigEndian = false)
+        public void Write(int writeAddress, short value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
 
@@ -574,7 +613,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="ushort"/> to write.</param>
         /// <param name="bigEndian">Whether the value should be written as big endian.</param>
-        public void WriteUInt16(int writeAddress, ushort value, bool bigEndian = false)
+        public void Write(int writeAddress, ushort value, bool bigEndian = false)
         {
             byte[] buff = BitConverter.GetBytes(value);
 
@@ -588,9 +627,51 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="writeAddress">Starting bit to write to.</param>
         /// <param name="value">The <see cref="byte"/> to write.</param>
-        public void WriteByte(int writeAddress, byte value)
+        public void Write(int writeAddress, byte value)
         {
             WriteBits(8, [value], writeAddress);
+        }
+
+        /// <summary>
+        /// Write a <see cref="uint"/> value to the bitheap,
+        /// with the desired bits selected with a <paramref name="mask"/>.
+        /// </summary>
+        /// <param name="writeAddress">Address to start writing to.</param>
+        /// <param name="mask">Mask dictating which bits in the value to write from.</param>
+        /// <param name="value">The value to write.</param>
+        /// <param name="bigEndian">Whether the value should be read as big endian.</param>
+        public void WriteBitMask(int writeAddress, uint mask, uint value, bool bigEndian = false)
+        {
+            if (mask == 0) return;
+            if (mask == 0xFFFFFFFF) Write(writeAddress, value, bigEndian);
+
+            if (bigEndian)
+            {
+                mask = ReverseUIntBytes(mask);
+                value = ReverseUIntBytes(value);
+            }
+
+            uint bits = 0;
+            int bitIndex = 0;
+
+            for (int i = 0; i < 32; i++)
+            {
+                if ((mask & (1 << i)) != 0)
+                {
+                    //Extract the bit from value
+                    uint v = value & (uint)(1 << i);
+                    v >>= i;
+
+                    //Merge with bits
+                    bits |= (v << bitIndex);
+                    bitIndex++;
+                }
+            }
+
+            int numBits = CountBits(mask);
+
+            byte[] bytes = BitConverter.GetBytes(bits);
+            WriteBits(numBits, bytes, writeAddress);
         }
 
         #endregion
@@ -639,6 +720,39 @@ namespace AHT_SaveFileUtil.Save.Slot
             if (address + range >= NumBitsUsed) return false;
 
             return true;
+        }
+
+        /// <summary>
+        /// Count how many bits are set in a value.
+        /// </summary>
+        /// <param name="value">The value to count bits of.</param>
+        /// <returns>The number of bits in <paramref name="value"/> that are set.</returns>
+        public static int CountBits(uint value)
+        {
+            int numBits = 0;
+
+            while (value > 0)
+            {
+                if ((value & 1) != 0)
+                   numBits++;
+
+                value >>= 1;
+            }
+
+            return numBits;
+        }
+
+        /// <summary>
+        /// Reverse the byte order of a <see cref="uint"/> value.
+        /// </summary>
+        /// <param name="value">The value to swap.</param>
+        /// <returns><paramref name="value"/>, with its bytes in reverse order.</returns>
+        public static uint ReverseUIntBytes(uint value)
+        {
+            return ((value & 0x000000ff) << 24) +
+                   ((value & 0x0000ff00) << 8) +
+                   ((value & 0x00ff0000) >> 8) +
+                   ((value & 0xff000000) >> 24);
         }
 
         #endregion

@@ -1,17 +1,13 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
 using AHT_SaveFileUtil.Save.Triggers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 {
     internal class TriggerDataPanel_Flags : TriggerDataPanel
     {
         private CheckedListBox Flags;
+        private uint FlagsValue;
 
         public TriggerDataPanel_Flags(int bitHeapAddress, TriggerDataUnit definition, GameState gameState)
             : base(bitHeapAddress, definition, gameState)
@@ -42,7 +38,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 
             //Set height based on number of flags
             Height = 20 + Flags.Items.Count * 20;
-            if (Height > 200) Height = 200;
+            if (Height > 250) Height = 250;
             if (Height < 70) Height = 70;
 
             Flags.Height = Height - 20;
@@ -50,12 +46,24 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
 
         private void PopulateList()
         {
-            var data = new BitSpanReader(ReadData(), _definition!.NumBits, 0);
+            ReadFlagsData();
 
             Flags.Items.Clear();
+            
+            uint mask = GetMask();
 
-            for (int i = 0; i < data.Length; i++)
-                Flags.Items.Add(i.ToString(), data.NextBit != 0);
+            int index = 0;
+            for (int i = 0; i < 32; i++)
+            {
+                if ((mask & (1 << i)) != 0)
+                {
+                    int checkIndex = Flags.Items.Add(
+                        "0x" + (1 << i).ToString("X"),
+                        (FlagsValue & (1 << i)) != 0);
+
+                    index++;
+                }
+            }
         }
 
         private void Flags_ItemCheck(object? sender, ItemCheckEventArgs e)
@@ -63,18 +71,60 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             WriteDataIndex(e.Index, e.NewValue == CheckState.Checked);
         }
 
+        private void ReadFlagsData()
+        {
+            uint mask = GetMask();
+
+            bool bigEndian = SaveFileHandler.Instance.IsBigEndian;
+
+            FlagsValue = _gameState.BitHeap.ReadBitMask(_bitHeapAddress, mask, bigEndian);
+        }
+
         public override void WriteData()
         {
-            for (int i = 0; i < Flags.Items.Count; i++)
-            {
-                byte val = Flags.CheckedIndices.Contains(i) ? (byte)1 : (byte)0;
-                _gameState.BitHeap.WriteBits(1, [val], _bitHeapAddress + i);
-            }
+            uint mask = GetMask();
+
+            bool bigEndian = SaveFileHandler.Instance.IsBigEndian;
+
+            _gameState.BitHeap.WriteBitMask(_bitHeapAddress, mask, FlagsValue, bigEndian);
         }
 
         private void WriteDataIndex(int index, bool set)
         {
-            _gameState.BitHeap.WriteBits(1, [set ? (byte)1 : (byte)0], _bitHeapAddress + index);
+            int bitIndex = CheckIndexToBitIndex(index);
+            if (bitIndex < 0) return;
+
+            if (set)
+                FlagsValue |= (uint)(1 << bitIndex);
+            else
+                FlagsValue &= ~(uint)(1 << bitIndex);
+
+            WriteData();
+        }
+
+        private uint GetMask()
+        {
+            if (_definition!.Mask == 0)
+                return _definition!.DefaultMask;
+
+            return _definition!.Mask;
+        }
+
+        private int CheckIndexToBitIndex(int index)
+        {
+            uint mask = GetMask();
+
+            int maskIndex = 0;
+            for (int i = 0; i < 32; i++)
+            {
+                if ((mask & (1 << i)) != 0)
+                {
+                    if (maskIndex == index) return i;
+                    maskIndex++;
+                }
+            }
+
+            return -1;
         }
     }
 }

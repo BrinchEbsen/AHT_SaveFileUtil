@@ -14,14 +14,15 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             if (definition.Type != TriggerDataType.SingleFlag)
                 throw new ArgumentException(STR_WRONG_TYPE_EXCEPTION);
 
-            Size = new(100, 25);
+            Size = new(150, 25);
             BackColor = Color.AliceBlue;
 
             Check_Flag = new CheckBox()
             {
                 Text = _definition!.Name,
                 Checked = (ReadData()[0] & 1) != 0,
-                Location = new Point(5, 0)
+                Location = new Point(5, 0),
+                Size = Size
             };
             Check_Flag.CheckedChanged += Check_Flag_CheckedChanged;
             Controls.Add(Check_Flag);

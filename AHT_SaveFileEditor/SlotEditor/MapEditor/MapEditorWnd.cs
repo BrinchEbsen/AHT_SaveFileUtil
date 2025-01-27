@@ -139,7 +139,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             {
                 Lbl_IsAllocated.Text = $"Allocated: Yes ({mapGameState.TriggerListBitHeapAddress})";
                 Lbl_MapAllocatedSize.Text = "Size: " + mapGameState.TriggerListBitHeapSize;
-            } else
+            }
+            else
             {
                 Lbl_IsAllocated.Text = "Allocated: No";
                 Lbl_MapAllocatedSize.Text = "Size: 0";
@@ -250,6 +251,22 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                                 gameState
                             ));
                         break;
+                    case TriggerDataType.Float:
+                        FlowPanel_TriggerData.Controls.Add(
+                            new TriggerDataPanel_Float(
+                                bitHeapOffset,
+                                definition,
+                                gameState
+                            ));
+                        break;
+                    case TriggerDataType.Int32:
+                        FlowPanel_TriggerData.Controls.Add(
+                            new TriggerDataPanel_Int32(
+                                bitHeapOffset,
+                                definition,
+                                gameState
+                            ));
+                        break;
                     case TriggerDataType.EXVector:
                         FlowPanel_TriggerData.Controls.Add(
                             new TriggerDataPanel_EXVector(
@@ -259,7 +276,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                             ));
                         break;
                     default:
-                        throw new NotImplementedException();
+                        throw new NotImplementedException(
+                            $"Trigger data type {definition.Type} not supported yet!");
                 }
 
                 bitHeapOffset += definition.NumBits;

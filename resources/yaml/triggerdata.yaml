@@ -2,21 +2,24 @@ trigger_data:
 - trigger_table_entry: 1
   object_name: StartPoint
   data:
-  - name: Data
-    type: Flags
+  - name: UnusedFlag
+    type: SingleFlag
     num_bits: 1
 - trigger_table_entry: 3
   object_name: fodder_Sheep
   data:
-  - name: Data
-    type: Flags
+  - name: SpecialSheepKilled
+    type: SingleFlag
     num_bits: 1
 - trigger_table_entry: 11
   object_name: Switch
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 12
   object_name: Door
   data:
@@ -26,75 +29,114 @@ trigger_data:
 - trigger_table_entry: 13
   object_name: Switch_Charge
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 14
   object_name: Switch_Horndive
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 15
   object_name: Switch_Electric
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsActive
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotActive
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 16
   object_name: Switch_Charge_Platform
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 17
   object_name: Switch_Horndive_Platform
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 18
   object_name: Switch_Padlock
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsPressed
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotPressed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 19
   object_name: Switch_Laser
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsActive
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotActive
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 20
   object_name: Switch_LightGem
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsActive
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotActive
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 21
   object_name: Switch_Timed_Controller
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsActive
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotActive
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 22
   object_name: Switch_Controller
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: IsActive
+    type: SingleFlag
+    num_bits: 1
+  - name: IsNotActive
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 23
   object_name: GenericGate_Scripted
   data:
-  - name: Data
-    type: Flags
-    num_bits: 3
+  - name: Open
+    type: SingleFlag
+    num_bits: 1
+  - name: Closed
+    type: SingleFlag
+    num_bits: 1
+  - name: Locked
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 24
   object_name: GenericGate
   data:
-  - name: Data
-    type: Flags
-    num_bits: 2
+  - name: Open
+    type: SingleFlag
+    num_bits: 1
+  - name: Closed
+    type: SingleFlag
+    num_bits: 1
 - trigger_table_entry: 25
   object_name: DestroyMe
   data:
@@ -125,6 +167,7 @@ trigger_data:
   - name: Data
     type: Flags
     num_bits: 3
+    mask: 0xe
   - name: Egg Position
     type: EXVector
     num_bits: 128
@@ -410,9 +453,12 @@ trigger_data:
 - trigger_table_entry: 201
   object_name: Gems_GemChain
   data:
-  - name: Data
+  - name: AllCollected
+    type: SingleFlag
+    num_bits: 1
+  - name: GemsCollected
     type: Flags
-    num_bits: 33
+    num_bits: 32
 - trigger_table_entry: 202
   object_name: DarkXtal
   data:
@@ -800,15 +846,22 @@ trigger_data:
 - trigger_table_entry: 293
   object_name: Water
   data:
-  - name: Data
-    type: Flags
-    num_bits: 64
+  - name: TargetHeight
+    type: Float
+    num_bits: 32
+  - name: YPosition
+    type: Float
+    num_bits: 32
 - trigger_table_entry: 294
   object_name: RisingBeachPlatform
   data:
   - name: Data
     type: Flags
-    num_bits: 33
+    num_bits: 1
+    mask: 0x1
+  - name: TargetHeight
+    type: Float
+    num_bits: 32
 - trigger_table_entry: 296
   object_name: PoleGrab_PoleGrabPath
   data:
@@ -848,9 +901,13 @@ trigger_data:
 - trigger_table_entry: 308
   object_name: Ineptune
   data:
-  - name: Data
+  - name: CurrentPlatform
+    type: Int32
+    num_bits: 32
+  - name: Flags
     type: Flags
-    num_bits: 35
+    num_bits: 3
+    mask: 0x3
 - trigger_table_entry: 309
   object_name: IneptunePlatform
   data:

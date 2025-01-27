@@ -20,6 +20,17 @@ namespace AHT_SaveFileEditor
 
         private static string BackupsDir => Path.Join(Path.GetDirectoryName(Application.ExecutablePath), "backups");
 
+        public bool IsBigEndian
+        {
+            get
+            {
+                if (saveFile == null)
+                    return false;
+
+                return saveFile.Platform == GamePlatform.GameCube;
+            }
+        }
+
         private SaveFileHandler() { }
 
         public static SaveFileHandler Instance => instance ??= new SaveFileHandler();

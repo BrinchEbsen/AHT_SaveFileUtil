@@ -192,6 +192,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             trig.Type = (TrigInfoType)type;
 
+#if DEBUG
+            if (trig.Type != TrigInfoType.RestartPoint)
+                throw new Exception("Weird gamestate trig info type??!?!? who knows");
+#endif
+
             switch(trig.Type)
             {
                 case TrigInfoType.RestartPoint:
