@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AHT_SaveFileUtil.Common
 {
@@ -74,6 +70,11 @@ namespace AHT_SaveFileUtil.Common
         Magma_Falls_Ball_Gadget = 62,
         Magma_Falls_Bottom = 63,
         Watery_Tomb = 64
+    }
+
+    public class MapMiniGame
+    {
+
     }
 
     public class MapDataEntry

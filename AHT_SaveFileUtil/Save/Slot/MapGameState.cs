@@ -1,14 +1,23 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
+    public enum EggType
+    {
+        ConceptArt,
+        ModelViewer,
+        Ember,
+        Flame,
+        SgtByrd,
+        Turret,
+        Sparx,
+        Blink
+    }
+
     public class MapGameState : ISaveFileIO<MapGameState>
     {
         public int MapIndexValue { get; private set; }
@@ -134,6 +143,52 @@ namespace AHT_SaveFileUtil.Save.Slot
             writer.Write(Flags, bigEndian);
             writer.Write(TriggerListBitHeapAddress, bigEndian);
             writer.Write(TriggerListBitHeapSize, bigEndian);
+        }
+
+        public int GetNumEggs_Type(EggType type) => type switch
+        {
+            EggType.ConceptArt => NumEggs_ConceptArt,
+            EggType.ModelViewer => NumEggs_ModelViewer,
+            EggType.Ember => NumEggs_Ember,
+            EggType.Flame => NumEggs_Flame,
+            EggType.SgtByrd => NumEggs_SgtByrd,
+            EggType.Turret => NumEggs_Turret,
+            EggType.Sparx => NumEggs_Sparx,
+            EggType.Blink => NumEggs_Blink,
+            _ => throw new ArgumentException("Invalid egg type.", nameof(type))
+        };
+
+        public void SetNumEggs_Type(EggType type, int value)
+        {
+            switch (type)
+            {
+                case EggType.ConceptArt:
+                    NumEggs_ConceptArt = value;
+                    break;
+                case EggType.ModelViewer:
+                    NumEggs_ModelViewer = value;
+                    break;
+                case EggType.Ember:
+                    NumEggs_Ember = value;
+                    break;
+                case EggType.Flame:
+                    NumEggs_Flame = value;
+                    break;
+                case EggType.SgtByrd:
+                    NumEggs_SgtByrd = value;
+                    break;
+                case EggType.Turret:
+                    NumEggs_Turret = value;
+                    break;
+                case EggType.Sparx:
+                    NumEggs_Sparx = value;
+                    break;
+                case EggType.Blink:
+                    NumEggs_Blink = value;
+                    break;
+                default:
+                    throw new ArgumentException("Invalid egg type.", nameof(type));
+            }
         }
 
         public override string ToString()

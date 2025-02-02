@@ -43,6 +43,38 @@
             splitContainer5 = new SplitContainer();
             Panel_MiniMap = new Panel();
             FlowPanel_TriggerData = new FlowLayoutPanel();
+            groupBox1 = new GroupBox();
+            Lbl_EggsSum = new Label();
+            label18 = new Label();
+            label17 = new Label();
+            label16 = new Label();
+            label15 = new Label();
+            label14 = new Label();
+            label13 = new Label();
+            label12 = new Label();
+            label11 = new Label();
+            Num_DragonEggs_Blink = new NumericUpDown();
+            Num_DragonEggs_Sparx = new NumericUpDown();
+            Num_DragonEggs_Turret = new NumericUpDown();
+            Num_DragonEggs_SgtByrd = new NumericUpDown();
+            Num_DragonEggs_Flame = new NumericUpDown();
+            Num_DragonEggs_Ember = new NumericUpDown();
+            Num_DragonEggs_ModelViewer = new NumericUpDown();
+            Num_DragonEggsMax = new NumericUpDown();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            Num_DragonEggs_ConceptArt = new NumericUpDown();
+            Num_DarkGemsMax = new NumericUpDown();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            Num_DarkGemsAmount = new NumericUpDown();
+            Num_LightGemsMax = new NumericUpDown();
+            label4 = new Label();
+            label3 = new Label();
+            label2 = new Label();
+            Num_LightGemsAmount = new NumericUpDown();
             GroupBox_DrawControls = new GroupBox();
             Btn_PaintReveal = new Button();
             Check_ShowSquares = new CheckBox();
@@ -66,6 +98,20 @@
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
             splitContainer5.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Sparx).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Turret).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_SgtByrd).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Flame).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Ember).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_ModelViewer).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggsMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_ConceptArt).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGemsMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGemsAmount).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).BeginInit();
             GroupBox_DrawControls.SuspendLayout();
             SuspendLayout();
             // 
@@ -225,6 +271,7 @@
             // 
             // splitContainer3.Panel2
             // 
+            splitContainer3.Panel2.Controls.Add(groupBox1);
             splitContainer3.Panel2.Controls.Add(GroupBox_DrawControls);
             splitContainer3.Size = new Size(820, 775);
             splitContainer3.SplitterDistance = 512;
@@ -269,6 +316,352 @@
             FlowPanel_TriggerData.Name = "FlowPanel_TriggerData";
             FlowPanel_TriggerData.Size = new Size(512, 259);
             FlowPanel_TriggerData.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(Lbl_EggsSum);
+            groupBox1.Controls.Add(label18);
+            groupBox1.Controls.Add(label17);
+            groupBox1.Controls.Add(label16);
+            groupBox1.Controls.Add(label15);
+            groupBox1.Controls.Add(label14);
+            groupBox1.Controls.Add(label13);
+            groupBox1.Controls.Add(label12);
+            groupBox1.Controls.Add(label11);
+            groupBox1.Controls.Add(Num_DragonEggs_Blink);
+            groupBox1.Controls.Add(Num_DragonEggs_Sparx);
+            groupBox1.Controls.Add(Num_DragonEggs_Turret);
+            groupBox1.Controls.Add(Num_DragonEggs_SgtByrd);
+            groupBox1.Controls.Add(Num_DragonEggs_Flame);
+            groupBox1.Controls.Add(Num_DragonEggs_Ember);
+            groupBox1.Controls.Add(Num_DragonEggs_ModelViewer);
+            groupBox1.Controls.Add(Num_DragonEggsMax);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(label10);
+            groupBox1.Controls.Add(Num_DragonEggs_ConceptArt);
+            groupBox1.Controls.Add(Num_DarkGemsMax);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(label7);
+            groupBox1.Controls.Add(Num_DarkGemsAmount);
+            groupBox1.Controls.Add(Num_LightGemsMax);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(Num_LightGemsAmount);
+            groupBox1.Location = new Point(3, 129);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(298, 434);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Collectable Tallies";
+            // 
+            // Lbl_EggsSum
+            // 
+            Lbl_EggsSum.AutoSize = true;
+            Lbl_EggsSum.Location = new Point(91, 409);
+            Lbl_EggsSum.Name = "Lbl_EggsSum";
+            Lbl_EggsSum.Size = new Size(65, 15);
+            Lbl_EggsSum.TabIndex = 68;
+            Lbl_EggsSum.Text = "Sum: temp";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label18.Location = new Point(7, 381);
+            label18.Name = "label18";
+            label18.Size = new Size(33, 15);
+            label18.TabIndex = 67;
+            label18.Text = "Blink";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label17.Location = new Point(7, 352);
+            label17.Name = "label17";
+            label17.Size = new Size(36, 15);
+            label17.TabIndex = 66;
+            label17.Text = "Sparx";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label16.Location = new Point(7, 323);
+            label16.Name = "label16";
+            label16.Size = new Size(38, 15);
+            label16.TabIndex = 65;
+            label16.Text = "Turret";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label15.ForeColor = Color.FromArgb(64, 64, 64);
+            label15.Location = new Point(7, 294);
+            label15.Name = "label15";
+            label15.Size = new Size(54, 15);
+            label15.TabIndex = 64;
+            label15.Text = "Sgt. Byrd";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label14.Location = new Point(7, 265);
+            label14.Name = "label14";
+            label14.Size = new Size(39, 15);
+            label14.TabIndex = 63;
+            label14.Text = "Flame";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label13.Location = new Point(7, 236);
+            label13.Name = "label13";
+            label13.Size = new Size(40, 15);
+            label13.TabIndex = 62;
+            label13.Text = "Ember";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label12.ForeColor = Color.FromArgb(64, 64, 64);
+            label12.Location = new Point(7, 207);
+            label12.Name = "label12";
+            label12.Size = new Size(78, 15);
+            label12.TabIndex = 61;
+            label12.Text = "Model Viewer";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label11.ForeColor = Color.FromArgb(64, 64, 64);
+            label11.Location = new Point(7, 178);
+            label11.Name = "label11";
+            label11.Size = new Size(69, 15);
+            label11.TabIndex = 60;
+            label11.Text = "Concept Art";
+            // 
+            // Num_DragonEggs_Blink
+            // 
+            Num_DragonEggs_Blink.Location = new Point(91, 379);
+            Num_DragonEggs_Blink.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_Blink.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_Blink.Name = "Num_DragonEggs_Blink";
+            Num_DragonEggs_Blink.Size = new Size(78, 23);
+            Num_DragonEggs_Blink.TabIndex = 59;
+            // 
+            // Num_DragonEggs_Sparx
+            // 
+            Num_DragonEggs_Sparx.Location = new Point(91, 350);
+            Num_DragonEggs_Sparx.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_Sparx.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_Sparx.Name = "Num_DragonEggs_Sparx";
+            Num_DragonEggs_Sparx.Size = new Size(78, 23);
+            Num_DragonEggs_Sparx.TabIndex = 58;
+            // 
+            // Num_DragonEggs_Turret
+            // 
+            Num_DragonEggs_Turret.Location = new Point(91, 321);
+            Num_DragonEggs_Turret.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_Turret.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_Turret.Name = "Num_DragonEggs_Turret";
+            Num_DragonEggs_Turret.Size = new Size(78, 23);
+            Num_DragonEggs_Turret.TabIndex = 57;
+            // 
+            // Num_DragonEggs_SgtByrd
+            // 
+            Num_DragonEggs_SgtByrd.Location = new Point(91, 292);
+            Num_DragonEggs_SgtByrd.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_SgtByrd.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_SgtByrd.Name = "Num_DragonEggs_SgtByrd";
+            Num_DragonEggs_SgtByrd.Size = new Size(78, 23);
+            Num_DragonEggs_SgtByrd.TabIndex = 56;
+            // 
+            // Num_DragonEggs_Flame
+            // 
+            Num_DragonEggs_Flame.Location = new Point(91, 263);
+            Num_DragonEggs_Flame.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_Flame.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_Flame.Name = "Num_DragonEggs_Flame";
+            Num_DragonEggs_Flame.Size = new Size(78, 23);
+            Num_DragonEggs_Flame.TabIndex = 55;
+            // 
+            // Num_DragonEggs_Ember
+            // 
+            Num_DragonEggs_Ember.Location = new Point(91, 234);
+            Num_DragonEggs_Ember.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_Ember.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_Ember.Name = "Num_DragonEggs_Ember";
+            Num_DragonEggs_Ember.Size = new Size(78, 23);
+            Num_DragonEggs_Ember.TabIndex = 54;
+            // 
+            // Num_DragonEggs_ModelViewer
+            // 
+            Num_DragonEggs_ModelViewer.Location = new Point(91, 205);
+            Num_DragonEggs_ModelViewer.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_ModelViewer.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_ModelViewer.Name = "Num_DragonEggs_ModelViewer";
+            Num_DragonEggs_ModelViewer.Size = new Size(78, 23);
+            Num_DragonEggs_ModelViewer.TabIndex = 53;
+            // 
+            // Num_DragonEggsMax
+            // 
+            Num_DragonEggsMax.Location = new Point(175, 176);
+            Num_DragonEggsMax.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggsMax.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggsMax.Name = "Num_DragonEggsMax";
+            Num_DragonEggsMax.Size = new Size(78, 23);
+            Num_DragonEggsMax.TabIndex = 52;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label8.ForeColor = Color.FromArgb(64, 64, 64);
+            label8.Location = new Point(175, 158);
+            label8.Name = "label8";
+            label8.Size = new Size(29, 15);
+            label8.TabIndex = 51;
+            label8.Text = "Max";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label9.ForeColor = Color.FromArgb(64, 64, 64);
+            label9.Location = new Point(91, 158);
+            label9.Name = "label9";
+            label9.Size = new Size(49, 15);
+            label9.TabIndex = 50;
+            label9.Text = "Amount";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(7, 141);
+            label10.Name = "label10";
+            label10.Size = new Size(87, 17);
+            label10.TabIndex = 49;
+            label10.Text = "Dragon Eggs";
+            // 
+            // Num_DragonEggs_ConceptArt
+            // 
+            Num_DragonEggs_ConceptArt.Location = new Point(91, 176);
+            Num_DragonEggs_ConceptArt.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DragonEggs_ConceptArt.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DragonEggs_ConceptArt.Name = "Num_DragonEggs_ConceptArt";
+            Num_DragonEggs_ConceptArt.Size = new Size(78, 23);
+            Num_DragonEggs_ConceptArt.TabIndex = 48;
+            // 
+            // Num_DarkGemsMax
+            // 
+            Num_DarkGemsMax.Location = new Point(175, 115);
+            Num_DarkGemsMax.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DarkGemsMax.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DarkGemsMax.Name = "Num_DarkGemsMax";
+            Num_DarkGemsMax.Size = new Size(78, 23);
+            Num_DarkGemsMax.TabIndex = 47;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label5.ForeColor = Color.FromArgb(64, 64, 64);
+            label5.Location = new Point(175, 97);
+            label5.Name = "label5";
+            label5.Size = new Size(29, 15);
+            label5.TabIndex = 46;
+            label5.Text = "Max";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label6.ForeColor = Color.FromArgb(64, 64, 64);
+            label6.Location = new Point(91, 97);
+            label6.Name = "label6";
+            label6.Size = new Size(49, 15);
+            label6.TabIndex = 45;
+            label6.Text = "Amount";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(6, 80);
+            label7.Name = "label7";
+            label7.Size = new Size(75, 17);
+            label7.TabIndex = 44;
+            label7.Text = "Dark Gems";
+            // 
+            // Num_DarkGemsAmount
+            // 
+            Num_DarkGemsAmount.Location = new Point(91, 115);
+            Num_DarkGemsAmount.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_DarkGemsAmount.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_DarkGemsAmount.Name = "Num_DarkGemsAmount";
+            Num_DarkGemsAmount.Size = new Size(78, 23);
+            Num_DarkGemsAmount.TabIndex = 43;
+            // 
+            // Num_LightGemsMax
+            // 
+            Num_LightGemsMax.Location = new Point(175, 54);
+            Num_LightGemsMax.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_LightGemsMax.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_LightGemsMax.Name = "Num_LightGemsMax";
+            Num_LightGemsMax.Size = new Size(78, 23);
+            Num_LightGemsMax.TabIndex = 42;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label4.ForeColor = Color.FromArgb(64, 64, 64);
+            label4.Location = new Point(175, 36);
+            label4.Name = "label4";
+            label4.Size = new Size(29, 15);
+            label4.TabIndex = 41;
+            label4.Text = "Max";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label3.ForeColor = Color.FromArgb(64, 64, 64);
+            label3.Location = new Point(91, 36);
+            label3.Name = "label3";
+            label3.Size = new Size(49, 15);
+            label3.TabIndex = 40;
+            label3.Text = "Amount";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(6, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(78, 17);
+            label2.TabIndex = 39;
+            label2.Text = "Light Gems";
+            // 
+            // Num_LightGemsAmount
+            // 
+            Num_LightGemsAmount.Location = new Point(91, 54);
+            Num_LightGemsAmount.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
+            Num_LightGemsAmount.Minimum = new decimal(new int[] { int.MaxValue, 0, 0, int.MinValue });
+            Num_LightGemsAmount.Name = "Num_LightGemsAmount";
+            Num_LightGemsAmount.Size = new Size(78, 23);
+            Num_LightGemsAmount.TabIndex = 38;
             // 
             // GroupBox_DrawControls
             // 
@@ -379,6 +772,21 @@
             splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
             splitContainer5.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Sparx).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Turret).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_SgtByrd).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Flame).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Ember).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_ModelViewer).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggsMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_ConceptArt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGemsMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_DarkGemsAmount).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).EndInit();
             GroupBox_DrawControls.ResumeLayout(false);
             GroupBox_DrawControls.PerformLayout();
             ResumeLayout(false);
@@ -408,5 +816,37 @@
         private Button Btn_PaintClear;
         private Label label1;
         private ComboBox ComboBox_SortMode;
+        private GroupBox groupBox1;
+        private Label Lbl_EggsSum;
+        private Label label18;
+        private Label label17;
+        private Label label16;
+        private Label label15;
+        private Label label14;
+        private Label label13;
+        private Label label12;
+        private Label label11;
+        private NumericUpDown Num_DragonEggs_Blink;
+        private NumericUpDown Num_DragonEggs_Sparx;
+        private NumericUpDown Num_DragonEggs_Turret;
+        private NumericUpDown Num_DragonEggs_SgtByrd;
+        private NumericUpDown Num_DragonEggs_Flame;
+        private NumericUpDown Num_DragonEggs_Ember;
+        private NumericUpDown Num_DragonEggs_ModelViewer;
+        private NumericUpDown Num_DragonEggsMax;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private NumericUpDown Num_DragonEggs_ConceptArt;
+        private NumericUpDown Num_DarkGemsMax;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private NumericUpDown Num_DarkGemsAmount;
+        private NumericUpDown Num_LightGemsMax;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private NumericUpDown Num_LightGemsAmount;
     }
 }

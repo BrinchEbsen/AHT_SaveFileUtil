@@ -2,7 +2,6 @@
 using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
 using AHT_SaveFileUtil.Save.Triggers;
-using System.Drawing.Text;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
@@ -74,6 +73,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             if (Allocated)
                 PopulateTriggerList();
+
+            UpdateCollectableAmounts();
         }
 
         #region Paint Controls
@@ -244,7 +245,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         {
             List<TriggerPanel> list = new(FlowPanel_Triggers.Controls.Count);
 
-            foreach(TriggerPanel panel in FlowPanel_Triggers.Controls)
+            foreach (TriggerPanel panel in FlowPanel_Triggers.Controls)
                 list.Add(panel);
 
 
@@ -253,7 +254,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             SortTriggerPanelList(list);
 
-            foreach(var panel in list)
+            foreach (var panel in list)
                 FlowPanel_Triggers.Controls.Add(panel);
         }
 
@@ -368,6 +369,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         #endregion
 
+        #region Map Data Controls
+
         private void Btn_MapAllocate_Click(object sender, EventArgs e)
         {
             if (Allocated) return;
@@ -403,7 +406,18 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             int size = map.GetBitHeapSize(tTable);
 
-            int address = gameState.BitHeap.Allocate(size);
+            int address;
+            try
+            {
+                address = gameState.BitHeap.Allocate(size);
+            }
+            catch (OverflowException ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Cannot allocate.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
             mapGameState.TriggerListBitHeapAddress = address;
             mapGameState.TriggerListBitHeapSize = size;
@@ -474,5 +488,102 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 address += tTableEntry.StoredDataSize + 1;
             }
         }
+
+        #endregion
+
+        #region CollectableAmounts
+
+        private void UpdateCollectableAmounts()
+        {
+            Num_LightGemsAmount.Value = mapGameState.NumLightGems;
+            Num_LightGemsMax.Value = mapGameState.MaxLightGems;
+
+            Num_DarkGemsAmount.Value = mapGameState.NumDarkGems;
+            Num_DarkGemsMax.Value = mapGameState.MaxDarkGems;
+
+            Num_DragonEggs_ConceptArt.Value = mapGameState.NumEggs_ConceptArt;
+            Num_DragonEggs_ModelViewer.Value = mapGameState.NumEggs_ModelViewer;
+            Num_DragonEggs_Ember.Value = mapGameState.NumEggs_Ember;
+            Num_DragonEggs_Flame.Value = mapGameState.NumEggs_Flame;
+            Num_DragonEggs_SgtByrd.Value = mapGameState.NumEggs_SgtByrd;
+            Num_DragonEggs_Turret.Value = mapGameState.NumEggs_Turret;
+            Num_DragonEggs_Sparx.Value = mapGameState.NumEggs_Sparx;
+            Num_DragonEggs_Blink.Value = mapGameState.NumEggs_Blink;
+
+            Num_DragonEggsMax.Value = mapGameState.MaxDragonEggs;
+
+            UpdateDragonEggSum();
+        }
+
+        private void UpdateDragonEggSum()
+        {
+            Lbl_EggsSum.Text = $"Sum: {mapGameState.SumOfEggs}";
+        }
+
+        private void Num_DragonEggsAmount_ValueChanged(object? sender, EventArgs e)
+        {
+            if (sender is null) return;
+
+            NumericUpDown num = (NumericUpDown)sender;
+
+            string senderName = num.Name;
+
+            switch (senderName)
+            {
+                case "Num_DragonEggs_ConceptArt":
+                    mapGameState.NumEggs_ConceptArt = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_ModelViewer":
+                    mapGameState.NumEggs_ModelViewer = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_Ember":
+                    mapGameState.NumEggs_Ember = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_Flame":
+                    mapGameState.NumEggs_Flame = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_SgtByrd":
+                    mapGameState.NumEggs_SgtByrd = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_Turret":
+                    mapGameState.NumEggs_Turret = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_Sparx":
+                    mapGameState.NumEggs_Sparx = (int)num.Value;
+                    break;
+                case "Num_DragonEggs_Blink":
+                    mapGameState.NumEggs_Blink = (int)num.Value;
+                    break;
+            }
+
+            UpdateDragonEggSum();
+        }
+
+        private void Num_DragonEggsMax_ValueChanged(object sender, EventArgs e)
+        {
+            mapGameState.MaxDragonEggs = (int)Num_DragonEggsMax.Value;
+        }
+
+        private void Num_LightGemsAmount_ValueChanged(object sender, EventArgs e)
+        {
+            mapGameState.NumLightGems = (int)Num_LightGemsAmount.Value;
+        }
+
+        private void Num_LightGemsMax_ValueChanged(object sender, EventArgs e)
+        {
+            mapGameState.MaxLightGems = (int)Num_LightGemsMax.Value;
+        }
+
+        private void Num_DarkGemsAmount_ValueChanged(object sender, EventArgs e)
+        {
+            mapGameState.NumDarkGems = (int)Num_DarkGemsAmount.Value;
+        }
+
+        private void Num_DarkGemsMax_ValueChanged(object sender, EventArgs e)
+        {
+            mapGameState.MaxDarkGems = (int)Num_DarkGemsMax.Value;
+        }
+
+        #endregion
     }
 }
