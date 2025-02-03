@@ -24,6 +24,11 @@ namespace AHT_SaveFileEditor.SlotEditor
 
             var dataEntry = MapData.MapDataList[entryNr];
 
+            MapGameState derivedState = null;
+            if (dataEntry.DerivedCollectableTallies != Map.None)
+                derivedState = gameState.GetMapGameState(
+                    dataEntry.DerivedCollectableTallies, SaveFileHandler.Instance.Platform);
+
             FlowDirection = FlowDirection.TopDown;
             WrapContents = false;
             BackColor = Color.Azure;
@@ -36,15 +41,21 @@ namespace AHT_SaveFileEditor.SlotEditor
                 Width = 300
             });
 
+            MapGameState stateForCollectables;
+            if (derivedState != null)
+                stateForCollectables = derivedState;
+            else
+                stateForCollectables = levelState;
+
             Controls.Add(new Label()
             {
                 Text = string.Format("DG: {0}/{1}, LG: {2}/{3}, DE: {4}/{5}",
-                    levelState.NumDarkGems,
-                    levelState.MaxDarkGems == -1 ? 0 : levelState.MaxDarkGems,
-                    levelState.NumLightGems,
-                    levelState.MaxLightGems == -1 ? 0 : levelState.MaxLightGems,
-                    levelState.SumOfEggs,
-                    levelState.MaxDragonEggs == -1 ? 0 : levelState.MaxDragonEggs
+                    stateForCollectables.NumDarkGems,
+                    stateForCollectables.MaxDarkGems == -1 ? 0 : stateForCollectables.MaxDarkGems,
+                    stateForCollectables.NumLightGems,
+                    stateForCollectables.MaxLightGems == -1 ? 0 : stateForCollectables.MaxLightGems,
+                    stateForCollectables.SumOfEggs,
+                    stateForCollectables.MaxDragonEggs == -1 ? 0 : stateForCollectables.MaxDragonEggs
                 ),
                 Width = 300
             });
