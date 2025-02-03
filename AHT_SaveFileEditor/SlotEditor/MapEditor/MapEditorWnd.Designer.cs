@@ -43,7 +43,16 @@
             splitContainer5 = new SplitContainer();
             Panel_MiniMap = new Panel();
             FlowPanel_TriggerData = new FlowLayoutPanel();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            GroupBox_DrawControls = new GroupBox();
+            Btn_PaintReveal = new Button();
+            Check_ShowSquares = new CheckBox();
+            Btn_PaintUnreveal = new Button();
+            Check_ShowMiniMap = new CheckBox();
+            Btn_PaintFill = new Button();
+            Btn_PaintClear = new Button();
             groupBox1 = new GroupBox();
+            Lbl_DerivedTallies = new Label();
             Lbl_EggsSum = new Label();
             label18 = new Label();
             label17 = new Label();
@@ -75,13 +84,11 @@
             label3 = new Label();
             label2 = new Label();
             Num_LightGemsAmount = new NumericUpDown();
-            GroupBox_DrawControls = new GroupBox();
-            Btn_PaintReveal = new Button();
-            Check_ShowSquares = new CheckBox();
-            Btn_PaintUnreveal = new Button();
-            Check_ShowMiniMap = new CheckBox();
-            Btn_PaintFill = new Button();
-            Btn_PaintClear = new Button();
+            groupBox2 = new GroupBox();
+            Lbl_StartPoint = new Label();
+            label20 = new Label();
+            label19 = new Label();
+            ComboBox_Character = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -98,6 +105,8 @@
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
             splitContainer5.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
+            GroupBox_DrawControls.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Sparx).BeginInit();
@@ -112,7 +121,7 @@
             ((System.ComponentModel.ISupportInitialize)Num_DarkGemsAmount).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).BeginInit();
-            GroupBox_DrawControls.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -130,7 +139,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer3);
-            splitContainer1.Size = new Size(1124, 775);
+            splitContainer1.Size = new Size(1513, 796);
             splitContainer1.SplitterDistance = 300;
             splitContainer1.TabIndex = 0;
             // 
@@ -157,7 +166,7 @@
             // splitContainer4.Panel2
             // 
             splitContainer4.Panel2.Controls.Add(FlowPanel_Triggers);
-            splitContainer4.Size = new Size(300, 775);
+            splitContainer4.Size = new Size(300, 796);
             splitContainer4.SplitterDistance = 136;
             splitContainer4.TabIndex = 0;
             // 
@@ -253,7 +262,7 @@
             FlowPanel_Triggers.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Triggers.Location = new Point(0, 0);
             FlowPanel_Triggers.Name = "FlowPanel_Triggers";
-            FlowPanel_Triggers.Size = new Size(300, 635);
+            FlowPanel_Triggers.Size = new Size(300, 656);
             FlowPanel_Triggers.TabIndex = 0;
             FlowPanel_Triggers.WrapContents = false;
             // 
@@ -271,9 +280,8 @@
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.Controls.Add(groupBox1);
-            splitContainer3.Panel2.Controls.Add(GroupBox_DrawControls);
-            splitContainer3.Size = new Size(820, 775);
+            splitContainer3.Panel2.Controls.Add(flowLayoutPanel1);
+            splitContainer3.Size = new Size(1209, 796);
             splitContainer3.SplitterDistance = 512;
             splitContainer3.TabIndex = 1;
             // 
@@ -293,7 +301,7 @@
             // splitContainer5.Panel2
             // 
             splitContainer5.Panel2.Controls.Add(FlowPanel_TriggerData);
-            splitContainer5.Size = new Size(512, 775);
+            splitContainer5.Size = new Size(512, 796);
             splitContainer5.SplitterDistance = 512;
             splitContainer5.TabIndex = 0;
             // 
@@ -314,12 +322,105 @@
             FlowPanel_TriggerData.FlowDirection = FlowDirection.TopDown;
             FlowPanel_TriggerData.Location = new Point(0, 0);
             FlowPanel_TriggerData.Name = "FlowPanel_TriggerData";
-            FlowPanel_TriggerData.Size = new Size(512, 259);
+            FlowPanel_TriggerData.Size = new Size(512, 280);
             FlowPanel_TriggerData.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(GroupBox_DrawControls);
+            flowLayoutPanel1.Controls.Add(groupBox1);
+            flowLayoutPanel1.Controls.Add(groupBox2);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.Location = new Point(0, 0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(693, 796);
+            flowLayoutPanel1.TabIndex = 15;
+            // 
+            // GroupBox_DrawControls
+            // 
+            GroupBox_DrawControls.Controls.Add(Btn_PaintReveal);
+            GroupBox_DrawControls.Controls.Add(Check_ShowSquares);
+            GroupBox_DrawControls.Controls.Add(Btn_PaintUnreveal);
+            GroupBox_DrawControls.Controls.Add(Check_ShowMiniMap);
+            GroupBox_DrawControls.Controls.Add(Btn_PaintFill);
+            GroupBox_DrawControls.Controls.Add(Btn_PaintClear);
+            GroupBox_DrawControls.Location = new Point(3, 3);
+            GroupBox_DrawControls.Name = "GroupBox_DrawControls";
+            GroupBox_DrawControls.Size = new Size(278, 111);
+            GroupBox_DrawControls.TabIndex = 6;
+            GroupBox_DrawControls.TabStop = false;
+            GroupBox_DrawControls.Text = "MiniMap Controls";
+            // 
+            // Btn_PaintReveal
+            // 
+            Btn_PaintReveal.Location = new Point(6, 47);
+            Btn_PaintReveal.Name = "Btn_PaintReveal";
+            Btn_PaintReveal.Size = new Size(107, 23);
+            Btn_PaintReveal.TabIndex = 1;
+            Btn_PaintReveal.Text = "Paint Reveal";
+            Btn_PaintReveal.UseVisualStyleBackColor = true;
+            Btn_PaintReveal.Click += Btn_PaintReveal_Click;
+            // 
+            // Check_ShowSquares
+            // 
+            Check_ShowSquares.AutoSize = true;
+            Check_ShowSquares.Location = new Point(161, 22);
+            Check_ShowSquares.Name = "Check_ShowSquares";
+            Check_ShowSquares.Size = new Size(76, 19);
+            Check_ShowSquares.TabIndex = 5;
+            Check_ShowSquares.Text = "Grid View";
+            Check_ShowSquares.UseVisualStyleBackColor = true;
+            Check_ShowSquares.CheckedChanged += Check_ShowSquares_CheckedChanged;
+            // 
+            // Btn_PaintUnreveal
+            // 
+            Btn_PaintUnreveal.Location = new Point(119, 47);
+            Btn_PaintUnreveal.Name = "Btn_PaintUnreveal";
+            Btn_PaintUnreveal.Size = new Size(107, 23);
+            Btn_PaintUnreveal.TabIndex = 2;
+            Btn_PaintUnreveal.Text = "Paint Unreveal";
+            Btn_PaintUnreveal.UseVisualStyleBackColor = true;
+            Btn_PaintUnreveal.Click += Btn_PaintUnreveal_Click;
+            // 
+            // Check_ShowMiniMap
+            // 
+            Check_ShowMiniMap.AutoSize = true;
+            Check_ShowMiniMap.Checked = true;
+            Check_ShowMiniMap.CheckState = CheckState.Checked;
+            Check_ShowMiniMap.Location = new Point(6, 22);
+            Check_ShowMiniMap.Name = "Check_ShowMiniMap";
+            Check_ShowMiniMap.Size = new Size(149, 19);
+            Check_ShowMiniMap.TabIndex = 0;
+            Check_ShowMiniMap.Text = "Show Minimap Overlay";
+            Check_ShowMiniMap.UseVisualStyleBackColor = true;
+            Check_ShowMiniMap.CheckedChanged += Check_ShowMiniMap_CheckedChanged;
+            // 
+            // Btn_PaintFill
+            // 
+            Btn_PaintFill.BackColor = Color.FromArgb(192, 255, 192);
+            Btn_PaintFill.Location = new Point(119, 76);
+            Btn_PaintFill.Name = "Btn_PaintFill";
+            Btn_PaintFill.Size = new Size(107, 23);
+            Btn_PaintFill.TabIndex = 4;
+            Btn_PaintFill.Text = "Fill";
+            Btn_PaintFill.UseVisualStyleBackColor = false;
+            Btn_PaintFill.Click += Btn_PaintFill_Click;
+            // 
+            // Btn_PaintClear
+            // 
+            Btn_PaintClear.BackColor = Color.FromArgb(255, 192, 192);
+            Btn_PaintClear.Location = new Point(6, 76);
+            Btn_PaintClear.Name = "Btn_PaintClear";
+            Btn_PaintClear.Size = new Size(107, 23);
+            Btn_PaintClear.TabIndex = 3;
+            Btn_PaintClear.Text = "Clear";
+            Btn_PaintClear.UseVisualStyleBackColor = false;
+            Btn_PaintClear.Click += Btn_PaintClear_Click;
             // 
             // groupBox1
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(Lbl_DerivedTallies);
             groupBox1.Controls.Add(Lbl_EggsSum);
             groupBox1.Controls.Add(label18);
             groupBox1.Controls.Add(label17);
@@ -351,12 +452,23 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(Num_LightGemsAmount);
-            groupBox1.Location = new Point(3, 129);
+            groupBox1.Location = new Point(3, 120);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(298, 434);
+            groupBox1.Size = new Size(278, 456);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             groupBox1.Text = "Collectable Tallies";
+            // 
+            // Lbl_DerivedTallies
+            // 
+            Lbl_DerivedTallies.AutoSize = true;
+            Lbl_DerivedTallies.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            Lbl_DerivedTallies.ForeColor = Color.FromArgb(128, 64, 64);
+            Lbl_DerivedTallies.Location = new Point(6, 429);
+            Lbl_DerivedTallies.Name = "Lbl_DerivedTallies";
+            Lbl_DerivedTallies.Size = new Size(34, 15);
+            Lbl_DerivedTallies.TabIndex = 69;
+            Lbl_DerivedTallies.Text = "temp";
             // 
             // Lbl_EggsSum
             // 
@@ -663,93 +775,66 @@
             Num_LightGemsAmount.Size = new Size(78, 23);
             Num_LightGemsAmount.TabIndex = 38;
             // 
-            // GroupBox_DrawControls
+            // groupBox2
             // 
-            GroupBox_DrawControls.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            GroupBox_DrawControls.Controls.Add(Btn_PaintReveal);
-            GroupBox_DrawControls.Controls.Add(Check_ShowSquares);
-            GroupBox_DrawControls.Controls.Add(Btn_PaintUnreveal);
-            GroupBox_DrawControls.Controls.Add(Check_ShowMiniMap);
-            GroupBox_DrawControls.Controls.Add(Btn_PaintFill);
-            GroupBox_DrawControls.Controls.Add(Btn_PaintClear);
-            GroupBox_DrawControls.Location = new Point(3, 12);
-            GroupBox_DrawControls.Name = "GroupBox_DrawControls";
-            GroupBox_DrawControls.Size = new Size(298, 111);
-            GroupBox_DrawControls.TabIndex = 6;
-            GroupBox_DrawControls.TabStop = false;
-            GroupBox_DrawControls.Text = "MiniMap Controls";
+            groupBox2.Controls.Add(Lbl_StartPoint);
+            groupBox2.Controls.Add(label20);
+            groupBox2.Controls.Add(label19);
+            groupBox2.Controls.Add(ComboBox_Character);
+            groupBox2.Location = new Point(3, 582);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(278, 100);
+            groupBox2.TabIndex = 14;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Player Start";
             // 
-            // Btn_PaintReveal
+            // Lbl_StartPoint
             // 
-            Btn_PaintReveal.Location = new Point(6, 47);
-            Btn_PaintReveal.Name = "Btn_PaintReveal";
-            Btn_PaintReveal.Size = new Size(107, 23);
-            Btn_PaintReveal.TabIndex = 1;
-            Btn_PaintReveal.Text = "Paint Reveal";
-            Btn_PaintReveal.UseVisualStyleBackColor = true;
-            Btn_PaintReveal.Click += Btn_PaintReveal_Click;
+            Lbl_StartPoint.AutoSize = true;
+            Lbl_StartPoint.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Lbl_StartPoint.Location = new Point(91, 51);
+            Lbl_StartPoint.Name = "Lbl_StartPoint";
+            Lbl_StartPoint.Size = new Size(38, 17);
+            Lbl_StartPoint.TabIndex = 16;
+            Lbl_StartPoint.Text = "temp";
             // 
-            // Check_ShowSquares
+            // label20
             // 
-            Check_ShowSquares.AutoSize = true;
-            Check_ShowSquares.Location = new Point(161, 22);
-            Check_ShowSquares.Name = "Check_ShowSquares";
-            Check_ShowSquares.Size = new Size(105, 19);
-            Check_ShowSquares.TabIndex = 5;
-            Check_ShowSquares.Text = "Debug Squares";
-            Check_ShowSquares.UseVisualStyleBackColor = true;
-            Check_ShowSquares.CheckedChanged += Check_ShowSquares_CheckedChanged;
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label20.ForeColor = Color.FromArgb(64, 64, 64);
+            label20.Location = new Point(7, 53);
+            label20.Name = "label20";
+            label20.Size = new Size(62, 15);
+            label20.TabIndex = 15;
+            label20.Text = "Start Point";
             // 
-            // Btn_PaintUnreveal
+            // label19
             // 
-            Btn_PaintUnreveal.Location = new Point(119, 47);
-            Btn_PaintUnreveal.Name = "Btn_PaintUnreveal";
-            Btn_PaintUnreveal.Size = new Size(107, 23);
-            Btn_PaintUnreveal.TabIndex = 2;
-            Btn_PaintUnreveal.Text = "Paint Unreveal";
-            Btn_PaintUnreveal.UseVisualStyleBackColor = true;
-            Btn_PaintUnreveal.Click += Btn_PaintUnreveal_Click;
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label19.ForeColor = Color.FromArgb(64, 64, 64);
+            label19.Location = new Point(7, 25);
+            label19.Name = "label19";
+            label19.Size = new Size(59, 15);
+            label19.TabIndex = 14;
+            label19.Text = "Character";
             // 
-            // Check_ShowMiniMap
+            // ComboBox_Character
             // 
-            Check_ShowMiniMap.AutoSize = true;
-            Check_ShowMiniMap.Checked = true;
-            Check_ShowMiniMap.CheckState = CheckState.Checked;
-            Check_ShowMiniMap.Location = new Point(6, 22);
-            Check_ShowMiniMap.Name = "Check_ShowMiniMap";
-            Check_ShowMiniMap.Size = new Size(149, 19);
-            Check_ShowMiniMap.TabIndex = 0;
-            Check_ShowMiniMap.Text = "Show Minimap Overlay";
-            Check_ShowMiniMap.UseVisualStyleBackColor = true;
-            Check_ShowMiniMap.CheckedChanged += Check_ShowMiniMap_CheckedChanged;
-            // 
-            // Btn_PaintFill
-            // 
-            Btn_PaintFill.BackColor = Color.FromArgb(192, 255, 192);
-            Btn_PaintFill.Location = new Point(119, 76);
-            Btn_PaintFill.Name = "Btn_PaintFill";
-            Btn_PaintFill.Size = new Size(107, 23);
-            Btn_PaintFill.TabIndex = 4;
-            Btn_PaintFill.Text = "Fill";
-            Btn_PaintFill.UseVisualStyleBackColor = false;
-            Btn_PaintFill.Click += Btn_PaintFill_Click;
-            // 
-            // Btn_PaintClear
-            // 
-            Btn_PaintClear.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_PaintClear.Location = new Point(6, 76);
-            Btn_PaintClear.Name = "Btn_PaintClear";
-            Btn_PaintClear.Size = new Size(107, 23);
-            Btn_PaintClear.TabIndex = 3;
-            Btn_PaintClear.Text = "Clear";
-            Btn_PaintClear.UseVisualStyleBackColor = false;
-            Btn_PaintClear.Click += Btn_PaintClear_Click;
+            ComboBox_Character.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBox_Character.FormattingEnabled = true;
+            ComboBox_Character.Location = new Point(91, 22);
+            ComboBox_Character.Name = "ComboBox_Character";
+            ComboBox_Character.Size = new Size(121, 23);
+            ComboBox_Character.TabIndex = 13;
+            ComboBox_Character.SelectedIndexChanged += ComboBox_Character_SelectedIndexChanged;
             // 
             // MapEditorWnd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1124, 775);
+            ClientSize = new Size(1513, 796);
             Controls.Add(splitContainer1);
             Name = "MapEditorWnd";
             ShowIcon = false;
@@ -772,6 +857,9 @@
             splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
             splitContainer5.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            GroupBox_DrawControls.ResumeLayout(false);
+            GroupBox_DrawControls.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).EndInit();
@@ -787,8 +875,8 @@
             ((System.ComponentModel.ISupportInitialize)Num_DarkGemsAmount).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).EndInit();
-            GroupBox_DrawControls.ResumeLayout(false);
-            GroupBox_DrawControls.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -848,5 +936,12 @@
         private Label label3;
         private Label label2;
         private NumericUpDown Num_LightGemsAmount;
+        private GroupBox groupBox2;
+        private Label label19;
+        private ComboBox ComboBox_Character;
+        private Label Lbl_StartPoint;
+        private Label label20;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label Lbl_DerivedTallies;
     }
 }

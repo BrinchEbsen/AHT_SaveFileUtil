@@ -8,6 +8,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 {
     public enum EggType
     {
+        None,
         ConceptArt,
         ModelViewer,
         Ember,

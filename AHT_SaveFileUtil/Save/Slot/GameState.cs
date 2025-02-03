@@ -336,6 +336,16 @@ namespace AHT_SaveFileUtil.Save.Slot
             PlayTimer = (hours * 60*60) + (minutes * 60) + seconds;
         }
 
+        public MapGameState GetMapGameState(Map mapIndex, GamePlatform platform)
+        {
+            if (platform == GamePlatform.PlayStation2)
+            {
+                mapIndex -= 2;
+            }
+
+            return MapStates[(int)mapIndex];
+        }
+
         #region Objectives
         /// <summary>
         /// Get the state of an objective.

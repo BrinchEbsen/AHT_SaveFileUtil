@@ -16,20 +16,11 @@ namespace AHT_SaveFileEditor.SlotEditor
 
         public LevelEntryPanel(SaveSlotEditor parentWnd, GameState gameState, Map entryNr)
         {
-            bool ps2Hack = false;
-
-            var saveFile = SaveFileHandler.Instance.SaveFile;
-            if (saveFile != null)
-                ps2Hack = saveFile.Platform == GamePlatform.PlayStation2;
-
             this.parentWnd = parentWnd;
             this.gameState = gameState;
             this.entryNr = entryNr;
 
-            var levelState =
-                ps2Hack ?
-                gameState.MapStates[(int)entryNr - 2] :
-                gameState.MapStates[(int)entryNr];
+            var levelState = gameState.GetMapGameState(entryNr, SaveFileHandler.Instance.Platform);
 
             var dataEntry = MapData.MapDataList[entryNr];
 

@@ -20,7 +20,22 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private readonly MapGameState mapGameState;
 
+        private readonly MapGameState? derivedMapGameState = null;
+
+        private MapGameState stateForCollectables
+        {
+            get
+            {
+                if (derivedTallies && derivedMapGameState != null)
+                    return derivedMapGameState;
+                else
+                    return mapGameState;
+            }
+        }
+
         private MiniMapPanel? miniMapPanel;
+
+        private bool derivedTallies = false;
 
         private bool Allocated => mapGameState.TriggerListBitHeapAddress != 0x7FFFFFFF;
 
@@ -35,19 +50,23 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         {
             InitializeComponent();
 
-            bool ps2Hack = false;
-
-            var saveFile = SaveFileHandler.Instance.SaveFile;
-            if (saveFile != null)
-                ps2Hack = saveFile.Platform == GamePlatform.PlayStation2;
-
             this.gameState = gameState;
             this.mapIndex = mapIndex;
 
-            mapGameState =
-                ps2Hack ?
-                gameState.MapStates[(int)mapIndex - 2] :
-                gameState.MapStates[(int)mapIndex];
+            //If the map derives tallies from another map, get those.
+            if (MapData.MapDataList.TryGetValue(mapIndex, out var data))
+            {
+                if (data.DerivedCollectableTallies != Map.None)
+                {
+                    derivedTallies = true;
+                    derivedMapGameState = gameState.GetMapGameState(
+                        data.DerivedCollectableTallies, SaveFileHandler.Instance.Platform);
+                }
+            }
+
+            //If no derived tallies were found, just get the map's own one
+            mapGameState = gameState.GetMapGameState(
+                    mapIndex, SaveFileHandler.Instance.Platform);
 
             ComboBox_SortMode.SelectedIndex = (int)SortMode.Index;
         }
@@ -75,6 +94,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 PopulateTriggerList();
 
             UpdateCollectableAmounts();
+
+            UpdatePlayerStartControls();
         }
 
         #region Paint Controls
@@ -367,6 +388,20 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
         }
 
+        internal void UpdateSelectedTriggerColor(TriggerPanel sender)
+        {
+            foreach (TriggerPanel panel in FlowPanel_Triggers.Controls)
+            {
+                if (panel == sender)
+                {
+                    panel.BackColor = TriggerPanel.SelectedColor;
+                } else
+                {
+                    panel.BackColor = TriggerPanel.UnselectedColor;
+                }
+            }
+        }
+
         #endregion
 
         #region Map Data Controls
@@ -495,34 +530,55 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private void UpdateCollectableAmounts()
         {
-            Num_LightGemsAmount.Value = mapGameState.NumLightGems;
-            Num_LightGemsMax.Value = mapGameState.MaxLightGems;
+            MapGameState state = stateForCollectables;
 
-            Num_DarkGemsAmount.Value = mapGameState.NumDarkGems;
-            Num_DarkGemsMax.Value = mapGameState.MaxDarkGems;
+            Num_LightGemsAmount.Value = state.NumLightGems;
+            Num_LightGemsMax.Value = state.MaxLightGems;
 
-            Num_DragonEggs_ConceptArt.Value = mapGameState.NumEggs_ConceptArt;
-            Num_DragonEggs_ModelViewer.Value = mapGameState.NumEggs_ModelViewer;
-            Num_DragonEggs_Ember.Value = mapGameState.NumEggs_Ember;
-            Num_DragonEggs_Flame.Value = mapGameState.NumEggs_Flame;
-            Num_DragonEggs_SgtByrd.Value = mapGameState.NumEggs_SgtByrd;
-            Num_DragonEggs_Turret.Value = mapGameState.NumEggs_Turret;
-            Num_DragonEggs_Sparx.Value = mapGameState.NumEggs_Sparx;
-            Num_DragonEggs_Blink.Value = mapGameState.NumEggs_Blink;
+            Num_DarkGemsAmount.Value = state.NumDarkGems;
+            Num_DarkGemsMax.Value = state.MaxDarkGems;
 
-            Num_DragonEggsMax.Value = mapGameState.MaxDragonEggs;
+            Num_DragonEggs_ConceptArt.Value = state.NumEggs_ConceptArt;
+            Num_DragonEggs_ModelViewer.Value = state.NumEggs_ModelViewer;
+            Num_DragonEggs_Ember.Value = state.NumEggs_Ember;
+            Num_DragonEggs_Flame.Value = state.NumEggs_Flame;
+            Num_DragonEggs_SgtByrd.Value = state.NumEggs_SgtByrd;
+            Num_DragonEggs_Turret.Value = state.NumEggs_Turret;
+            Num_DragonEggs_Sparx.Value = state.NumEggs_Sparx;
+            Num_DragonEggs_Blink.Value = state.NumEggs_Blink;
 
-            UpdateDragonEggSum();
+            Num_DragonEggsMax.Value = state.MaxDragonEggs;
+
+            UpdateDragonEggSum(state);
+
+            bool visible = false;
+
+            if (MapData.MapDataList.TryGetValue(mapIndex, out var data))
+            {
+                if (data.DerivedCollectableTallies != Map.None)
+                {
+                    if (MapData.MapDataList.TryGetValue(
+                        data.DerivedCollectableTallies, out var otherData))
+                    {
+                        visible = true;
+                        Lbl_DerivedTallies.Text = "Derived from: " + otherData.Name;
+                    }
+                }
+            }
+
+            Lbl_DerivedTallies.Visible = visible;
         }
 
-        private void UpdateDragonEggSum()
+        private void UpdateDragonEggSum(MapGameState state)
         {
-            Lbl_EggsSum.Text = $"Sum: {mapGameState.SumOfEggs}";
+            Lbl_EggsSum.Text = $"Sum: {state.SumOfEggs}";
         }
 
         private void Num_DragonEggsAmount_ValueChanged(object? sender, EventArgs e)
         {
             if (sender is null) return;
+
+            MapGameState state = stateForCollectables;
 
             NumericUpDown num = (NumericUpDown)sender;
 
@@ -531,57 +587,100 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             switch (senderName)
             {
                 case "Num_DragonEggs_ConceptArt":
-                    mapGameState.NumEggs_ConceptArt = (int)num.Value;
+                    state.NumEggs_ConceptArt = (int)num.Value;
                     break;
                 case "Num_DragonEggs_ModelViewer":
-                    mapGameState.NumEggs_ModelViewer = (int)num.Value;
+                    state.NumEggs_ModelViewer = (int)num.Value;
                     break;
                 case "Num_DragonEggs_Ember":
-                    mapGameState.NumEggs_Ember = (int)num.Value;
+                    state.NumEggs_Ember = (int)num.Value;
                     break;
                 case "Num_DragonEggs_Flame":
-                    mapGameState.NumEggs_Flame = (int)num.Value;
+                    state.NumEggs_Flame = (int)num.Value;
                     break;
                 case "Num_DragonEggs_SgtByrd":
-                    mapGameState.NumEggs_SgtByrd = (int)num.Value;
+                    state.NumEggs_SgtByrd = (int)num.Value;
                     break;
                 case "Num_DragonEggs_Turret":
-                    mapGameState.NumEggs_Turret = (int)num.Value;
+                    state.NumEggs_Turret = (int)num.Value;
                     break;
                 case "Num_DragonEggs_Sparx":
-                    mapGameState.NumEggs_Sparx = (int)num.Value;
+                    state.NumEggs_Sparx = (int)num.Value;
                     break;
                 case "Num_DragonEggs_Blink":
-                    mapGameState.NumEggs_Blink = (int)num.Value;
+                    state.NumEggs_Blink = (int)num.Value;
                     break;
             }
 
-            UpdateDragonEggSum();
+            UpdateDragonEggSum(state);
         }
 
         private void Num_DragonEggsMax_ValueChanged(object sender, EventArgs e)
         {
-            mapGameState.MaxDragonEggs = (int)Num_DragonEggsMax.Value;
+            stateForCollectables.MaxDragonEggs = (int)Num_DragonEggsMax.Value;
         }
 
         private void Num_LightGemsAmount_ValueChanged(object sender, EventArgs e)
         {
-            mapGameState.NumLightGems = (int)Num_LightGemsAmount.Value;
+            stateForCollectables.NumLightGems = (int)Num_LightGemsAmount.Value;
         }
 
         private void Num_LightGemsMax_ValueChanged(object sender, EventArgs e)
         {
-            mapGameState.MaxLightGems = (int)Num_LightGemsMax.Value;
+            stateForCollectables.MaxLightGems = (int)Num_LightGemsMax.Value;
         }
 
         private void Num_DarkGemsAmount_ValueChanged(object sender, EventArgs e)
         {
-            mapGameState.NumDarkGems = (int)Num_DarkGemsAmount.Value;
+            stateForCollectables.NumDarkGems = (int)Num_DarkGemsAmount.Value;
         }
 
         private void Num_DarkGemsMax_ValueChanged(object sender, EventArgs e)
         {
-            mapGameState.MaxDarkGems = (int)Num_DarkGemsMax.Value;
+            stateForCollectables.MaxDarkGems = (int)Num_DarkGemsMax.Value;
+        }
+
+        #endregion
+
+        #region Player Start
+
+        private void UpdatePlayerStartControls()
+        {
+            if (ComboBox_Character.Items.Count == 0)
+            {
+                var playerNames = Enum.GetValues<Players>();
+                foreach (var name in playerNames)
+                    ComboBox_Character.Items.Add(name);
+            }
+
+            ComboBox_Character.SelectedIndex = (int)mapGameState.LastStartPointPlayer;
+
+            uint startPoint = mapGameState.LastStartPoint;
+            string startPointStr;
+
+            if ((startPoint & (uint)EXHashCode.HT_StartPoint_START) != 0)
+            {
+                startPointStr = startPoint.ToString("X");
+
+                if (Enum.IsDefined(typeof(EXHashCode), startPoint))
+                {
+                    startPointStr +=
+                        " (" +
+                            ((EXHashCode)startPoint).ToString().Replace("HT_StartPoint_", "") +
+                        ")";
+                }
+            }
+            else
+            {
+                startPointStr = "Trigger: " + startPoint.ToString();
+            }
+
+            Lbl_StartPoint.Text = startPointStr;
+        }
+
+        private void ComboBox_Character_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mapGameState.LastStartPointPlayer = (Players)ComboBox_Character.SelectedIndex;
         }
 
         #endregion

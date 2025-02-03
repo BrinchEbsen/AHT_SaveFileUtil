@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AHT_SaveFileUtil.Save.Slot;
+using System.Collections.Generic;
 
 namespace AHT_SaveFileUtil.Common
 {
@@ -72,9 +73,40 @@ namespace AHT_SaveFileUtil.Common
         Watery_Tomb = 64
     }
 
+    public enum MiniGameType
+    {
+        None,
+        SgtByrd,
+        Blink,
+        Turret,
+        Sparx
+    }
+
     public class MapMiniGame
     {
-
+        public Map MapIndex { get; set; }
+        public MiniGameType MiniGameType { get; set; }
+        public EggType RewardedEgg { get; set; }
+        /// <summary>
+        /// Set when the minigame NPC has been met by the player.
+        /// </summary>
+        public EXHashCode Objective_Intro { get; set; } = EXHashCode.HT_None;
+        /// <summary>
+        /// Set when the easy variant of the minigame has been beaten.
+        /// </summary>
+        public EXHashCode Objective_Easy { get; set; } = EXHashCode.HT_None;
+        /// <summary>
+        /// Set when the dragon egg has been awarded.
+        /// </summary>
+        public EXHashCode Objective_HalfDone { get; set; } = EXHashCode.HT_None;
+        /// <summary>
+        /// Set when the hard variant of the minigame has been beaten.
+        /// </summary>
+        public EXHashCode Objective_Hard { get; set; } = EXHashCode.HT_None;
+        /// <summary>
+        /// Set when the light gem has been awarded.
+        /// </summary>
+        public EXHashCode Objective_AllDone { get; set; } = EXHashCode.HT_None;
     }
 
     public class MapDataEntry
@@ -90,6 +122,12 @@ namespace AHT_SaveFileUtil.Common
         /// should be distinguished by a map hash.
         /// </summary>
         public bool MiniMapDistinguishedByMapHash { get; set; } = false;
+        public MapMiniGame[] MiniGames { get; set; } = [];
+        /// <summary>
+        /// When not <see cref="Map.None"/>, determines which other map
+        /// this map derives its collectable tally counts from.
+        /// </summary>
+        public Map DerivedCollectableTallies { get; set; } = Map.None;
     }
 
     public static class MapData
@@ -245,7 +283,19 @@ namespace AHT_SaveFileUtil.Common
             { Map.Sunken_Ruins, new()
                 {
                     Name = "Sunken Ruins",
-                    FileHash = 0x0100005a
+                    FileHash = 0x0100005a,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Outlandish_Inlet,
+                            MiniGameType = MiniGameType.Sparx,
+                            RewardedEgg = EggType.Sparx,
+                            Objective_Intro = EXHashCode.HT_Objective_SparxSign2B,
+                            Objective_Easy = EXHashCode.HT_Objective_MR2_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR2_Spx_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR2_Spx_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR2_Spx_AllDone,
+                        }
+                    ]
                 }
             },
             { Map.Cloudy_Domain, new()
@@ -253,7 +303,19 @@ namespace AHT_SaveFileUtil.Common
                     Name = "Cloudy Domain",
                     FileHash = 0x0100005b,
                     MapHash1 = 0x0500000c,
-                    MiniMapDistinguishedByMapHash = true
+                    MiniMapDistinguishedByMapHash = true,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Cloudy_Speedway,
+                            MiniGameType = MiniGameType.SgtByrd,
+                            RewardedEgg = EggType.SgtByrd,
+                            Objective_Intro = EXHashCode.HT_Objective_MR2_Sgt_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR2_Sgt_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR2_Sgt_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR2_Sgt_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR2_Sgt_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Cloudy_Domain_Ball_Gadget, new()
@@ -261,26 +323,73 @@ namespace AHT_SaveFileUtil.Common
                     Name = "Cloudy Domain (Ball Gadget)",
                     FileHash = 0x0100005b,
                     MapHash1 = 0x0500000b,
-                    MiniMapDistinguishedByMapHash = true
+                    MiniMapDistinguishedByMapHash = true,
+                    DerivedCollectableTallies = Map.Cloudy_Domain
                 }
             },
             { Map.Dragonfly_Falls, new()
                 {
                     Name = "Dragonfly Falls",
-                    FileHash = 0x0100003a
+                    FileHash = 0x0100003a,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Cavern_Chaos,
+                            MiniGameType = MiniGameType.Sparx,
+                            RewardedEgg = EggType.Sparx,
+                            Objective_Intro = EXHashCode.HT_Objective_SparxSign1C,
+                            Objective_Easy = EXHashCode.HT_Objective_MR1_Spx_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR1_Spx_Egg,
+                            Objective_Hard = EXHashCode.HT_Objective_MR1_Spx_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR1_Spx_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Crocovile_Swamp, new()
                 {
                     Name = "Crocovile Swamp",
-                    FileHash = 0x01000039
+                    FileHash = 0x01000039,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Completely_Swamped,
+                            MiniGameType = MiniGameType.Blink,
+                            RewardedEgg = EggType.Blink,
+                            Objective_Intro = EXHashCode.HT_Objective_1B_MetBlinky,
+                            Objective_Easy = EXHashCode.HT_Objective_MR1_Blk_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR1_Blk_Hard,
+                            Objective_Hard = EXHashCode.HT_Objective_MR1_Blk_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_1B_RescueBlinkGates
+                        },
+                        new MapMiniGame() {
+                            MapIndex = Map.Critter_Calamity,
+                            MiniGameType = MiniGameType.Turret,
+                            RewardedEgg = EggType.Turret,
+                            Objective_Intro = EXHashCode.HT_Objective_1BMetFrog,
+                            Objective_Easy = EXHashCode.HT_Objective_1BFrogGivesEgg,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR1_Spy_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MiniGame1A_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MiniGame1A_Complete
+                        }
+                    ]
                 }
             },
             { Map.Dragon_Village, new()
                 {
                     Name = "Dragon Village",
                     FileHash = 0x01000037,
-                    MapHash1 = 0x05000009
+                    MapHash1 = 0x05000009,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Island_Speedway,
+                            MiniGameType = MiniGameType.SgtByrd,
+                            RewardedEgg = EggType.SgtByrd,
+                            Objective_Intro = EXHashCode.HT_Objective_MR1_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR1_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR1_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR1_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR1_AllDone
+                        }
+                    ]
                 }
             },
             { Map.MapR1LinkAB, new()
@@ -320,14 +429,48 @@ namespace AHT_SaveFileUtil.Common
             { Map.Dark_Mine, new()
                 {
                     Name = "Dark Mine",
-                    FileHash = 0x010000a1
+                    FileHash = 0x010000a1,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Mined_Out,
+                            MiniGameType = MiniGameType.Blink,
+                            RewardedEgg = EggType.Blink,
+                            Objective_Intro = EXHashCode.HT_Objective_MR4_Blk_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR4_Blk_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR4_Blk_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR4_Blk_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR4_Blk_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Frostbite_Village, new()
                 {
                     Name = "Frostbite Village",
                     FileHash = 0x01000038,
-                    MapHash1 = 0x05000009
+                    MapHash1 = 0x05000009,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Snowed_Under,
+                            MiniGameType = MiniGameType.Blink,
+                            RewardedEgg = EggType.Blink,
+                            Objective_Intro = EXHashCode.HT_Objective_MR3_Blk_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR3_Blk_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR3_Blk_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR3_Blk_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR3_Blk_AllDone
+                        },
+                        new MapMiniGame() {
+                            MapIndex = Map.Iced_TNT,
+                            MiniGameType = MiniGameType.Turret,
+                            RewardedEgg = EggType.Turret,
+                            Objective_Intro = EXHashCode.HT_Objective_MR3_Spy_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR3_Spy_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR3_Spy_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR3_Spy_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR3_Spy_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Gnastys_Cave, new()
@@ -339,7 +482,19 @@ namespace AHT_SaveFileUtil.Common
             { Map.Ice_Citadel, new()
                 {
                     Name = "Ice Citadel",
-                    FileHash = 0x01000059
+                    FileHash = 0x01000059,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Iceberg_Aerobatics,
+                            MiniGameType = MiniGameType.SgtByrd,
+                            RewardedEgg = EggType.SgtByrd,
+                            Objective_Intro = EXHashCode.HT_Objective_MR3_Sgt_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR3_Sgt_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR3_Sgt_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR3_Sgt_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR3_Sgt_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Reds_Lair, new()
@@ -351,7 +506,19 @@ namespace AHT_SaveFileUtil.Common
             { Map.Gloomy_Glacier, new()
                 {
                     Name = "Gloomy Glacier",
-                    FileHash = 0x0100005c
+                    FileHash = 0x0100005c,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Frosty_Flight,
+                            MiniGameType = MiniGameType.Sparx,
+                            RewardedEgg = EggType.Sparx,
+                            Objective_Intro = EXHashCode.HT_Objective_SparxSign3B,
+                            Objective_Easy = EXHashCode.HT_Objective_MR3_Spx_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR3_Spx_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR3_Spx_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR3_Spx_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Playroom, new()
@@ -411,13 +578,47 @@ namespace AHT_SaveFileUtil.Common
             { Map.Stormy_Beach, new()
                 {
                     Name = "Stormy Beach",
-                    FileHash = 0x0100005d
+                    FileHash = 0x0100005d,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Storming_the_Beach,
+                            MiniGameType = MiniGameType.Turret,
+                            RewardedEgg = EggType.Turret,
+                            Objective_Intro = EXHashCode.HT_Objective_MR4_Spy_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR4_Spy_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR4_Spy_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR4_Spy_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR4_Spy_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Coastal_Remains, new()
                 {
                     Name = "Coastal Remains",
-                    FileHash = 0x0100003b
+                    FileHash = 0x0100003b,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.All_Washed_Up,
+                            MiniGameType = MiniGameType.Blink,
+                            RewardedEgg = EggType.Blink,
+                            Objective_Intro = EXHashCode.HT_Objective_MR2_Blk_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR2_Blk_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR2_Blk_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR2_Blk_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR2_Blk_AllDone
+                        },
+                        new MapMiniGame() {
+                            MapIndex = Map.Turtle_Turmoil,
+                            MiniGameType = MiniGameType.Turret,
+                            RewardedEgg = EggType.Turret,
+                            Objective_Intro = EXHashCode.HT_Objective_MR2_Spy_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR2_Spy_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR2_Spy_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR2_Spy_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR2_Spy_AllDone
+                        }
+                    ]
                 }
             },
             { Map.MapR2LinkAB, new()
@@ -503,7 +704,19 @@ namespace AHT_SaveFileUtil.Common
             { Map.Molten_Mount, new()
                 {
                     Name = "Molten Mount",
-                    FileHash = 0x0100005E
+                    FileHash = 0x0100005E,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Lava_Palaver,
+                            MiniGameType = MiniGameType.SgtByrd,
+                            RewardedEgg = EggType.SgtByrd,
+                            Objective_Intro = EXHashCode.HT_Objective_MR4_Sgt_Intro,
+                            Objective_Easy = EXHashCode.HT_Objective_MR4_Sgt_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR4_Sgt_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR4_Sgt_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR4_Sgt_AllDone
+                        }
+                    ]
                 }
             },
             { Map.Magma_Falls_Top, new()
@@ -519,7 +732,8 @@ namespace AHT_SaveFileUtil.Common
                     Name = "Magma Falls (Ball Gadget)",
                     FileHash = 0x0100005F,
                     MapHash1 = 0x0500000c,
-                    MiniMapDistinguishedByMapHash = true
+                    MiniMapDistinguishedByMapHash = true,
+                    DerivedCollectableTallies = Map.Magma_Falls_Top
                 }
             },
             { Map.Magma_Falls_Bottom, new()
@@ -527,7 +741,20 @@ namespace AHT_SaveFileUtil.Common
                     Name = "Magma Falls Bottom",
                     FileHash = 0x0100005F,
                     MapHash1 = 0x0500000d,
-                    MiniMapDistinguishedByMapHash = true
+                    MiniMapDistinguishedByMapHash = true,
+                    MiniGames = [
+                        new MapMiniGame() {
+                            MapIndex = Map.Sparx_Will_Fly,
+                            MiniGameType = MiniGameType.Sparx,
+                            RewardedEgg = EggType.Sparx,
+                            Objective_Intro = EXHashCode.HT_Objective_SparxSign4C,
+                            Objective_Easy = EXHashCode.HT_Objective_MR4_Spx_Easy,
+                            Objective_HalfDone = EXHashCode.HT_Objective_MR4_Spx_HalfDone,
+                            Objective_Hard = EXHashCode.HT_Objective_MR4_Spx_Hard,
+                            Objective_AllDone = EXHashCode.HT_Objective_MR4_Spx_AllDone
+                        }
+                    ],
+                    DerivedCollectableTallies = Map.Magma_Falls_Top
                 }
             },
             { Map.Watery_Tomb, new()

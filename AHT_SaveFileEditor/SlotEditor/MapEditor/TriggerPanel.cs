@@ -5,6 +5,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 {
     internal class TriggerPanel : Panel
     {
+        public static readonly Color UnselectedColor = Color.AliceBlue;
+        public static readonly Color SelectedColor = Color.LightBlue;
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int TrigIndex { get; set; }
 
@@ -37,7 +40,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             TriggerData = triggerData;
             _parentWnd = parentWnd;
 
-            BackColor = Color.AliceBlue;
+            BackColor = UnselectedColor;
             Height = 40;
             Width = 300 - 24;
             
@@ -66,6 +69,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private void Btn_Click(object? sender, EventArgs e)
         {
+            _parentWnd!.UpdateSelectedTriggerColor(this);
             _parentWnd!.PopulateTriggerData(this);
         }
     }

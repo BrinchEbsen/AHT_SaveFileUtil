@@ -31,6 +31,17 @@ namespace AHT_SaveFileEditor
             }
         }
 
+        public GamePlatform Platform
+        {
+            get
+            {
+                if (SaveFile == null)
+                    throw new NullReferenceException("No save file has been instantiated.");
+
+                return SaveFile.Platform;
+            }
+        }
+
         private SaveFileHandler() { }
 
         public static SaveFileHandler Instance => instance ??= new SaveFileHandler();
