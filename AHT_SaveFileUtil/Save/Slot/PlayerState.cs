@@ -258,7 +258,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// Without the health upgrade, the player dies at 0x20 health. With the upgrade, they die at 0x0.
         /// </para>
         /// </summary>
-        public int Health { get; private set; }
+        public int Health { get; set; }
 
         /// <summary>
         /// Get whether <see cref="Health"/> is an intended value.
@@ -268,22 +268,22 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         public static readonly Dictionary<int, string> HealthStrings_NoUpgrade = new()
         {
-            { 0x0, "No Health" },
+            { 0x0,  "No Health" },
             { 0x20, "No Health" },
             { 0x40, "No Sparx" },
-            { 0x60, "Green" },
-            { 0x80, "Blue" },
-            { 0xA0, "Gold" }
+            { 0x60, "Green Sparx" },
+            { 0x80, "Blue Sparx" },
+            { 0xA0, "Gold Sparx" }
         };
 
         public static readonly Dictionary<int, string> HealthStrings_Upgrade = new()
         {
-            { 0x0, "No Health" },
+            { 0x0,  "No Health" },
             { 0x20, "No Sparx" },
-            { 0x40, "Red" },
-            { 0x60, "Green" },
-            { 0x80, "Blue" },
-            { 0xA0, "Gold" }
+            { 0x40, "Red Sparx" },
+            { 0x60, "Green Sparx" },
+            { 0x80, "Blue Sparx" },
+            { 0xA0, "Gold Sparx" }
         };
         #endregion
 

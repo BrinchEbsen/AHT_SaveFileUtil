@@ -46,6 +46,8 @@ namespace AHT_SaveFileEditor
 
             UpdateCompletionPercentage();
 
+            UpdateHealthControls();
+
             InitializeObjectivesMapping();
             InitializeAbilityFlagsMapping();
 
@@ -121,6 +123,61 @@ namespace AHT_SaveFileEditor
         }
 
         #region PlayerState Vars
+        private void UpdateHealthControls()
+        {
+            Num_Health.Value = Slot.GameState.PlayerState.Health;
+            UpdateHealthDescriptor();
+        }
+
+        private void Num_Health_ValueChanged(object sender, EventArgs e)
+        {
+            Slot.GameState.PlayerState.Health = (int)Num_Health.Value;
+            UpdateHealthDescriptor();
+        }
+
+        private void UpdateHealthDescriptor()
+        {
+            int health = Slot.GameState.PlayerState.Health;
+            string descr;
+
+            //If health isn't a valid value
+            if (PlayerState.RoundHealthToValid(health) != health)
+            {
+                descr = "???";
+            }
+            else
+            {
+                Dictionary<int, string> names;
+
+                if (Slot.GameState.PlayerState.AF_HitPointUpgrade)
+                    names = PlayerState.HealthStrings_Upgrade;
+                else
+                    names = PlayerState.HealthStrings_NoUpgrade;
+
+                descr = names[health];
+            }
+
+            Lbl_HealthDescriptor.Text = descr;
+        }
+
+        private void Btn_Health_Damage_Click(object sender, EventArgs e)
+        {
+            int health = (int)Num_Health.Value;
+
+            health = PlayerState.RoundHealthToValid(health - 0x20);
+
+            Num_Health.Value = health;
+        }
+
+        private void Btn_Health_Heal_Click(object sender, EventArgs e)
+        {
+            int health = (int)Num_Health.Value;
+
+            health = PlayerState.RoundHealthToValid(health + 0x20);
+
+            Num_Health.Value = health;
+        }
+
         private void Num_Gems_ValueChanged(object sender, EventArgs e)
         {
             Slot.GameState.PlayerState.Gems = (int)Num_Gems.Value;
@@ -268,6 +325,9 @@ namespace AHT_SaveFileEditor
 
             uint mask = CheckList_AbilityFlags_Mapping[e.Index];
             Slot.GameState.PlayerState.SetAbilityFlag(mask, newValue);
+
+            if (mask == PlayerState.AF_MASK_HIT_POINT_UPGRADE)
+                UpdateHealthDescriptor();
         }
 
         private void Btn_SetAllAbilityFlags_Click(object sender, EventArgs e)

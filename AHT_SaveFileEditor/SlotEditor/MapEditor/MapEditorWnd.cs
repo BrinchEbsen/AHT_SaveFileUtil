@@ -657,8 +657,12 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             uint startPoint = mapGameState.LastStartPoint;
             string startPointStr;
-
-            if ((startPoint & (uint)EXHashCode.HT_StartPoint_START) != 0)
+            
+            if (startPoint == 0xFFFFFFFF)
+            {
+                startPointStr = "None";
+            }
+            else if ((startPoint & (uint)EXHashCode.HT_StartPoint_START) != 0)
             {
                 startPointStr = startPoint.ToString("X");
 

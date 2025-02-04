@@ -16,6 +16,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
     {
         private const int TEXTURE_SIZE = 512;
 
+        private readonly Font TextFont = new Font(FontFamily.GenericSansSerif, 20);
+        private readonly Brush TextBrush = new SolidBrush(Color.White);
+
         private readonly GameState _gameState;
         private readonly Map _mapIndex;
         private MiniMapInfo? _mappedInfo;
@@ -213,6 +216,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             if (ShowMiniMap)
                 graphics.DrawImage(_miniMapTexture, 0, 0);
+
+            if (UsingDefault)
+                graphics.DrawString("No Minimap", TextFont, TextBrush, 10, 10);
 
             if (!UsingDefault && HighLight != null)
                 DrawHighLight(graphics);
