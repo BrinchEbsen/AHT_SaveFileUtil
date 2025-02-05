@@ -1,4 +1,5 @@
 ﻿using AHT_SaveFileEditor.SlotEditor;
+using AHT_SaveFileEditor.SlotEditor.MapEditor;
 using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.Slot;
 
@@ -89,6 +90,8 @@ namespace AHT_SaveFileEditor
             Num_DoubleGemMax.Value = (decimal)playerState.DoubleGemTimerMax;
         }
 
+        #region Misc
+
         private void Check_FileUsed_CheckedChanged(object sender, EventArgs e)
         {
             Slot.IsUsed = Check_FileUsed.Checked;
@@ -121,6 +124,8 @@ namespace AHT_SaveFileEditor
                 Slot.GameState.GetObjective(EXHashCode.HT_Objective_Boss4_Beaten) ? 1 : 0
                 );
         }
+
+        #endregion
 
         #region PlayerState Vars
         private void UpdateHealthControls()
@@ -486,6 +491,8 @@ namespace AHT_SaveFileEditor
         }
         #endregion
 
+        #region Collectable Amounts
+
         private void Num_LightGems_ValueChanged(object sender, EventArgs e)
         {
             Slot.GameState.PlayerState.TotalLightGems = (sbyte)Num_LightGems.Value;
@@ -558,5 +565,28 @@ namespace AHT_SaveFileEditor
         {
             Slot.GameState.PlayerState.DoubleGemTimerMax = (float)Num_DoubleGemMax.Value;
         }
+
+        #endregion
+
+        #region Quick Actions
+
+        private void MenuItem_ResetSlot_Click(object sender, EventArgs e)
+        {
+            var miniMaps = ResourceHandler.Instance.MiniMaps;
+            if (miniMaps == null)
+            {
+                MessageBox.Show(
+                    "Minimap resource not loaded",
+                    "Cannot reset savefile.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            Slot.Reset();
+            Slot.GameState.AllocateMinimaps(miniMaps);
+        }
+
+        #endregion
     }
 }

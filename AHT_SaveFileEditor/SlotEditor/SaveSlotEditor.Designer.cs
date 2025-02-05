@@ -106,6 +106,9 @@ namespace AHT_SaveFileEditor
             label1 = new Label();
             Label_StartingLevel = new Label();
             Check_FileUsed = new CheckBox();
+            menuStrip1 = new MenuStrip();
+            quickActionsToolStripMenuItem = new ToolStripMenuItem();
+            MenuItem_ResetSlot = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -134,6 +137,7 @@ namespace AHT_SaveFileEditor
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeSeconds).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeMinutes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeHours).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -141,7 +145,7 @@ namespace AHT_SaveFileEditor
             splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.FixedPanel = FixedPanel.Panel1;
             splitContainer1.IsSplitterFixed = true;
-            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Location = new Point(0, 24);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -222,7 +226,7 @@ namespace AHT_SaveFileEditor
             splitContainer1.Panel2.Controls.Add(label1);
             splitContainer1.Panel2.Controls.Add(Label_StartingLevel);
             splitContainer1.Panel2.Controls.Add(Check_FileUsed);
-            splitContainer1.Size = new Size(1243, 937);
+            splitContainer1.Size = new Size(1243, 929);
             splitContainer1.SplitterDistance = 316;
             splitContainer1.TabIndex = 0;
             // 
@@ -243,7 +247,7 @@ namespace AHT_SaveFileEditor
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(FlowPanel_Levels);
-            splitContainer2.Size = new Size(316, 937);
+            splitContainer2.Size = new Size(316, 929);
             splitContainer2.SplitterDistance = 64;
             splitContainer2.TabIndex = 0;
             // 
@@ -276,7 +280,7 @@ namespace AHT_SaveFileEditor
             FlowPanel_Levels.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Levels.Location = new Point(0, 0);
             FlowPanel_Levels.Name = "FlowPanel_Levels";
-            FlowPanel_Levels.Size = new Size(316, 869);
+            FlowPanel_Levels.Size = new Size(316, 861);
             FlowPanel_Levels.TabIndex = 0;
             FlowPanel_Levels.WrapContents = false;
             // 
@@ -669,7 +673,7 @@ namespace AHT_SaveFileEditor
             // 
             // FlowPanel_PowerUps
             // 
-            FlowPanel_PowerUps.Location = new Point(3, 381);
+            FlowPanel_PowerUps.Location = new Point(3, 374);
             FlowPanel_PowerUps.Name = "FlowPanel_PowerUps";
             FlowPanel_PowerUps.Size = new Size(912, 130);
             FlowPanel_PowerUps.TabIndex = 33;
@@ -1007,12 +1011,37 @@ namespace AHT_SaveFileEditor
             Check_FileUsed.UseVisualStyleBackColor = true;
             Check_FileUsed.CheckedChanged += Check_FileUsed_CheckedChanged;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { quickActionsToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1243, 24);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // quickActionsToolStripMenuItem
+            // 
+            quickActionsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { MenuItem_ResetSlot });
+            quickActionsToolStripMenuItem.Name = "quickActionsToolStripMenuItem";
+            quickActionsToolStripMenuItem.Size = new Size(93, 20);
+            quickActionsToolStripMenuItem.Text = "Quick Actions";
+            // 
+            // MenuItem_ResetSlot
+            // 
+            MenuItem_ResetSlot.Name = "MenuItem_ResetSlot";
+            MenuItem_ResetSlot.Size = new Size(180, 22);
+            MenuItem_ResetSlot.Text = "Reset This Slot";
+            MenuItem_ResetSlot.Click += MenuItem_ResetSlot_Click;
+            // 
             // SaveSlotEditor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1243, 937);
+            ClientSize = new Size(1243, 953);
             Controls.Add(splitContainer1);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "SaveSlotEditor";
             ShowIcon = false;
             Text = "Save Slot Editor";
@@ -1048,7 +1077,10 @@ namespace AHT_SaveFileEditor
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeSeconds).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeMinutes).EndInit();
             ((System.ComponentModel.ISupportInitialize)Num_PlayTimeHours).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -1130,5 +1162,8 @@ namespace AHT_SaveFileEditor
         private Button Btn_Health_Heal;
         private Button Btn_Health_Damage;
         private Label Lbl_HealthDescriptor;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem quickActionsToolStripMenuItem;
+        private ToolStripMenuItem MenuItem_ResetSlot;
     }
 }

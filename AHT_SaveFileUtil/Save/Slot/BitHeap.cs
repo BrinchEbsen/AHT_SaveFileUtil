@@ -235,6 +235,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             NumBitsUsed = 0;
         }
 
+        public void EmptyStack()
+        {
+            StackPtr = -1;
+        }
+
         #endregion
 
         #region Reading

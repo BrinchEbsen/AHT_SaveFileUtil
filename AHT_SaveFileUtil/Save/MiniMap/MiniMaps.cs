@@ -48,6 +48,19 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             }
         }
 
+        public int MiniMapStatus_TotalBitHeapSize
+        {
+            get
+            {
+                int size = 0;
+
+                foreach (var _ in MiniMapOrder)
+                    size += 2;
+
+                return size;
+            }
+        }
+
         public int MiniMapStatus_BitHeapAddress => MiniMaps_TotalBitheapSize;
 
         public MiniMaps() { }

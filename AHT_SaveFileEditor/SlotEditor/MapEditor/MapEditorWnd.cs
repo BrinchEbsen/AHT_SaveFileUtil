@@ -388,7 +388,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
         }
 
-        internal void UpdateSelectedTriggerColor(TriggerPanel sender)
+        internal void UpdateSelectedTriggerColor(TriggerPanel? sender = null)
         {
             foreach (TriggerPanel panel in FlowPanel_Triggers.Controls)
             {
@@ -469,6 +469,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 mapGameState.TriggerListBitHeapAddress, mapGameState.TriggerListBitHeapSize);
 
             DepopulateTriggerData();
+            UpdateSelectedTriggerColor();
         }
 
         private void Btn_WriteAllWrittenFlag_Click(object sender, EventArgs e)
@@ -478,6 +479,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             SetAllWrittenFlag(true);
 
             DepopulateTriggerData();
+            UpdateSelectedTriggerColor();
         }
 
         private void Btn_ClearAllWrittenFlag_Click(object sender, EventArgs e)
@@ -487,6 +489,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             SetAllWrittenFlag(false);
 
             DepopulateTriggerData();
+            UpdateSelectedTriggerColor();
         }
 
         private void SetAllWrittenFlag(bool set)

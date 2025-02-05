@@ -1,5 +1,6 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
+using AHT_SaveFileUtil.Save.MiniMap;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,8 @@ namespace AHT_SaveFileUtil.Save.Slot
 
     public class GameState : ISaveFileIO<GameState>
     {
+        public GamePlatform Platform { get; private set; }
+
         #region Variables
         /// <summary>
         /// Maximum number of objectives supported.
@@ -53,7 +56,9 @@ namespace AHT_SaveFileUtil.Save.Slot
         public Map StartingMap { get; set; }
 
         /// <summary>
-        /// A set of flags, usage currently unknown.
+        /// A set of flags.
+        /// Only used flag is 0x1, which determines if the <see cref="TimeoutTimer"/> should be set
+        /// when the pause menu is closed. This is unused functionality.
         /// </summary>
         public uint Flags { get; private set; }
 
@@ -101,7 +106,8 @@ namespace AHT_SaveFileUtil.Save.Slot
             => $"{PlayTimerHours}:{PlayTimerMinutes % 60:00}:{(int)PlayTimer % 60:00}";
 
         /// <summary>
-        /// Unused in the code, purpose unknown.
+        /// If <see cref="Flags"/> has 0x1 set, ticks down every frame until it hits 0,
+        /// which then boots the player back to the title screen. This is unused functionality.
         /// </summary>
         public float TimeoutTimer { get; private set; }
 
@@ -200,7 +206,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
             
-            var state = new GameState();
+            var state = new GameState() { Platform = platform };
 
             state.Version = reader.ReadUInt32(bigEndian);
             state.VersionValidFlag = reader.ReadInt32(bigEndian);
@@ -344,6 +350,71 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
 
             return MapStates[(int)mapIndex];
+        }
+
+        internal void SetMapStatesFromSheet()
+        {
+            uint[][] sheet = PlayerState.DataSheet_GameInfo_0;
+            
+            foreach (uint[] row in sheet)
+            {
+                foreach(var pair in MapData.MapDataList)
+                {
+                    if (row[0] == pair.Value.FileHash)
+                    {
+                        var state = GetMapGameState(pair.Key, Platform);
+
+                        state.MaxDarkGems   = (int)row[1];
+                        state.MaxDragonEggs = (int)row[2];
+                        state.MaxLightGems  = (int)row[3];
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void Clear()
+        {
+            //General
+            CheatsPlayerType = Players.None;
+            Flags = 0;
+            TimeoutTimer = 0;
+            PlayTimer = 0;
+
+            //Trig info
+            NumTrigInfo = 0;
+            for (int i = 0; i < TrigInfo.Length; i++)
+                TrigInfo[i] = null;
+
+            //BitHeap
+            BitHeap.ClearAll();
+            BitHeap.EmptyStack();
+
+            //Map states
+            foreach(var mapState in MapStates)
+                mapState.Reset();
+
+            SetMapStatesFromSheet();
+
+            //Player state
+            PlayerState.Reset();
+
+            //Objectives/Tasks
+            for (int i = 0; i < Objectives.Length; i++)
+                Objectives[i] = 0;
+
+            for (int i = 0; i < Tasks.Length; i++)
+                Tasks[i] = 0;
+
+            //TODO: probably figure out the shop flags here...
+            ShopAvailableFlags = 0;
+        }
+
+        public void AllocateMinimaps(MiniMaps miniMaps)
+        {
+            BitHeap.Allocate(miniMaps.MiniMaps_TotalBitheapSize);
+            BitHeap.Allocate(miniMaps.MiniMapStatus_TotalBitHeapSize);
         }
 
         #region Objectives

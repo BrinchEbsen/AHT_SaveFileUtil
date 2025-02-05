@@ -76,6 +76,14 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         public sbyte Magazines { get; set; }
 
+        public void Clear()
+        {
+            Amount = 0;
+            Max = 0;
+            Total = 0;
+            Magazines = 0;
+        }
+
         public static PowerupTally FromReader(BinaryReader reader, GamePlatform platform)
         {
             return new PowerupTally
@@ -244,6 +252,57 @@ namespace AHT_SaveFileUtil.Save.Slot
     /// </summary>
     public class PlayerState : ISaveFileIO<PlayerState>
     {
+        #region Data Sheets
+
+        /// <summary>
+        /// <para>
+        /// Hardcoded array with values from the first data sheet in
+        /// HT_SpreadSheet_GameInfo from the file HT_File_GameInfo.
+        /// </para>
+        /// <para>
+        /// Contains the maximum collectable tallies for each level file.
+        /// </para>
+        /// </summary>
+        internal static readonly uint[][] DataSheet_GameInfo_0 = [
+        /*                      HashCode,   Max Dark Gems, Max Dragon Eggs, Max Light Gems */
+        /* HT_File_Realm1A */ [ 0x01000037, 3,             6,               6              ],
+        /* HT_File_Realm1B */ [ 0x01000039, 3,             10,              8              ],
+        /* HT_File_Realm1C */ [ 0x0100003A, 4,             9,               6              ],
+        /* HT_File_Realm2A */ [ 0x0100003B, 4,             9,               7              ],
+        /* HT_File_Realm2B */ [ 0x0100005A, 3,             8,               6              ],
+        /* HT_File_Realm2C */ [ 0x0100005B, 3,             8,               7              ],
+        /* HT_File_Realm3A */ [ 0x01000038, 5,             9,               7              ],
+        /* HT_File_Realm3B */ [ 0x0100005C, 0,             8,               6              ],
+        /* HT_File_Realm3C */ [ 0x01000059, 5,             8,               7              ],
+        /* HT_File_Realm4A */ [ 0x0100005D, 1,             2,               2              ],
+        /* HT_File_Realm4B */ [ 0x0100005E, 3,             6,               5              ],
+        /* HT_File_Realm4C */ [ 0x0100005F, 1,             6,               5              ],
+        /* HT_File_Realm4D */ [ 0x010000A1, 2,             6,               5              ],
+        /* HT_File_Realm4E */ [ 0x010000A2, 3,             5,               3              ]
+        ];
+
+        /// <summary>
+        /// <para>
+        /// Hardcoded array with values from the second data sheet in
+        /// HT_SpreadSheet_GameInfo from the file HT_File_GameInfo.
+        /// </para>
+        /// <para>
+        /// Contains the savefile startup values for several player state stats.
+        /// </para>
+        /// </summary>
+        internal static readonly sbyte[][] DataSheet_GameInfo_1 = [
+        /*                       Element Flags,  Data 1,  Data 2,  Data 3,  Data 4,  Data 5 */
+        /* Flame Bombs      */ [ 0x1,            0,       0,       10,      50,      0      ],
+        /* Ice Bombs        */ [ 0x2,            0,       0,       4,       20,      0      ],
+        /* Water Bombs      */ [ 0x4,            0,       0,       20,      100,     0      ],
+        /* Electric Bombs   */ [ 0x8,            0,       0,       2,       10,      0      ],
+        /* Fire Arrows      */ [ 0x10,           0,       0,       20,      20,      0      ],
+        /* Lock Picks       */ [ 0x20,           0,       0,       1,       3,       0      ],
+        /* Double Gem Timer */ [ 0x40,           0,       120,     0,       0,       0      ]
+        ];
+
+        #endregion
+
         #region Variables
         /// <summary>
         /// The currently selected breath.
@@ -759,6 +818,81 @@ namespace AHT_SaveFileUtil.Save.Slot
             Setup.ToWriter(writer, platform);
             writer.Write((int)LastPlayerSetup, bigEndian);
             writer.BaseStream.Seek(4, SeekOrigin.Current);
+        }
+
+        private void SetFromDataSheet()
+        {
+            foreach (sbyte[] row in DataSheet_GameInfo_1)
+            {
+                switch(row[0])
+                {
+                    case 0x1:
+                        FlameBombs.Amount = row[2];
+                        FlameBombs.Max = row[3];
+                        FlameBombs.Total = row[5];
+                        break;
+                    case 0x2:
+                        IceBombs.Amount = row[2];
+                        IceBombs.Max = row[3];
+                        IceBombs.Total = row[5];
+                        break;
+                    case 0x4:
+                        WaterBombs.Amount = row[2];
+                        WaterBombs.Max = row[3];
+                        WaterBombs.Total = row[5];
+                        break;
+                    case 0x8:
+                        ElectricBombs.Amount = row[2];
+                        ElectricBombs.Max = row[3];
+                        ElectricBombs.Total = row[5];
+                        break;
+                    case 0x10:
+                        FireArrows = row[2];
+                        FireArrowsMax = row[3];
+                        break;
+                    case 0x20:
+                        LockPickers.Amount = row[2];
+                        LockPickers.Max = row[3];
+                        LockPickers.Total = row[5];
+                        break;
+                    case 0x40:
+                        DoubleGemTimerMax = row[2] * 60f;
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Replicates StartNewGame method on the game's PlayerState class.
+        /// </summary>
+        public void Reset()
+        {
+            FlameBombs.Clear();
+            IceBombs.Clear();
+            WaterBombs.Clear();
+            ElectricBombs.Clear();
+            FireArrows = 0;
+            FireArrowsMax = 0;
+            LockPickers.Clear();
+            DoubleGemTimerMax = 0f;
+            Health = 0xA0;
+            CurrentBreath = BreathType.Fire;
+            Gems = 0;
+            TotalGems = 0;
+            AbilityFlags = 0;
+            SgtByrdFuel = 0f;
+            BlinkBombs = 0;
+            InvincibleTimerMax = 0f;
+            LastPlayerSetup = Players.Spyro;
+            SuperchargeTimerMax = 0f;
+            DoubleGemTimerMax = 10f * 60f;
+            DoubleGemTimer = 0f;
+            TotalLightGems = 0;
+            TotalDragonEggs = 0;
+            TotalDarkGems = 0;
+            UNK_0 = 0;
+
+            SetFromDataSheet();
         }
 
         #region Health Methods

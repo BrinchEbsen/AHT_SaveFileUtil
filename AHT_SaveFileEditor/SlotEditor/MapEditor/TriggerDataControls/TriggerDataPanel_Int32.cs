@@ -31,6 +31,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             {
                 Location = new Point(0, 20),
                 Size = new Size(Width, Height - 20),
+                Minimum = int.MinValue,
+                Maximum = int.MaxValue,
                 Value = value
             };
             num.ValueChanged += Num_ValueChanged;

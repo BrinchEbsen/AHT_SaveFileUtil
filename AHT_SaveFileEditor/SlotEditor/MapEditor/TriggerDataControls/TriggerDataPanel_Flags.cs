@@ -15,7 +15,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls
             if (definition.Type != TriggerDataType.Flags)
                 throw new ArgumentException(STR_WRONG_TYPE_EXCEPTION);
 
-            Width = 100;
+            Width = 150;
             BackColor = Color.AliceBlue;
 
             Controls.Add(new Label()

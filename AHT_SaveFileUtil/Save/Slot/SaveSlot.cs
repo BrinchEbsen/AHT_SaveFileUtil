@@ -1,11 +1,14 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Extensions;
+using AHT_SaveFileUtil.Save.MiniMap;
 using System.IO;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
     public class SaveSlot : ISaveFileIO<SaveSlot>
     {
+        public GamePlatform Platform { get; private set; }
+
         public uint UsageFlag { get; set; }
 
         private byte UsedFlag;
@@ -32,7 +35,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            var slot = new SaveSlot();
+            var slot = new SaveSlot() { Platform = platform };
 
             slot.UsageFlag = reader.ReadUInt32(bigEndian);
 
@@ -63,6 +66,16 @@ namespace AHT_SaveFileUtil.Save.Slot
                 writer.BaseStream.Seek(8, SeekOrigin.Current);
 
             GameState.ToWriter(writer, platform);
+        }
+
+        public void Reset()
+        {
+            UsedFlag = 1;
+            DisplayedSaveMessageFlag = 0;
+            SpareFlag2 = 0;
+            SpareFlag3 = 0;
+
+            GameState.Clear();
         }
 
         public override string ToString()

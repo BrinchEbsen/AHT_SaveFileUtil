@@ -192,6 +192,32 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
+        public void Reset()
+        {
+            Flags = 0;
+            LastStartPoint = 0xFFFFFFFF;
+            LastStartPointPlayer = 0;
+            
+            MaxDarkGems = -1;
+            MaxLightGems = -1;
+            MaxDragonEggs = -1;
+
+            NumDarkGems = 0;
+            NumLightGems = 0;
+
+            NumEggs_ConceptArt = 0;
+            NumEggs_ModelViewer = 0;
+            NumEggs_Ember = 0;
+            NumEggs_Flame = 0;
+            NumEggs_SgtByrd = 0;
+            NumEggs_Turret = 0;
+            NumEggs_Sparx = 0;
+            NumEggs_Blink = 0;
+
+            TriggerListBitHeapSize = -1;
+            TriggerListBitHeapAddress = 0x7FFFFFFF;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
