@@ -156,6 +156,26 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             return offset;
         }
 
+        public int GetMiniMapStatusIndex(uint fileHash, uint mapHash = 0)
+        {
+            for (int i = 0; i < MiniMapOrder.Length; i++)
+            {
+                var state = MiniMapOrder[i];
+
+                if (mapHash == 0)
+                {
+                    if (state.FileHash == fileHash)
+                        return i;
+                } else
+                {
+                    if (state.FileHash == fileHash && state.MapHash == mapHash)
+                        return i;
+                }
+            }
+
+            return -1;
+        }
+
         public bool MiniMapStatus_GetBitName(BitHeap bitHeap, int index, BitNames name)
         {
             int address = MiniMapStatus_BitHeapAddress;

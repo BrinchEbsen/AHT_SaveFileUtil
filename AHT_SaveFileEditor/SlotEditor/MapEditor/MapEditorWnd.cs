@@ -1,5 +1,6 @@
 ﻿using AHT_SaveFileEditor.SlotEditor.MapEditor.TriggerDataControls;
 using AHT_SaveFileUtil.Common;
+using AHT_SaveFileUtil.Save.MiniMap;
 using AHT_SaveFileUtil.Save.Slot;
 using AHT_SaveFileUtil.Save.Triggers;
 
@@ -88,6 +89,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (miniMapPanel.UsingDefault)
                 GroupBox_DrawControls.Visible = false;
 
+            if (!InitializeMiniMapDataButtons())
+                GroupBox_MiniMapStateControls.Visible = false;
+
             UpdateTriggerControls();
 
             if (Allocated)
@@ -98,7 +102,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             UpdatePlayerStartControls();
         }
 
-        #region Paint Controls
+        #region MiniMap Controls
 
         private void Check_ShowMiniMap_CheckedChanged(object sender, EventArgs e)
         {
@@ -154,6 +158,56 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             Btn_PaintReveal.Enabled = miniMapPanel.PaintMode != PaintMode.Reveal;
             Btn_PaintUnreveal.Enabled = miniMapPanel.PaintMode != PaintMode.Unreveal;
+        }
+
+        private bool InitializeMiniMapDataButtons()
+        {
+            var rsc = ResourceHandler.Instance;
+            if (rsc.MiniMaps == null)
+                return false;
+
+            if (!MapData.MapDataList.TryGetValue(mapIndex, out var data))
+                return false;
+
+            int index;
+            if (data.MiniMapDistinguishedByMapHash)
+                index = rsc.MiniMaps.GetMiniMapStatusIndex(data.FileHash, data.MapHash1);
+            else
+                index = rsc.MiniMaps.GetMiniMapStatusIndex(data.FileHash);
+
+            if (index < 0) return false;
+
+            Check_MiniMapViewable.Checked
+                = rsc.MiniMaps.MiniMapStatus_GetBitName(gameState.BitHeap, index, BitNames.Visible);
+
+            Check_MiniMapSelectable.Checked
+                = rsc.MiniMaps.MiniMapStatus_GetBitName(gameState.BitHeap, index, BitNames.Selectable);
+
+            return true;
+        }
+
+        private void Check_MiniMapStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            var rsc = ResourceHandler.Instance;
+            if (rsc.MiniMaps == null)
+                return;
+
+            if (!MapData.MapDataList.TryGetValue(mapIndex, out var data))
+                return;
+
+            int index;
+            if (data.MiniMapDistinguishedByMapHash)
+                index = rsc.MiniMaps.GetMiniMapStatusIndex(data.FileHash, data.MapHash1);
+            else
+                index = rsc.MiniMaps.GetMiniMapStatusIndex(data.FileHash);
+
+            if (index < 0) return;
+
+            rsc.MiniMaps.MiniMapStatus_SetBitName(
+                gameState.BitHeap, index, BitNames.Visible, Check_MiniMapViewable.Checked);
+
+            rsc.MiniMaps.MiniMapStatus_SetBitName(
+                gameState.BitHeap, index, BitNames.Visible, Check_MiniMapSelectable.Checked);
         }
 
         #endregion
@@ -261,6 +315,28 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             FlowPanel_Triggers.ResumeLayout();
         }
+
+        /*
+        private void Text_TriggerSearchBar_TextChanged(object sender, EventArgs e)
+        {
+            string query = Text_TriggerSearchBar.Text;
+
+            if (query == "")
+            {
+                foreach(TriggerPanel trigger in FlowPanel_Triggers.Controls)
+                    trigger.Visible = true;
+            }
+            else
+            {
+                foreach(TriggerPanel trigger in FlowPanel_Triggers.Controls)
+                {
+                    string name = trigger.TriggerData.ObjectName;
+
+                    trigger.Visible = name.Contains(query, StringComparison.OrdinalIgnoreCase);
+                }
+            }
+        }
+        */
 
         private void ReSortTriggerPanelList()
         {
@@ -395,7 +471,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                 if (panel == sender)
                 {
                     panel.BackColor = TriggerPanel.SelectedColor;
-                } else
+                }
+                else
                 {
                     panel.BackColor = TriggerPanel.UnselectedColor;
                 }
@@ -660,7 +737,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             uint startPoint = mapGameState.LastStartPoint;
             string startPointStr;
-            
+
             if (startPoint == 0xFFFFFFFF)
             {
                 startPointStr = "None";

@@ -43,8 +43,10 @@
             splitContainer5 = new SplitContainer();
             Panel_MiniMap = new Panel();
             FlowPanel_TriggerData = new FlowLayoutPanel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            FlowPanel_MapInfo = new FlowLayoutPanel();
             GroupBox_DrawControls = new GroupBox();
+            Check_MiniMapSelectable = new CheckBox();
+            Check_MiniMapViewable = new CheckBox();
             Btn_PaintReveal = new Button();
             Check_ShowSquares = new CheckBox();
             Btn_PaintUnreveal = new Button();
@@ -89,6 +91,7 @@
             label20 = new Label();
             label19 = new Label();
             ComboBox_Character = new ComboBox();
+            GroupBox_MiniMapStateControls = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -105,7 +108,7 @@
             splitContainer5.Panel1.SuspendLayout();
             splitContainer5.Panel2.SuspendLayout();
             splitContainer5.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            FlowPanel_MapInfo.SuspendLayout();
             GroupBox_DrawControls.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).BeginInit();
@@ -122,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).BeginInit();
             groupBox2.SuspendLayout();
+            GroupBox_MiniMapStateControls.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -139,7 +143,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer3);
-            splitContainer1.Size = new Size(1513, 796);
+            splitContainer1.Size = new Size(1513, 753);
             splitContainer1.SplitterDistance = 300;
             splitContainer1.TabIndex = 0;
             // 
@@ -166,8 +170,8 @@
             // splitContainer4.Panel2
             // 
             splitContainer4.Panel2.Controls.Add(FlowPanel_Triggers);
-            splitContainer4.Size = new Size(300, 796);
-            splitContainer4.SplitterDistance = 136;
+            splitContainer4.Size = new Size(300, 753);
+            splitContainer4.SplitterDistance = 134;
             splitContainer4.TabIndex = 0;
             // 
             // label1
@@ -262,7 +266,7 @@
             FlowPanel_Triggers.FlowDirection = FlowDirection.TopDown;
             FlowPanel_Triggers.Location = new Point(0, 0);
             FlowPanel_Triggers.Name = "FlowPanel_Triggers";
-            FlowPanel_Triggers.Size = new Size(300, 656);
+            FlowPanel_Triggers.Size = new Size(300, 615);
             FlowPanel_Triggers.TabIndex = 0;
             FlowPanel_Triggers.WrapContents = false;
             // 
@@ -280,8 +284,8 @@
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.Controls.Add(flowLayoutPanel1);
-            splitContainer3.Size = new Size(1209, 796);
+            splitContainer3.Panel2.Controls.Add(FlowPanel_MapInfo);
+            splitContainer3.Size = new Size(1209, 753);
             splitContainer3.SplitterDistance = 512;
             splitContainer3.TabIndex = 1;
             // 
@@ -301,7 +305,7 @@
             // splitContainer5.Panel2
             // 
             splitContainer5.Panel2.Controls.Add(FlowPanel_TriggerData);
-            splitContainer5.Size = new Size(512, 796);
+            splitContainer5.Size = new Size(512, 753);
             splitContainer5.SplitterDistance = 512;
             splitContainer5.TabIndex = 0;
             // 
@@ -322,20 +326,21 @@
             FlowPanel_TriggerData.FlowDirection = FlowDirection.TopDown;
             FlowPanel_TriggerData.Location = new Point(0, 0);
             FlowPanel_TriggerData.Name = "FlowPanel_TriggerData";
-            FlowPanel_TriggerData.Size = new Size(512, 280);
+            FlowPanel_TriggerData.Size = new Size(512, 237);
             FlowPanel_TriggerData.TabIndex = 0;
             // 
-            // flowLayoutPanel1
+            // FlowPanel_MapInfo
             // 
-            flowLayoutPanel1.Controls.Add(GroupBox_DrawControls);
-            flowLayoutPanel1.Controls.Add(groupBox1);
-            flowLayoutPanel1.Controls.Add(groupBox2);
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(693, 796);
-            flowLayoutPanel1.TabIndex = 15;
+            FlowPanel_MapInfo.Controls.Add(GroupBox_DrawControls);
+            FlowPanel_MapInfo.Controls.Add(GroupBox_MiniMapStateControls);
+            FlowPanel_MapInfo.Controls.Add(groupBox1);
+            FlowPanel_MapInfo.Controls.Add(groupBox2);
+            FlowPanel_MapInfo.Dock = DockStyle.Fill;
+            FlowPanel_MapInfo.FlowDirection = FlowDirection.TopDown;
+            FlowPanel_MapInfo.Location = new Point(0, 0);
+            FlowPanel_MapInfo.Name = "FlowPanel_MapInfo";
+            FlowPanel_MapInfo.Size = new Size(693, 753);
+            FlowPanel_MapInfo.TabIndex = 15;
             // 
             // GroupBox_DrawControls
             // 
@@ -347,10 +352,30 @@
             GroupBox_DrawControls.Controls.Add(Btn_PaintClear);
             GroupBox_DrawControls.Location = new Point(3, 3);
             GroupBox_DrawControls.Name = "GroupBox_DrawControls";
-            GroupBox_DrawControls.Size = new Size(278, 111);
+            GroupBox_DrawControls.Size = new Size(278, 106);
             GroupBox_DrawControls.TabIndex = 6;
             GroupBox_DrawControls.TabStop = false;
-            GroupBox_DrawControls.Text = "MiniMap Controls";
+            GroupBox_DrawControls.Text = "MiniMap Drawing";
+            // 
+            // Check_MiniMapSelectable
+            // 
+            Check_MiniMapSelectable.AutoSize = true;
+            Check_MiniMapSelectable.Location = new Point(85, 22);
+            Check_MiniMapSelectable.Name = "Check_MiniMapSelectable";
+            Check_MiniMapSelectable.Size = new Size(79, 19);
+            Check_MiniMapSelectable.TabIndex = 9;
+            Check_MiniMapSelectable.Text = "Selectable";
+            Check_MiniMapSelectable.UseVisualStyleBackColor = true;
+            // 
+            // Check_MiniMapViewable
+            // 
+            Check_MiniMapViewable.AutoSize = true;
+            Check_MiniMapViewable.Location = new Point(6, 22);
+            Check_MiniMapViewable.Name = "Check_MiniMapViewable";
+            Check_MiniMapViewable.Size = new Size(73, 19);
+            Check_MiniMapViewable.TabIndex = 8;
+            Check_MiniMapViewable.Text = "Viewable";
+            Check_MiniMapViewable.UseVisualStyleBackColor = true;
             // 
             // Btn_PaintReveal
             // 
@@ -365,7 +390,7 @@
             // Check_ShowSquares
             // 
             Check_ShowSquares.AutoSize = true;
-            Check_ShowSquares.Location = new Point(161, 22);
+            Check_ShowSquares.Location = new Point(162, 22);
             Check_ShowSquares.Name = "Check_ShowSquares";
             Check_ShowSquares.Size = new Size(76, 19);
             Check_ShowSquares.TabIndex = 5;
@@ -388,7 +413,7 @@
             Check_ShowMiniMap.AutoSize = true;
             Check_ShowMiniMap.Checked = true;
             Check_ShowMiniMap.CheckState = CheckState.Checked;
-            Check_ShowMiniMap.Location = new Point(6, 22);
+            Check_ShowMiniMap.Location = new Point(7, 22);
             Check_ShowMiniMap.Name = "Check_ShowMiniMap";
             Check_ShowMiniMap.Size = new Size(149, 19);
             Check_ShowMiniMap.TabIndex = 0;
@@ -410,7 +435,7 @@
             // Btn_PaintClear
             // 
             Btn_PaintClear.BackColor = Color.FromArgb(255, 192, 192);
-            Btn_PaintClear.Location = new Point(6, 76);
+            Btn_PaintClear.Location = new Point(7, 76);
             Btn_PaintClear.Name = "Btn_PaintClear";
             Btn_PaintClear.Size = new Size(107, 23);
             Btn_PaintClear.TabIndex = 3;
@@ -452,7 +477,7 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(Num_LightGemsAmount);
-            groupBox1.Location = new Point(3, 120);
+            groupBox1.Location = new Point(3, 170);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(278, 456);
             groupBox1.TabIndex = 7;
@@ -786,9 +811,9 @@
             groupBox2.Controls.Add(label20);
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(ComboBox_Character);
-            groupBox2.Location = new Point(3, 582);
+            groupBox2.Location = new Point(3, 632);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(278, 100);
+            groupBox2.Size = new Size(278, 91);
             groupBox2.TabIndex = 14;
             groupBox2.TabStop = false;
             groupBox2.Text = "Player Start";
@@ -835,11 +860,22 @@
             ComboBox_Character.TabIndex = 13;
             ComboBox_Character.SelectedIndexChanged += ComboBox_Character_SelectedIndexChanged;
             // 
+            // GroupBox_MiniMapStateControls
+            // 
+            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapSelectable);
+            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapViewable);
+            GroupBox_MiniMapStateControls.Location = new Point(3, 115);
+            GroupBox_MiniMapStateControls.Name = "GroupBox_MiniMapStateControls";
+            GroupBox_MiniMapStateControls.Size = new Size(278, 49);
+            GroupBox_MiniMapStateControls.TabIndex = 15;
+            GroupBox_MiniMapStateControls.TabStop = false;
+            GroupBox_MiniMapStateControls.Text = "MiniMap State";
+            // 
             // MapEditorWnd
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1513, 796);
+            ClientSize = new Size(1513, 753);
             Controls.Add(splitContainer1);
             Name = "MapEditorWnd";
             ShowIcon = false;
@@ -862,7 +898,7 @@
             splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer5).EndInit();
             splitContainer5.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
+            FlowPanel_MapInfo.ResumeLayout(false);
             GroupBox_DrawControls.ResumeLayout(false);
             GroupBox_DrawControls.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -882,6 +918,8 @@
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            GroupBox_MiniMapStateControls.ResumeLayout(false);
+            GroupBox_MiniMapStateControls.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -946,7 +984,10 @@
         private ComboBox ComboBox_Character;
         private Label Lbl_StartPoint;
         private Label label20;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel FlowPanel_MapInfo;
         private Label Lbl_DerivedTallies;
+        private CheckBox Check_MiniMapViewable;
+        private CheckBox Check_MiniMapSelectable;
+        private GroupBox GroupBox_MiniMapStateControls;
     }
 }

@@ -2,7 +2,6 @@
 using AHT_SaveFileUtil.Extensions;
 using System;
 using System.IO;
-using System.Reflection.PortableExecutable;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
@@ -34,11 +33,12 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             bool bigEndian = platform == GamePlatform.GameCube;
 
-            var entry = new StackEntry();
-
-            entry.Start = reader.ReadInt32(bigEndian);
-            entry.Address = reader.ReadInt32(bigEndian);
-            entry.End = reader.ReadInt32(bigEndian);
+            var entry = new StackEntry
+            {
+                Start = reader.ReadInt32(bigEndian),
+                Address = reader.ReadInt32(bigEndian),
+                End = reader.ReadInt32(bigEndian)
+            };
 
             int mode = reader.ReadInt32(bigEndian);
             if (!Enum.IsDefined(typeof(PreserveMode), mode))
@@ -63,8 +63,7 @@ namespace AHT_SaveFileUtil.Save.Slot
     }
 
     /// <summary>
-    /// Stores data in a stream of bits 0x4000 bytes long.
-    /// Data can be allocated, written to and read from.
+    /// An allocate-only memory heap that handles data as a packed stream of bits.
     /// </summary>
     public class BitHeap : ISaveFileIO<BitHeap>
     {
@@ -105,7 +104,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         public StackEntry[] Stack { get; private set; } = new StackEntry[32];
 
         /// <summary>
-        /// Whether the object's data is valid.
+        /// Whether the heap's data is valid.
         /// </summary>
         public bool IsValid
         {
@@ -118,6 +117,9 @@ namespace AHT_SaveFileUtil.Save.Slot
                     return false;
 
                 if (NumBitsUsed < 0)
+                    return false;
+
+                if (NumBitsUsed > BITHEAP_LENGTH)
                     return false;
 
                 return true;
@@ -235,6 +237,9 @@ namespace AHT_SaveFileUtil.Save.Slot
             NumBitsUsed = 0;
         }
 
+        /// <summary>
+        /// Reset the stack pointer.
+        /// </summary>
         public void EmptyStack()
         {
             StackPtr = -1;
