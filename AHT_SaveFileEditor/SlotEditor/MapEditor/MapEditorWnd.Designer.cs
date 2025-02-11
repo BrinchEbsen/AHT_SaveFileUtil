@@ -45,14 +45,15 @@
             FlowPanel_TriggerData = new FlowLayoutPanel();
             FlowPanel_MapInfo = new FlowLayoutPanel();
             GroupBox_DrawControls = new GroupBox();
-            Check_MiniMapSelectable = new CheckBox();
-            Check_MiniMapViewable = new CheckBox();
             Btn_PaintReveal = new Button();
             Check_ShowSquares = new CheckBox();
             Btn_PaintUnreveal = new Button();
             Check_ShowMiniMap = new CheckBox();
             Btn_PaintFill = new Button();
             Btn_PaintClear = new Button();
+            GroupBox_MiniMapStateControls = new GroupBox();
+            Check_MiniMapSelectable = new CheckBox();
+            Check_MiniMapViewable = new CheckBox();
             groupBox1 = new GroupBox();
             Lbl_DerivedTallies = new Label();
             Lbl_EggsSum = new Label();
@@ -87,11 +88,13 @@
             label2 = new Label();
             Num_LightGemsAmount = new NumericUpDown();
             groupBox2 = new GroupBox();
-            Lbl_StartPoint = new Label();
+            Lbl_StartPointDescr = new Label();
+            label21 = new Label();
+            ComboBox_StartPointValue = new ComboBox();
+            ComboBox_StartPointType = new ComboBox();
             label20 = new Label();
             label19 = new Label();
             ComboBox_Character = new ComboBox();
-            GroupBox_MiniMapStateControls = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -110,6 +113,7 @@
             splitContainer5.SuspendLayout();
             FlowPanel_MapInfo.SuspendLayout();
             GroupBox_DrawControls.SuspendLayout();
+            GroupBox_MiniMapStateControls.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Sparx).BeginInit();
@@ -125,7 +129,6 @@
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).BeginInit();
             groupBox2.SuspendLayout();
-            GroupBox_MiniMapStateControls.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -357,26 +360,6 @@
             GroupBox_DrawControls.TabStop = false;
             GroupBox_DrawControls.Text = "MiniMap Drawing";
             // 
-            // Check_MiniMapSelectable
-            // 
-            Check_MiniMapSelectable.AutoSize = true;
-            Check_MiniMapSelectable.Location = new Point(85, 22);
-            Check_MiniMapSelectable.Name = "Check_MiniMapSelectable";
-            Check_MiniMapSelectable.Size = new Size(79, 19);
-            Check_MiniMapSelectable.TabIndex = 9;
-            Check_MiniMapSelectable.Text = "Selectable";
-            Check_MiniMapSelectable.UseVisualStyleBackColor = true;
-            // 
-            // Check_MiniMapViewable
-            // 
-            Check_MiniMapViewable.AutoSize = true;
-            Check_MiniMapViewable.Location = new Point(6, 22);
-            Check_MiniMapViewable.Name = "Check_MiniMapViewable";
-            Check_MiniMapViewable.Size = new Size(73, 19);
-            Check_MiniMapViewable.TabIndex = 8;
-            Check_MiniMapViewable.Text = "Viewable";
-            Check_MiniMapViewable.UseVisualStyleBackColor = true;
-            // 
             // Btn_PaintReveal
             // 
             Btn_PaintReveal.Location = new Point(6, 47);
@@ -442,6 +425,37 @@
             Btn_PaintClear.Text = "Clear";
             Btn_PaintClear.UseVisualStyleBackColor = false;
             Btn_PaintClear.Click += Btn_PaintClear_Click;
+            // 
+            // GroupBox_MiniMapStateControls
+            // 
+            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapSelectable);
+            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapViewable);
+            GroupBox_MiniMapStateControls.Location = new Point(3, 115);
+            GroupBox_MiniMapStateControls.Name = "GroupBox_MiniMapStateControls";
+            GroupBox_MiniMapStateControls.Size = new Size(278, 49);
+            GroupBox_MiniMapStateControls.TabIndex = 15;
+            GroupBox_MiniMapStateControls.TabStop = false;
+            GroupBox_MiniMapStateControls.Text = "MiniMap State";
+            // 
+            // Check_MiniMapSelectable
+            // 
+            Check_MiniMapSelectable.AutoSize = true;
+            Check_MiniMapSelectable.Location = new Point(85, 22);
+            Check_MiniMapSelectable.Name = "Check_MiniMapSelectable";
+            Check_MiniMapSelectable.Size = new Size(79, 19);
+            Check_MiniMapSelectable.TabIndex = 9;
+            Check_MiniMapSelectable.Text = "Selectable";
+            Check_MiniMapSelectable.UseVisualStyleBackColor = true;
+            // 
+            // Check_MiniMapViewable
+            // 
+            Check_MiniMapViewable.AutoSize = true;
+            Check_MiniMapViewable.Location = new Point(6, 22);
+            Check_MiniMapViewable.Name = "Check_MiniMapViewable";
+            Check_MiniMapViewable.Size = new Size(73, 19);
+            Check_MiniMapViewable.TabIndex = 8;
+            Check_MiniMapViewable.Text = "Viewable";
+            Check_MiniMapViewable.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -807,26 +821,61 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(Lbl_StartPoint);
+            groupBox2.Controls.Add(Lbl_StartPointDescr);
+            groupBox2.Controls.Add(label21);
+            groupBox2.Controls.Add(ComboBox_StartPointValue);
+            groupBox2.Controls.Add(ComboBox_StartPointType);
             groupBox2.Controls.Add(label20);
             groupBox2.Controls.Add(label19);
             groupBox2.Controls.Add(ComboBox_Character);
-            groupBox2.Location = new Point(3, 632);
+            groupBox2.Location = new Point(287, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(278, 91);
+            groupBox2.Size = new Size(278, 161);
             groupBox2.TabIndex = 14;
             groupBox2.TabStop = false;
             groupBox2.Text = "Player Start";
             // 
-            // Lbl_StartPoint
+            // Lbl_StartPointDescr
             // 
-            Lbl_StartPoint.AutoSize = true;
-            Lbl_StartPoint.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Lbl_StartPoint.Location = new Point(91, 51);
-            Lbl_StartPoint.Name = "Lbl_StartPoint";
-            Lbl_StartPoint.Size = new Size(38, 17);
-            Lbl_StartPoint.TabIndex = 16;
-            Lbl_StartPoint.Text = "temp";
+            Lbl_StartPointDescr.AutoSize = true;
+            Lbl_StartPointDescr.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            Lbl_StartPointDescr.ForeColor = Color.FromArgb(64, 64, 64);
+            Lbl_StartPointDescr.Location = new Point(47, 126);
+            Lbl_StartPointDescr.Name = "Lbl_StartPointDescr";
+            Lbl_StartPointDescr.Size = new Size(34, 15);
+            Lbl_StartPointDescr.TabIndex = 19;
+            Lbl_StartPointDescr.Text = "temp";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
+            label21.ForeColor = Color.FromArgb(64, 64, 64);
+            label21.Location = new Point(7, 82);
+            label21.Name = "label21";
+            label21.Size = new Size(96, 15);
+            label21.TabIndex = 18;
+            label21.Text = "Start Point Value";
+            // 
+            // ComboBox_StartPointValue
+            // 
+            ComboBox_StartPointValue.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBox_StartPointValue.FormattingEnabled = true;
+            ComboBox_StartPointValue.Location = new Point(47, 100);
+            ComboBox_StartPointValue.Name = "ComboBox_StartPointValue";
+            ComboBox_StartPointValue.Size = new Size(225, 23);
+            ComboBox_StartPointValue.TabIndex = 17;
+            ComboBox_StartPointValue.SelectedIndexChanged += ComboBox_StartPointValue_SelectedIndexChanged;
+            // 
+            // ComboBox_StartPointType
+            // 
+            ComboBox_StartPointType.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBox_StartPointType.FormattingEnabled = true;
+            ComboBox_StartPointType.Location = new Point(111, 50);
+            ComboBox_StartPointType.Name = "ComboBox_StartPointType";
+            ComboBox_StartPointType.Size = new Size(161, 23);
+            ComboBox_StartPointType.TabIndex = 16;
+            ComboBox_StartPointType.SelectedIndexChanged += ComboBox_StartPointType_SelectedIndexChanged;
             // 
             // label20
             // 
@@ -835,9 +884,9 @@
             label20.ForeColor = Color.FromArgb(64, 64, 64);
             label20.Location = new Point(7, 53);
             label20.Name = "label20";
-            label20.Size = new Size(62, 15);
+            label20.Size = new Size(90, 15);
             label20.TabIndex = 15;
-            label20.Text = "Start Point";
+            label20.Text = "Start Point Type";
             // 
             // label19
             // 
@@ -854,22 +903,11 @@
             // 
             ComboBox_Character.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBox_Character.FormattingEnabled = true;
-            ComboBox_Character.Location = new Point(91, 22);
+            ComboBox_Character.Location = new Point(111, 22);
             ComboBox_Character.Name = "ComboBox_Character";
-            ComboBox_Character.Size = new Size(121, 23);
+            ComboBox_Character.Size = new Size(161, 23);
             ComboBox_Character.TabIndex = 13;
             ComboBox_Character.SelectedIndexChanged += ComboBox_Character_SelectedIndexChanged;
-            // 
-            // GroupBox_MiniMapStateControls
-            // 
-            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapSelectable);
-            GroupBox_MiniMapStateControls.Controls.Add(Check_MiniMapViewable);
-            GroupBox_MiniMapStateControls.Location = new Point(3, 115);
-            GroupBox_MiniMapStateControls.Name = "GroupBox_MiniMapStateControls";
-            GroupBox_MiniMapStateControls.Size = new Size(278, 49);
-            GroupBox_MiniMapStateControls.TabIndex = 15;
-            GroupBox_MiniMapStateControls.TabStop = false;
-            GroupBox_MiniMapStateControls.Text = "MiniMap State";
             // 
             // MapEditorWnd
             // 
@@ -901,6 +939,8 @@
             FlowPanel_MapInfo.ResumeLayout(false);
             GroupBox_DrawControls.ResumeLayout(false);
             GroupBox_DrawControls.PerformLayout();
+            GroupBox_MiniMapStateControls.ResumeLayout(false);
+            GroupBox_MiniMapStateControls.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Num_DragonEggs_Blink).EndInit();
@@ -918,8 +958,6 @@
             ((System.ComponentModel.ISupportInitialize)Num_LightGemsAmount).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            GroupBox_MiniMapStateControls.ResumeLayout(false);
-            GroupBox_MiniMapStateControls.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -982,12 +1020,15 @@
         private GroupBox groupBox2;
         private Label label19;
         private ComboBox ComboBox_Character;
-        private Label Lbl_StartPoint;
         private Label label20;
         private FlowLayoutPanel FlowPanel_MapInfo;
         private Label Lbl_DerivedTallies;
         private CheckBox Check_MiniMapViewable;
         private CheckBox Check_MiniMapSelectable;
         private GroupBox GroupBox_MiniMapStateControls;
+        private ComboBox ComboBox_StartPointType;
+        private ComboBox ComboBox_StartPointValue;
+        private Label label21;
+        private Label Lbl_StartPointDescr;
     }
 }

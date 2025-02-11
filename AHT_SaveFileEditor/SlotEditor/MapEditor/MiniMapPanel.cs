@@ -1,6 +1,7 @@
 ﻿using AHT_SaveFileUtil.Common;
 using AHT_SaveFileUtil.Save.MiniMap;
 using AHT_SaveFileUtil.Save.Slot;
+using AHT_SaveFileUtil.Save.Triggers;
 using System.ComponentModel;
 
 namespace AHT_SaveFileEditor.SlotEditor.MapEditor
@@ -27,8 +28,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private Image? _miniMapTexture = null;
         private Image? _revealBlob = null;
 
-        private readonly Pen redPen = new(Color.Red, 2);
-        private readonly Pen bluePen = new(Color.Blue, 5);
+        private readonly Pen gridViewPen = new(Color.Red, 2);
+        private readonly Pen triggerPen = new(Color.Blue, 5);
+        private readonly Pen startPointPen = new(Color.Green, 8);
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public PaintMode PaintMode { get; set; } = PaintMode.None;
@@ -43,7 +45,10 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         public bool ShowSquares { get; set; } = true;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public EXVector3? HighLight { get; private set; }
+        public EXVector3? TriggerHighLight { get; private set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public EXVector3? StartPointHighLight { get; private set; }
 
         public MiniMapPanel(GameState gameState, Map mapIndex)
         {
@@ -220,7 +225,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (UsingDefault)
                 graphics.DrawString("No Minimap", TextFont, TextBrush, 10, 10);
 
-            if (!UsingDefault && HighLight != null)
+            if (!UsingDefault)
                 DrawHighLight(graphics);
 
             /*
@@ -294,7 +299,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
                         //Draw debug squares to easily see the grid
                         if (ShowSquares)
-                            graphics.DrawRectangle(redPen,
+                            graphics.DrawRectangle(gridViewPen,
                             new Rectangle(
                                 pixPos[0] - 5,
                                 pixPos[1] - 5,
@@ -314,13 +319,29 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         {
             if (_backgroundInfo == null) return;
 
-            int[] pixCoords = _backgroundInfo.GetPixelCoordsFromWorldPosition(HighLight!.X, HighLight!.Z, TEXTURE_SIZE);
+            if (StartPointHighLight != null)
+            {
+                int[] pixCoords = _backgroundInfo.GetPixelCoordsFromWorldPosition(
+                StartPointHighLight!.X, StartPointHighLight!.Z, TEXTURE_SIZE);
 
-            if (pixCoords[0] < 0 || pixCoords[0] >= TEXTURE_SIZE ||
-                pixCoords[1] < 0 || pixCoords[1] >= TEXTURE_SIZE)
-                return;
+                if (CoordsWithinTextureArea(pixCoords[0], pixCoords[1]))
+                    graphics.DrawEllipse(startPointPen, pixCoords[0] - 5, pixCoords[1] - 5, 10, 10);
+            }
+            
+            if (TriggerHighLight != null)
+            {
+                int[] pixCoords = _backgroundInfo.GetPixelCoordsFromWorldPosition(
+                TriggerHighLight!.X, TriggerHighLight!.Z, TEXTURE_SIZE);
 
-            graphics.DrawEllipse(bluePen, pixCoords[0] - 5, pixCoords[1] - 5, 10, 10);
+                if (CoordsWithinTextureArea(pixCoords[0], pixCoords[1]))
+                    graphics.DrawEllipse(triggerPen, pixCoords[0] - 6, pixCoords[1] - 6, 12, 12);
+            }
+        }
+
+        private bool CoordsWithinTextureArea(int x, int y)
+        {
+            return (x >= 0 && x < TEXTURE_SIZE &&
+                    y >= 0 && y < TEXTURE_SIZE);
         }
 
         /// <summary>
@@ -371,14 +392,37 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             _gameState.BitHeap.SetBits(address, _mappedInfo.BitHeapSize);
         }
 
-        public void SetHighLight(EXVector3 position)
+        public void SetTriggerHighLight(EXVector3 position)
         {
-            HighLight = new EXVector3(position);
+            TriggerHighLight = new EXVector3(position);
         }
 
-        public void ClearHighLight()
+        public void ClearTriggerHighLight()
         {
-            HighLight = null;
+            TriggerHighLight = null;
+        }
+
+        public void SetStartPointHighLight(uint startPoint, GeoMap mapData)
+        {
+            int index = mapData.GetStartPointTriggerIndex(startPoint);
+            if (index < 0) return;
+
+            SetStartPointHighLight(mapData.TriggerList[index].Position);
+        }
+
+        public void SetStartPointHighLight(int trigIndex, GeoMap mapData)
+        {
+            SetStartPointHighLight(mapData.TriggerList[trigIndex].Position);
+        }
+
+        public void SetStartPointHighLight(EXVector3 position)
+        {
+            StartPointHighLight = new EXVector3(position);
+        }
+
+        public void ClearStartPointHighLight()
+        {
+            StartPointHighLight = null;
         }
     }
 }

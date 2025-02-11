@@ -183,8 +183,6 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             get
             {
-                if (PlayerState == null) return 0f;
-
                 int tally =
                     PlayerState.TotalDragonEggs +
                     PlayerState.TotalDarkGems +

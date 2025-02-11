@@ -19,6 +19,23 @@ namespace AHT_SaveFileUtil.Save.Slot
         Blink
     }
 
+    public enum StartPointType
+    {
+        /// <summary>
+        /// The startpoint has not been set and has a value of -1 (0xFFFFFFFF).
+        /// </summary>
+        None,
+        /// <summary>
+        /// The startpoint is an index into the map's trigger list.
+        /// </summary>
+        Trigger,
+        /// <summary>
+        /// The startpoint is a specific startpoint trigger
+        /// with a HT_StartPoint (0x4a000000) hashcode.
+        /// </summary>
+        HashCode
+    }
+
     public class MapGameState : ISaveFileIO<MapGameState>
     {
         public int MapIndexValue { get; private set; }
@@ -67,6 +84,23 @@ namespace AHT_SaveFileUtil.Save.Slot
                 NumEggs_Turret +
                 NumEggs_Sparx +
                 NumEggs_Blink;
+
+        public StartPointType TypeOfStartPoint
+        {
+            get
+            {
+                if (LastStartPoint == 0xFFFFFFFF)
+                {
+                    return StartPointType.None;
+                } else if ((LastStartPoint & 0xFF000000) == (uint)EXHashCode.HT_StartPoint_START)
+                {
+                    return StartPointType.HashCode;
+                } else
+                {
+                    return StartPointType.Trigger;
+                }
+            }
+        }
 
         private MapGameState() { }
 

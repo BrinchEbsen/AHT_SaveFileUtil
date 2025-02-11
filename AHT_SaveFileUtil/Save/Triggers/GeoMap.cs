@@ -1,4 +1,6 @@
-﻿using YamlDotNet.Serialization;
+﻿using AHT_SaveFileUtil.Common;
+using System.Collections.Generic;
+using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace AHT_SaveFileUtil.Save.Triggers
@@ -12,6 +14,54 @@ namespace AHT_SaveFileUtil.Save.Triggers
         public Trigger[] TriggerList { get; set; }
 
         public GeoMap() { }
+
+        public int GetTriggerIndex(Trigger trigger)
+        {
+            for (int i = 0; i < TriggerList.Length; i++)
+                if (TriggerList[i] == trigger) return i;
+
+            return -1;
+        }
+
+        public List<Trigger> GetStartPointTriggerList(bool includeShopStartPoints = false)
+        {
+            List<Trigger> list = [];
+
+            foreach(Trigger trigger in TriggerList)
+            {
+                if (trigger.Type == (uint)EXHashCode.HT_TriggerType_StartPoint)
+                {
+                    //If trigger is shop startpoint then skip (if requested)
+                    if (!includeShopStartPoints &&
+                        (trigger.Data[0] == (uint)EXHashCode.HT_StartPoint_SHOP ||
+                         trigger.Data[0] == (uint)EXHashCode.HT_StartPoint_MAINSHOP))
+                        continue;
+
+                    list.Add(trigger);
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Get the index of the startpoint trigger with the given startpoint hash.
+        /// </summary>
+        /// <param name="startPointHash">Startpoint hashcode to check against (T_StartPoint, 0x4a000000)</param>
+        /// <returns>The index of the startpoint trigger, or -1 if no trigger was found.</returns>
+        public int GetStartPointTriggerIndex(uint startPointHash)
+        {
+            for (int i = 0; i < TriggerList.Length; i++)
+            {
+                Trigger trigger = TriggerList[i];
+                if (trigger.Data == null) continue;
+                if (trigger.Data.Length == 0) continue;
+
+                if (trigger.Data[0] == startPointHash) return i;
+            }
+
+            return -1;
+        }
 
         public int GetTriggerBitHeapOffset(int trigIndex, TriggerTable tTable)
         {

@@ -15,6 +15,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
     public partial class MapEditorWnd : Form
     {
+        private static readonly Color textGrey = Color.FromArgb(64, 64, 64);
+        private static readonly Color textError = Color.Red;
+
         private readonly GameState gameState;
 
         private readonly Map mapIndex;
@@ -22,6 +25,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private readonly MapGameState mapGameState;
 
         private readonly MapGameState? derivedMapGameState = null;
+
+        private readonly GeoMap? _mapData = null;
 
         private MapGameState stateForCollectables
         {
@@ -53,6 +58,18 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             this.gameState = gameState;
             this.mapIndex = mapIndex;
+
+            var rsc = ResourceHandler.Instance;
+            if (rsc.Maps == null)
+                throw new ArgumentNullException("\"Maps\" resource not loaded.");
+
+            if (rsc.Maps.TryGetValue(mapIndex, out var mapData))
+                this._mapData = mapData;
+
+            //This is temporary - you should be able to set a checkpoint in minigame maps too, but
+            //the trigger yaml files haven't been generated yet.
+            if (_mapData == null)
+                ComboBox_StartPointType.Enabled = false;
 
             //If the map derives tallies from another map, get those.
             if (MapData.MapDataList.TryGetValue(mapIndex, out var data))
@@ -459,7 +476,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             if (miniMapPanel != null)
             {
-                miniMapPanel.SetHighLight(triggerPanel.Trigger.Position);
+                miniMapPanel.SetTriggerHighLight(triggerPanel.Trigger.Position);
                 miniMapPanel.Invalidate();
             }
         }
@@ -726,6 +743,13 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private void UpdatePlayerStartControls()
         {
+            UpdatePlayerStart_Character();
+
+            UpdatePlayerStart_StartPoint();
+        }
+
+        private void UpdatePlayerStart_Character()
+        {
             if (ComboBox_Character.Items.Count == 0)
             {
                 var playerNames = Enum.GetValues<Players>();
@@ -734,37 +758,202 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
 
             ComboBox_Character.SelectedIndex = (int)mapGameState.LastStartPointPlayer;
-
-            uint startPoint = mapGameState.LastStartPoint;
-            string startPointStr;
-
-            if (startPoint == 0xFFFFFFFF)
-            {
-                startPointStr = "None";
-            }
-            else if ((startPoint & (uint)EXHashCode.HT_StartPoint_START) != 0)
-            {
-                startPointStr = startPoint.ToString("X");
-
-                if (Enum.IsDefined(typeof(EXHashCode), startPoint))
-                {
-                    startPointStr +=
-                        " (" +
-                            ((EXHashCode)startPoint).ToString().Replace("HT_StartPoint_", "") +
-                        ")";
-                }
-            }
-            else
-            {
-                startPointStr = "Trigger: " + startPoint.ToString();
-            }
-
-            Lbl_StartPoint.Text = startPointStr;
         }
 
         private void ComboBox_Character_SelectedIndexChanged(object sender, EventArgs e)
         {
             mapGameState.LastStartPointPlayer = (Players)ComboBox_Character.SelectedIndex;
+        }
+
+        private void UpdatePlayerStart_StartPoint()
+        {
+            if (ComboBox_StartPointType.Items.Count == 0)
+            {
+                var spTypes = Enum.GetValues<StartPointType>();
+                foreach (var name in spTypes)
+                    ComboBox_StartPointType.Items.Add(name);
+            }
+
+            var type = mapGameState.TypeOfStartPoint;
+            ComboBox_StartPointType.SelectedIndex = (int)type;
+
+            ResetStartPointValueComboBox(type);
+        }
+
+        private void ResetStartPointValueComboBox(StartPointType type)
+        {
+            ComboBox_StartPointValue.Items.Clear();
+            ComboBox_StartPointValue.Enabled = false;
+
+            if (_mapData == null) return;
+
+            if (!EnsureValidStartPoint(type))
+            {
+                ComboBox_StartPointType.SelectedIndex = 0;
+                Lbl_StartPointDescr.Text = $"INVALID: 0x{mapGameState.LastStartPoint:X}";
+                Lbl_StartPointDescr.ForeColor = textError;
+            }
+            else
+            {
+                Lbl_StartPointDescr.ForeColor = textGrey;
+
+                RepopulateStartPointComboBox(type);
+            }
+        }
+
+        private bool EnsureValidStartPoint(StartPointType type)
+        {
+            if (_mapData == null) return false;
+
+            uint sp = mapGameState.LastStartPoint;
+
+            switch (type)
+            {
+                case StartPointType.None:
+                    return sp == 0xFFFFFFFF;
+                case StartPointType.Trigger:
+                    return sp < (uint)_mapData.TriggerList.Length;
+                case StartPointType.HashCode:
+                    return _mapData.GetStartPointTriggerIndex(sp) != -1;
+                default:
+                    throw new ArgumentException("Invalid startpoint type.", nameof(type));
+            }
+        }
+
+        private void RepopulateStartPointComboBox(StartPointType type)
+        {
+            if (_mapData == null) return;
+
+            switch (type)
+            {
+                case StartPointType.None:
+                    Lbl_StartPointDescr.Text = "None";
+                    break;
+                case StartPointType.Trigger:
+                    ComboBox_StartPointValue.Enabled = true;
+
+                    for (int i = 0; i < _mapData.TriggerList.Length; i++)
+                        ComboBox_StartPointValue.Items.Add(i);
+
+                    ComboBox_StartPointValue.SelectedIndex = (int)mapGameState.LastStartPoint;
+                    break;
+                case StartPointType.HashCode:
+                    {
+                        ComboBox_StartPointValue.Enabled = true;
+
+                        var list = _mapData.GetStartPointTriggerList();
+
+                        int selected = 0;
+                        string selectedStr = "N/A";
+
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            Trigger trig = list[i];
+                            string str;
+
+                            if (Enum.IsDefined(typeof(EXHashCode), trig.Data[0]))
+                                str = ((EXHashCode)trig.Data[0]).ToString().Replace("HT_StartPoint_", "");
+                            else
+                                str = $"0x{trig.Data[0]}";
+
+                            ComboBox_StartPointValue.Items.Add(str);
+
+                            if (mapGameState.LastStartPoint == trig.Data[0])
+                            {
+                                selected = i;
+                                selectedStr = str;
+                                ComboBox_StartPointValue.SelectedIndex = selected;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private static int startPointTypeChangedCounter = 0;
+        private void ComboBox_StartPointType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (startPointTypeChangedCounter == 0)
+            {
+                startPointTypeChangedCounter++;
+                return;
+            }
+
+            ChangeStartPointType();
+        }
+
+        private void ChangeStartPointType()
+        {
+            var rsc = ResourceHandler.Instance;
+            if (rsc.Maps == null)
+                return;
+
+            if (!rsc.Maps.TryGetValue(mapIndex, out var mapData))
+                return;
+
+            var type = (StartPointType)ComboBox_StartPointType.SelectedIndex;
+
+            switch (type)
+            {
+                case StartPointType.None:
+                    mapGameState.LastStartPoint = 0xFFFFFFFF;
+                    miniMapPanel!.ClearStartPointHighLight();
+                    miniMapPanel!.Invalidate();
+                    break;
+                case StartPointType.Trigger:
+                    mapGameState.LastStartPoint = 0;
+                    break;
+                case StartPointType.HashCode:
+                    {
+                        if (mapData.TriggerList == null)
+                            mapGameState.LastStartPoint = (uint)EXHashCode.HT_StartPoint_START;
+
+                        var spList = mapData.GetStartPointTriggerList();
+
+                        if (spList.Count == 0)
+                            mapGameState.LastStartPoint = (uint)EXHashCode.HT_StartPoint_START;
+
+                        mapGameState.LastStartPoint = spList[0].Data[0];
+                    }
+                    break;
+            }
+
+            ResetStartPointValueComboBox(type);
+        }
+
+        private void ComboBox_StartPointValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_mapData == null) return;
+
+            var type = (StartPointType)ComboBox_StartPointType.SelectedIndex;
+
+            switch (type)
+            {
+                case StartPointType.None:
+                    miniMapPanel!.ClearStartPointHighLight();
+                    break;
+                case StartPointType.Trigger:
+                    mapGameState.LastStartPoint = (uint)ComboBox_StartPointValue.SelectedIndex;
+                    Lbl_StartPointDescr.Text = $"Trigger {mapGameState.LastStartPoint}";
+                    miniMapPanel!.SetStartPointHighLight(ComboBox_StartPointValue.SelectedIndex, _mapData);
+                    break;
+                case StartPointType.HashCode:
+                    {
+                        var list = _mapData.GetStartPointTriggerList();
+
+                        int index = ComboBox_StartPointValue.SelectedIndex;
+
+                        mapGameState.LastStartPoint = list[index].Data[0];
+                        Lbl_StartPointDescr.Text = $"StartPoint 0x{mapGameState.LastStartPoint:X}";
+
+                        int trigIndex = _mapData.GetTriggerIndex(list[index]);
+                        if (trigIndex != -1)
+                            miniMapPanel!.SetStartPointHighLight(trigIndex, _mapData);
+                    }
+                    break;
+            }
+
+            miniMapPanel!.Invalidate();
         }
 
         #endregion
