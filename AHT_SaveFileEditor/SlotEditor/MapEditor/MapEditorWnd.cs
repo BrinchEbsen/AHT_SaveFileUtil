@@ -18,6 +18,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private static readonly Color textGrey = Color.FromArgb(64, 64, 64);
         private static readonly Color textError = Color.Red;
 
+        private const int MapInfoGroupBoxWidth = 278;
+
         private readonly GameState gameState;
 
         private readonly Map mapIndex;
@@ -25,6 +27,8 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         private readonly MapGameState mapGameState;
 
         private readonly MapGameState? derivedMapGameState = null;
+
+        private readonly MapMiniGame[] MiniGames = [];
 
         private readonly GeoMap? _mapData = null;
 
@@ -80,6 +84,11 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                     derivedMapGameState = gameState.GetMapGameState(
                         data.DerivedCollectableTallies, SaveFileHandler.Instance.Platform);
                 }
+                if (data.MiniGames.Length > 0)
+                {
+                    MiniGames = data.MiniGames;
+                    AddMiniGamePanels();
+                }
             }
 
             //If no derived tallies were found, just get the map's own one
@@ -116,7 +125,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             UpdateCollectableAmounts();
 
-            UpdatePlayerStartControls();
+            InitializePlayerStartControls();
         }
 
         #region MiniMap Controls
@@ -741,14 +750,14 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         #region Player Start
 
-        private void UpdatePlayerStartControls()
+        private void InitializePlayerStartControls()
         {
-            UpdatePlayerStart_Character();
+            InitializePlayerStart_Character();
 
-            UpdatePlayerStart_StartPoint();
+            InitializePlayerStart_StartPoint();
         }
 
-        private void UpdatePlayerStart_Character()
+        private void InitializePlayerStart_Character()
         {
             if (ComboBox_Character.Items.Count == 0)
             {
@@ -765,8 +774,10 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             mapGameState.LastStartPointPlayer = (Players)ComboBox_Character.SelectedIndex;
         }
 
-        private void UpdatePlayerStart_StartPoint()
+        private void InitializePlayerStart_StartPoint()
         {
+            startPointTypeChangedCounter = 0;
+
             if (ComboBox_StartPointType.Items.Count == 0)
             {
                 var spTypes = Enum.GetValues<StartPointType>();
@@ -870,6 +881,10 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
         }
 
+        /// <summary>
+        /// Counts how many times the selected index for the startpoint type has changed
+        /// so it doesn't overwrite the save data on its initialization.
+        /// </summary>
         private static int startPointTypeChangedCounter = 0;
         private void ComboBox_StartPointType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -954,6 +969,101 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             }
 
             miniMapPanel!.Invalidate();
+        }
+
+        #endregion
+
+        #region
+
+        private void AddMiniGamePanels()
+        {
+            foreach(var miniGame in MiniGames)
+                AddMiniGamePanel(miniGame);
+        }
+
+        private void AddMiniGamePanel(MapMiniGame miniGame)
+        {
+            string name = "MiniGame: ";
+
+            name += MapData.MapDataList[miniGame.MapIndex].Name;
+
+            switch (miniGame.MiniGameType)
+            {
+                case MiniGameType.SgtByrd:
+                    name += " (Sgt. Byrd)";
+                    break;
+                case MiniGameType.Blink:
+                    name += " (Blink)";
+                    break;
+                case MiniGameType.Turret:
+                    name += " (Spyro)";
+                    break;
+                case MiniGameType.Sparx:
+                    name += " (Sparx)";
+                    break;
+            }
+
+            var groupBox = new GroupBox()
+            {
+                Width = MapInfoGroupBoxWidth,
+                Height = 400,
+                Text = name
+            };
+
+            const int spacing = 75;
+
+            MiniGamePanel_AddObjective(groupBox, 20 +  0,            miniGame.Objective_Intro,    "Met NPC");
+            MiniGamePanel_AddObjective(groupBox, 20 +  spacing,      miniGame.Objective_Easy,     "Beaten Easy Version");
+            MiniGamePanel_AddObjective(groupBox, 20 + (spacing*2),   miniGame.Objective_HalfDone, "Received Dragon Egg");
+            MiniGamePanel_AddObjective(groupBox, 20 + (spacing*3),   miniGame.Objective_Hard,     "Beaten Hard Version");
+            MiniGamePanel_AddObjective(groupBox, 20 + (spacing*4), miniGame.Objective_AllDone,  "Received Light Gem");
+
+            FlowPanel_MapInfo.Controls.Add(groupBox);
+        }
+
+        private void MiniGamePanel_AddObjective(GroupBox gb, int yOffset, EXHashCode objective, string description)
+        {
+            gb.Controls.Add(new Label()
+            {
+                Location = new Point(20, yOffset),
+                Height = 20,
+                Width = 200,
+                Text = description
+            });
+
+            gb.Controls.Add(new Label()
+            {
+                Location = new Point(20, yOffset + 20),
+                Text = objective.ToString().Replace("HT_Objective_", ""),
+                Height = 20,
+                Width = 200,
+                ForeColor = textGrey
+            });
+
+            bool objectiveSet = gameState.GetObjective(objective);
+
+            Button btnToggle = new()
+            {
+                Location = new Point(20, yOffset + 40),
+                Size = new Size(100, 25),
+            };
+
+            btnToggle.Text = objectiveSet ? "Reset" : "Set";
+            btnToggle.BackColor = objectiveSet ? Color.Pink : Color.LightGreen;
+
+            btnToggle.Click += (sender, e) =>
+            {
+                bool o = gameState.GetObjective(objective);
+
+                o = !o;
+
+                gameState.SetObjective(objective, o);
+
+                btnToggle.Text = o ? "Reset" : "Set";
+                btnToggle.BackColor = o ? Color.Pink : Color.LightGreen;
+            };
+
+            gb.Controls.Add(btnToggle);
         }
 
         #endregion

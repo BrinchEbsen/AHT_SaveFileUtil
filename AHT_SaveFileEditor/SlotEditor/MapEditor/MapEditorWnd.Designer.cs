@@ -334,6 +334,7 @@
             // 
             // FlowPanel_MapInfo
             // 
+            FlowPanel_MapInfo.AutoScroll = true;
             FlowPanel_MapInfo.Controls.Add(GroupBox_DrawControls);
             FlowPanel_MapInfo.Controls.Add(GroupBox_MiniMapStateControls);
             FlowPanel_MapInfo.Controls.Add(groupBox1);
