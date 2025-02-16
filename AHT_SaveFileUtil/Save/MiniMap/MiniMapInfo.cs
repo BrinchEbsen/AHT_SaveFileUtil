@@ -154,7 +154,12 @@ namespace AHT_SaveFileUtil.Save.MiniMap
 
         /// <summary>
         /// For info type "Background".
+        /// Get the pixel coordinates from a word position.
         /// </summary>
+        /// <param name="x">X-coordinate of the world position.</param>
+        /// <param name="z">Z-coordinate of the world position.</param>
+        /// <param name="textureSize">Size of the square source texture.</param>
+        /// <returns>Pixel coordinates corresponding to the given world coordinates.</returns>
         public int[] GetPixelCoordsFromWorldPosition(float x, float z, int textureSize)
         {
             if (Type != InfoType.Background) return [0, 0];
@@ -185,7 +190,12 @@ namespace AHT_SaveFileUtil.Save.MiniMap
 
         /// <summary>
         /// For info type "Background".
+        /// Get a world position from a set of pixel coordinates.
         /// </summary>
+        /// <param name="x">X-coordinate of the pixel.</param>
+        /// <param name="z">Y-coordinate of the pixel (world Z-coordinate).</param>
+        /// <param name="textureSize">Size of the square source texture.</param>
+        /// <returns>World coordinates corresponding to the given pixel coordinates.</returns>
         public float[] GetWorldPositionFromPixelCoords(int x, int z, int textureSize)
         {
             if (Type != InfoType.Background) return [0, 0];
@@ -248,58 +258,6 @@ namespace AHT_SaveFileUtil.Save.MiniMap
             xLeft   = WorldEdge[0] - PixelEdge[0] * xRatio;
 
             return true;
-        }
-
-        /// <summary>
-        /// For info of type "Mapped".
-        /// Get a 2D-array of minimap reveal cells.
-        /// </summary>
-        /// <param name="bitHeap"></param>
-        /// <param name="bitHeapOffset"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        public bool[][] GetArrayFromBitHeap(BitHeap bitHeap, int bitHeapOffset)
-        {
-            if (Type != InfoType.Mapped) return [];
-
-            ArgumentNullException.ThrowIfNull(bitHeap);
-
-            if (!bitHeap.IsValid)
-                throw new ArgumentException("BitHeap's data is invalid.");
-
-            int size = BitHeapSize;
-            if (size == 0)
-                return [];
-
-            int[] dim = MappedGridSize;
-
-            //generate array
-            bool[][] map = new bool[dim[1]][];
-            for(int i = 0; i < dim[1]; i++)
-                map[i] = new bool[dim[0]];
-
-            byte[] bits = bitHeap.ReadBits(size, bitHeapOffset);
-
-            int readByte = 0;
-            int readBit = 0;
-
-            for(int i = 0; i < map.Length; i++)
-                for (int j = 0; j < map[i].Length; j++)
-                {
-                    bool bit = ((bits[readByte] >> readBit) & 1) != 0;
-
-                    readBit++;
-                    //Check for rollover
-                    if (readBit > 7)
-                    {
-                        readByte++;
-                        readBit = 0;
-                    }
-
-                    map[i][j] = bit;
-                }
-
-            return map;
         }
     }
 }

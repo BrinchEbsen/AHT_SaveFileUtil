@@ -8,11 +8,26 @@ using System.Text;
 
 namespace AHT_SaveFileUtil.Save.Slot
 {
+    /// <summary>
+    /// The state of a task.
+    /// </summary>
     public enum TaskStates
     {
+        /// <summary>
+        /// The task has not been logged in the task list.
+        /// </summary>
         Undiscovered = 0b00,
+        /// <summary>
+        /// The task is logged in the task list, but not completed.
+        /// </summary>
         Found        = 0b01,
+        /// <summary>
+        /// The task has not been logged in the task list, but has been completed (normally impossible).
+        /// </summary>
         Done         = 0b10,
+        /// <summary>
+        /// The task is logged in the task list, and has been completed.
+        /// </summary>
         FoundAndDone = 0b11
     }
 
@@ -21,6 +36,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         public GamePlatform Platform { get; private set; }
 
         #region Variables
+
         /// <summary>
         /// Maximum number of objectives supported.
         /// </summary>
@@ -57,7 +73,7 @@ namespace AHT_SaveFileUtil.Save.Slot
 
         /// <summary>
         /// A set of flags.
-        /// Only used flag is 0x1, which determines if the <see cref="TimeoutTimer"/> should be set
+        /// Only functional flag is 0x1, which determines if the <see cref="TimeoutTimer"/> should be set
         /// when the pause menu is closed. This is unused functionality.
         /// </summary>
         public uint Flags { get; private set; }
@@ -196,6 +212,7 @@ namespace AHT_SaveFileUtil.Save.Slot
                 return (tally / 221f) * 100f;
             }
         }
+
         #endregion
 
         private GameState() { }
@@ -350,6 +367,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             return MapStates[(int)mapIndex];
         }
 
+        /// <summary>
+        /// Set the state of each map's collectables from a spreadsheet
+        /// used by the game when starting a new save.
+        /// </summary>
         internal void SetMapStatesFromSheet()
         {
             uint[][] sheet = PlayerState.DataSheet_GameInfo_0;
@@ -372,7 +393,10 @@ namespace AHT_SaveFileUtil.Save.Slot
             }
         }
 
-        public void Clear()
+        /// <summary>
+        /// Reset this game state to that of a new game.
+        /// </summary>
+        public void StartNewGame()
         {
             //General
             CheatsPlayerType = Players.None;
@@ -396,7 +420,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             SetMapStatesFromSheet();
 
             //Player state
-            PlayerState.Reset();
+            PlayerState.StartNewGame();
 
             //Objectives/Tasks
             for (int i = 0; i < Objectives.Length; i++)
@@ -409,13 +433,18 @@ namespace AHT_SaveFileUtil.Save.Slot
             ShopAvailableFlags = 0;
         }
 
+        /// <summary>
+        /// Allocate space in the bitheap for the data described in <paramref name="miniMaps"/>.
+        /// </summary>
+        /// <param name="miniMaps">Minimap data to allocate space for.</param>
         public void AllocateMinimaps(MiniMaps miniMaps)
         {
-            BitHeap.Allocate(miniMaps.MiniMaps_TotalBitheapSize);
+            BitHeap.Allocate(miniMaps.MiniMapsInfo_TotalBitheapSize);
             BitHeap.Allocate(miniMaps.MiniMapStatus_TotalBitHeapSize);
         }
 
         #region Objectives
+
         /// <summary>
         /// Get the state of an objective.
         /// </summary>
@@ -426,6 +455,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             if (!ObjectiveToIndexAndBit(objectiveHash, out int index, out int bit))
                 return false;
 
+            //Retrieve bit of the objective
             return (Objectives[index] & (1 << bit)) != 0;
         }
 
@@ -492,9 +522,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+
         #endregion
 
         #region Tasks
+
         /// <summary>
         /// Get the state of a task.
         /// </summary>
@@ -558,9 +590,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return true;
         }
+
         #endregion
 
         #region Trigger Info
+
         /// <summary>
         /// Get an array of <see cref="GameStateTrigInfo"/> that belong to a map.
         /// </summary>
@@ -609,7 +643,7 @@ namespace AHT_SaveFileUtil.Save.Slot
                 }
             };
 
-            return AddPointTrigInfo(info);
+            return AddTrigInfo(info);
         }
 
         /// <summary>
@@ -618,7 +652,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// </summary>
         /// <param name="info">The info to add.</param>
         /// <returns>true if the info could be added, false if not.</returns>
-        public bool AddPointTrigInfo(GameStateTrigInfo info)
+        public bool AddTrigInfo(GameStateTrigInfo info)
         {
             if (NumTrigInfo >= MAX_NUM_TRIG_INFO)
                 return false;
@@ -629,6 +663,14 @@ namespace AHT_SaveFileUtil.Save.Slot
             return true;
         }
 
+        /// <summary>
+        /// Remove a <see cref="GameStateTrigInfo"/> from <see cref="TrigInfo"/>
+        /// with the given <paramref name="map"/> and <paramref name="trigIndex"/>.
+        /// Every element above it will be shifted down one position.
+        /// </summary>
+        /// <param name="map">Map of the info to remove.</param>
+        /// <param name="trigIndex">Trigger index of the info to remove.</param>
+        /// <returns>true if the arguments correspond to a valid entry, false if not.</returns>
         public bool RemoveTrigInfo(Map map, int trigIndex)
         {
             int index = FindTrigInfo(map, trigIndex);
@@ -640,6 +682,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// <summary>
         /// Remove a <see cref="GameStateTrigInfo"/> from <see cref="TrigInfo"/>
         /// at the given <paramref name="index"/>.
+        /// Every element above it will be shifted down one position.
         /// </summary>
         /// <param name="index">Index of the info to remove.</param>
         /// <returns>true if the index corresponds to a valid entry, false if not.</returns>
@@ -693,6 +736,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         {
             return (index >= 0) && (index < MAX_NUM_TRIG_INFO);
         }
+
         #endregion
 
         public override string ToString()

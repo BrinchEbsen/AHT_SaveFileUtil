@@ -304,12 +304,14 @@ namespace AHT_SaveFileUtil.Save.Slot
         #endregion
 
         #region Variables
+
         /// <summary>
         /// The currently selected breath.
         /// </summary>
         public BreathType CurrentBreath { get; private set; }
 
         #region Health
+
         /// <summary>
         /// The current health.
         /// <para>
@@ -325,6 +327,9 @@ namespace AHT_SaveFileUtil.Save.Slot
         public bool HealthIsValid =>
             (Health % 0x20 == 0) && (Health >= 0) && (Health <= 0xA0);
 
+        /// <summary>
+        /// Health values mapped to descriptive strings, for values without the health point upgrade.
+        /// </summary>
         public static readonly Dictionary<int, string> HealthStrings_NoUpgrade = new()
         {
             { 0x0,  "No Health" },
@@ -335,6 +340,9 @@ namespace AHT_SaveFileUtil.Save.Slot
             { 0xA0, "Gold Sparx" }
         };
 
+        /// <summary>
+        /// Health values mapped to descriptive strings, for values with the health point upgrade.
+        /// </summary>
         public static readonly Dictionary<int, string> HealthStrings_Upgrade = new()
         {
             { 0x0,  "No Health" },
@@ -344,6 +352,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             { 0x80, "Blue Sparx" },
             { 0xA0, "Gold Sparx" }
         };
+
         #endregion
 
         /// <summary>
@@ -398,6 +407,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         public uint AbilityFlags { get; private set; }
 
         #region Ability Flags Constants
+
         public const uint AF_MASK_DOUBLE_JUMP = 0x1;
         public const uint AF_MASK_HIT_POINT_UPGRADE = 0x4;
         public const uint AF_MASK_POLE_SPIN = 0x10;
@@ -449,9 +459,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             { AF_MASK_HORN_DIVE_UPGRADE, "Horn Dive Upgrade" },
             { AF_MASK_BUTTERFLY_JAR, "Butterfly Jar" }
         };
+
         #endregion
         
         #region Ability Flags Properties
+
         /// <summary>
         /// Gets or sets whether Spyro can double jump/horn dive.
         /// </summary>
@@ -588,9 +600,11 @@ namespace AHT_SaveFileUtil.Save.Slot
             set => AbilityFlags =
                 value ? (AbilityFlags & AF_MASK_BUTTERFLY_JAR) : (AbilityFlags & ~AF_MASK_BUTTERFLY_JAR);
         }
+
         #endregion
 
         #region Timers
+
         /// <summary>
         /// The amount of time underwater before Spyro runs out of oxygen (unused in the final game code).
         /// </summary>
@@ -625,9 +639,11 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// The upper limit of the double gem powerup duration (usually 2 minutes/120 seconds).
         /// </summary>
         public float DoubleGemTimerMax { get; set; }
+
         #endregion
 
         #region MiniGame Characters
+
         /// <summary>
         /// The amount of Sgt. Byrd boost fuel left.
         /// </summary>
@@ -662,6 +678,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// Set to a predetermined value when starting his minigame.
         /// </summary>
         public short BlinkBombs { get; set; }
+
         #endregion
 
         /// <summary>
@@ -694,6 +711,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         /// The last player character to be set up.
         /// </summary>
         public Players LastPlayerSetup { get; private set; }
+
         #endregion
 
         private PlayerState() { }
@@ -863,9 +881,9 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         /// <summary>
-        /// Replicates StartNewGame method on the game's PlayerState class.
+        /// Set the player state to that of a new game.
         /// </summary>
-        public void Reset()
+        public void StartNewGame()
         {
             FlameBombs.Clear();
             IceBombs.Clear();
@@ -896,6 +914,7 @@ namespace AHT_SaveFileUtil.Save.Slot
         }
 
         #region Health Methods
+
         /// <summary>
         /// Ensure that <see cref="Health"/> is rounded to a valid health value.
         /// </summary>
@@ -925,9 +944,11 @@ namespace AHT_SaveFileUtil.Save.Slot
 
             return health;
         }
+
         #endregion
 
         #region Ability Flag Methods
+
         /// <summary>
         /// Get the state of an ability flag, where <paramref name="mask"/> is
         /// one of the constants AF_MASK_*.
@@ -954,6 +975,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             else
                 AbilityFlags &= ~mask;
         }
+
         #endregion
     }
 }

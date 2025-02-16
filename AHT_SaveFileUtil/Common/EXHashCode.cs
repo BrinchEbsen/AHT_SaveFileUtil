@@ -1,7 +1,7 @@
 ﻿namespace AHT_SaveFileUtil.Common
 {
     /// <summary>
-    /// A unique 4-byte tag for every object or asset in the game.
+    /// A unique 32-bit tag for every object, asset, type etc. in the game.
     /// The first bytes denote the section number and the last bytes are an incrementing ID.
     /// </summary>
     public enum EXHashCode : uint

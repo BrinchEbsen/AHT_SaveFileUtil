@@ -75,7 +75,7 @@ namespace AHT_SaveFileUtil.Save.Slot
             SpareFlag2 = 0;
             SpareFlag3 = 0;
 
-            GameState.Clear();
+            GameState.StartNewGame();
         }
 
         public override string ToString()

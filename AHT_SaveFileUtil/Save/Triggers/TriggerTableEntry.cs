@@ -1,18 +1,25 @@
 ﻿using AHT_SaveFileUtil.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHT_SaveFileUtil.Save.Triggers
 {
+    /// <summary>
+    /// Defines information regarding a type of trigger.
+    /// </summary>
     public class TriggerTableEntry
     {
+        /// <summary>
+        /// The primary trigger type.
+        /// </summary>
         public uint PrimaryHash { get; set; }
 
+        /// <summary>
+        /// The secondary trigger type.
+        /// </summary>
         public uint SubHash { get; set; }
 
+        /// <summary>
+        /// The number of bits preserved by this trigger type.
+        /// </summary>
         public int StoredDataSize { get; set; }
 
         public TriggerTableEntry() { }

@@ -32,7 +32,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private readonly GeoMap? _mapData = null;
 
-        private MapGameState stateForCollectables
+        private MapGameState StateForCollectables
         {
             get
             {
@@ -45,7 +45,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private MiniMapPanel? miniMapPanel;
 
-        private bool derivedTallies = false;
+        private readonly bool derivedTallies = false;
 
         private bool Allocated => mapGameState.TriggerListBitHeapAddress != 0x7FFFFFFF;
 
@@ -65,7 +65,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             var rsc = ResourceHandler.Instance;
             if (rsc.Maps == null)
-                throw new ArgumentNullException("\"Maps\" resource not loaded.");
+                throw new NullReferenceException("\"Maps\" resource not loaded.");
 
             if (rsc.Maps.TryGetValue(mapIndex, out var mapData))
                 this._mapData = mapData;
@@ -636,7 +636,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private void UpdateCollectableAmounts()
         {
-            MapGameState state = stateForCollectables;
+            MapGameState state = StateForCollectables;
 
             Num_LightGemsAmount.Value = state.NumLightGems;
             Num_LightGemsMax.Value = state.MaxLightGems;
@@ -684,7 +684,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
         {
             if (sender is null) return;
 
-            MapGameState state = stateForCollectables;
+            MapGameState state = StateForCollectables;
 
             NumericUpDown num = (NumericUpDown)sender;
 
@@ -723,27 +723,27 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
         private void Num_DragonEggsMax_ValueChanged(object sender, EventArgs e)
         {
-            stateForCollectables.MaxDragonEggs = (int)Num_DragonEggsMax.Value;
+            StateForCollectables.MaxDragonEggs = (int)Num_DragonEggsMax.Value;
         }
 
         private void Num_LightGemsAmount_ValueChanged(object sender, EventArgs e)
         {
-            stateForCollectables.NumLightGems = (int)Num_LightGemsAmount.Value;
+            StateForCollectables.NumLightGems = (int)Num_LightGemsAmount.Value;
         }
 
         private void Num_LightGemsMax_ValueChanged(object sender, EventArgs e)
         {
-            stateForCollectables.MaxLightGems = (int)Num_LightGemsMax.Value;
+            StateForCollectables.MaxLightGems = (int)Num_LightGemsMax.Value;
         }
 
         private void Num_DarkGemsAmount_ValueChanged(object sender, EventArgs e)
         {
-            stateForCollectables.NumDarkGems = (int)Num_DarkGemsAmount.Value;
+            StateForCollectables.NumDarkGems = (int)Num_DarkGemsAmount.Value;
         }
 
         private void Num_DarkGemsMax_ValueChanged(object sender, EventArgs e)
         {
-            stateForCollectables.MaxDarkGems = (int)Num_DarkGemsMax.Value;
+            StateForCollectables.MaxDarkGems = (int)Num_DarkGemsMax.Value;
         }
 
         #endregion
@@ -818,17 +818,13 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             uint sp = mapGameState.LastStartPoint;
 
-            switch (type)
+            return type switch
             {
-                case StartPointType.None:
-                    return sp == 0xFFFFFFFF;
-                case StartPointType.Trigger:
-                    return sp < (uint)_mapData.TriggerList.Length;
-                case StartPointType.HashCode:
-                    return _mapData.GetStartPointTriggerIndex(sp) != -1;
-                default:
-                    throw new ArgumentException("Invalid startpoint type.", nameof(type));
-            }
+                StartPointType.None => sp == 0xFFFFFFFF,
+                StartPointType.Trigger => sp < (uint)_mapData.TriggerList.Length,
+                StartPointType.HashCode => _mapData.GetStartPointTriggerIndex(sp) != -1,
+                _ => throw new ArgumentException("Invalid startpoint type.", nameof(type)),
+            };
         }
 
         private void RepopulateStartPointComboBox(StartPointType type)
@@ -854,10 +850,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
                         var list = _mapData.GetStartPointTriggerList();
 
-                        int selected = 0;
-                        string selectedStr = "N/A";
-
-                        for (int i = 0; i < list.Count; i++)
+                        for (int i = 0; i < list.Length; i++)
                         {
                             Trigger trig = list[i];
                             string str;
@@ -870,11 +863,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
                             ComboBox_StartPointValue.Items.Add(str);
 
                             if (mapGameState.LastStartPoint == trig.Data[0])
-                            {
-                                selected = i;
-                                selectedStr = str;
-                                ComboBox_StartPointValue.SelectedIndex = selected;
-                            }
+                                ComboBox_StartPointValue.SelectedIndex = i;
                         }
                     }
                     break;
@@ -925,7 +914,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
                         var spList = mapData.GetStartPointTriggerList();
 
-                        if (spList.Count == 0)
+                        if (spList.Length == 0)
                             mapGameState.LastStartPoint = (uint)EXHashCode.HT_StartPoint_START;
 
                         mapGameState.LastStartPoint = spList[0].Data[0];
@@ -1046,10 +1035,9 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             {
                 Location = new Point(20, yOffset + 40),
                 Size = new Size(100, 25),
+                Text = objectiveSet ? "Reset" : "Set",
+                BackColor = objectiveSet ? Color.Pink : Color.LightGreen
             };
-
-            btnToggle.Text = objectiveSet ? "Reset" : "Set";
-            btnToggle.BackColor = objectiveSet ? Color.Pink : Color.LightGreen;
 
             btnToggle.Click += (sender, e) =>
             {

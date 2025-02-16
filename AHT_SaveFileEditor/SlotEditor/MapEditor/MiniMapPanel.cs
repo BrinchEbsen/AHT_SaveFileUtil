@@ -126,7 +126,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
 
             if (offset > size) return;
 
-            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoBitHeapOffset(_mappedInfo);
             if (address < 0) return;
 
             byte value = PaintMode == PaintMode.Reveal ? (byte)1 : (byte)0;
@@ -272,7 +272,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             var miniMaps = ResourceHandler.Instance.MiniMaps;
             if (miniMaps == null) return;
             
-            int address = miniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            int address = miniMaps.GetMiniMapInfoBitHeapOffset(_mappedInfo);
             if (address < 0) return;
 
             //Get dimensions
@@ -375,7 +375,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (_mappedInfo == null) return;
             if (ResourceHandler.Instance.MiniMaps == null) return;
 
-            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoBitHeapOffset(_mappedInfo);
             if (address < 0) return;
 
             _gameState.BitHeap.ClearBits(address, _mappedInfo.BitHeapSize);
@@ -386,7 +386,7 @@ namespace AHT_SaveFileEditor.SlotEditor.MapEditor
             if (_mappedInfo == null) return;
             if (ResourceHandler.Instance.MiniMaps == null) return;
 
-            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoOffset(_mappedInfo);
+            int address = ResourceHandler.Instance.MiniMaps.GetMiniMapInfoBitHeapOffset(_mappedInfo);
             if (address < 0) return;
 
             _gameState.BitHeap.SetBits(address, _mappedInfo.BitHeapSize);

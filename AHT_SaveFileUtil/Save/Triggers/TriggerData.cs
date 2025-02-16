@@ -1,6 +1,8 @@
 ﻿using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
+#nullable enable
+
 namespace AHT_SaveFileUtil.Save.Triggers
 {
     /// <summary>
@@ -11,17 +13,17 @@ namespace AHT_SaveFileUtil.Save.Triggers
         /// <summary>
         /// The name of this unit.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = "Undefined";
 
         /// <summary>
         /// Type of this unit.
         /// </summary>
-        public TriggerDataType Type { get; set; }
+        public TriggerDataType Type { get; set; } = TriggerDataType.Unused;
 
         /// <summary>
         /// Number of bits defined by this unit.
         /// </summary>
-        public int NumBits { get; set; }
+        public int NumBits { get; set; } = 0;
 
         /// <summary>
         /// Mask for a bitmask, if such is preserved.
@@ -58,17 +60,17 @@ namespace AHT_SaveFileUtil.Save.Triggers
         /// <summary>
         /// The entry index into the trigger table.
         /// </summary>
-        public int TriggerTableEntry { get; set; }
+        public int TriggerTableEntry { get; set; } = -1;
 
         /// <summary>
         /// A name for this type of trigger.
         /// </summary>
-        public string ObjectName { get; set; }
+        public string ObjectName { get; set; } = "Undefined";
 
         /// <summary>
         /// Collection of the defintions of the preserved data.
         /// </summary>
-        public TriggerDataUnit[] Data { get; set; }
+        public TriggerDataUnit[] Data { get; set; } = [];
 
         /// <summary>
         /// Total size of the trigger's preserved data.
@@ -96,7 +98,7 @@ namespace AHT_SaveFileUtil.Save.Triggers
     /// </summary>
     public class TriggerDataDefinitions
     {
-        public TriggerData[] TriggerData { get; set; }
+        public TriggerData[] TriggerData { get; set; } = [];
 
         public TriggerDataDefinitions() { }
 
@@ -117,12 +119,21 @@ namespace AHT_SaveFileUtil.Save.Triggers
 
         #region YAML
 
+        /// <summary>
+        /// Generate a <see cref="TriggerDataDefinitions"/> object from a yaml string.
+        /// </summary>
+        /// <param name="yaml"></param>
+        /// <returns>The yaml string, converted to a <see cref="TriggerDataDefinitions"/> object.</returns>
         public static TriggerDataDefinitions FromYAML(string yaml)
         {
             var deserializer = new DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();
             return deserializer.Deserialize<TriggerDataDefinitions>(yaml);
         }
 
+        /// <summary>
+        /// Convert the object to a yaml string.
+        /// </summary>
+        /// <returns>The object, converted to a yaml string.</returns>
         public string ToYaml()
         {
             var serializer = new SerializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build();

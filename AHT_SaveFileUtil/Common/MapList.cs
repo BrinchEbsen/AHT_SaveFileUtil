@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AHT_SaveFileUtil.Common
 {
+    /// <summary>
+    /// A map's index (offset by -2 on certain versions).
+    /// </summary>
     public enum Map
     {
         None = -1,
@@ -73,6 +76,9 @@ namespace AHT_SaveFileUtil.Common
         Watery_Tomb = 64
     }
 
+    /// <summary>
+    /// The type of a minigame.
+    /// </summary>
     public enum MiniGameType
     {
         None,
@@ -82,47 +88,137 @@ namespace AHT_SaveFileUtil.Common
         Sparx
     }
 
+    public enum CollectableType
+    {
+        None,
+        DarkGem,
+        LightGem,
+        DragonEgg1,
+        DragonEgg2,
+        DragonEgg3,
+        DragonEgg4,
+        DragonEgg5,
+        DragonEgg6,
+        DragonEgg7,
+        DragonEgg8
+    }
+
+    /// <summary>
+    /// Contains info regarding a minigame.
+    /// </summary>
     public class MapMiniGame
     {
+        /// <summary>
+        /// The map of this minigame.
+        /// </summary>
         public Map MapIndex { get; set; }
+
+        /// <summary>
+        /// The type of this minigame.
+        /// </summary>
         public MiniGameType MiniGameType { get; set; }
+
+        /// <summary>
+        /// The egg type rewarded by this minigame.
+        /// </summary>
         public EggType RewardedEgg { get; set; }
+
         /// <summary>
         /// Set when the minigame NPC has been met by the player.
         /// </summary>
         public EXHashCode Objective_Intro { get; set; } = EXHashCode.HT_None;
+
         /// <summary>
         /// Set when the easy variant of the minigame has been beaten.
         /// </summary>
         public EXHashCode Objective_Easy { get; set; } = EXHashCode.HT_None;
+
         /// <summary>
         /// Set when the dragon egg has been awarded.
         /// </summary>
         public EXHashCode Objective_HalfDone { get; set; } = EXHashCode.HT_None;
+
         /// <summary>
         /// Set when the hard variant of the minigame has been beaten.
         /// </summary>
         public EXHashCode Objective_Hard { get; set; } = EXHashCode.HT_None;
+
         /// <summary>
         /// Set when the light gem has been awarded.
         /// </summary>
         public EXHashCode Objective_AllDone { get; set; } = EXHashCode.HT_None;
     }
 
+    /// <summary>
+    /// A collectable which is granted to the player as part of an objective.
+    /// </summary>
+    public class ObjectiveCollectable
+    {
+        /// <summary>
+        /// The objectives needed to be set for this collectable to be granted.
+        /// If it has been set in a savefile, it means it's been collected.
+        /// </summary>
+        public EXHashCode[] Objectives { get; set; } = [];
+
+        /// <summary>
+        /// The type of collectable.
+        /// </summary>
+        public CollectableType Type { get; set; } = CollectableType.None;
+
+        /// <summary>
+        /// Descriptive name of this collectable and its associated objective.
+        /// </summary>
+        public string Name { get; set; } = "N/A";
+    }
+
+    /// <summary>
+    /// An entry in <see cref="MapData.MapDataList"/>.
+    /// </summary>
     public class MapDataEntry
     {
+        /// <summary>
+        /// Descriptive name for the map.
+        /// </summary>
         public string Name { get; set; } = "N/A";
+
+        /// <summary>
+        /// The file containing this map.
+        /// </summary>
         public uint FileHash { get; set; } = 0;
+
+        /// <summary>
+        /// The primary map hashcode for this map.
+        /// </summary>
         public uint MapHash1 { get; set; } = 0;
+
+        /// <summary>
+        /// The secondary map hashcode for this map (shouldn't be used).
+        /// </summary>
         public uint MapHash2 { get; set; } = 0;
+
+        /// <summary>
+        /// Whether this map is unused in the final game.
+        /// </summary>
         public bool Unused { get; set; } = false;
+
+        /// <summary>
+        /// Whether this map preserves its trigger list's state in the bitheap.
+        /// </summary>
         public bool DoesPreserve { get; set; } = true;
+
         /// <summary>
         /// Whether the map to use for a minimap is ambiguous in a file and
         /// should be distinguished by a map hash.
         /// </summary>
         public bool MiniMapDistinguishedByMapHash { get; set; } = false;
+
+        /// <summary>
+        /// List of minigames present in the map.
+        /// </summary>
         public MapMiniGame[] MiniGames { get; set; } = [];
+
+        public ObjectiveCollectable[] ObjectiveCollectables { get; set; } = [];
+
         /// <summary>
         /// When not <see cref="Map.None"/>, determines which other map
         /// this map derives its collectable tally counts from.
@@ -132,6 +228,9 @@ namespace AHT_SaveFileUtil.Common
 
     public static class MapData
     {
+        /// <summary>
+        /// Contains static information regarding every map.
+        /// </summary>
         public static readonly Dictionary<Map, MapDataEntry> MapDataList = new()
         {
             { Map.Completely_Swamped, new()
@@ -494,6 +593,28 @@ namespace AHT_SaveFileUtil.Common
                             Objective_Hard = EXHashCode.HT_Objective_MR3_Sgt_Hard,
                             Objective_AllDone = EXHashCode.HT_Objective_MR3_Sgt_AllDone
                         }
+                    ],
+                    ObjectiveCollectables = [
+                        new ObjectiveCollectable() {
+                            Name = "Boiler 1",
+                            Objectives = [EXHashCode.HT_Entity_Boiler3C_1_Lit],
+                            Type = CollectableType.LightGem
+                        },
+                        new ObjectiveCollectable() {
+                            Name = "Boiler 3",
+                            Objectives = [EXHashCode.HT_Entity_Boiler3C_3_Lit],
+                            Type = CollectableType.LightGem
+                        },
+                        new ObjectiveCollectable() {
+                            Name = "Boiler 5",
+                            Objectives = [EXHashCode.HT_Entity_Boiler3C_5_Lit],
+                            Type = CollectableType.LightGem
+                        },
+                        new ObjectiveCollectable() {
+                            Name = "Ice Princess Reward",
+                            Objectives = [EXHashCode.HT_Objective_3C_IcePrincessHasRewarded],
+                            Type = CollectableType.LightGem
+                        }
                     ]
                 }
             },
@@ -517,6 +638,13 @@ namespace AHT_SaveFileUtil.Common
                             Objective_HalfDone = EXHashCode.HT_Objective_MR3_Spx_HalfDone,
                             Objective_Hard = EXHashCode.HT_Objective_MR3_Spx_Hard,
                             Objective_AllDone = EXHashCode.HT_Objective_MR3_Spx_AllDone
+                        }
+                    ],
+                    ObjectiveCollectables = [
+                        new ObjectiveCollectable() {
+                            Name = "Bentley Reward",
+                            Objectives = [EXHashCode.HT_Objective_3B_BentleyHasRewarded],
+                            Type = CollectableType.LightGem
                         }
                     ]
                 }
@@ -618,6 +746,13 @@ namespace AHT_SaveFileUtil.Common
                             Objective_Hard = EXHashCode.HT_Objective_MR2_Spy_Hard,
                             Objective_AllDone = EXHashCode.HT_Objective_MR2_Spy_AllDone
                         }
+                    ],
+                    ObjectiveCollectables = [
+                        new ObjectiveCollectable() {
+                            Name = "Otto Reward",
+                            Objectives = [EXHashCode.HT_Objective_OtterNPC_AllDone],
+                            Type = CollectableType.LightGem
+                        }
                     ]
                 }
             },
@@ -715,6 +850,13 @@ namespace AHT_SaveFileUtil.Common
                             Objective_HalfDone = EXHashCode.HT_Objective_MR4_Sgt_HalfDone,
                             Objective_Hard = EXHashCode.HT_Objective_MR4_Sgt_Hard,
                             Objective_AllDone = EXHashCode.HT_Objective_MR4_Sgt_AllDone
+                        }
+                    ],
+                    ObjectiveCollectables = [
+                        new ObjectiveCollectable() {
+                            Name = "Teena Reward",
+                            Objectives = [EXHashCode.HT_Objective_TeenaHasRewarded],
+                            Type = CollectableType.DragonEgg7
                         }
                     ]
                 }
